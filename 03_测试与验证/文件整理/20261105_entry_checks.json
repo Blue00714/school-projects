@@ -1,0 +1,32 @@
+{
+  "entrypoints": [
+    {
+      "entry": "backend/run.py",
+      "exit": 0
+    },
+    {
+      "entry": "backend/cli.py",
+      "exit": 0
+    },
+    {
+      "entry": "scripts/mysql/mysql_bootstrap.py",
+      "exit": 0
+    },
+    {
+      "entry": "scripts/mysql/migrate_to_mysql.py",
+      "exit": 0
+    },
+    {
+      "entry": "backend/tests/integration/acceptance_mysql.py",
+      "exit": 0
+    }
+  ],
+  "links_ok": true,
+  "credentials_unchanged": true,
+  "forecast_algorithm_unchanged": true,
+  "root_files": [
+    "README.md",
+    "启动系统.cmd",
+    ".gitignore"
+  ]
+}

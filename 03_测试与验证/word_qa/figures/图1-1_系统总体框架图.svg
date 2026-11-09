@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1150" viewBox="0 0 1900 1150">
+<rect width="100%" height="100%" fill="white"/>
+<rect x="90" y="20" width="1300" height="210" fill="white" stroke="#222" stroke-width="3"/>
+<text x="140" y="92.36" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="44" text-anchor="start" fill="#111111">页面层</text>
+<rect x="90" y="300" width="1300" height="170" fill="white" stroke="#222" stroke-width="3"/>
+<text x="140" y="372.36" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="44" text-anchor="start" fill="#111111">接口层</text>
+<rect x="90" y="540" width="1300" height="250" fill="white" stroke="#222" stroke-width="3"/>
+<text x="140" y="612.36" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="44" text-anchor="start" fill="#111111">业务服务层</text>
+<rect x="90" y="900" width="1300" height="210" fill="white" stroke="#222" stroke-width="3"/>
+<text x="140" y="972.36" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="44" text-anchor="start" fill="#111111">数据与模型层</text>
+<rect x="130" y="110" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="240.0" y="171.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">商品订单</text>
+<rect x="377" y="110" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="487.0" y="171.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">运营看板</text>
+<rect x="624" y="110" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="734.0" y="171.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">预测回测</text>
+<rect x="871" y="110" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="981.0" y="171.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">模拟库存</text>
+<rect x="1118" y="110" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1228.0" y="171.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">AI助手</text>
+<text x="740" y="425.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">FastAPI：路由、参数校验、权限与任务状态</text>
+<rect x="130" y="650" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="240.0" y="711.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">数据检查</text>
+<rect x="377" y="650" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="487.0" y="711.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">销售统计</text>
+<rect x="624" y="650" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="734.0" y="711.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">预测评价</text>
+<rect x="871" y="650" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="981.0" y="711.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">库存规则</text>
+<rect x="1118" y="650" width="220" height="95" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1228.0" y="711.5" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">AI工具</text>
+<rect x="145" y="1000" width="350" height="90" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="320.0" y="1059.0" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">业务数据库</text>
+<rect x="555" y="1000" width="350" height="90" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="730.0" y="1059.0" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">原始文件与记录</text>
+<rect x="965" y="1000" width="350" height="90" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1140.0" y="1059.0" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">预测模型与结果</text>
+<polyline points="740,230 740,300" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="740,300 732.6603118449277,283.56439907437846 747.3396881550723,283.56439907437846" fill="#222"/>
+<polyline points="740,470 740,540" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="740,540 732.6603118449277,523.5643990743785 747.3396881550723,523.5643990743785" fill="#222"/>
+<polyline points="740,790 740,900" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="740,900 732.6603118449277,883.5643990743785 747.3396881550723,883.5643990743785" fill="#222"/>
+<rect x="1480" y="620" width="360" height="180" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1660.0" y="698.34" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="38" text-anchor="middle" fill="#111111">外部大模型API</text>
+<text x="1660.0" y="751.34" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="38" text-anchor="middle" fill="#111111">理解与表达</text>
+<polyline points="1390,700 1480,700" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="1480,700 1463.5643990743783,707.3396881550723 1463.5643990743783,692.6603118449277" fill="#222"/>
+<polyline points="1660,800 1660,850 1280,850 1280,790" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="1280,790 1287.3396881550723,806.4356009256215 1272.6603118449277,806.4356009256215" fill="#222"/>
+<rect x="1458.0" y="852.6" width="244" height="54.8" fill="white"/>
+<text x="1580" y="892.6" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="32" text-anchor="middle" fill="#111111">返回调用或回答</text>
+</svg>

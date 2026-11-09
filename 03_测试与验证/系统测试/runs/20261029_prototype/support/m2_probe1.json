@@ -1,0 +1,287 @@
+{
+  "login": {
+    "status": 200,
+    "body": {
+      "user": {
+        "id": 1,
+        "username": "admin",
+        "display_name": "系统管理员",
+        "role": "admin",
+        "active": true,
+        "must_change_password": true
+      }
+    }
+  },
+  "dashboard": {
+    "status": 200,
+    "elapsed_s": 0.266,
+    "totals": {
+      "quantity": 851403,
+      "revenue": 1694068.71,
+      "orders": 2913,
+      "lines": 86861,
+      "products": 2930,
+      "amount_rows": 86861
+    },
+    "batch": {
+      "id": "original",
+      "label": "原始数据 2009-12-01~2011-12-09",
+      "kind": "original"
+    },
+    "filters": {
+      "start": "2011-11-10",
+      "end": "2011-12-09",
+      "product": "",
+      "country": ""
+    },
+    "trend_days": 30,
+    "warnings": [],
+    "keys_present": [
+      true,
+      true,
+      true
+    ]
+  },
+  "orders_first_page": {
+    "status": 200,
+    "page": 1,
+    "page_size": 200,
+    "total": 2913,
+    "filters": {
+      "start": "2011-11-10",
+      "end": "2011-12-09",
+      "product": "",
+      "country": ""
+    },
+    "batch": {
+      "id": "original",
+      "label": "原始数据 2009-12-01~2011-12-09",
+      "kind": "original"
+    },
+    "row0": {
+      "order_key": "581475",
+      "date": "2011-12-09",
+      "first_time": "2011-12-09 08:39:00",
+      "last_time": "2011-12-09 08:39:00",
+      "customer_id": "13069",
+      "country": "United Kingdom",
+      "lines": 19,
+      "quantity": 352,
+      "revenue": 280.24,
+      "product_codes": [
+        "22581",
+        "22596",
+        "21705",
+        "22216",
+        "22955"
+      ]
+    },
+    "row_keys": [
+      "country",
+      "customer_id",
+      "date",
+      "first_time",
+      "last_time",
+      "lines",
+      "order_key",
+      "product_codes",
+      "quantity",
+      "revenue"
+    ],
+    "max_product_codes": 5,
+    "total_consistent_with_dashboard": true
+  },
+  "orders_all_pages": {
+    "pages": 15,
+    "rows": 2913,
+    "elapsed_s": 2.015,
+    "sum_quantity": 851403,
+    "sum_revenue": 1694068.71,
+    "matches_dashboard_quantity": true,
+    "revenue_delta_vs_dashboard": 0.0,
+    "total_equals_dashboard_orders": true,
+    "unique_order_keys": 2913
+  },
+  "order_detail": {
+    "status": 200,
+    "order_key": "581475",
+    "header": {
+      "order_key": "581475",
+      "date": "2011-12-09",
+      "first_time": "2011-12-09 08:39:00",
+      "last_time": "2011-12-09 08:39:00",
+      "customer_id": "13069",
+      "country": "United Kingdom",
+      "lines": 19,
+      "quantity": 352,
+      "revenue": 280.24
+    },
+    "lines": 19,
+    "detail_quantity": 352,
+    "detail_revenue": 280.24,
+    "quantity_matches_header": true,
+    "revenue_matches_header": true,
+    "row_keys": [
+      "country",
+      "customer_id",
+      "description",
+      "invoice",
+      "invoice_time",
+      "quantity",
+      "revenue",
+      "sheet",
+      "source_row",
+      "stock_code",
+      "unit_price"
+    ],
+    "batch": {
+      "id": "original",
+      "label": "原始数据 2009-12-01~2011-12-09",
+      "kind": "original"
+    }
+  },
+  "export_trend": {
+    "status": 200,
+    "bom": true,
+    "content_type": null,
+    "content_disposition": null,
+    "lines": 31,
+    "header": "date,quantity,revenue,orders,observed"
+  },
+  "export_orders": {
+    "status": 200,
+    "elapsed_s": 0.141,
+    "bom": true,
+    "content_type": null,
+    "content_disposition": null,
+    "lines": 2914,
+    "header": "order_key,date,first_time,customer_id,country,lines,quantity,revenue",
+    "rows_equal_total": true
+  },
+  "export_transactions": {
+    "status": 200,
+    "elapsed_s": 1.218,
+    "bytes": 10009829,
+    "bom": true,
+    "content_type": null,
+    "content_disposition": null,
+    "lines": 86862,
+    "header": "invoice,stock_code,description,quantity,unit_price,revenue,invoice_time,customer_id,country,sheet,source_row",
+    "rows_equal_dashboard_lines": true,
+    "sample_row": "581587,22138,BAKING SET 9 PIECE RETROSPOT,3,4.95,14.85,2011-12-09 12:50:00,12680,France,Year 2010-2011,541910"
+  },
+  "products": {
+    "status": 200,
+    "type": "list",
+    "count": 50,
+    "sample": {
+      "stock_code": "84077",
+      "name": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
+      "quantity": 106490
+    },
+    "max_50": true
+  },
+  "transactions": {
+    "status": 200,
+    "total": 86861,
+    "page": 1,
+    "page_size": 5,
+    "rows": 5,
+    "batch": {
+      "id": "original",
+      "label": "原始数据 2009-12-01~2011-12-09",
+      "kind": "original"
+    },
+    "total_equals_dashboard_lines": true
+  },
+  "batches": {
+    "status": 200,
+    "active_batch_id": "original",
+    "ids": [
+      "original"
+    ],
+    "first_keys": [
+      "created_at",
+      "id",
+      "is_active",
+      "kind",
+      "label",
+      "manifest",
+      "policy_version",
+      "published_at",
+      "source_file",
+      "source_sha256",
+      "status"
+    ]
+  },
+  "template": {
+    "status": 200,
+    "bom": true,
+    "lines": 3,
+    "header": "Invoice,StockCode,Description,Quantity,InvoiceDate,Price,Customer ID,Country",
+    "content_disposition": null,
+    "sample": "100001,A-1001,示例商品A,2,2011-01-01 10:00:00,3.5,10001,United Kingdom"
+  },
+  "errors": {
+    "/api/orders?page=0&start=2011-11-10&end=2011-12-09": {
+      "status": 400,
+      "expected": 400,
+      "code": "bad_request",
+      "error": "页码至少1，单页1至200行"
+    },
+    "/api/orders?page_size=201&start=2011-11-10&end=2011-12-09": {
+      "status": 400,
+      "expected": 400,
+      "code": "bad_request",
+      "error": "页码至少1，单页1至200行"
+    },
+    "/api/orders?start=2011-12-09&end=2011-11-10": {
+      "status": 400,
+      "expected": 400,
+      "code": "bad_request",
+      "error": "开始日期不能晚于结束日期"
+    },
+    "/api/orders?start=bad-date&end=2011-12-09": {
+      "status": 400,
+      "expected": 400,
+      "code": "bad_request",
+      "error": "日期必须为YYYY-MM-DD"
+    },
+    "/api/orders/NOT-AN-ORDER?start=2011-11-10&end=2011-12-09": {
+      "status": 404,
+      "expected": 404,
+      "code": "not_found",
+      "error": "订单不存在或不在所选筛选范围内"
+    },
+    "/api/imports/jobs/not-a-job": {
+      "status": 404,
+      "expected": 404,
+      "code": "not_found",
+      "error": "导入任务不存在"
+    },
+    "/api/imports/batches/nope/activate": {
+      "status": 404,
+      "expected": 404,
+      "code": "not_found",
+      "error": "数据批次不存在"
+    }
+  },
+  "openapi": {
+    "status": 200,
+    "paths": [
+      "/api/dashboard",
+      "/api/export/orders",
+      "/api/export/transactions",
+      "/api/export/trend",
+      "/api/imports",
+      "/api/imports/batches",
+      "/api/imports/batches/{batch_id}/activate",
+      "/api/imports/jobs/{job_id}",
+      "/api/imports/template.csv",
+      "/api/orders",
+      "/api/orders/{order_key}",
+      "/api/products",
+      "/api/transactions"
+    ]
+  }
+}

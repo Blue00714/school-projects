@@ -1,0 +1,15 @@
+{
+  "dashboard": {
+    "lines": 86861,
+    "quantity": 851403.0,
+    "orders": 2913,
+    "products": 2882,
+    "amount_rows": 86861,
+    "revenue": 1694068.71,
+    "average_order_value": 581.5546549948507
+  },
+  "model": "daily-v3-robust-blend-mad3",
+  "inventory_items": 12,
+  "admin_login": true,
+  "operator_login": true
+}

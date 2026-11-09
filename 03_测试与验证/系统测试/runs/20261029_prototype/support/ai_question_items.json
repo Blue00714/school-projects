@@ -1,0 +1,375 @@
+[
+ {
+  "id": 1,
+  "question": "2011-11-10到2011-12-09全店卖了多少",
+  "expect_status": "ok",
+  "expect_tools": [
+   "dashboard_summary"
+  ],
+  "expect_params": {
+   "dashboard_summary": {
+    "start": "2011-11-10",
+    "end": "2011-12-09"
+   }
+  },
+  "note": "与 /api/dashboard 同口径，数字必须完全一致"
+ },
+ {
+  "id": 2,
+  "question": "2011年12月9日全店销售额是多少",
+  "expect_status": "ok",
+  "expect_tools": [
+   "dashboard_summary"
+  ],
+  "expect_params": {
+   "dashboard_summary": {
+    "start": "2011-12-09",
+    "end": "2011-12-09"
+   }
+  },
+  "note": "单日日期解析（年月日写法）"
+ },
+ {
+  "id": 3,
+  "question": "最近30天全店销量",
+  "expect_status": "ok",
+  "expect_tools": [
+   "dashboard_summary"
+  ],
+  "expect_params": {
+   "dashboard_summary": {
+    "start": "2011-11-10",
+    "end": "2011-12-09"
+   }
+  },
+  "note": "相对日期按数据覆盖末日回推，与看板默认一致"
+ },
+ {
+  "id": 4,
+  "question": "2011-01-01到2011-03-31英国卖了多少",
+  "expect_status": "ok",
+  "expect_tools": [
+   "dashboard_summary"
+  ],
+  "expect_params": {
+   "dashboard_summary": {
+    "start": "2011-01-01",
+    "end": "2011-03-31",
+    "country": "United Kingdom"
+   }
+  },
+  "note": "国家中文→英文映射（英国=United Kingdom）"
+ },
+ {
+  "id": 5,
+  "question": "2011-11-10到2011-12-09商品85123A卖了多少",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_search",
+   "dashboard_summary"
+  ],
+  "expect_params": {
+   "product_search": {
+    "q": "85123A"
+   },
+   "dashboard_summary": {
+    "product": "85123A",
+    "start": "2011-11-10",
+    "end": "2011-12-09"
+   }
+  },
+  "note": "商品编号精确匹配 + 看板商品筛选"
+ },
+ {
+  "id": 6,
+  "question": "2020-01-01到2020-01-31全店销量",
+  "expect_status": "ok",
+  "expect_tools": [
+   "dashboard_summary"
+  ],
+  "expect_params": {
+   "dashboard_summary": {
+    "start": "2020-01-01",
+    "end": "2020-01-31"
+   }
+  },
+  "note": "空结果/超覆盖：返回0并给出按无记录显示的提示"
+ },
+ {
+  "id": 7,
+  "question": "最近哪些商品销量最高",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_ranking"
+  ],
+  "expect_params": {},
+  "note": "排名工具默认最近30天、前10"
+ },
+ {
+  "id": 8,
+  "question": "2011-12-09销量前5的商品",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_ranking"
+  ],
+  "expect_params": {
+   "product_ranking": {
+    "start": "2011-12-09",
+    "end": "2011-12-09",
+    "top_n": 5
+   }
+  },
+  "note": "“前5”解析为 top_n=5"
+ },
+ {
+  "id": 9,
+  "question": "2011-11-10到2011-12-09德国销量最高的商品",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_ranking"
+  ],
+  "expect_params": {
+   "product_ranking": {
+    "country": "Germany",
+    "start": "2011-11-10",
+    "end": "2011-12-09"
+   }
+  },
+  "note": "国家过滤 + 排名；国家名不得被误当商品名"
+ },
+ {
+  "id": 10,
+  "question": "搜索 PAPER CRAFT",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_search"
+  ],
+  "expect_params": {
+   "product_search": {
+    "q": "PAPER CRAFT"
+   }
+  },
+  "note": "商品检索"
+ },
+ {
+  "id": 11,
+  "question": "JUMBO BAG 卖了多少",
+  "expect_status": "need_clarification",
+  "expect_tools": [
+   "product_search"
+  ],
+  "expect_params": {
+   "product_search": {
+    "q": "JUMBO BAG"
+   }
+  },
+  "note": "商品重名歧义→追问"
+ },
+ {
+  "id": 12,
+  "question": "商品85123A的库存",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_search",
+   "inventory_query"
+  ],
+  "expect_params": {
+   "inventory_query": {
+    "stock_code": "85123A"
+   }
+  },
+  "note": "固定样例 100+20−30=90，候选10"
+ },
+ {
+  "id": 13,
+  "question": "WHITE HANGING HEART T-LIGHT HOLDER 库存",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_search",
+   "inventory_query"
+  ],
+  "expect_params": {
+   "inventory_query": {
+    "stock_code": "85123A"
+   }
+  },
+  "note": "名称精确匹配到 85123A（同名大小写取销量最高）"
+ },
+ {
+  "id": 14,
+  "question": "某商品库存",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "缺商品→追问"
+ },
+ {
+  "id": 15,
+  "question": "商品洗衣机的库存",
+  "expect_status": "need_clarification",
+  "expect_tools": [
+   "product_search"
+  ],
+  "expect_params": {},
+  "note": "商品不存在→追问（不伪造）"
+ },
+ {
+  "id": 16,
+  "question": "最近订单",
+  "expect_status": "ok",
+  "expect_tools": [
+   "orders_query"
+  ],
+  "expect_params": {},
+  "note": "订单数与看板订单数一致（按 invoice 去重）"
+ },
+ {
+  "id": 17,
+  "question": "订单536365 详情",
+  "expect_status": "ok",
+  "expect_tools": [
+   "orders_query"
+  ],
+  "expect_params": {
+   "orders_query": {
+    "order_key": "536365"
+   }
+  },
+  "note": "订单号识别 + 单笔明细"
+ },
+ {
+  "id": 18,
+  "question": "2011-12-09 最近5笔交易",
+  "expect_status": "ok",
+  "expect_tools": [
+   "orders_query"
+  ],
+  "expect_params": {
+   "orders_query": {
+    "start": "2011-12-09",
+    "end": "2011-12-09",
+    "page_size": 5
+   }
+  },
+  "note": "日期+条数解析"
+ },
+ {
+  "id": 19,
+  "question": "未来7天全店销量预测",
+  "expect_status": "ok",
+  "expect_tools": [
+   "forecast_7d"
+  ],
+  "expect_params": {},
+  "note": "预测合计与 services.forecasting 一致"
+ },
+ {
+  "id": 20,
+  "question": "以2011-11-30为起点预测未来7天",
+  "expect_status": "ok",
+  "expect_tools": [
+   "forecast_7d"
+  ],
+  "expect_params": {
+   "forecast_7d": {
+    "origin": "2011-11-30"
+   }
+  },
+  "note": "显式起点解析"
+ },
+ {
+  "id": 21,
+  "question": "未来7天某商品销量预测",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "商品级预测不支持→追问"
+ },
+ {
+  "id": 22,
+  "question": "未来3天销量预测",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "非7天预测→追问"
+ },
+ {
+  "id": 23,
+  "question": "当前数据批次和数据范围",
+  "expect_status": "ok",
+  "expect_tools": [
+   "batch_info"
+  ],
+  "expect_params": {},
+  "note": "批次信息工具"
+ },
+ {
+  "id": 24,
+  "question": "商品23843的库存",
+  "expect_status": "ok",
+  "expect_tools": [
+   "product_search",
+   "inventory_query"
+  ],
+  "expect_params": {
+   "inventory_query": {
+    "stock_code": "23843"
+   }
+  },
+  "note": "工具失败（场景无该商品）被如实说明，未 500"
+ },
+ {
+  "id": 25,
+  "question": "帮我写一首诗",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "非数据问题→追问"
+ },
+ {
+  "id": 26,
+  "question": "利润是多少",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "缺成本列→追问，不编造利润"
+ },
+ {
+  "id": 27,
+  "question": "帮我生成运营简报",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "简报走专门接口"
+ },
+ {
+  "id": 28,
+  "question": "2011-12-09到2011-11-10全店销量",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "倒序日期→追问"
+ },
+ {
+  "id": 29,
+  "question": "比上个月增长了多少",
+  "expect_status": "need_clarification",
+  "expect_tools": [],
+  "expect_params": {},
+  "note": "缺基准区间→追问"
+ },
+ {
+  "id": 30,
+  "question": "以2020-01-01为起点预测未来7天",
+  "expect_status": "failed",
+  "expect_tools": [
+   "forecast_7d"
+  ],
+  "expect_params": {
+   "forecast_7d": {
+    "origin": "2020-01-01"
+   }
+  },
+  "note": "工具失败（起点超出覆盖）→failed，保留错误不重试"
+ }
+]

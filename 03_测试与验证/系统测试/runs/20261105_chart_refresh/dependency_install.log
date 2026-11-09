@@ -1,0 +1,9 @@
+Collecting playwright==1.56.0
+  Downloading playwright-1.56.0-py3-none-win_amd64.whl.metadata (3.5 kB)
+Collecting pyee<14,>=13 (from playwright==1.56.0)
+  Downloading pyee-13.0.1-py3-none-any.whl.metadata (3.0 kB)
+Collecting greenlet<4.0.0,>=3.1.1 (from playwright==1.56.0)
+  Downloading greenlet-3.5.6-cp312-cp312-win_amd64.whl.metadata (3.9 kB)
+Collecting typing-extensions (from pyee<14,>=13->playwright==1.56.0)
+  Using cached typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Downloading playwright-1.56.0-py3-none-win_amd64.whl (35.6 MB)

@@ -1,0 +1,109 @@
+{
+  "unauthenticated": {
+    "/api/dashboard": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "/api/orders?start=2011-11-10&end=2011-12-09": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "/api/products": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "/api/transactions": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "/api/export/orders": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "/api/imports/batches": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "/api/imports/jobs/x": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "/api/imports/template.csv": {
+      "status": 401,
+      "code": "unauthorized"
+    },
+    "POST /api/imports": {
+      "status": 401,
+      "code": "unauthorized"
+    }
+  },
+  "missing_file_part": {
+    "status": 400,
+    "body": {
+      "error": "参数无效：file Field required",
+      "code": "bad_request"
+    }
+  },
+  "duplicate_by_hash": {
+    "status": 202,
+    "body": {
+      "job_id": "139d117f5b7c42adaf06e6d6e87edb54",
+      "status": "duplicate",
+      "batch_id": "b20261029T07064946c0e6"
+    },
+    "is_duplicate": true
+  },
+  "fake_xls": {
+    "upload_http": 202,
+    "status": "failed",
+    "error": "Excel 文件无法解析：Excel file format cannot be determined, you must specify an engine manually.",
+    "issues": [
+      {
+        "level": "error",
+        "row": null,
+        "field": "file",
+        "message": "Excel 文件无法解析：Excel file format cannot be determined, you must specify an engine manually."
+      }
+    ],
+    "batch": null
+  },
+  "activate_not_ready": {
+    "status": 400,
+    "body": {
+      "error": "该批次尚未就绪，不能切换",
+      "code": "bad_request"
+    }
+  },
+  "detail_out_of_range": {
+    "status": 404,
+    "body": {
+      "error": "订单不存在或不在所选筛选范围内",
+      "code": "not_found"
+    }
+  },
+  "default_paging": {
+    "status": 200,
+    "page": 1,
+    "page_size": 25,
+    "rows": 25,
+    "total": 2913,
+    "default_range_days": 30
+  },
+  "param_errors": {
+    "/api/orders?page=abc&start=2011-11-10&end=2011-12-09": {
+      "status": 400,
+      "code": "bad_request",
+      "error": "分页参数应为整数"
+    },
+    "/api/transactions?page_size=0": {
+      "status": 400,
+      "code": "bad_request",
+      "error": "页码至少1，单页1至200行"
+    },
+    "/api/orders?start=2011-01-01&end=2015-01-01": {
+      "status": 400,
+      "code": "bad_request",
+      "error": "单次查询最多覆盖4年"
+    }
+  }
+}

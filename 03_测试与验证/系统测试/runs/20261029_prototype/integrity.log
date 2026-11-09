@@ -1,0 +1,102 @@
+﻿M0 integrity / runtime evidence
+recorded_at: 2026-10-29 14:48:08 +08:00
+project_root: C:\Users\Administrator\Desktop\学校项目
+
+[1] original data file
+path: C:\Users\Administrator\Desktop\学校项目\20261014_电商数据与页面选型\online_retail_II.xlsx
+size_bytes: 45622278 (43.51 MiB)
+last_write_time: 2026-10-14 12:06:05
+creation_time: 2026-10-14 11:52:20
+sha256: bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980
+expected_sha256: bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980
+sha256_match: True
+
+[2] runtime database
+path: C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\retail.sqlite3 exists=True
+size_bytes: 284557312
+last_write_time: 2026-10-21 18:44:48 (unchanged during M0 checks)
+sha256_before_checks: 033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf
+sha256_after_checks:  033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf
+read_only_uri: file:C:/Users/Administrator/Desktop/学校项目/电商运营系统/runtime/retail.sqlite3?mode=ro
+journal_mode_at_read: delete
+
+[3] data_manifest.json content (verbatim)
+{
+  "source_file": "online_retail_II.xlsx",
+  "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "source_kind": "public_mirror",
+  "official_byte_comparison_completed": false,
+  "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+  "prepared_at": "2026-10-21T18:03:58",
+  "sheets": [
+    {
+      "sheet": "Year 2009-2010",
+      "raw_rows": 525461,
+      "cross_sheet_copies_excluded": 0
+    },
+    {
+      "sheet": "Year 2010-2011",
+      "raw_rows": 541910,
+      "cross_sheet_copies_excluded": 22523
+    }
+  ],
+  "raw_rows": 1067371,
+  "cross_sheet_copies_excluded": 22523,
+  "retained_rows": 1044848,
+  "positive_sale_rows": 1022290,
+  "within_sheet_duplicate_candidates_retained": 11812,
+  "cancelled_rows": 19165,
+  "nonpositive_quantity_rows": 22557,
+  "invalid_dates": 0,
+  "quantity_invalid_rows": 0,
+  "sale_rows_without_valid_price": 5,
+  "zero_price_sale_rows": 2631,
+  "invoice_with_multiple_times": 83,
+  "date_min": "2009-12-01",
+  "date_max": "2011-12-09",
+  "elapsed_seconds": 41.73,
+  "rules": [
+    "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+    "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+    "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+    "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+    "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+  ],
+  "order_identity_conflicts": 0,
+  "order_key": "invoice"
+}
+[4] runtime/models listing
+  <root>\电商运营系统\runtime\models\4ac61f51f6d2bed861fa5bc598f19e2d684df21dbe66126a5edd99e802b7cc0f  bytes=<dir>  mtime=2026-10-21 18:25:24
+  <root>\电商运营系统\runtime\models\4e99a848c625529bda0f4f734d73a86aaae7fb4e0d47b2e9c59128b31c3ba99a  bytes=<dir>  mtime=2026-10-21 18:14:20
+  <root>\电商运营系统\runtime\models\b33b982be9be11535774b9ee06fefc7fe8aad6f537369049950181ecd2b50b77  bytes=<dir>  mtime=2026-10-21 18:14:21
+  <root>\电商运营系统\runtime\models\f80480b0d7a56d545fe1bdb889f921a2930394f070956521b5a308e58ba7b8af  bytes=<dir>  mtime=2026-10-21 18:25:23
+  <root>\电商运营系统\runtime\models\4ac61f51f6d2bed861fa5bc598f19e2d684df21dbe66126a5edd99e802b7cc0f\lightgbm.txt  bytes=580932  mtime=2026-10-21 18:44:37
+  <root>\电商运营系统\runtime\models\4ac61f51f6d2bed861fa5bc598f19e2d684df21dbe66126a5edd99e802b7cc0f\metadata.json  bytes=1016  mtime=2026-10-21 18:44:37
+  <root>\电商运营系统\runtime\models\4e99a848c625529bda0f4f734d73a86aaae7fb4e0d47b2e9c59128b31c3ba99a\lightgbm.txt  bytes=582613  mtime=2026-10-21 18:14:20
+  <root>\电商运营系统\runtime\models\4e99a848c625529bda0f4f734d73a86aaae7fb4e0d47b2e9c59128b31c3ba99a\metadata.json  bytes=1016  mtime=2026-10-21 18:14:20
+  <root>\电商运营系统\runtime\models\b33b982be9be11535774b9ee06fefc7fe8aad6f537369049950181ecd2b50b77\lightgbm.txt  bytes=580932  mtime=2026-10-21 18:14:21
+  <root>\电商运营系统\runtime\models\b33b982be9be11535774b9ee06fefc7fe8aad6f537369049950181ecd2b50b77\metadata.json  bytes=1016  mtime=2026-10-21 18:14:21
+  <root>\电商运营系统\runtime\models\f80480b0d7a56d545fe1bdb889f921a2930394f070956521b5a308e58ba7b8af\lightgbm.txt  bytes=582613  mtime=2026-10-21 18:44:37
+  <root>\电商运营系统\runtime\models\f80480b0d7a56d545fe1bdb889f921a2930394f070956521b5a308e58ba7b8af\metadata.json  bytes=1016  mtime=2026-10-21 18:44:37
+
+[5] sqlite read-only counts (also see sqlite_probe.log)
+transactions_rows: 1067371
+transactions_sale_1_rows: 1022290
+forecast_runs_rows: 9
+sale_1_date_min: 2009-12-01  sale_1_date_max: 2011-12-09
+
+[6] write-scope compliance
+files changed under project after 2026-10-29 14:30 excluding runs/, test_tmp/, __pycache__:
+  <root>\20261014_电商数据与页面选型  2026-10-29 14:36:13
+  <root>\先看这里.md  2026-10-29 14:36:13
+  <root>\03_测试与验证\系统测试  2026-10-29 14:45:32
+  <root>\03_测试与验证\系统测试\runs  2026-10-29 14:45:32
+  <root>\03_测试与验证\系统测试\test_tmp  2026-10-29 14:46:55
+  <root>\03_测试与验证\系统测试\tests\__pycache__  2026-10-29 14:46:36
+  <root>\20261014_电商数据与页面选型\系统实施与交付完整清单_转交dsh.md  2026-10-29 14:36:13
+  (only directory timestamps and two pre-existing docs last written 14:36 before this audit; no 电商运营系统 source tree files modified)
+test_tmp dirs total=48 created_after_14:45=18 (allowed by historical test convention; WorkspaceScratch keeps fixtures)
+
+[7] historical reference values from checklist/acceptance.json
+window 2011-11-10..2011-12-09 inclusive, full store: quantity=851403 revenue=1694068.71 orders=2913 lines=86861
+policy_version: cross-sheet-multiset-v1-sales-v2-invoice-order; order_key: invoice

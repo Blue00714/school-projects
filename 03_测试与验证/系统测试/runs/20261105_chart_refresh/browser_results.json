@@ -1,0 +1,68 @@
+{
+  "checks": [
+    {
+      "case": "restore_saved_result",
+      "instance": "ec_1793841329013",
+      "width": 872,
+      "height": 280,
+      "canvasCount": 1,
+      "pixelWidth": 872,
+      "pixelRatio": 1
+    },
+    {
+      "case": "generate_2011-07-05",
+      "instance": "ec_1793841329014",
+      "width": 872,
+      "height": 280,
+      "canvasCount": 1,
+      "pixelWidth": 872,
+      "pixelRatio": 1
+    },
+    {
+      "case": "generate_2011-07-06",
+      "instance": "ec_1793841329015",
+      "width": 872,
+      "height": 280,
+      "canvasCount": 1,
+      "pixelWidth": 872,
+      "pixelRatio": 1
+    },
+    {
+      "case": "sidebar_layout_change",
+      "instance": "ec_1793841329015",
+      "width": 987,
+      "height": 280,
+      "canvasCount": 1,
+      "pixelWidth": 987,
+      "pixelRatio": 1
+    },
+    {
+      "case": "responsive_resize",
+      "instance": "ec_1793841329015",
+      "width": 918,
+      "height": 280,
+      "canvasCount": 1,
+      "pixelWidth": 918,
+      "pixelRatio": 1
+    },
+    {
+      "case": "reload_after_new_prediction",
+      "instance": "ec_1793841335643",
+      "width": 918,
+      "height": 280,
+      "canvasCount": 1,
+      "pixelWidth": 918,
+      "pixelRatio": 1
+    },
+    {
+      "case": "leave_and_return",
+      "instance": "ec_1793841335644",
+      "width": 918,
+      "height": 280,
+      "canvasCount": 1,
+      "pixelWidth": 918,
+      "pixelRatio": 1
+    }
+  ],
+  "pageErrors": []
+}

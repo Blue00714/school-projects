@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1530" viewBox="0 0 1900 1530">
+<rect width="100%" height="100%" fill="white"/>
+<rect x="430" y="30" width="940" height="1450" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900" y="96.80000000000001" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="43" text-anchor="middle" fill="#111111">智能电商运营管理系统</text>
+<circle cx="180" cy="262" r="32" fill="none" stroke="#222" stroke-width="4"/>
+<polyline points="180,294 180,410" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="118,333 242,333" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="180,410 125,480" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="180,410 235,480" fill="none" stroke="#222" stroke-width="3"/>
+<text x="180" y="550.36" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="44" text-anchor="middle" fill="#111111">管理员</text>
+<circle cx="1710" cy="767" r="32" fill="none" stroke="#222" stroke-width="4"/>
+<polyline points="1710,799 1710,915" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1648,838 1772,838" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1710,915 1655,985" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1710,915 1765,985" fill="none" stroke="#222" stroke-width="3"/>
+<text x="1710" y="1055.36" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="44" text-anchor="middle" fill="#111111">运营人员</text>
+<polyline points="245,335 365,175 590,175" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="245,335 365,325 590,325" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="245,335 365,475 590,475" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1645,840 1470,175 1210,175" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1645,840 1470,625 1210,625" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1645,840 1470,775 1210,775" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1645,840 1470,925 1210,925" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1645,840 1470,1075 1210,1075" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1645,840 1470,1225 1210,1225" fill="none" stroke="#222" stroke-width="3"/>
+<polyline points="1645,840 1470,1375 1210,1375" fill="none" stroke="#222" stroke-width="3"/>
+<ellipse cx="900.0" cy="175.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="190.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">登录与退出</text>
+<ellipse cx="900.0" cy="325.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="340.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">账号维护</text>
+<ellipse cx="900.0" cy="475.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="490.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">配置与任务状态</text>
+<ellipse cx="900.0" cy="625.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="640.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">导入与检查数据</text>
+<ellipse cx="900.0" cy="775.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="790.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">商品订单查询与看板</text>
+<ellipse cx="900.0" cy="925.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="940.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">预测与历史回测</text>
+<ellipse cx="900.0" cy="1075.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="1090.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">模拟库存与补货提示</text>
+<ellipse cx="900.0" cy="1225.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="1240.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">AI数据查询</text>
+<ellipse cx="900.0" cy="1375.0" rx="310.0" ry="54.0" fill="white" stroke="#222" stroke-width="3"/>
+<text x="900.0" y="1390.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">报告生成与导出</text>
+</svg>

@@ -1,0 +1,1705 @@
+INFO:     Started server process [11044]
+INFO:     Waiting for application startup.
+2026-11-03 16:35:03,218 INFO ece.main startup complete; app db=C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\app.sqlite3
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8777 (Press CTRL+C to quit)
+2026-11-03 16:36:53,914 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:36:54,086 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:42:50,675 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:42:51,092 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:46:08,819 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:50:12,226 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:55:21,284 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:55:21,467 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:58:27,981 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+2026-11-03 16:58:28,163 ERROR ece.api unhandled error on GET /favicon.ico
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length
+ERROR:    Exception in ASGI application
+  + Exception Group Traceback (most recent call last):
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 76, in collapse_excgroups
+  |     yield
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 186, in __call__
+  |     async with anyio.create_task_group() as task_group:
+  |                ^^^^^^^^^^^^^^^^^^^^^^^^^
+  |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\anyio\_backends\_asyncio.py", line 815, in __aexit__
+  |     raise BaseExceptionGroup(
+  | ExceptionGroup: unhandled errors in a TaskGroup (1 sub-exception)
+  +-+---------------- 1 ----------------
+    | Traceback (most recent call last):
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    |     result = await app(  # type: ignore[func-returns-value]
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    |     return await self.app(scope, receive, send)
+    |            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    |     await super().__call__(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    |     await self.middleware_stack(scope, receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    |     await self.app(scope, receive, _send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    |     with collapse_excgroups():
+    |          ^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    |     self.gen.throw(value)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    |     raise exc
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    |     await response(scope, wrapped_receive, send)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    |     await send({"type": "http.response.body", "body": chunk, "more_body": True})
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    |     await send(message)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    |     output = self.conn.send(event=h11.Data(data=data))
+    |              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    |     data_list = self.send_with_data_passthrough(event)
+    |                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    |     writer(event, data_list.append)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    |     self.send_data(event.data, write)
+    |   File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    |     raise LocalProtocolError("Too much data for declared Content-Length")
+    | h11._util.LocalProtocolError: Too much data for declared Content-Length
+    +------------------------------------
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+    result = await app(  # type: ignore[func-returns-value]
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\middleware\proxy_headers.py", line 60, in __call__
+    return await self.app(scope, receive, send)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\fastapi\applications.py", line 1054, in __call__
+    await super().__call__(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\applications.py", line 113, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 187, in __call__
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 185, in __call__
+    with collapse_excgroups():
+         ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\AppData\Local\Programs\Python\Python312\Lib\contextlib.py", line 158, in __exit__
+    self.gen.throw(value)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\_utils.py", line 82, in collapse_excgroups
+    raise exc
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 188, in __call__
+    await response(scope, wrapped_receive, send)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\base.py", line 223, in __call__
+    await send({"type": "http.response.body", "body": chunk, "more_body": True})
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\starlette\middleware\errors.py", line 162, in _send
+    await send(message)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\uvicorn\protocols\http\h11_impl.py", line 500, in send
+    output = self.conn.send(event=h11.Data(data=data))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 512, in send
+    data_list = self.send_with_data_passthrough(event)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_connection.py", line 545, in send_with_data_passthrough
+    writer(event, data_list.append)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 65, in __call__
+    self.send_data(event.data, write)
+  File "C:\Users\Administrator\Desktop\学校项目\电商运营系统\.pydeps\h11\_writers.py", line 91, in send_data
+    raise LocalProtocolError("Too much data for declared Content-Length")
+h11._util.LocalProtocolError: Too much data for declared Content-Length

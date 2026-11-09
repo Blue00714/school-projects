@@ -1,0 +1,3184 @@
+{
+  "scenario": {
+    "id": "demo-original",
+    "name": "补货运营演示 · 模拟",
+    "note": "模拟演示；商品名称来自批次 original。日需求参考2011-11-12至2011-12-09的日均记录销量；初始库存、出入库及采购在途为模拟设定，未由历史订单自动扣减。重复载入保留当前操作结果。",
+    "created_at": "2026-11-03T08:35:13+00:00",
+    "item_count": 12
+  },
+  "item_count": 12,
+  "movement_count": 27,
+  "transit_count": 9,
+  "needs_replenishment": 6,
+  "replenishment_quantity": 9038.0,
+  "items": [
+    {
+      "stock_code": "20668",
+      "name": "DISCO BALL CHRISTMAS DECORATION",
+      "initial_qty": 154.0,
+      "lead_time_days": 7,
+      "safety_stock": 462.0,
+      "daily_demand": 154.0,
+      "balance": 308.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 0.0,
+      "replenishment_candidate": 1232.0
+    },
+    {
+      "stock_code": "22086",
+      "name": "PAPER CHAIN KIT 50'S CHRISTMAS",
+      "initial_qty": 253.0,
+      "lead_time_days": 5,
+      "safety_stock": 506.0,
+      "daily_demand": 253.0,
+      "balance": 506.0,
+      "in_transit_effective": 1265.0,
+      "in_transit_total": 1265.0,
+      "replenishment_candidate": 0.0
+    },
+    {
+      "stock_code": "22197",
+      "name": "POPCORN HOLDER",
+      "initial_qty": 5988.0,
+      "lead_time_days": 5,
+      "safety_stock": 998.0,
+      "daily_demand": 499.0,
+      "balance": 7984.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 0.0,
+      "replenishment_candidate": 0.0
+    },
+    {
+      "stock_code": "22577",
+      "name": "WOODEN HEART CHRISTMAS SCANDINAVIAN",
+      "initial_qty": 282.0,
+      "lead_time_days": 7,
+      "safety_stock": 282.0,
+      "daily_demand": 141.0,
+      "balance": 423.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 846.0,
+      "replenishment_candidate": 846.0
+    },
+    {
+      "stock_code": "22578",
+      "name": "WOODEN STAR CHRISTMAS SCANDINAVIAN",
+      "initial_qty": 324.0,
+      "lead_time_days": 7,
+      "safety_stock": 324.0,
+      "daily_demand": 162.0,
+      "balance": 486.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 972.0,
+      "replenishment_candidate": 972.0
+    },
+    {
+      "stock_code": "22910",
+      "name": "PAPER CHAIN KIT VINTAGE CHRISTMAS",
+      "initial_qty": 252.0,
+      "lead_time_days": 7,
+      "safety_stock": 252.0,
+      "daily_demand": 126.0,
+      "balance": 378.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 756.0,
+      "replenishment_candidate": 756.0
+    },
+    {
+      "stock_code": "22952",
+      "name": "60 CAKE CASES VINTAGE CHRISTMAS",
+      "initial_qty": 130.0,
+      "lead_time_days": 5,
+      "safety_stock": 260.0,
+      "daily_demand": 130.0,
+      "balance": 260.0,
+      "in_transit_effective": 650.0,
+      "in_transit_total": 650.0,
+      "replenishment_candidate": 0.0
+    },
+    {
+      "stock_code": "23084",
+      "name": "RABBIT NIGHT LIGHT",
+      "initial_qty": 514.0,
+      "lead_time_days": 7,
+      "safety_stock": 1542.0,
+      "daily_demand": 514.0,
+      "balance": 1028.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 0.0,
+      "replenishment_candidate": 4112.0
+    },
+    {
+      "stock_code": "84077",
+      "name": "WORLD WAR 2 GLIDERS ASSTD DESIGNS",
+      "initial_qty": 143.0,
+      "lead_time_days": 5,
+      "safety_stock": 286.0,
+      "daily_demand": 143.0,
+      "balance": 286.0,
+      "in_transit_effective": 715.0,
+      "in_transit_total": 715.0,
+      "replenishment_candidate": 0.0
+    },
+    {
+      "stock_code": "84879",
+      "name": "ASSORTED COLOUR BIRD ORNAMENT",
+      "initial_qty": 1740.0,
+      "lead_time_days": 5,
+      "safety_stock": 290.0,
+      "daily_demand": 145.0,
+      "balance": 2320.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 0.0,
+      "replenishment_candidate": 0.0
+    },
+    {
+      "stock_code": "85099B",
+      "name": "JUMBO BAG RED RETROSPOT",
+      "initial_qty": 140.0,
+      "lead_time_days": 7,
+      "safety_stock": 420.0,
+      "daily_demand": 140.0,
+      "balance": 280.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 0.0,
+      "replenishment_candidate": 1120.0
+    },
+    {
+      "stock_code": "85123A",
+      "name": "WHITE HANGING HEART T-LIGHT HOLDER",
+      "initial_qty": 1596.0,
+      "lead_time_days": 5,
+      "safety_stock": 266.0,
+      "daily_demand": 133.0,
+      "balance": 2128.0,
+      "in_transit_effective": 0.0,
+      "in_transit_total": 0.0,
+      "replenishment_candidate": 0.0
+    }
+  ],
+  "transit": [
+    {
+      "id": "a735858a60df4ec8b0060a9be7294b1d",
+      "stock_code": "22910",
+      "qty": 756.0,
+      "expected_date": "2026-11-17",
+      "status": "in_transit",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "16787dba96af4eab8e3d9ef07a324366",
+      "stock_code": "22952",
+      "qty": 650.0,
+      "expected_date": "2026-11-05",
+      "status": "in_transit",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "cf1a341ca7f241279d897b78871b4690",
+      "stock_code": "85123A",
+      "qty": 399.0,
+      "expected_date": "2026-11-02",
+      "status": "received",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "c2b8d04ea01a44f68ece9469f7050c1c",
+      "stock_code": "22577",
+      "qty": 846.0,
+      "expected_date": "2026-11-17",
+      "status": "in_transit",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "fdba6da29ecf4029a026e840324134e7",
+      "stock_code": "84077",
+      "qty": 715.0,
+      "expected_date": "2026-11-05",
+      "status": "in_transit",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "f6d6b57efa4e476d8a37d861cb766147",
+      "stock_code": "84879",
+      "qty": 435.0,
+      "expected_date": "2026-11-02",
+      "status": "received",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "74cea473db15447fb1474f50c6ec8bae",
+      "stock_code": "22578",
+      "qty": 972.0,
+      "expected_date": "2026-11-17",
+      "status": "in_transit",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "41f9d5a619bf4549ad20d612d103cc80",
+      "stock_code": "22086",
+      "qty": 1265.0,
+      "expected_date": "2026-11-05",
+      "status": "in_transit",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    },
+    {
+      "id": "5f5fe1a4138e441db1a30cd0aef0b4f0",
+      "stock_code": "22197",
+      "qty": 1497.0,
+      "expected_date": "2026-11-02",
+      "status": "received",
+      "created_at": "2026-11-03T08:35:13+00:00"
+    }
+  ],
+  "jobs": {
+    "forecast": {
+      "id": "7d24a602ab84417cb14a317f18a355e2",
+      "result": {
+        "origin": "2011-12-09",
+        "horizon": 7,
+        "requested_method": "robust_blend",
+        "actual_method": "robust_blend",
+        "method_label": "销量预测模型",
+        "model_version": "daily-v3-robust-blend-mad3",
+        "history_start": "2009-12-01",
+        "history_end": "2011-12-09",
+        "history_days": 739,
+        "training_rows": 4543,
+        "closed_weekdays": [
+          5
+        ],
+        "rows": [
+          {
+            "date": "2011-12-10",
+            "h": 1,
+            "prediction": 0.0,
+            "baseline": 0.0,
+            "actual": null,
+            "abs_error": null
+          },
+          {
+            "date": "2011-12-11",
+            "h": 2,
+            "prediction": 19814.07432584478,
+            "baseline": 15960.25,
+            "actual": null,
+            "abs_error": null
+          },
+          {
+            "date": "2011-12-12",
+            "h": 3,
+            "prediction": 35379.16786529438,
+            "baseline": 36893.75,
+            "actual": null,
+            "abs_error": null
+          },
+          {
+            "date": "2011-12-13",
+            "h": 4,
+            "prediction": 35443.90434731391,
+            "baseline": 32086.5,
+            "actual": null,
+            "abs_error": null
+          },
+          {
+            "date": "2011-12-14",
+            "h": 5,
+            "prediction": 36783.343677936704,
+            "baseline": 35769.0,
+            "actual": null,
+            "abs_error": null
+          },
+          {
+            "date": "2011-12-15",
+            "h": 6,
+            "prediction": 35762.98908262506,
+            "baseline": 30336.25,
+            "actual": null,
+            "abs_error": null
+          },
+          {
+            "date": "2011-12-16",
+            "h": 7,
+            "prediction": 34159.249417170075,
+            "baseline": 44729.5,
+            "actual": null,
+            "abs_error": null
+          }
+        ],
+        "metrics": {
+          "n": 0,
+          "MAE": null,
+          "RMSE": null,
+          "WAPE": null,
+          "BIAS": null,
+          "BIAS_PCT": null
+        },
+        "baseline_metrics": {
+          "n": 0,
+          "MAE": null,
+          "RMSE": null,
+          "WAPE": null,
+          "BIAS": null,
+          "BIAS_PCT": null
+        },
+        "complete_actual": false,
+        "actual_days": 0,
+        "warnings": [
+          "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+          "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+          "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+        ],
+        "batch_id": "original",
+        "data_policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order"
+      }
+    },
+    "backtest": {
+      "id": "d1b64c5bb0464cc0885253b753ebfa74",
+      "result": {
+        "start": "2011-11-05",
+        "end": "2011-12-02",
+        "requested_method": "robust_blend",
+        "model_version": "daily-v3-robust-blend-mad3",
+        "origins_attempted": 28,
+        "origins_with_actual": 28,
+        "complete_origins": 28,
+        "forecast_count": 196,
+        "scored_count": 196,
+        "metrics": {
+          "n": 196,
+          "MAE": 4826.363019193542,
+          "RMSE": 7970.468082855548,
+          "WAPE": 0.186663689368588,
+          "BIAS": -1464.0229899806195,
+          "BIAS_PCT": -0.0566223327054825
+        },
+        "baseline_metrics": {
+          "n": 196,
+          "MAE": 5847.857142857143,
+          "RMSE": 8544.605054066249,
+          "WAPE": 0.2261708422771235,
+          "BIAS": -1921.2755102040817,
+          "BIAS_PCT": -0.07430696232380289
+        },
+        "complete_window_metrics": {
+          "n": 196,
+          "MAE": 4826.363019193542,
+          "RMSE": 7970.468082855548,
+          "WAPE": 0.186663689368588,
+          "BIAS": -1464.0229899806195,
+          "BIAS_PCT": -0.0566223327054825
+        },
+        "complete_window_baseline_metrics": {
+          "n": 196,
+          "MAE": 5847.857142857143,
+          "RMSE": 8544.605054066249,
+          "WAPE": 0.2261708422771235,
+          "BIAS": -1921.2755102040817,
+          "BIAS_PCT": -0.07430696232380289
+        },
+        "by_horizon": {
+          "1": {
+            "n": 28,
+            "MAE": 4226.495239318986,
+            "RMSE": 5865.155620789983,
+            "WAPE": 0.166271904791983,
+            "BIAS": -1267.210879701083,
+            "BIAS_PCT": -0.04985255035445724
+          },
+          "2": {
+            "n": 28,
+            "MAE": 3983.921581224891,
+            "RMSE": 5834.7993554955065,
+            "WAPE": 0.1591658642119413,
+            "BIAS": -620.0139093418741,
+            "BIAS_PCT": -0.024770831376023737
+          },
+          "3": {
+            "n": 28,
+            "MAE": 4169.058269229858,
+            "RMSE": 6180.879624757231,
+            "WAPE": 0.1634675260197477,
+            "BIAS": -1155.5306988749967,
+            "BIAS_PCT": -0.045308012598216665
+          },
+          "4": {
+            "n": 28,
+            "MAE": 4656.69007330902,
+            "RMSE": 6537.421994518021,
+            "WAPE": 0.1815878252641253,
+            "BIAS": -1334.6489763842926,
+            "BIAS_PCT": -0.05204469296802433
+          },
+          "5": {
+            "n": 28,
+            "MAE": 4844.189480000968,
+            "RMSE": 6728.780572619481,
+            "WAPE": 0.18792811570753223,
+            "BIAS": -1242.0676331177801,
+            "BIAS_PCT": -0.04818544584946587
+          },
+          "6": {
+            "n": 28,
+            "MAE": 4739.883965440125,
+            "RMSE": 6637.643132028069,
+            "WAPE": 0.18479491471868423,
+            "BIAS": -1139.3791973132995,
+            "BIAS_PCT": -0.04442123122315783
+          },
+          "7": {
+            "n": 28,
+            "MAE": 7164.302525830943,
+            "RMSE": 14351.921217418596,
+            "WAPE": 0.2561616837716545,
+            "BIAS": -3489.309635131011,
+            "BIAS_PCT": -0.1247612629579943
+          }
+        },
+        "worst_cases": [
+          {
+            "date": "2011-12-09",
+            "h": 7,
+            "prediction": 26770.564963987905,
+            "baseline": 28500.25,
+            "actual": 93980.0,
+            "abs_error": 67209.43503601209,
+            "origin": "2011-12-02"
+          },
+          {
+            "date": "2011-11-14",
+            "h": 2,
+            "prediction": 29606.984362388182,
+            "baseline": 27782.25,
+            "actual": 47631.0,
+            "abs_error": 18024.015637611818,
+            "origin": "2011-11-12"
+          },
+          {
+            "date": "2011-12-05",
+            "h": 4,
+            "prediction": 27157.483153377187,
+            "baseline": 33576.5,
+            "actual": 44664.0,
+            "abs_error": 17506.516846622813,
+            "origin": "2011-12-01"
+          },
+          {
+            "date": "2011-12-07",
+            "h": 6,
+            "prediction": 27630.661548581782,
+            "baseline": 34841.25,
+            "actual": 41980.0,
+            "abs_error": 14349.338451418218,
+            "origin": "2011-12-01"
+          },
+          {
+            "date": "2011-11-23",
+            "h": 2,
+            "prediction": 27622.654396360893,
+            "baseline": 30381.0,
+            "actual": 39420.0,
+            "abs_error": 11797.345603639107,
+            "origin": "2011-11-21"
+          }
+        ],
+        "origin_results": [
+          {
+            "origin": "2011-11-05",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-05",
+            "history_days": 705,
+            "training_rows": 4305,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-06",
+                "h": 1,
+                "prediction": 15230.83630405349,
+                "baseline": 10866.75,
+                "actual": 23309.0,
+                "abs_error": 8078.16369594651
+              },
+              {
+                "date": "2011-11-07",
+                "h": 2,
+                "prediction": 28048.0,
+                "baseline": 26486.5,
+                "actual": 31395.0,
+                "abs_error": 3347.0
+              },
+              {
+                "date": "2011-11-08",
+                "h": 3,
+                "prediction": 28736.279914526913,
+                "baseline": 25524.5,
+                "actual": 26538.0,
+                "abs_error": 2198.2799145269128
+              },
+              {
+                "date": "2011-11-09",
+                "h": 4,
+                "prediction": 28818.855844317583,
+                "baseline": 21821.5,
+                "actual": 38269.0,
+                "abs_error": 9450.144155682417
+              },
+              {
+                "date": "2011-11-10",
+                "h": 5,
+                "prediction": 34480.11988907071,
+                "baseline": 32138.75,
+                "actual": 39239.0,
+                "abs_error": 4758.880110929291
+              },
+              {
+                "date": "2011-11-11",
+                "h": 6,
+                "prediction": 27069.841346303132,
+                "baseline": 25665.25,
+                "actual": 29063.0,
+                "abs_error": 1993.158653696868
+              },
+              {
+                "date": "2011-11-12",
+                "h": 7,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4260.803790111714,
+              "RMSE": 5307.897326131861,
+              "WAPE": 0.15880490983468662,
+              "BIAS": -3632.7238145325964,
+              "BIAS_PCT": -0.1353956685731455
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6472.821428571428,
+              "RMSE": 8555.772077855643,
+              "WAPE": 0.24124927454436063,
+              "BIAS": -6472.821428571428,
+              "BIAS_PCT": -0.24124927454436063
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-06",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-06",
+            "history_days": 706,
+            "training_rows": 4312,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-07",
+                "h": 1,
+                "prediction": 28048.0,
+                "baseline": 26486.5,
+                "actual": 31395.0,
+                "abs_error": 3347.0
+              },
+              {
+                "date": "2011-11-08",
+                "h": 2,
+                "prediction": 30167.5,
+                "baseline": 25524.5,
+                "actual": 26538.0,
+                "abs_error": 3629.5
+              },
+              {
+                "date": "2011-11-09",
+                "h": 3,
+                "prediction": 29958.0,
+                "baseline": 21821.5,
+                "actual": 38269.0,
+                "abs_error": 8311.0
+              },
+              {
+                "date": "2011-11-10",
+                "h": 4,
+                "prediction": 35510.04085612307,
+                "baseline": 32138.75,
+                "actual": 39239.0,
+                "abs_error": 3728.9591438769276
+              },
+              {
+                "date": "2011-11-11",
+                "h": 5,
+                "prediction": 27506.0,
+                "baseline": 25665.25,
+                "actual": 29063.0,
+                "abs_error": 1557.0
+              },
+              {
+                "date": "2011-11-12",
+                "h": 6,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-13",
+                "h": 7,
+                "prediction": 19968.321800349484,
+                "baseline": 14805.0,
+                "actual": 20840.0,
+                "abs_error": 871.678199650516
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 3063.591049075349,
+              "RMSE": 3973.8000602239185,
+              "WAPE": 0.11570451346430122,
+              "BIAS": -2026.591049075349,
+              "BIAS_PCT": -0.07653950137866586
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 5557.5,
+              "RMSE": 7502.573757194451,
+              "WAPE": 0.2098934953383978,
+              "BIAS": -5557.5,
+              "BIAS_PCT": -0.2098934953383978
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-07",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-07",
+            "history_days": 707,
+            "training_rows": 4319,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-08",
+                "h": 1,
+                "prediction": 30167.5,
+                "baseline": 25524.5,
+                "actual": 26538.0,
+                "abs_error": 3629.5
+              },
+              {
+                "date": "2011-11-09",
+                "h": 2,
+                "prediction": 29958.0,
+                "baseline": 21821.5,
+                "actual": 38269.0,
+                "abs_error": 8311.0
+              },
+              {
+                "date": "2011-11-10",
+                "h": 3,
+                "prediction": 36715.44281364634,
+                "baseline": 32138.75,
+                "actual": 39239.0,
+                "abs_error": 2523.5571863536607
+              },
+              {
+                "date": "2011-11-11",
+                "h": 4,
+                "prediction": 27506.0,
+                "baseline": 25665.25,
+                "actual": 29063.0,
+                "abs_error": 1557.0
+              },
+              {
+                "date": "2011-11-12",
+                "h": 5,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-13",
+                "h": 6,
+                "prediction": 21557.192570195344,
+                "baseline": 14805.0,
+                "actual": 20840.0,
+                "abs_error": 717.1925701953442
+              },
+              {
+                "date": "2011-11-14",
+                "h": 7,
+                "prediction": 30830.032891093666,
+                "baseline": 27782.25,
+                "actual": 47631.0,
+                "abs_error": 16800.967108906334
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4791.316695065048,
+              "RMSE": 7307.7790460390615,
+              "WAPE": 0.1663816691410623,
+              "BIAS": -3549.404532152093,
+              "BIAS_PCT": -0.1232554406442338
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 7691.821428571428,
+              "RMSE": 10446.460748485242,
+              "WAPE": 0.2671036313126302,
+              "BIAS": -7691.821428571428,
+              "BIAS_PCT": -0.2671036313126302
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-08",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-08",
+            "history_days": 708,
+            "training_rows": 4326,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-09",
+                "h": 1,
+                "prediction": 29914.32804174631,
+                "baseline": 21821.5,
+                "actual": 38269.0,
+                "abs_error": 8354.67195825369
+              },
+              {
+                "date": "2011-11-10",
+                "h": 2,
+                "prediction": 35599.8737704692,
+                "baseline": 32138.75,
+                "actual": 39239.0,
+                "abs_error": 3639.126229530797
+              },
+              {
+                "date": "2011-11-11",
+                "h": 3,
+                "prediction": 27506.0,
+                "baseline": 25665.25,
+                "actual": 29063.0,
+                "abs_error": 1557.0
+              },
+              {
+                "date": "2011-11-12",
+                "h": 4,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-13",
+                "h": 5,
+                "prediction": 20166.139789713936,
+                "baseline": 14805.0,
+                "actual": 20840.0,
+                "abs_error": 673.8602102860641
+              },
+              {
+                "date": "2011-11-14",
+                "h": 6,
+                "prediction": 30668.74366477644,
+                "baseline": 27782.25,
+                "actual": 47631.0,
+                "abs_error": 16962.25633522356
+              },
+              {
+                "date": "2011-11-15",
+                "h": 7,
+                "prediction": 29850.950781816617,
+                "baseline": 25028.0,
+                "actual": 30912.0,
+                "abs_error": 1061.0492181833833
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4606.851993068213,
+              "RMSE": 7316.967416830708,
+              "WAPE": 0.15657847845381734,
+              "BIAS": -4606.851993068213,
+              "BIAS_PCT": -0.15657847845381734
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 8387.607142857143,
+              "RMSE": 10673.693087864602,
+              "WAPE": 0.2850794352136885,
+              "BIAS": -8387.607142857143,
+              "BIAS_PCT": -0.2850794352136885
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-09",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-09",
+            "history_days": 709,
+            "training_rows": 4333,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-10",
+                "h": 1,
+                "prediction": 37272.584928083656,
+                "baseline": 32138.75,
+                "actual": 39239.0,
+                "abs_error": 1966.4150719163445
+              },
+              {
+                "date": "2011-11-11",
+                "h": 2,
+                "prediction": 27506.0,
+                "baseline": 25665.25,
+                "actual": 29063.0,
+                "abs_error": 1557.0
+              },
+              {
+                "date": "2011-11-12",
+                "h": 3,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-13",
+                "h": 4,
+                "prediction": 21268.19961188519,
+                "baseline": 14805.0,
+                "actual": 20840.0,
+                "abs_error": 428.19961188518937
+              },
+              {
+                "date": "2011-11-14",
+                "h": 5,
+                "prediction": 31257.5,
+                "baseline": 27782.25,
+                "actual": 47631.0,
+                "abs_error": 16373.5
+              },
+              {
+                "date": "2011-11-15",
+                "h": 6,
+                "prediction": 30463.0,
+                "baseline": 25028.0,
+                "actual": 30912.0,
+                "abs_error": 449.0
+              },
+              {
+                "date": "2011-11-16",
+                "h": 7,
+                "prediction": 30384.5,
+                "baseline": 26910.0,
+                "actual": 33144.0,
+                "abs_error": 2759.5
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 3361.9449548287907,
+              "RMSE": 6351.404070222566,
+              "WAPE": 0.1171823525676149,
+              "BIAS": -3239.602208575879,
+              "BIAS_PCT": -0.11291803205727835
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6928.535714285715,
+              "RMSE": 8990.761676675993,
+              "WAPE": 0.24149774185999034,
+              "BIAS": -6928.535714285715,
+              "BIAS_PCT": -0.24149774185999034
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-10",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-10",
+            "history_days": 710,
+            "training_rows": 4340,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-11",
+                "h": 1,
+                "prediction": 27506.0,
+                "baseline": 25665.25,
+                "actual": 29063.0,
+                "abs_error": 1557.0
+              },
+              {
+                "date": "2011-11-12",
+                "h": 2,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-13",
+                "h": 3,
+                "prediction": 21549.043975310764,
+                "baseline": 14805.0,
+                "actual": 20840.0,
+                "abs_error": 709.0439753107639
+              },
+              {
+                "date": "2011-11-14",
+                "h": 4,
+                "prediction": 31236.700330001462,
+                "baseline": 27782.25,
+                "actual": 47631.0,
+                "abs_error": 16394.299669998538
+              },
+              {
+                "date": "2011-11-15",
+                "h": 5,
+                "prediction": 30463.0,
+                "baseline": 25028.0,
+                "actual": 30912.0,
+                "abs_error": 449.0
+              },
+              {
+                "date": "2011-11-16",
+                "h": 6,
+                "prediction": 30384.5,
+                "baseline": 26910.0,
+                "actual": 33144.0,
+                "abs_error": 2759.5
+              },
+              {
+                "date": "2011-11-17",
+                "h": 7,
+                "prediction": 37951.902534415276,
+                "baseline": 37171.5,
+                "actual": 31993.0,
+                "abs_error": 5958.902534415276
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 3975.3923113892256,
+              "RMSE": 6708.470282233813,
+              "WAPE": 0.14375098112811857,
+              "BIAS": -2070.264737181785,
+              "BIAS_PCT": -0.07486118698580195
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6654.0,
+              "RMSE": 8801.297638700784,
+              "WAPE": 0.2406099709168677,
+              "BIAS": -5174.428571428572,
+              "BIAS_PCT": -0.18710837211945264
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-11",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-11",
+            "history_days": 711,
+            "training_rows": 4347,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-12",
+                "h": 1,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-13",
+                "h": 2,
+                "prediction": 20515.983049948067,
+                "baseline": 14805.0,
+                "actual": 20840.0,
+                "abs_error": 324.01695005193324
+              },
+              {
+                "date": "2011-11-14",
+                "h": 3,
+                "prediction": 30748.50829785927,
+                "baseline": 27782.25,
+                "actual": 47631.0,
+                "abs_error": 16882.49170214073
+              },
+              {
+                "date": "2011-11-15",
+                "h": 4,
+                "prediction": 30267.84337048537,
+                "baseline": 25028.0,
+                "actual": 30912.0,
+                "abs_error": 644.1566295146295
+              },
+              {
+                "date": "2011-11-16",
+                "h": 5,
+                "prediction": 30384.5,
+                "baseline": 26910.0,
+                "actual": 33144.0,
+                "abs_error": 2759.5
+              },
+              {
+                "date": "2011-11-17",
+                "h": 6,
+                "prediction": 37504.52740826196,
+                "baseline": 37171.5,
+                "actual": 31993.0,
+                "abs_error": 5511.527408261958
+              },
+              {
+                "date": "2011-11-18",
+                "h": 7,
+                "prediction": 30453.5,
+                "baseline": 28364.0,
+                "actual": 24338.0,
+                "abs_error": 6115.5
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4605.313241424179,
+              "RMSE": 7180.624382840872,
+              "WAPE": 0.1706954044306794,
+              "BIAS": -1283.3054104921907,
+              "BIAS_PCT": -0.04756556711097934
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6743.75,
+              "RMSE": 8839.067919611207,
+              "WAPE": 0.24995631638585605,
+              "BIAS": -4113.892857142857,
+              "BIAS_PCT": -0.1524809645342003
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-12",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-12",
+            "history_days": 712,
+            "training_rows": 4354,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-13",
+                "h": 1,
+                "prediction": 19272.820546412957,
+                "baseline": 14805.0,
+                "actual": 20840.0,
+                "abs_error": 1567.179453587043
+              },
+              {
+                "date": "2011-11-14",
+                "h": 2,
+                "prediction": 29606.984362388182,
+                "baseline": 27782.25,
+                "actual": 47631.0,
+                "abs_error": 18024.015637611818
+              },
+              {
+                "date": "2011-11-15",
+                "h": 3,
+                "prediction": 29068.675261660108,
+                "baseline": 25028.0,
+                "actual": 30912.0,
+                "abs_error": 1843.324738339892
+              },
+              {
+                "date": "2011-11-16",
+                "h": 4,
+                "prediction": 29949.41828815293,
+                "baseline": 26910.0,
+                "actual": 33144.0,
+                "abs_error": 3194.5817118470695
+              },
+              {
+                "date": "2011-11-17",
+                "h": 5,
+                "prediction": 36249.86197787827,
+                "baseline": 37171.5,
+                "actual": 31993.0,
+                "abs_error": 4256.861977878267
+              },
+              {
+                "date": "2011-11-18",
+                "h": 6,
+                "prediction": 29675.233748509872,
+                "baseline": 28364.0,
+                "actual": 24338.0,
+                "abs_error": 5337.233748509872
+              },
+              {
+                "date": "2011-11-19",
+                "h": 7,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4889.028181110566,
+              "RMSE": 7440.53883930269,
+              "WAPE": 0.18121126596582599,
+              "BIAS": -2147.857973571098,
+              "BIAS_PCT": -0.07961010820297622
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6743.75,
+              "RMSE": 8839.067919611207,
+              "WAPE": 0.24995631638585605,
+              "BIAS": -4113.892857142857,
+              "BIAS_PCT": -0.1524809645342003
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-13",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-13",
+            "history_days": 713,
+            "training_rows": 4361,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-14",
+                "h": 1,
+                "prediction": 29925.89952420842,
+                "baseline": 27782.25,
+                "actual": 47631.0,
+                "abs_error": 17705.10047579158
+              },
+              {
+                "date": "2011-11-15",
+                "h": 2,
+                "prediction": 29597.347907760406,
+                "baseline": 25028.0,
+                "actual": 30912.0,
+                "abs_error": 1314.652092239594
+              },
+              {
+                "date": "2011-11-16",
+                "h": 3,
+                "prediction": 30362.724676494392,
+                "baseline": 26910.0,
+                "actual": 33144.0,
+                "abs_error": 2781.275323505608
+              },
+              {
+                "date": "2011-11-17",
+                "h": 4,
+                "prediction": 36247.919272370316,
+                "baseline": 37171.5,
+                "actual": 31993.0,
+                "abs_error": 4254.919272370316
+              },
+              {
+                "date": "2011-11-18",
+                "h": 5,
+                "prediction": 29126.807600257438,
+                "baseline": 28364.0,
+                "actual": 24338.0,
+                "abs_error": 4788.807600257438
+              },
+              {
+                "date": "2011-11-19",
+                "h": 6,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-20",
+                "h": 7,
+                "prediction": 21717.369865105495,
+                "baseline": 17822.5,
+                "actual": 19416.0,
+                "abs_error": 2301.3698651054947
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4735.16066132429,
+              "RMSE": 7263.093643397555,
+              "WAPE": 0.17684157959212327,
+              "BIAS": -1493.7044505433619,
+              "BIAS_PCT": -0.055784602333640285
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6109.25,
+              "RMSE": 8560.890049375706,
+              "WAPE": 0.22815897862714343,
+              "BIAS": -3479.3928571428573,
+              "BIAS_PCT": -0.12994307329513322
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-14",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-14",
+            "history_days": 714,
+            "training_rows": 4368,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-15",
+                "h": 1,
+                "prediction": 30463.0,
+                "baseline": 25028.0,
+                "actual": 30912.0,
+                "abs_error": 449.0
+              },
+              {
+                "date": "2011-11-16",
+                "h": 2,
+                "prediction": 30384.5,
+                "baseline": 26910.0,
+                "actual": 33144.0,
+                "abs_error": 2759.5
+              },
+              {
+                "date": "2011-11-17",
+                "h": 3,
+                "prediction": 36456.89500104189,
+                "baseline": 37171.5,
+                "actual": 31993.0,
+                "abs_error": 4463.895001041892
+              },
+              {
+                "date": "2011-11-18",
+                "h": 4,
+                "prediction": 28911.24305881798,
+                "baseline": 28364.0,
+                "actual": 24338.0,
+                "abs_error": 4573.243058817981
+              },
+              {
+                "date": "2011-11-19",
+                "h": 5,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-20",
+                "h": 6,
+                "prediction": 21716.446413549624,
+                "baseline": 17822.5,
+                "actual": 19416.0,
+                "abs_error": 2300.4464135496237
+              },
+              {
+                "date": "2011-11-21",
+                "h": 7,
+                "prediction": 32949.24239677933,
+                "baseline": 31837.5,
+                "actual": 25814.0,
+                "abs_error": 7135.242396779329
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 3097.332410026975,
+              "RMSE": 3870.4206059320554,
+              "WAPE": 0.13091244781748748,
+              "BIAS": 2180.6181243126894,
+              "BIAS_PCT": 0.09216642536810125
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4134.214285714285,
+              "RMSE": 4710.64970875265,
+              "WAPE": 0.1747374967545602,
+              "BIAS": 216.64285714285714,
+              "BIAS_PCT": 0.009156668699469257
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-15",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-15",
+            "history_days": 715,
+            "training_rows": 4375,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-16",
+                "h": 1,
+                "prediction": 30384.5,
+                "baseline": 26910.0,
+                "actual": 33144.0,
+                "abs_error": 2759.5
+              },
+              {
+                "date": "2011-11-17",
+                "h": 2,
+                "prediction": 36954.302668203665,
+                "baseline": 37171.5,
+                "actual": 31993.0,
+                "abs_error": 4961.302668203665
+              },
+              {
+                "date": "2011-11-18",
+                "h": 3,
+                "prediction": 29836.6165692441,
+                "baseline": 28364.0,
+                "actual": 24338.0,
+                "abs_error": 5498.616569244099
+              },
+              {
+                "date": "2011-11-19",
+                "h": 4,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-20",
+                "h": 5,
+                "prediction": 22434.844125926218,
+                "baseline": 17822.5,
+                "actual": 19416.0,
+                "abs_error": 3018.844125926218
+              },
+              {
+                "date": "2011-11-21",
+                "h": 6,
+                "prediction": 33312.0,
+                "baseline": 31837.5,
+                "actual": 25814.0,
+                "abs_error": 7498.0
+              },
+              {
+                "date": "2011-11-22",
+                "h": 7,
+                "prediction": 30463.0,
+                "baseline": 25359.0,
+                "actual": 36025.0,
+                "abs_error": 5562.0
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4185.466194767711,
+              "RMSE": 4761.953627417604,
+              "WAPE": 0.1716058300437766,
+              "BIAS": 1807.8947661962832,
+              "BIAS_PCT": 0.07412442665831419
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4817.357142857143,
+              "RMSE": 5787.593192708495,
+              "WAPE": 0.1975136179933228,
+              "BIAS": -466.5,
+              "BIAS_PCT": -0.01912669126691267
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-16",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-16",
+            "history_days": 716,
+            "training_rows": 4382,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-17",
+                "h": 1,
+                "prediction": 37815.88138398079,
+                "baseline": 37171.5,
+                "actual": 31993.0,
+                "abs_error": 5822.881383980792
+              },
+              {
+                "date": "2011-11-18",
+                "h": 2,
+                "prediction": 29777.869666705275,
+                "baseline": 28364.0,
+                "actual": 24338.0,
+                "abs_error": 5439.869666705275
+              },
+              {
+                "date": "2011-11-19",
+                "h": 3,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-20",
+                "h": 4,
+                "prediction": 21688.45555969454,
+                "baseline": 17822.5,
+                "actual": 19416.0,
+                "abs_error": 2272.4555596945393
+              },
+              {
+                "date": "2011-11-21",
+                "h": 5,
+                "prediction": 33288.15736572917,
+                "baseline": 31837.5,
+                "actual": 25814.0,
+                "abs_error": 7474.1573657291665
+              },
+              {
+                "date": "2011-11-22",
+                "h": 6,
+                "prediction": 30463.0,
+                "baseline": 25359.0,
+                "actual": 36025.0,
+                "abs_error": 5562.0
+              },
+              {
+                "date": "2011-11-23",
+                "h": 7,
+                "prediction": 31214.5,
+                "baseline": 30381.0,
+                "actual": 39420.0,
+                "abs_error": 8205.5
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4968.123425158539,
+              "RMSE": 5641.571291393413,
+              "WAPE": 0.19647279739731857,
+              "BIAS": 1034.5519965871104,
+              "BIAS_PCT": 0.040913098856026196
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 5218.071428571428,
+              "RMSE": 6294.151590961247,
+              "WAPE": 0.20635741161316565,
+              "BIAS": -867.2142857142857,
+              "BIAS_PCT": -0.034295447611945355
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-17",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-17",
+            "history_days": 717,
+            "training_rows": 4389,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-18",
+                "h": 1,
+                "prediction": 28377.534334958582,
+                "baseline": 28364.0,
+                "actual": 24338.0,
+                "abs_error": 4039.534334958582
+              },
+              {
+                "date": "2011-11-19",
+                "h": 2,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-20",
+                "h": 3,
+                "prediction": 20272.452724202485,
+                "baseline": 17822.5,
+                "actual": 19416.0,
+                "abs_error": 856.4527242024851
+              },
+              {
+                "date": "2011-11-21",
+                "h": 4,
+                "prediction": 30387.652203432735,
+                "baseline": 31837.5,
+                "actual": 25814.0,
+                "abs_error": 4573.652203432735
+              },
+              {
+                "date": "2011-11-22",
+                "h": 5,
+                "prediction": 28860.41291626213,
+                "baseline": 25359.0,
+                "actual": 36025.0,
+                "abs_error": 7164.587083737872
+              },
+              {
+                "date": "2011-11-23",
+                "h": 6,
+                "prediction": 29758.153964101803,
+                "baseline": 30381.0,
+                "actual": 39420.0,
+                "abs_error": 9661.846035898197
+              },
+              {
+                "date": "2011-11-24",
+                "h": 7,
+                "prediction": 33987.772256144024,
+                "baseline": 34940.0,
+                "actual": 26629.0,
+                "abs_error": 7358.772256144024
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4807.834948339128,
+              "RMSE": 5816.279485937092,
+              "WAPE": 0.19607581267040639,
+              "BIAS": 0.28262844310821883,
+              "BIAS_PCT": 1.1526311169512892e-05
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 5665.571428571428,
+              "RMSE": 6756.692645074216,
+              "WAPE": 0.23105650132252012,
+              "BIAS": -419.7142857142857,
+              "BIAS_PCT": -0.01711702264014635
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-18",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-18",
+            "history_days": 718,
+            "training_rows": 4396,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-19",
+                "h": 1,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-20",
+                "h": 2,
+                "prediction": 19163.65974020295,
+                "baseline": 17822.5,
+                "actual": 19416.0,
+                "abs_error": 252.34025979704893
+              },
+              {
+                "date": "2011-11-21",
+                "h": 3,
+                "prediction": 30078.618739685226,
+                "baseline": 31837.5,
+                "actual": 25814.0,
+                "abs_error": 4264.618739685226
+              },
+              {
+                "date": "2011-11-22",
+                "h": 4,
+                "prediction": 28216.05833758013,
+                "baseline": 25359.0,
+                "actual": 36025.0,
+                "abs_error": 7808.941662419871
+              },
+              {
+                "date": "2011-11-23",
+                "h": 5,
+                "prediction": 28771.228177347235,
+                "baseline": 30381.0,
+                "actual": 39420.0,
+                "abs_error": 10648.771822652765
+              },
+              {
+                "date": "2011-11-24",
+                "h": 6,
+                "prediction": 32665.86430612109,
+                "baseline": 34940.0,
+                "actual": 26629.0,
+                "abs_error": 6036.86430612109
+              },
+              {
+                "date": "2011-11-25",
+                "h": 7,
+                "prediction": 26018.617025021944,
+                "baseline": 28250.25,
+                "actual": 31775.0,
+                "abs_error": 5756.382974978056
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4966.845680807723,
+              "RMSE": 6120.296858168205,
+              "WAPE": 0.19414850298278444,
+              "BIAS": -2023.5648105773466,
+              "BIAS_PCT": -0.07909890983332175
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 5593.964285714285,
+              "RMSE": 6716.562205925843,
+              "WAPE": 0.2186618754851211,
+              "BIAS": -1498.392857142857,
+              "BIAS_PCT": -0.05857051915634999
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-19",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-19",
+            "history_days": 719,
+            "training_rows": 4403,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-20",
+                "h": 1,
+                "prediction": 18718.028264627697,
+                "baseline": 17822.5,
+                "actual": 19416.0,
+                "abs_error": 697.9717353723026
+              },
+              {
+                "date": "2011-11-21",
+                "h": 2,
+                "prediction": 30118.098441697395,
+                "baseline": 31837.5,
+                "actual": 25814.0,
+                "abs_error": 4304.098441697395
+              },
+              {
+                "date": "2011-11-22",
+                "h": 3,
+                "prediction": 27815.118993477612,
+                "baseline": 25359.0,
+                "actual": 36025.0,
+                "abs_error": 8209.881006522388
+              },
+              {
+                "date": "2011-11-23",
+                "h": 4,
+                "prediction": 28370.772161473957,
+                "baseline": 30381.0,
+                "actual": 39420.0,
+                "abs_error": 11049.227838526043
+              },
+              {
+                "date": "2011-11-24",
+                "h": 5,
+                "prediction": 32235.58388690443,
+                "baseline": 34940.0,
+                "actual": 26629.0,
+                "abs_error": 5606.583886904431
+              },
+              {
+                "date": "2011-11-25",
+                "h": 6,
+                "prediction": 26404.389436825804,
+                "baseline": 28250.25,
+                "actual": 31775.0,
+                "abs_error": 5370.610563174196
+              },
+              {
+                "date": "2011-11-26",
+                "h": 7,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 5034.053353170965,
+              "RMSE": 6196.51112217064,
+              "WAPE": 0.19677557654552882,
+              "BIAS": -2202.4298307133004,
+              "BIAS_PCT": -0.08609054559715602
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 5593.964285714285,
+              "RMSE": 6716.562205925843,
+              "WAPE": 0.2186618754851211,
+              "BIAS": -1498.392857142857,
+              "BIAS_PCT": -0.05857051915634999
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-20",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-20",
+            "history_days": 720,
+            "training_rows": 4410,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-21",
+                "h": 1,
+                "prediction": 30904.820933760035,
+                "baseline": 31837.5,
+                "actual": 25814.0,
+                "abs_error": 5090.820933760035
+              },
+              {
+                "date": "2011-11-22",
+                "h": 2,
+                "prediction": 28268.49474889889,
+                "baseline": 25359.0,
+                "actual": 36025.0,
+                "abs_error": 7756.505251101109
+              },
+              {
+                "date": "2011-11-23",
+                "h": 3,
+                "prediction": 28726.767603325592,
+                "baseline": 30381.0,
+                "actual": 39420.0,
+                "abs_error": 10693.232396674408
+              },
+              {
+                "date": "2011-11-24",
+                "h": 4,
+                "prediction": 32560.139354950046,
+                "baseline": 34940.0,
+                "actual": 26629.0,
+                "abs_error": 5931.139354950046
+              },
+              {
+                "date": "2011-11-25",
+                "h": 5,
+                "prediction": 26128.03542578983,
+                "baseline": 28250.25,
+                "actual": 31775.0,
+                "abs_error": 5646.964574210171
+              },
+              {
+                "date": "2011-11-26",
+                "h": 6,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-27",
+                "h": 7,
+                "prediction": 19345.76698796653,
+                "baseline": 20908.25,
+                "actual": 11173.0,
+                "abs_error": 8172.76698796653
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 6184.489928380329,
+              "RMSE": 6910.507462956816,
+              "WAPE": 0.2534092901886154,
+              "BIAS": -700.2821350441538,
+              "BIAS_PCT": -0.0286940395777768
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6757.071428571428,
+              "RMSE": 7634.707454167074,
+              "WAPE": 0.27687080006556,
+              "BIAS": 120.0,
+              "BIAS_PCT": 0.004916996417616896
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-21",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-21",
+            "history_days": 721,
+            "training_rows": 4417,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-22",
+                "h": 1,
+                "prediction": 26862.55443299957,
+                "baseline": 25359.0,
+                "actual": 36025.0,
+                "abs_error": 9162.445567000432
+              },
+              {
+                "date": "2011-11-23",
+                "h": 2,
+                "prediction": 27622.654396360893,
+                "baseline": 30381.0,
+                "actual": 39420.0,
+                "abs_error": 11797.345603639107
+              },
+              {
+                "date": "2011-11-24",
+                "h": 3,
+                "prediction": 31883.62037914966,
+                "baseline": 34940.0,
+                "actual": 26629.0,
+                "abs_error": 5254.620379149659
+              },
+              {
+                "date": "2011-11-25",
+                "h": 4,
+                "prediction": 24786.712857257666,
+                "baseline": 28250.25,
+                "actual": 31775.0,
+                "abs_error": 6988.287142742334
+              },
+              {
+                "date": "2011-11-26",
+                "h": 5,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-27",
+                "h": 6,
+                "prediction": 17977.347125207525,
+                "baseline": 20908.25,
+                "actual": 11173.0,
+                "abs_error": 6804.347125207525
+              },
+              {
+                "date": "2011-11-28",
+                "h": 7,
+                "prediction": 27086.539123913237,
+                "baseline": 31659.25,
+                "actual": 29466.0,
+                "abs_error": 2379.460876086763
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 6055.215241975116,
+              "RMSE": 7086.566148500264,
+              "WAPE": 0.2429193222102713,
+              "BIAS": -2609.7959550159217,
+              "BIAS_PCT": -0.10469815508866771
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 6209.892857142857,
+              "RMSE": 7334.352622006156,
+              "WAPE": 0.2491245816331209,
+              "BIAS": -427.17857142857144,
+              "BIAS_PCT": -0.01713728164687543
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-22",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-22",
+            "history_days": 722,
+            "training_rows": 4424,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-23",
+                "h": 1,
+                "prediction": 29941.91270105198,
+                "baseline": 30381.0,
+                "actual": 39420.0,
+                "abs_error": 9478.08729894802
+              },
+              {
+                "date": "2011-11-24",
+                "h": 2,
+                "prediction": 33687.67129707978,
+                "baseline": 34940.0,
+                "actual": 26629.0,
+                "abs_error": 7058.671297079782
+              },
+              {
+                "date": "2011-11-25",
+                "h": 3,
+                "prediction": 27299.832847716232,
+                "baseline": 28250.25,
+                "actual": 31775.0,
+                "abs_error": 4475.167152283768
+              },
+              {
+                "date": "2011-11-26",
+                "h": 4,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-27",
+                "h": 5,
+                "prediction": 20109.226345941435,
+                "baseline": 20908.25,
+                "actual": 11173.0,
+                "abs_error": 8936.226345941435
+              },
+              {
+                "date": "2011-11-28",
+                "h": 6,
+                "prediction": 30243.88112046651,
+                "baseline": 31659.25,
+                "actual": 29466.0,
+                "abs_error": 777.8811204665108
+              },
+              {
+                "date": "2011-11-29",
+                "h": 7,
+                "prediction": 31764.933410382822,
+                "baseline": 27597.0,
+                "actual": 30940.0,
+                "abs_error": 824.9334103828223
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4507.280946443191,
+              "RMSE": 5865.490551189087,
+              "WAPE": 0.18624798040827104,
+              "BIAS": 520.6368175198232,
+              "BIAS_PCT": 0.021513537083987667
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 5163.75,
+              "RMSE": 6255.982184934216,
+              "WAPE": 0.21337432040754886,
+              "BIAS": 618.9642857142857,
+              "BIAS_PCT": 0.025576583649640206
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-23",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-23",
+            "history_days": 723,
+            "training_rows": 4431,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-24",
+                "h": 1,
+                "prediction": 34981.77122206548,
+                "baseline": 34940.0,
+                "actual": 26629.0,
+                "abs_error": 8352.77122206548
+              },
+              {
+                "date": "2011-11-25",
+                "h": 2,
+                "prediction": 28176.687059765412,
+                "baseline": 28250.25,
+                "actual": 31775.0,
+                "abs_error": 3598.3129402345876
+              },
+              {
+                "date": "2011-11-26",
+                "h": 3,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-27",
+                "h": 4,
+                "prediction": 21319.76399670959,
+                "baseline": 20908.25,
+                "actual": 11173.0,
+                "abs_error": 10146.76399670959
+              },
+              {
+                "date": "2011-11-28",
+                "h": 5,
+                "prediction": 30581.709575448338,
+                "baseline": 31659.25,
+                "actual": 29466.0,
+                "abs_error": 1115.709575448338
+              },
+              {
+                "date": "2011-11-29",
+                "h": 6,
+                "prediction": 32681.754871476347,
+                "baseline": 27597.0,
+                "actual": 30940.0,
+                "abs_error": 1741.754871476347
+              },
+              {
+                "date": "2011-11-30",
+                "h": 7,
+                "prediction": 33131.72513944852,
+                "baseline": 34900.25,
+                "actual": 28532.0,
+                "abs_error": 4599.725139448521
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4222.148249340409,
+              "RMSE": 5491.67489356754,
+              "WAPE": 0.1864494700525683,
+              "BIAS": 3194.0588378448124,
+              "BIAS_PCT": 0.14104918692182877
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4782.214285714285,
+              "RMSE": 5767.052710378648,
+              "WAPE": 0.21118190707504023,
+              "BIAS": 2820.0,
+              "BIAS_PCT": 0.1245308015014352
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-24",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-24",
+            "history_days": 724,
+            "training_rows": 4438,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-25",
+                "h": 1,
+                "prediction": 25916.287171893524,
+                "baseline": 28250.25,
+                "actual": 31775.0,
+                "abs_error": 5858.712828106476
+              },
+              {
+                "date": "2011-11-26",
+                "h": 2,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-27",
+                "h": 3,
+                "prediction": 18979.485055544814,
+                "baseline": 20908.25,
+                "actual": 11173.0,
+                "abs_error": 7806.485055544814
+              },
+              {
+                "date": "2011-11-28",
+                "h": 4,
+                "prediction": 27967.658395925904,
+                "baseline": 31659.25,
+                "actual": 29466.0,
+                "abs_error": 1498.3416040740958
+              },
+              {
+                "date": "2011-11-29",
+                "h": 5,
+                "prediction": 29922.104216530504,
+                "baseline": 27597.0,
+                "actual": 30940.0,
+                "abs_error": 1017.8957834694957
+              },
+              {
+                "date": "2011-11-30",
+                "h": 6,
+                "prediction": 29927.101192204667,
+                "baseline": 34900.25,
+                "actual": 28532.0,
+                "abs_error": 1395.1011922046673
+              },
+              {
+                "date": "2011-12-01",
+                "h": 7,
+                "prediction": 30549.805635088203,
+                "baseline": 33119.75,
+                "actual": 27051.0,
+                "abs_error": 3498.8056350882034
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 3010.763156926822,
+              "RMSE": 4013.10020026883,
+              "WAPE": 0.13260186173444669,
+              "BIAS": 617.9202381696596,
+              "BIAS_PCT": 0.02721481887280883
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4461.892857142857,
+              "RMSE": 5352.826814103527,
+              "WAPE": 0.19651339839055726,
+              "BIAS": 2499.6785714285716,
+              "BIAS_PCT": 0.1100923636409395
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-25",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-25",
+            "history_days": 725,
+            "training_rows": 4445,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-26",
+                "h": 1,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-11-27",
+                "h": 2,
+                "prediction": 22455.382406923825,
+                "baseline": 20908.25,
+                "actual": 11173.0,
+                "abs_error": 11282.382406923825
+              },
+              {
+                "date": "2011-11-28",
+                "h": 3,
+                "prediction": 31771.23117873001,
+                "baseline": 31659.25,
+                "actual": 29466.0,
+                "abs_error": 2305.2311787300096
+              },
+              {
+                "date": "2011-11-29",
+                "h": 4,
+                "prediction": 33405.523810147766,
+                "baseline": 27597.0,
+                "actual": 30940.0,
+                "abs_error": 2465.523810147766
+              },
+              {
+                "date": "2011-11-30",
+                "h": 5,
+                "prediction": 32959.86380943198,
+                "baseline": 34900.25,
+                "actual": 28532.0,
+                "abs_error": 4427.863809431983
+              },
+              {
+                "date": "2011-12-01",
+                "h": 6,
+                "prediction": 34084.17435581131,
+                "baseline": 33119.75,
+                "actual": 27051.0,
+                "abs_error": 7033.1743558113085
+              },
+              {
+                "date": "2011-12-02",
+                "h": 7,
+                "prediction": 30671.99031340754,
+                "baseline": 30153.5,
+                "actual": 28825.0,
+                "abs_error": 1846.9903134075394
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4194.452267778919,
+              "RMSE": 5492.43562773643,
+              "WAPE": 0.18822828744993128,
+              "BIAS": 4194.452267778919,
+              "BIAS_PCT": 0.18822828744993128
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4148.142857142857,
+              "RMSE": 5208.651237536039,
+              "WAPE": 0.18615012789527333,
+              "BIAS": 3193.0,
+              "BIAS_PCT": 0.14328758165744582
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-26",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-26",
+            "history_days": 726,
+            "training_rows": 4452,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-27",
+                "h": 1,
+                "prediction": 20811.821446859314,
+                "baseline": 20908.25,
+                "actual": 11173.0,
+                "abs_error": 9638.821446859314
+              },
+              {
+                "date": "2011-11-28",
+                "h": 2,
+                "prediction": 29342.027565408585,
+                "baseline": 31659.25,
+                "actual": 29466.0,
+                "abs_error": 123.97243459141464
+              },
+              {
+                "date": "2011-11-29",
+                "h": 3,
+                "prediction": 31289.919738495693,
+                "baseline": 27597.0,
+                "actual": 30940.0,
+                "abs_error": 349.9197384956933
+              },
+              {
+                "date": "2011-11-30",
+                "h": 4,
+                "prediction": 30783.960844017543,
+                "baseline": 34900.25,
+                "actual": 28532.0,
+                "abs_error": 2251.9608440175434
+              },
+              {
+                "date": "2011-12-01",
+                "h": 5,
+                "prediction": 31491.083544531644,
+                "baseline": 33119.75,
+                "actual": 27051.0,
+                "abs_error": 4440.083544531644
+              },
+              {
+                "date": "2011-12-02",
+                "h": 6,
+                "prediction": 29206.32554852744,
+                "baseline": 30153.5,
+                "actual": 28825.0,
+                "abs_error": 381.3255485274385
+              },
+              {
+                "date": "2011-12-03",
+                "h": 7,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 2455.1547938604353,
+              "RMSE": 4105.3235573152215,
+              "WAPE": 0.11017638365391377,
+              "BIAS": 2419.7340982628884,
+              "BIAS_PCT": 0.10858686100662375
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4148.142857142857,
+              "RMSE": 5208.651237536039,
+              "WAPE": 0.18615012789527333,
+              "BIAS": 3193.0,
+              "BIAS_PCT": 0.14328758165744582
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-27",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-27",
+            "history_days": 727,
+            "training_rows": 4459,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-28",
+                "h": 1,
+                "prediction": 27791.83452846385,
+                "baseline": 31659.25,
+                "actual": 29466.0,
+                "abs_error": 1674.165471536151
+              },
+              {
+                "date": "2011-11-29",
+                "h": 2,
+                "prediction": 29762.359702202702,
+                "baseline": 27597.0,
+                "actual": 30940.0,
+                "abs_error": 1177.6402977972975
+              },
+              {
+                "date": "2011-11-30",
+                "h": 3,
+                "prediction": 29347.205783850535,
+                "baseline": 34900.25,
+                "actual": 28532.0,
+                "abs_error": 815.2057838505352
+              },
+              {
+                "date": "2011-12-01",
+                "h": 4,
+                "prediction": 30955.289770099196,
+                "baseline": 33119.75,
+                "actual": 27051.0,
+                "abs_error": 3904.289770099196
+              },
+              {
+                "date": "2011-12-02",
+                "h": 5,
+                "prediction": 27756.770825015345,
+                "baseline": 30153.5,
+                "actual": 28825.0,
+                "abs_error": 1068.2291749846554
+              },
+              {
+                "date": "2011-12-03",
+                "h": 6,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-12-04",
+                "h": 7,
+                "prediction": 16048.891931061313,
+                "baseline": 18684.5,
+                "actual": 12412.0,
+                "abs_error": 3636.891931061313
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 1753.774632761307,
+              "RMSE": 2218.938042800521,
+              "WAPE": 0.07808137604040774,
+              "BIAS": 633.76464867042,
+              "BIAS_PCT": 0.02821640530632936
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 3653.464285714286,
+              "RMSE": 4383.076181462056,
+              "WAPE": 0.16265916578682915,
+              "BIAS": 2698.3214285714284,
+              "BIAS_PCT": 0.1201343925304975
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-28",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-28",
+            "history_days": 728,
+            "training_rows": 4466,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-29",
+                "h": 1,
+                "prediction": 29275.742940830263,
+                "baseline": 27597.0,
+                "actual": 30940.0,
+                "abs_error": 1664.2570591697367
+              },
+              {
+                "date": "2011-11-30",
+                "h": 2,
+                "prediction": 29472.504424928236,
+                "baseline": 34900.25,
+                "actual": 28532.0,
+                "abs_error": 940.5044249282364
+              },
+              {
+                "date": "2011-12-01",
+                "h": 3,
+                "prediction": 30767.124293254485,
+                "baseline": 33119.75,
+                "actual": 27051.0,
+                "abs_error": 3716.1242932544847
+              },
+              {
+                "date": "2011-12-02",
+                "h": 4,
+                "prediction": 27241.33928163671,
+                "baseline": 30153.5,
+                "actual": 28825.0,
+                "abs_error": 1583.6607183632914
+              },
+              {
+                "date": "2011-12-03",
+                "h": 5,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-12-04",
+                "h": 6,
+                "prediction": 17284.21809344389,
+                "baseline": 18684.5,
+                "actual": 12412.0,
+                "abs_error": 4872.218093443891
+              },
+              {
+                "date": "2011-12-05",
+                "h": 7,
+                "prediction": 28027.561884318893,
+                "baseline": 33576.5,
+                "actual": 44664.0,
+                "abs_error": 16636.438115681107
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 4201.886100691535,
+              "RMSE": 6766.318301421684,
+              "WAPE": 0.1705864769686398,
+              "BIAS": -1479.358440226789,
+              "BIAS_PCT": -0.06005839721609244
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4924.071428571428,
+              "RMSE": 6007.1601131483085,
+              "WAPE": 0.19990546559643668,
+              "BIAS": 801.0714285714286,
+              "BIAS_PCT": 0.03252157472277641
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-29",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-29",
+            "history_days": 729,
+            "training_rows": 4473,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-11-30",
+                "h": 1,
+                "prediction": 29901.200779261864,
+                "baseline": 34900.25,
+                "actual": 28532.0,
+                "abs_error": 1369.2007792618642
+              },
+              {
+                "date": "2011-12-01",
+                "h": 2,
+                "prediction": 31476.867521010943,
+                "baseline": 33119.75,
+                "actual": 27051.0,
+                "abs_error": 4425.867521010943
+              },
+              {
+                "date": "2011-12-02",
+                "h": 3,
+                "prediction": 28745.01376312096,
+                "baseline": 30153.5,
+                "actual": 28825.0,
+                "abs_error": 79.98623687903819
+              },
+              {
+                "date": "2011-12-03",
+                "h": 4,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-12-04",
+                "h": 5,
+                "prediction": 18776.567624315714,
+                "baseline": 18684.5,
+                "actual": 12412.0,
+                "abs_error": 6364.567624315714
+              },
+              {
+                "date": "2011-12-05",
+                "h": 6,
+                "prediction": 29841.450345653164,
+                "baseline": 33576.5,
+                "actual": 44664.0,
+                "abs_error": 14822.549654346836
+              },
+              {
+                "date": "2011-12-06",
+                "h": 7,
+                "prediction": 30012.221466676157,
+                "baseline": 31103.75,
+                "actual": 30469.0,
+                "abs_error": 456.77853332384257
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 3931.278621305463,
+              "RMSE": 6345.907092811101,
+              "WAPE": 0.16003762859117457,
+              "BIAS": -457.0969285658851,
+              "BIAS_PCT": -0.018607866684275328
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4537.178571428572,
+              "RMSE": 5877.6704196901,
+              "WAPE": 0.18470308747157654,
+              "BIAS": 1369.3214285714287,
+              "BIAS_PCT": 0.055743429890725955
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-11-30",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-11-30",
+            "history_days": 730,
+            "training_rows": 4480,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-12-01",
+                "h": 1,
+                "prediction": 30537.450933764572,
+                "baseline": 33119.75,
+                "actual": 27051.0,
+                "abs_error": 3486.4509337645723
+              },
+              {
+                "date": "2011-12-02",
+                "h": 2,
+                "prediction": 28352.33082866,
+                "baseline": 30153.5,
+                "actual": 28825.0,
+                "abs_error": 472.6691713399996
+              },
+              {
+                "date": "2011-12-03",
+                "h": 3,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-12-04",
+                "h": 4,
+                "prediction": 18118.427874821267,
+                "baseline": 18684.5,
+                "actual": 12412.0,
+                "abs_error": 5706.427874821267
+              },
+              {
+                "date": "2011-12-05",
+                "h": 5,
+                "prediction": 28261.3290519722,
+                "baseline": 33576.5,
+                "actual": 44664.0,
+                "abs_error": 16402.6709480278
+              },
+              {
+                "date": "2011-12-06",
+                "h": 6,
+                "prediction": 28357.449237433288,
+                "baseline": 31103.75,
+                "actual": 30469.0,
+                "abs_error": 2111.5507625667124
+              },
+              {
+                "date": "2011-12-07",
+                "h": 7,
+                "prediction": 28647.689248887953,
+                "baseline": 34841.25,
+                "actual": 41980.0,
+                "abs_error": 13332.310751112047
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 5930.297205947485,
+              "RMSE": 8419.355643532768,
+              "WAPE": 0.22390429631788608,
+              "BIAS": -3303.7604034943884,
+              "BIAS_PCT": -0.124736775014486
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4647.25,
+              "RMSE": 6002.811370367578,
+              "WAPE": 0.17546156708971364,
+              "BIAS": -560.25,
+              "BIAS_PCT": -0.021152798528594776
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-12-01",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-12-01",
+            "history_days": 731,
+            "training_rows": 4487,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-12-02",
+                "h": 1,
+                "prediction": 26232.784949347315,
+                "baseline": 30153.5,
+                "actual": 28825.0,
+                "abs_error": 2592.215050652685
+              },
+              {
+                "date": "2011-12-03",
+                "h": 2,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-12-04",
+                "h": 3,
+                "prediction": 16362.892631931489,
+                "baseline": 18684.5,
+                "actual": 12412.0,
+                "abs_error": 3950.8926319314887
+              },
+              {
+                "date": "2011-12-05",
+                "h": 4,
+                "prediction": 27157.483153377187,
+                "baseline": 33576.5,
+                "actual": 44664.0,
+                "abs_error": 17506.516846622813
+              },
+              {
+                "date": "2011-12-06",
+                "h": 5,
+                "prediction": 27641.57643976275,
+                "baseline": 31103.75,
+                "actual": 30469.0,
+                "abs_error": 2827.42356023725
+              },
+              {
+                "date": "2011-12-07",
+                "h": 6,
+                "prediction": 27630.661548581782,
+                "baseline": 34841.25,
+                "actual": 41980.0,
+                "abs_error": 14349.338451418218
+              },
+              {
+                "date": "2011-12-08",
+                "h": 7,
+                "prediction": 27552.93056046679,
+                "baseline": 31228.0,
+                "actual": 35672.0,
+                "abs_error": 8119.06943953321
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 7049.350854342238,
+              "RMSE": 9324.502208890797,
+              "WAPE": 0.2543291790642075,
+              "BIAS": -5920.524388076098,
+              "BIAS_PCT": -0.21360294562746848
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 4415.142857142857,
+              "RMSE": 5796.003794179474,
+              "WAPE": 0.1592912143983672,
+              "BIAS": -2062.0714285714284,
+              "BIAS_PCT": -0.07439620249250085
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          },
+          {
+            "origin": "2011-12-02",
+            "horizon": 7,
+            "requested_method": "robust_blend",
+            "actual_method": "robust_blend",
+            "method_label": "销量预测模型",
+            "model_version": "daily-v3-robust-blend-mad3",
+            "history_start": "2009-12-01",
+            "history_end": "2011-12-02",
+            "history_days": 732,
+            "training_rows": 4494,
+            "closed_weekdays": [
+              5
+            ],
+            "rows": [
+              {
+                "date": "2011-12-03",
+                "h": 1,
+                "prediction": 0.0,
+                "baseline": 0.0,
+                "actual": 0.0,
+                "abs_error": 0.0
+              },
+              {
+                "date": "2011-12-04",
+                "h": 2,
+                "prediction": 17464.51097981311,
+                "baseline": 18684.5,
+                "actual": 12412.0,
+                "abs_error": 5052.510979813109
+              },
+              {
+                "date": "2011-12-05",
+                "h": 3,
+                "prediction": 27476.670189231525,
+                "baseline": 33576.5,
+                "actual": 44664.0,
+                "abs_error": 17187.329810768475
+              },
+              {
+                "date": "2011-12-06",
+                "h": 4,
+                "prediction": 27994.37042796166,
+                "baseline": 31103.75,
+                "actual": 30469.0,
+                "abs_error": 2474.6295720383387
+              },
+              {
+                "date": "2011-12-07",
+                "h": 5,
+                "prediction": 28120.683684872885,
+                "baseline": 34841.25,
+                "actual": 41980.0,
+                "abs_error": 13859.316315127115
+              },
+              {
+                "date": "2011-12-08",
+                "h": 6,
+                "prediction": 27404.126177776627,
+                "baseline": 31228.0,
+                "actual": 35672.0,
+                "abs_error": 8267.873822223373
+              },
+              {
+                "date": "2011-12-09",
+                "h": 7,
+                "prediction": 26770.564963987905,
+                "baseline": 28500.25,
+                "actual": 93980.0,
+                "abs_error": 67209.43503601209
+              }
+            ],
+            "metrics": {
+              "n": 7,
+              "MAE": 16293.013647997499,
+              "RMSE": 27004.239108668407,
+              "WAPE": 0.44005099038874007,
+              "BIAS": -14849.439082336612,
+              "BIAS_PCT": -0.40106210650002233
+            },
+            "baseline_metrics": {
+              "n": 7,
+              "MAE": 13579.607142857143,
+              "RMSE": 25413.68688518481,
+              "WAPE": 0.3667657623940396,
+              "BIAS": -11606.107142857143,
+              "BIAS_PCT": -0.31346435061753164
+            },
+            "complete_actual": true,
+            "actual_days": 7,
+            "warnings": [
+              "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+              "已按起点以前的同星期历史波动约束异常峰值的延续；实际销量与大单仍完整保留，突发大单可能低估。",
+              "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+            ]
+          }
+        ],
+        "warnings": [
+          "重叠起点的预测不是独立样本，不以条数代表独立样本量。",
+          "完整窗口和末端部分目标分别统计；未开展显著性检验。"
+        ],
+        "batch_id": "original",
+        "data_policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order"
+      }
+    }
+  }
+}

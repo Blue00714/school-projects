@@ -1,0 +1,20 @@
+{
+  "item_after_ui_receipt": {
+    "stock_code": "20668",
+    "name": "DISCO BALL CHRISTMAS DECORATION",
+    "initial_qty": 154.0,
+    "lead_time_days": 7,
+    "safety_stock": 462.0,
+    "daily_demand": 154.0,
+    "balance": 1540.0,
+    "in_transit_effective": 0.0,
+    "in_transit_total": 0.0,
+    "replenishment_candidate": 0.0
+  },
+  "item_count": 12,
+  "movement_count": 28,
+  "purchase_count": 10,
+  "pending_purchase_count": 6,
+  "needs_order": 5,
+  "suggested_total": 7806.0
+}

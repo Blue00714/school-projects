@@ -1,0 +1,64 @@
+
+> mall-admin-web@3.0.0 build-only
+> vite build --configLoader native
+
+vite v7.3.0 building client environment for production...
+transforming...
+✓ 2239 modules transformed.
+[plugin vite:reporter] 
+rendering chunks...
+(!) C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/stores/user.ts is dynamically imported by C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/apis/ece.ts but also statically imported by C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/router/guard.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/stores/permission.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/ece/Admin.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/ece/Ai.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/ece/Dashboard.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/ece/Forecast.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/ece/Imports.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/ece/Inventory.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/ece/Orders.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/layout/components/Navbar.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/layout/components/PolicyBar.vue?vue&type=script&setup=true&lang.ts, C:/Users/Administrator/Desktop/学校项目/电商运营系统/frontend/src/views/normal/login/index.vue?vue&type=script&setup=true&lang.ts, dynamic import will not move module into another chunk.
+
+computing gzip size...
+dist/index.html                                 0.52 kB │ gzip:   0.37 kB
+dist/assets/divider-DX5ccdpw.css                0.95 kB │ gzip:   0.46 kB
+dist/assets/Ai-DdPtyAkD.css                     1.20 kB │ gzip:   0.48 kB
+dist/assets/Forecast-B1PHnYXe.css               1.26 kB │ gzip:   0.47 kB
+dist/assets/index-CoKZ2IQ1.css                  1.51 kB │ gzip:   0.57 kB
+dist/assets/index-BkbU-2HQ.css                  1.91 kB │ gzip:   0.58 kB
+dist/assets/loading-Bs1A1bSs.css                2.03 kB │ gzip:   0.72 kB
+dist/assets/progress-m7X7_Zdw.css               3.21 kB │ gzip:   0.96 kB
+dist/assets/descriptions-item-BxW4ZIg7.css      3.97 kB │ gzip:   0.77 kB
+dist/assets/alert-DoDDMYK-.css                  4.08 kB │ gzip:   0.90 kB
+dist/assets/overlay-DR0zZjmG.css                4.73 kB │ gzip:   1.23 kB
+dist/assets/Admin-DkjXKG8y.css                  5.81 kB │ gzip:   1.43 kB
+dist/assets/Dashboard-B2KP3sg0.css             10.10 kB │ gzip:   2.07 kB
+dist/assets/select-Cza5wmAc.css                12.25 kB │ gzip:   2.19 kB
+dist/assets/Inventory-PZQGgBeh.css             12.26 kB │ gzip:   2.44 kB
+dist/assets/Imports-CNARi8Ds.css               14.40 kB │ gzip:   2.57 kB
+dist/assets/input-DbQ3yDQM.css                 17.81 kB │ gzip:   2.68 kB
+dist/assets/Orders-C1OxLcjI.css                25.27 kB │ gzip:   3.57 kB
+dist/assets/table-column-C3IHkBhz.css          29.15 kB │ gzip:   4.21 kB
+dist/assets/date-picker-panel-CywqlWK0.css     32.51 kB │ gzip:   4.50 kB
+dist/assets/index-X-4nfcfH.css                 79.30 kB │ gzip:  12.96 kB
+dist/assets/table-BcCC8_DG.js                   0.70 kB │ gzip:   0.42 kB
+dist/assets/example-CD0E2g5T.js                 1.11 kB │ gzip:   0.58 kB
+dist/assets/ums-admin-D6KUlihe.js               1.23 kB │ gzip:   0.57 kB
+dist/assets/product-D14f0Udh.js                 1.89 kB │ gzip:   0.91 kB
+dist/assets/total-week-DA3-T8vB.js              1.91 kB │ gzip:   0.79 kB
+dist/assets/divider-BqE41JBa.js                 1.92 kB │ gzip:   0.81 kB
+dist/assets/format-ZnMda2Od.js                  2.16 kB │ gzip:   0.91 kB
+dist/assets/order-CJ9H2j5_.js                   2.26 kB │ gzip:   0.93 kB
+dist/assets/dashboard-DeT4n18y.js               3.58 kB │ gzip:   1.05 kB
+dist/assets/index-DuGHp0SB.js                   5.60 kB │ gzip:   1.60 kB
+dist/assets/alert-B1ZMwfjh.js                   5.90 kB │ gzip:   1.56 kB
+dist/assets/index-BiCpTWPl.js                   9.29 kB │ gzip:   2.77 kB
+dist/assets/loading-DKp5YrKw.js                10.48 kB │ gzip:   2.92 kB
+dist/assets/progress-Bvz4zv2K.js               10.71 kB │ gzip:   2.78 kB
+dist/assets/descriptions-item-BaCa5kfS.js      14.04 kB │ gzip:   3.11 kB
+dist/assets/omit-CHFrL9YD.js                   21.42 kB │ gzip:   6.31 kB
+dist/assets/overlay-B6gIyBmN.js                27.73 kB │ gzip:   6.69 kB
+dist/assets/Ai-DGhxtuS2.js                     31.88 kB │ gzip:   5.75 kB
+dist/assets/Forecast-hH-qyMqn.js               43.71 kB │ gzip:   7.50 kB
+dist/assets/Dashboard-DxBEKQ_A.js              50.96 kB │ gzip:   9.35 kB
+dist/assets/Admin-0ZCmUt0M.js                  52.53 kB │ gzip:  10.11 kB
+dist/assets/Imports-DLeWAtV9.js                62.47 kB │ gzip:  12.32 kB
+dist/assets/select-BbLq9USP.js                 78.29 kB │ gzip:  16.18 kB
+dist/assets/Orders-BRmZ_7_4.js                101.57 kB │ gzip:  17.48 kB
+dist/assets/Inventory-CdAK15rr.js             108.17 kB │ gzip:  16.49 kB
+dist/assets/input-C9-3yY2q.js                 115.77 kB │ gzip:  26.36 kB
+dist/assets/table-column-Cc5_qpLS.js          202.05 kB │ gzip:  44.23 kB
+dist/assets/date-picker-panel-8yFRU4zX.js     242.57 kB │ gzip:  42.05 kB
+dist/assets/index-Upif5ZM9.js                 843.78 kB │ gzip: 206.43 kB
+dist/assets/index-B3DlhXpi.js               3,255.63 kB │ gzip: 769.75 kB
+✓ built in 12.61s

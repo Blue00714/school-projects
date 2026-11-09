@@ -1,0 +1,72 @@
+==============================================================================
+FastAPI 原型 API 自动化测试运行记录
+运行时间: 2026-10-29T15:05:45+08:00
+命令: python.exe 03_测试与验证\系统测试\tests_api\run_api_tests.py --pattern test_auth.py --out test_api_probe_auth.log
+工作目录: C:\Users\Administrator\11111\数据\学校项目
+说明: （未填写）
+Python: 3.12.10 (Windows-10-10.0.19045-SP0)
+pandas: 3.0.5
+隔离方式: 每个测试类一个 python run.py 子进程 + 临时 ECE_RUNTIME_DIR + 复制的 retail.sqlite3 (ECE_ORIGINAL_DB)
+官方库运行前:
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+==============================================================================
+test_01_health_is_public_and_describes_service (test_auth.AuthTests.test_01_health_is_public_and_describes_service) ... ok
+test_02_login_success_me_and_cookie_flags (test_auth.AuthTests.test_02_login_success_me_and_cookie_flags) ... FAIL
+test_03_login_failures_are_401_or_400 (test_auth.AuthTests.test_03_login_failures_are_401_or_400) ... FAIL
+test_04_unauthenticated_requests_are_401 (test_auth.AuthTests.test_04_unauthenticated_requests_are_401) ... ok
+test_05_operator_cannot_use_admin_endpoints (test_auth.AuthTests.test_05_operator_cannot_use_admin_endpoints) ... ok
+test_06_admin_user_management (test_auth.AuthTests.test_06_admin_user_management) ... ok
+test_07_password_change_revokes_other_sessions (test_auth.AuthTests.test_07_password_change_revokes_other_sessions) ... FAIL
+test_08_logout_invalidates_session (test_auth.AuthTests.test_08_logout_invalidates_session) ... ok
+
+======================================================================
+FAIL: test_02_login_success_me_and_cookie_flags (test_auth.AuthTests.test_02_login_success_me_and_cookie_flags)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_auth.py", line 51, in test_02_login_success_me_and_cookie_flags
+    self.assertIn('SameSite=Lax', cookie)
+AssertionError: 'SameSite=Lax' not found in 'ece_session=bNVih-0W7Bs-rNJ-iA-mvHRrbxUMOuxTC0JEucTbRXw; HttpOnly; Max-Age=43200; Path=/; SameSite=lax'
+
+======================================================================
+FAIL: test_03_login_failures_are_401_or_400 (test_auth.AuthTests.test_03_login_failures_are_401_or_400)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_auth.py", line 70, in test_03_login_failures_are_401_or_400
+    self.expect_error(missing, 400, 'bad_request')
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 389, in expect_error
+    payload = self.expect_json(response, status)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 383, in expect_json
+    self.assertEqual(
+AssertionError: 401 != 400 : http://127.0.0.1:58973/api/auth/login 期望 HTTP 400，实际 401：{"error":"账号或密码错误","code":"unauthorized"}
+
+======================================================================
+FAIL: test_07_password_change_revokes_other_sessions (test_auth.AuthTests.test_07_password_change_revokes_other_sessions)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_auth.py", line 160, in test_07_password_change_revokes_other_sessions
+    self.expect_error(client.get('/api/auth/me'), 401, 'unauthorized')
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 389, in expect_error
+    payload = self.expect_json(response, status)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 383, in expect_json
+    self.assertEqual(
+AssertionError: 200 != 401 : http://127.0.0.1:58973/api/auth/me 期望 HTTP 401，实际 200：{"user":{"id":4,"username":"qa-admin2","display_name":"QA 第二管理员","role":"admin","active":true,"must_change_password":false}}
+
+----------------------------------------------------------------------
+Ran 8 tests in 4.362s
+
+FAILED (failures=3)
+==============================================================================
+耗时: 4.39s
+用例: 共 8，失败 3，错误 0，跳过 0
+官方库运行后:
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+官方库是否被修改: 否
+失败用例:
+  - test_02_login_success_me_and_cookie_flags (test_auth.AuthTests.test_02_login_success_me_and_cookie_flags)
+  - test_03_login_failures_are_401_or_400 (test_auth.AuthTests.test_03_login_failures_are_401_or_400)
+  - test_07_password_change_revokes_other_sessions (test_auth.AuthTests.test_07_password_change_revokes_other_sessions)
+==============================================================================

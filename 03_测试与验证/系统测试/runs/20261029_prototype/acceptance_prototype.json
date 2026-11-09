@@ -1,0 +1,429 @@
+{
+  "generated_at": "2026-10-29T15:16:13+08:00",
+  "suite": "tests_api/acceptance_prototype",
+  "scope": "FastAPI 课程原型（不是完整交付；真实 AI 未接通，AI 仅本地规则层）",
+  "environment": {
+    "python": "3.12.10",
+    "platform": "Windows-10-10.0.19045-SP0",
+    "implementation": "CPython",
+    "executable": "C:\\Users\\Administrator\\AppData\\Local\\Programs\\Python\\Python312\\python.exe",
+    "pandas": "3.0.5",
+    "numpy": "2.5.3",
+    "lightgbm": "4.6.0",
+    "openpyxl": "3.1.5",
+    "fastapi": "0.115.6",
+    "uvicorn": "0.32.1"
+  },
+  "isolation": {
+    "mode": "subprocess python run.py --port <free>，临时 ECE_RUNTIME_DIR + 复制的 retail.sqlite3（ECE_ORIGINAL_DB）",
+    "temp_dir": "C:\\Users\\Administrator\\11111\\数据\\学校项目\\.tmp\\qa_api\\acceptance-8e56fd8f",
+    "official_files_before": {
+      "C:\\Users\\Administrator\\11111\\数据\\学校项目\\电商运营系统\\runtime\\retail.sqlite3": {
+        "sha256": "033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf",
+        "size": 284557312
+      },
+      "C:\\Users\\Administrator\\11111\\数据\\学校项目\\电商运营系统\\runtime\\app.sqlite3": {
+        "sha256": "b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d",
+        "size": 139264
+      }
+    },
+    "official_files_after": {
+      "C:\\Users\\Administrator\\11111\\数据\\学校项目\\电商运营系统\\runtime\\retail.sqlite3": {
+        "sha256": "033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf",
+        "size": 284557312
+      },
+      "C:\\Users\\Administrator\\11111\\数据\\学校项目\\电商运营系统\\runtime\\app.sqlite3": {
+        "sha256": "b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d",
+        "size": 139264
+      }
+    },
+    "official_files_unchanged": true
+  },
+  "key_numbers": {
+    "historical_window": {
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09"
+      },
+      "quantity": 851403,
+      "revenue": 1694068.71,
+      "orders": 2913,
+      "lines": 86861
+    },
+    "orders": {
+      "total": 2913,
+      "sample_order": "581475",
+      "sample_lines": 19,
+      "sample_quantity": 352,
+      "sample_revenue": 280.24
+    },
+    "import": {
+      "batch_id": "b20261029T071605d58f54",
+      "job_status": "succeeded",
+      "report": {
+        "raw_rows": 8,
+        "retained_rows": 8,
+        "positive_sale_rows": 8,
+        "date_min": "2011-12-01",
+        "date_max": "2011-12-06"
+      },
+      "active_totals": {
+        "quantity": 46,
+        "revenue": 135.5,
+        "orders": 6
+      }
+    },
+    "forecast": {
+      "status": "succeeded",
+      "origin": "2011-12-09",
+      "rows": 7,
+      "model_version": "daily-v1-hw-fixed-lgbm400",
+      "actual_method": "blend_rule",
+      "export_rows": 7
+    },
+    "inventory": {
+      "balance": 90.0,
+      "duplicate_balance": 90.0,
+      "out_91_status": 400,
+      "lead_time_demand": 80.0,
+      "effective_in_transit": 10.0,
+      "candidate": 10.0
+    },
+    "ai": {
+      "llm_configured": false,
+      "provider": "local-rule-planner",
+      "tools_count": 7,
+      "ask_status": "ok",
+      "unapproved_numbers": [],
+      "brief_markdown_chars": 2601
+    },
+    "contract": {
+      "openapi_endpoints": 43,
+      "status_codes": {
+        "401": 401,
+        "403": 403,
+        "404": 404,
+        "400": 400
+      }
+    }
+  },
+  "checks": [
+    {
+      "id": "m2.dashboard.historical",
+      "name": "历史窗口全店汇总（含首尾日）",
+      "expected": {
+        "quantity": 851403,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "lines": 86861
+      },
+      "actual": {
+        "range": {
+          "start": "2011-11-10",
+          "end": "2011-12-09"
+        },
+        "quantity": 851403,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "lines": 86861
+      },
+      "passed": true,
+      "elapsed_seconds": 0.25,
+      "note": ""
+    },
+    {
+      "id": "m2.orders.total",
+      "name": "订单列表 total 与看板订单数一致",
+      "expected": {
+        "orders": 2913,
+        "dashboard": 2913
+      },
+      "actual": {
+        "orders_total": 2913,
+        "dashboard": 2913
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m2.orders.detail",
+      "name": "订单明细行相加等于订单头",
+      "expected": {
+        "order_key": "581475"
+      },
+      "actual": {
+        "order_key": "581475",
+        "header_quantity": 352,
+        "header_revenue": 280.24,
+        "lines": 19
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m2.import.upload",
+      "name": "小样例上传→异步任务成功→快照未自动切换",
+      "expected": {
+        "http": 202,
+        "job_status": "succeeded",
+        "is_active": false
+      },
+      "actual": {
+        "http": 202,
+        "job_status": "succeeded",
+        "is_active": false,
+        "batch_id": "b20261029T071605d58f54",
+        "report": {
+          "raw_rows": 8,
+          "positive_sale_rows": 8,
+          "cancelled_rows": 0,
+          "date_min": "2011-12-01",
+          "date_max": "2011-12-06"
+        }
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m2.import.duplicate",
+      "name": "同一文件重复导入为 duplicate 且不新建批次",
+      "expected": {
+        "status": "duplicate",
+        "batch_id": "b20261029T071605d58f54"
+      },
+      "actual": {
+        "status": "duplicate",
+        "batch_id": "b20261029T071605d58f54"
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m2.import.activate",
+      "name": "显式切换后看板随新批次变化（46/135.5/6）",
+      "expected": {
+        "quantity": 46,
+        "revenue": 135.5,
+        "orders": 6
+      },
+      "actual": {
+        "quantity": 46,
+        "revenue": 135.5,
+        "orders": 6,
+        "previous_batch_id": "original",
+        "batch": "b20261029T071605d58f54"
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m2.import.switch_back",
+      "name": "切回原始批次恢复历史基线",
+      "expected": {
+        "quantity": 851403
+      },
+      "actual": {
+        "quantity": 851403,
+        "batch": "original"
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m3.forecast.7rows",
+      "name": "全店未来7天预测：7行、actual 全为空",
+      "expected": {
+        "rows": 7,
+        "actual_all_null": true,
+        "model_version": "daily-v1-hw-fixed-lgbm400"
+      },
+      "actual": {
+        "status": "succeeded",
+        "rows": 7,
+        "actual_all_null": true,
+        "model_version": "daily-v1-hw-fixed-lgbm400",
+        "origin": "2011-12-09",
+        "actual_method": "blend_rule"
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m3.forecast.export",
+      "name": "预测 CSV 导出 7 行且列齐全",
+      "expected": {
+        "data_rows": 7,
+        "columns": 11
+      },
+      "actual": {
+        "http": 200,
+        "rows": 7,
+        "columns": 11
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m3.backtest",
+      "name": "小窗口回测（12个起点，WAPE 可计算）",
+      "expected": {
+        "origins_attempted": 12,
+        "forecast_count": 84
+      },
+      "actual": {
+        "origins_attempted": 12,
+        "forecast_count": 84,
+        "scored_count": 84,
+        "WAPE": 0.19995146108072423
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m4.inventory.sample",
+      "name": "模拟库存固定样例：100+20-30=90、幂等、出库91被拒",
+      "expected": {
+        "balance": 90,
+        "duplicate_balance": 90,
+        "out_91": 400
+      },
+      "actual": {
+        "balance_after_out": 90.0,
+        "duplicate_balance": 90.0,
+        "out_91_status": 400,
+        "simulated": true
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m4.inventory.replenishment",
+      "name": "补货候选 = max(0, 80+30-90-10) = 10",
+      "expected": {
+        "lead_time_demand": 80,
+        "effective_in_transit": 10,
+        "candidate": 10,
+        "confirmed": 201
+      },
+      "actual": {
+        "lead_time_demand": 80.0,
+        "effective_in_transit": 10.0,
+        "candidate": 10.0,
+        "confirm_http": 201
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m5.ai.status",
+      "name": "AI 未配置密钥：本地规则层，不冒充大模型",
+      "expected": {
+        "llm_configured": false,
+        "key_present": false,
+        "provider": "local-rule-planner"
+      },
+      "actual": {
+        "llm_configured": false,
+        "key_present": false,
+        "provider": "local-rule-planner",
+        "tools_count": 7
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m5.ai.numbers",
+      "name": "AI 回答数字与工具结果一致（无工具外数字）",
+      "expected": {
+        "unapproved": [],
+        "key_numbers_mentioned": true
+      },
+      "actual": {
+        "status": "ok",
+        "tool_calls": 1,
+        "unapproved": [],
+        "key_numbers_mentioned": {
+          "quantity": true,
+          "revenue": true,
+          "orders": true
+        },
+        "answer_head": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-11-10~2011-12-09，全店）：成交量 851403 件，销售额 £1694068.71，订单 2913 笔，商品数 2930；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +29.8%，销售额"
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "m5.ai.brief",
+      "name": "运营简报生成并可下载 Markdown",
+      "expected": {
+        "http": 201,
+        "download": 200,
+        "markdown": ">200 chars"
+      },
+      "actual": {
+        "http": 201,
+        "download": 200,
+        "markdown_chars": 2601,
+        "provider": "template"
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "contract.openapi",
+      "name": "openapi.json 与实际注册路由一致",
+      "expected": {
+        "count": 43
+      },
+      "actual": {
+        "documented": 43,
+        "registered": 43,
+        "missing_in_docs": [],
+        "missing_in_routes": []
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    },
+    {
+      "id": "contract.errors",
+      "name": "错误码 400/401/403/404 与契约一致",
+      "expected": {
+        "400": 400,
+        "401": 401,
+        "403": 403,
+        "404": 404
+      },
+      "actual": {
+        "401": 401,
+        "403": 403,
+        "404": 404,
+        "400": 400
+      },
+      "passed": true,
+      "elapsed_seconds": 0.0,
+      "note": ""
+    }
+  ],
+  "summary": {
+    "total": 17,
+    "passed": 17,
+    "failed": 0,
+    "all_assertions_passed": true,
+    "elapsed_seconds": 10.89
+  }
+}

@@ -1,0 +1,208 @@
+INFO:     127.0.0.1:60586 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60589 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60622 - "POST /api/inventory/demo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60636 - "GET /api/inventory/scenarios/demo-original/items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60639 - "GET /api/inventory/scenarios/demo-original/movements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60642 - "GET /api/inventory/scenarios/demo-original/in-transit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60645 - "POST /api/inventory/demo HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60649 - "GET /api/inventory/scenarios/demo-original/movements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60652 - "POST /api/forecast HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:60657 - "GET /api/jobs/7d24a602ab84417cb14a317f18a355e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60670 - "GET /api/jobs/7d24a602ab84417cb14a317f18a355e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60676 - "GET /api/jobs/7d24a602ab84417cb14a317f18a355e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60681 - "GET /api/jobs/7d24a602ab84417cb14a317f18a355e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60693 - "GET /api/jobs/7d24a602ab84417cb14a317f18a355e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60701 - "GET /api/jobs/7d24a602ab84417cb14a317f18a355e2 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60705 - "POST /api/backtest HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:60712 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60721 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60742 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60746 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60750 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60756 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60763 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60769 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60775 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60781 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60794 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60828 - "GET /api/jobs/d1b64c5bb0464cc0885253b753ebfa74 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:60832 - "GET /api/forecast/latest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61177 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:61177 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:61179 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:61184 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61245 - "POST /api/auth/login HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61245 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61245 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61245 - "GET /assets/Inventory-DGB5Hko5.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61253 - "GET /assets/loading-B8uGP5na.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61254 - "GET /assets/loading-Bs1A1bSs.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61255 - "GET /assets/omit-CtrCvzVt.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61245 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61256 - "GET /assets/date-picker-panel-DQMfVaJr.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61257 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61253 - "GET /assets/select-Cza5wmAc.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:61256 - "GET /assets/table-column-CwPYV1nE.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61255 - "GET /assets/Inventory-fbwk-2LF.css HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61254 - "GET /assets/select-DiSMwiBD.js HTTP/1.1" 404 Not Found
+INFO:     127.0.0.1:61256 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62571 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62571 - "GET /assets/index-B6-DdGrw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62571 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62572 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:62571 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62571 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62578 - "GET /assets/loading-DagJvNy6.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62571 - "GET /assets/Dashboard-DuyJZqsw.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62579 - "GET /assets/descriptions-item-7Z5E9wnE.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62580 - "GET /assets/loading-Bs1A1bSs.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62581 - "GET /assets/descriptions-item-BxW4ZIg7.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62582 - "GET /assets/table-column-D56NZ-yx.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62580 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62581 - "GET /assets/select-Cza5wmAc.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62580 - "GET /assets/progress-m7X7_Zdw.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62581 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62578 - "GET /assets/Dashboard-B2KP3sg0.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62571 - "GET /assets/input-BjD9KQRC.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62579 - "GET /assets/omit-CRU0tTTY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62581 - "GET /assets/progress-BjGFjoy7.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62580 - "GET /assets/alert-CJmgWw29.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62578 - "GET /assets/select-BLl5ZjBA.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62582 - "GET /assets/date-picker-panel-B9E_Jfbt.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62581 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:62580 - "GET /assets/index-B3DlhXpi.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:62580 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:62582 - "GET /api/dashboard?start=2011-11-10&end=2011-12-09 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /?release=20261103-v3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /assets/index-Db9wxCdA.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63063 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:63062 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /assets/Inventory-DtkjAfRQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63071 - "GET /assets/loading-BjJUZpKa.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63072 - "GET /assets/date-picker-panel-D1KhdJbq.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63073 - "GET /assets/input-BW4zgCMH.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63074 - "GET /assets/omit-eQWc3q6w.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/loading-Bs1A1bSs.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/select-Cza5wmAc.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63071 - "GET /assets/Inventory-PZQGgBeh.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /assets/table-column-CeGBx9VQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63074 - "GET /assets/select-CT3YDNxJ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /assets/alert-tTRChYKO.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63073 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/inventory/scenarios HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63073 - "GET /api/inventory/scenarios/demo-original/movements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63062 - "GET /api/inventory/scenarios/demo-original/items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63075 - "GET /api/inventory/scenarios/demo-original/in-transit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63074 - "GET /api/inventory/scenarios/demo-original/replenishment HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63935 - "POST /api/inventory/scenarios/demo-original/replenishment/confirm HTTP/1.1" 201 Created
+INFO:     127.0.0.1:63935 - "GET /api/inventory/scenarios/demo-original/items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63940 - "GET /api/inventory/scenarios/demo-original/movements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63938 - "GET /api/inventory/scenarios/demo-original/replenishment HTTP/1.1" 200 OK
+INFO:     127.0.0.1:63939 - "GET /api/inventory/scenarios/demo-original/in-transit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64000 - "POST /api/inventory/scenarios/demo-original/in-transit/6cd2f431141947389afcd078f3d024e1/receive HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64003 - "GET /api/inventory/scenarios/demo-original/replenishment HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64005 - "GET /api/inventory/scenarios/demo-original/movements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64000 - "GET /api/inventory/scenarios/demo-original/items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64004 - "GET /api/inventory/scenarios/demo-original/in-transit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64216 - "GET /?release=20261103-v3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64216 - "GET /assets/index-Db9wxCdA.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64216 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64218 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:64216 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64216 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64216 - "GET /assets/Forecast-fSOqsq8k.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64225 - "GET /assets/table-column-CeGBx9VQ.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64228 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64226 - "GET /assets/Forecast-BZVPHmk3.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64227 - "GET /assets/input-BW4zgCMH.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64225 - "GET /assets/divider-BLKJv03f.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64229 - "GET /assets/omit-eQWc3q6w.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64229 - "GET /assets/alert-tTRChYKO.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64228 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64227 - "GET /assets/date-picker-panel-D1KhdJbq.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64216 - "GET /assets/index-B3DlhXpi.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64226 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64216 - "GET /api/forecast/latest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65057 - "GET /?release=20261103-v3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65057 - "GET /assets/index-C70iHNbJ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /assets/index-X-4nfcfH.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65057 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:65061 - "GET /?release=20261103-v3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65061 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /assets/Inventory-Cm29YSGH.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65066 - "GET /assets/loading-BulcxTC4.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65068 - "GET /assets/date-picker-panel-gzkMel3n.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65067 - "GET /assets/loading-Bs1A1bSs.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65069 - "GET /assets/input-BAAkolXP.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65061 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65067 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65061 - "GET /assets/select-Cza5wmAc.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65067 - "GET /assets/Inventory-PZQGgBeh.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /assets/omit-BHmpeq7W.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65066 - "GET /assets/table-column-BuViKDC3.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65061 - "GET /assets/select-4ONoijVK.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65069 - "GET /assets/alert-BMrJBuc-.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65067 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65067 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:65071 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65071 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65071 - "GET /assets/Forecast-uXsq6MAQ.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65066 - "GET /assets/divider-nhsow-qK.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65068 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65061 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65069 - "GET /assets/index-B3DlhXpi.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65068 - "GET /assets/Forecast-BZVPHmk3.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /api/inventory/scenarios HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65066 - "GET /api/inventory/scenarios/demo-original/movements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65058 - "GET /api/inventory/scenarios/demo-original/items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65068 - "GET /api/inventory/scenarios/demo-original/in-transit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65069 - "GET /api/inventory/scenarios/demo-original/replenishment HTTP/1.1" 200 OK
+INFO:     127.0.0.1:65071 - "GET /api/forecast/latest HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49217 - "GET /?release=20261103-v3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49217 - "GET /assets/index-BQtkqJrl.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /assets/index-X-4nfcfH.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49217 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:49223 - "GET /?release=20261103-v3 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49223 - "GET /assets/index-X-4nfcfH.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49223 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /assets/Inventory-D4bBXaLW.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49228 - "GET /assets/loading-JjJP7BMo.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49229 - "GET /assets/loading-Bs1A1bSs.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49230 - "GET /assets/date-picker-panel-0Lb0dOVW.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49231 - "GET /assets/input-BE5JheCi.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49223 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49229 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49223 - "GET /assets/select-Cza5wmAc.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49229 - "GET /assets/Inventory-PZQGgBeh.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49228 - "GET /assets/omit-BQ6VY1Jq.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49223 - "GET /assets/table-column-BgBTFujg.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /assets/select-D6POok9u.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49231 - "GET /assets/alert-B_RrX8cU.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49229 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49229 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:49234 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49234 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49234 - "GET /assets/Forecast-BAewfd36.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49223 - "GET /assets/divider-DMi3rNMK.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49230 - "GET /assets/table-column-C3IHkBhz.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /assets/index-B3DlhXpi.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49228 - "GET /assets/Forecast-BZVPHmk3.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49231 - "GET /assets/format-ZnMda2Od.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49230 - "GET /assets/date-picker-panel-CywqlWK0.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49230 - "GET /api/inventory/scenarios HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49223 - "GET /api/inventory/scenarios/demo-original/in-transit HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49234 - "GET /api/inventory/scenarios/demo-original/movements HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49228 - "GET /api/inventory/scenarios/demo-original/replenishment HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49230 - "GET /api/inventory/scenarios/demo-original/items HTTP/1.1" 200 OK
+INFO:     127.0.0.1:49219 - "GET /api/forecast/latest HTTP/1.1" 200 OK

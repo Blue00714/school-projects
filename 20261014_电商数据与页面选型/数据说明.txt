@@ -1,0 +1,17 @@
+﻿Online Retail II 原始公开电商数据
+
+来源：https://archive.ics.uci.edu/dataset/502/online+retail+ii
+实际下载：公开镜像 https://raw.githubusercontent.com/KristerMartinez/online_retail_ii/main/online_retail_II.xlsx
+官方连接暂不可用，尚未取得官方原文件逐字节比对。
+提供方：UCI Machine Learning Repository
+依据官方说明，覆盖2009年12月1日至2011年12月9日。
+原始Excel未经清洗、删改或模拟补充，每行是交易明细，不等同于独立订单。
+单价单位为英镑；包含取消交易和缺失记录，使用前需核查。
+不包含原始库存、采购成本、点击或浏览数据。
+许可：CC BY 4.0，使用时注明数据来源。
+
+工作表：
+Year 2009-2010：Invoice, StockCode, Description, Quantity, InvoiceDate, Price, Customer ID, Country
+Year 2010-2011：Invoice, StockCode, Description, Quantity, InvoiceDate, Price, Customer ID, Country
+
+SHA256：bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980

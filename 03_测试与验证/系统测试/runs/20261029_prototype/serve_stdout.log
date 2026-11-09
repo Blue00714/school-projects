@@ -1,0 +1,5 @@
+Local: http://127.0.0.1:8899
+2026-10-29T14:47:35 "GET /api/health HTTP/1.1" 200 -
+2026-10-29T14:47:35 "GET /api/health HTTP/1.1" 200 -
+2026-10-29T14:47:36 "GET /api/options HTTP/1.1" 200 -
+2026-10-29T14:47:36 "GET /api/dashboard?start=2011-11-10&end=2011-12-09 HTTP/1.1" 200 -

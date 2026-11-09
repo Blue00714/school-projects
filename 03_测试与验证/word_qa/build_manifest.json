@@ -1,0 +1,36 @@
+{
+  "output": "C:\\Users\\Administrator\\Desktop\\学校项目\\01_交付内容\\基于FastAPI的智能电商运营管理系统_前三章参考稿.docx",
+  "source_sha256": "a78a6ccd55d218cd0d7c14235dd0826afc40cf2b0afca146240f542792fe657d",
+  "paragraphs": 142,
+  "tables": 7,
+  "images": 6,
+  "figures": [
+    "C:\\Users\\Administrator\\Desktop\\学校项目\\03_测试与验证\\word_qa\\figures\\图1-1_系统总体框架图.png",
+    "C:\\Users\\Administrator\\Desktop\\学校项目\\03_测试与验证\\word_qa\\figures\\图3-1_系统功能用例图.png",
+    "C:\\Users\\Administrator\\Desktop\\学校项目\\03_测试与验证\\word_qa\\figures\\图3-2_系统概念ER图.png",
+    "C:\\Users\\Administrator\\Desktop\\学校项目\\03_测试与验证\\word_qa\\figures\\图3-3_系统主要业务流程图.png"
+  ],
+  "authoring": "Claude Code CLI via official MCP attempted helper implementation; tool writes denied. Codex recovered and reviewed helper implementation, authored revision text, corrected formatting and business flow, executed and verified locally. CLI route: deepseek-flash[1m].",
+  "render_status": "Native Word-compatible COM field refresh and PDF export; bundled Poppler rasterization; all 15 pages visually checked. Packaged render_docx.py unavailable because LibreOffice is absent.",
+  "rendered_pages": 15,
+  "editable_tables": 7,
+  "design_figures": 4,
+  "final_pdf": "revision_final.pdf",
+  "final_page_images": "revision-render-final",
+  "school_artwork_preserved_byte_for_byte": true,
+  "final_docx_sha256": "b5f956598480b28a6260d43c8e181bbc0da7570eb162873ae2c16839ebad96e6",
+  "toc_and_page_fields": "Updated by native application; cached TOC retained; updateFields remains enabled",
+  "limitations": "Cover personal fields blank. Frontend/database are proposed design choices, model API provider not fixed. Existing local model experiments are acknowledged; system integration, full data audit and real business benefits are not claimed complete.",
+  "revision_date": "2026-10-20",
+  "opaque_parts_preserved": true,
+  "changed_parts_vs_previous_word": [
+    "word/document.xml",
+    "word/media/image6.png"
+  ],
+  "reproduction": "revision_before.docx + revision_content.json -> revise_report.py (imports revision_figures.py) -> revise_render.ps1 -> finalize_revision.py; then export read-only and rasterize for QA. Original school template and original Markdown preserved.",
+  "verified_pdf": "revision_verified.pdf",
+  "verified_page_images": "revision-verified-render",
+  "final_read_only_export_pixel_match_all_pages": true,
+  "historical_output_path_before_relocation": "C:\\Users\\Administrator\\11111\\数据\\学校项目\\20261014_电商数据与页面选型\\基于FastAPI的智能电商运营管理系统_前三章参考稿.docx",
+  "relocated_on": "2026-10-22"
+}

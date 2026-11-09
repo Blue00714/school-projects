@@ -1,0 +1,339 @@
+{
+  "steps": [],
+  "login": 200,
+  "original_before": {
+    "batch": {
+      "id": "original",
+      "label": "原始数据 2009-12-01~2011-12-09",
+      "kind": "original"
+    },
+    "totals": {
+      "quantity": 851403,
+      "revenue": 1694068.71,
+      "orders": 2913,
+      "lines": 86861
+    }
+  },
+  "expected": {
+    "raw_rows": 20,
+    "cross_sheet_copies_excluded": 3,
+    "retained_rows": 17,
+    "positive_sale_rows": 13,
+    "quantity": 42,
+    "revenue": 358.87,
+    "orders": 12,
+    "cancelled_rows": 1,
+    "invalid_dates": 1,
+    "nonpositive_quantity_rows": 3,
+    "sale_rows_without_valid_price": 1
+  },
+  "expected_manifest": {
+    "raw_rows": 20,
+    "cross_sheet_copies_excluded": 3,
+    "retained_rows": 17,
+    "positive_sale_rows": 13,
+    "cancelled_rows": 1,
+    "invalid_dates": 1,
+    "nonpositive_quantity_rows": 3,
+    "sale_rows_without_valid_price": 1
+  },
+  "import_upload_status": 202,
+  "import1": {
+    "job_id": "37c951042dc94a708a91a28cff8d33e7",
+    "http": 202,
+    "status": "succeeded",
+    "waited_s": 0.58,
+    "job_keys": [
+      "created_at",
+      "error",
+      "file_name",
+      "finished_at",
+      "id",
+      "status"
+    ],
+    "batch": {
+      "id": "b20261029T0706482c93d6",
+      "label": "M2 样例导入",
+      "is_active": false
+    },
+    "report": {
+      "raw_rows": 20,
+      "cross_sheet_copies_excluded": 3,
+      "retained_rows": 17,
+      "positive_sale_rows": 13,
+      "cancelled_rows": 1,
+      "invalid_dates": 1,
+      "nonpositive_quantity_rows": 3,
+      "sale_rows_without_valid_price": 1
+    },
+    "report_matches_expected": true,
+    "issues_count": 9,
+    "issue_levels": {
+      "error": 0,
+      "warning": 5,
+      "info": 4
+    },
+    "issue_fields": [
+      "Duplicate",
+      "Invoice",
+      "InvoiceDate",
+      "Price",
+      "Quantity"
+    ],
+    "sample_issues": [
+      {
+        "level": "warning",
+        "row": 14,
+        "field": "InvoiceDate",
+        "message": "工作表 SheetA 第 14 行：日期无法解析，该行不计入销量与销售额"
+      },
+      {
+        "level": "warning",
+        "row": 12,
+        "field": "Quantity",
+        "message": "工作表 SheetA 第 12 行：数量小于等于0，不计入正向销量"
+      },
+      {
+        "level": "warning",
+        "row": 13,
+        "field": "Quantity",
+        "message": "工作表 SheetA 第 13 行：数量小于等于0，不计入正向销量"
+      }
+    ],
+    "report_date_range": [
+      "2011-01-03",
+      "2011-01-16"
+    ],
+    "report_policy": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+    "report_source_file": "sample_upload.xlsx",
+    "report_source_kind": "upload",
+    "report_source_sha256_matches": true
+  },
+  "batches_after_import": {
+    "active_batch_id": "original",
+    "ids": [
+      "original",
+      "b20261029T0706482c93d6"
+    ],
+    "new_batch": {
+      "id": "b20261029T0706482c93d6",
+      "label": "M2 样例导入",
+      "kind": "upload",
+      "status": "ready",
+      "is_active": false,
+      "source_file": "sample_upload.xlsx",
+      "source_sha256": "be805a0b05dd86d33e11872cf24fd2fd586f8bce3106970730b2caee10a5c3a5",
+      "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+      "created_at": "2026-10-29T07:06:48+00:00",
+      "published_at": "2026-10-29T07:06:48+00:00",
+      "manifest": {
+        "source_file": "sample_upload.xlsx",
+        "source_sha256": "be805a0b05dd86d33e11872cf24fd2fd586f8bce3106970730b2caee10a5c3a5",
+        "source_kind": "upload",
+        "official_byte_comparison_completed": false,
+        "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+        "prepared_at": "2026-10-29T15:06:48",
+        "sheets": [
+          {
+            "sheet": "SheetA",
+            "raw_rows": 15,
+            "cross_sheet_copies_excluded": 0
+          },
+          {
+            "sheet": "SheetB",
+            "raw_rows": 5,
+            "cross_sheet_copies_excluded": 3
+          }
+        ],
+        "raw_rows": 20,
+        "cross_sheet_copies_excluded": 3,
+        "retained_rows": 17,
+        "positive_sale_rows": 13,
+        "within_sheet_duplicate_candidates_retained": 0,
+        "cancelled_rows": 1,
+        "nonpositive_quantity_rows": 3,
+        "invalid_dates": 1,
+        "quantity_invalid_rows": 0,
+        "sale_rows_without_valid_price": 1,
+        "zero_price_sale_rows": 0,
+        "invoice_with_multiple_times": 1,
+        "order_identity_conflicts": 0,
+        "order_key": "invoice",
+        "date_min": "2011-01-03",
+        "date_max": "2011-01-16",
+        "elapsed_seconds": 0.45,
+        "rules": [
+          "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+          "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+          "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+          "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+          "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+        ]
+      }
+    },
+    "no_auto_switch": true
+  },
+  "batch_files": {
+    "dir_exists": true,
+    "files": [
+      "data.sqlite3",
+      "data_manifest.json"
+    ],
+    "db_bytes": 45056
+  },
+  "app_db_row": {
+    "db_path": "C:/Users/Administrator/11111/数据/学校项目/.tmp/rt_data/batches/b20261029T0706482c93d6/data.sqlite3",
+    "kind": "upload",
+    "status": "ready",
+    "is_active": 0,
+    "label": "M2 样例导入",
+    "source_sha256": "be805a0b05dd86d3..."
+  },
+  "import_duplicate": {
+    "http": 202,
+    "body": {
+      "job_id": "2ad66b0e579d430a93caeb9a0cea2fff",
+      "status": "duplicate",
+      "batch_id": "b20261029T0706482c93d6"
+    },
+    "same_batch": true,
+    "job": {
+      "status": "duplicate",
+      "batch": {
+        "id": "b20261029T0706482c93d6",
+        "label": "M2 样例导入",
+        "is_active": false
+      },
+      "report_keys": [
+        "batch_id",
+        "duplicate",
+        "manifest",
+        "source_sha256"
+      ]
+    }
+  },
+  "batch_count_after_duplicate": 2,
+  "activate": {
+    "http": 200,
+    "batch_id": "b20261029T0706482c93d6",
+    "previous_batch_id": "original",
+    "is_active": true
+  },
+  "dashboard_new_batch": {
+    "batch": {
+      "id": "b20261029T0706482c93d6",
+      "label": "M2 样例导入",
+      "kind": "upload"
+    },
+    "filters": {
+      "start": "2011-01-03",
+      "end": "2011-01-16",
+      "product": "",
+      "country": ""
+    },
+    "totals": {
+      "quantity": 42,
+      "revenue": 358.87,
+      "orders": 12,
+      "lines": 13
+    },
+    "matches_expected": true,
+    "order_total": 12,
+    "order_total_matches": true,
+    "order_rows": 12,
+    "batch_field": {
+      "id": "b20261029T0706482c93d6",
+      "label": "M2 样例导入",
+      "kind": "upload"
+    }
+  },
+  "switch_back": {
+    "http": 200,
+    "previous_batch_id": "b20261029T0706482c93d6",
+    "batch": {
+      "id": "original",
+      "label": "原始数据 2009-12-01~2011-12-09",
+      "kind": "original"
+    },
+    "totals": {
+      "quantity": 851403,
+      "revenue": 1694068.71,
+      "orders": 2913,
+      "lines": 86861
+    },
+    "matches_original_baseline": true
+  },
+  "import_csv": {
+    "http": 202,
+    "batch_id": {
+      "id": "b20261029T07064946c0e6",
+      "label": "M2 CSV 样例",
+      "is_active": false
+    },
+    "status": "succeeded",
+    "waited_s": 1.14,
+    "report": {
+      "raw_rows": 6,
+      "retained_rows": 6,
+      "positive_sale_rows": 4,
+      "cancelled_rows": 1,
+      "invalid_dates": 1,
+      "date_min": "2011-02-01",
+      "date_max": "2011-02-04"
+    },
+    "issues_count": 3
+  },
+  "import_csv_duplicate": {
+    "http": 202,
+    "body": {
+      "job_id": "f77dc6cddb10486491be37796dd36c33",
+      "status": "duplicate",
+      "batch_id": "b20261029T07064946c0e6"
+    },
+    "same_batch": true
+  },
+  "import_failed_columns": {
+    "http": 202,
+    "status": "failed",
+    "error": "缺少必要字段：CSV 缺少列 Description, InvoiceDate, Price, Customer ID, Country。示例表头见 /api/imports/template.csv",
+    "issues": [
+      {
+        "level": "error",
+        "row": null,
+        "field": "file",
+        "message": "缺少必要字段：CSV 缺少列 Description, InvoiceDate, Price, Customer ID, Country。示例表头见 /api/imports/template.csv"
+      }
+    ],
+    "batch": null
+  },
+  "import_bad_extension": {
+    "http": 400,
+    "body": {
+      "error": "仅支持 .xlsx/.xls/.csv 文件（单文件不超过 20MB）",
+      "code": "bad_request"
+    }
+  },
+  "import_empty_file": {
+    "http": 400,
+    "body": {
+      "error": "上传文件为空",
+      "code": "bad_request"
+    }
+  },
+  "import_oversize": {
+    "http": 400,
+    "body": {
+      "error": "文件超过 20MB 上限，请拆分后再导入",
+      "code": "bad_request"
+    }
+  },
+  "final_batches": {
+    "active_batch_id": "original",
+    "ids": [
+      "original",
+      "b20261029T07064946c0e6",
+      "b20261029T0706482c93d6"
+    ],
+    "count": 3
+  }
+}

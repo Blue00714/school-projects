@@ -1,0 +1,5 @@
+MOVE ������Ӫϵͳ\runtime\server_stdout.log -> ������Ӫϵͳ\runtime\logs\server_stdout.log
+MOVE ������Ӫϵͳ\runtime\server_stderr.log -> ������Ӫϵͳ\runtime\logs\server_stderr.log
+MOVE ������Ӫϵͳ\runtime\mysql-logs -> ������Ӫϵͳ\runtime\logs\mysql
+MOVE ������Ӫϵͳ\runtime\mysql-tmp -> ������Ӫϵͳ\runtime\tmp\mysql
+Moves complete. Paths/imports must be finalized before restart.

@@ -1,0 +1,821 @@
+{
+  "ran_at": "2026-10-29T16:30:21",
+  "passed": 48,
+  "total": 48,
+  "all_passed": true,
+  "results": [
+    {
+      "step": "01 /api/health 免登录可访问",
+      "ok": true,
+      "detail": {
+        "ok": true,
+        "service": "ecommerce-ops-fastapi",
+        "version": "0.2.0-prototype",
+        "data_ready": true,
+        "batch": {
+          "id": "original",
+          "label": "原始数据 2009-12-01~2011-12-09",
+          "kind": "original",
+          "status": "ready",
+          "is_active": true,
+          "source_file": "online_retail_II.xlsx",
+          "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+          "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+          "created_at": "2026-10-21T18:03:58",
+          "published_at": "2026-10-21T18:03:58",
+          "manifest": {
+            "source_file": "online_retail_II.xlsx",
+            "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+            "source_kind": "public_mirror",
+            "official_byte_comparison_completed": false,
+            "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+            "prepared_at": "2026-10-21T18:03:58",
+            "sheets": [
+              {
+                "sheet": "Year 2009-2010",
+                "raw_rows": 525461,
+                "cross_sheet_copies_excluded": 0
+              },
+              {
+                "sheet": "Year 2010-2011",
+                "raw_rows": 541910,
+                "cross_sheet_copies_excluded": 22523
+              }
+            ],
+            "raw_rows": 1067371,
+            "cross_sheet_copies_excluded": 22523,
+            "retained_rows": 1044848,
+            "positive_sale_rows": 1022290,
+            "within_sheet_duplicate_candidates_retained": 11812,
+            "cancelled_rows": 19165,
+            "nonpositive_quantity_rows": 22557,
+            "invalid_dates": 0,
+            "quantity_invalid_rows": 0,
+            "sale_rows_without_valid_price": 5,
+            "zero_price_sale_rows": 2631,
+            "invoice_with_multiple_times": 83,
+            "date_min": "2009-12-01",
+            "date_max": "2011-12-09",
+            "elapsed_seconds": 41.73,
+            "rules": [
+              "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+              "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+              "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+              "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+              "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+            ],
+            "order_identity_conflicts": 0,
+            "order_key": "invoice"
+          }
+        },
+        "ai_configured": false
+      },
+      "elapsed_seconds": 0.078
+    },
+    {
+      "step": "02 健康检查含服务标识与批次",
+      "ok": true,
+      "detail": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09",
+        "kind": "original",
+        "status": "ready",
+        "is_active": true,
+        "source_file": "online_retail_II.xlsx",
+        "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+        "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+        "created_at": "2026-10-21T18:03:58",
+        "published_at": "2026-10-21T18:03:58",
+        "manifest": {
+          "source_file": "online_retail_II.xlsx",
+          "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+          "source_kind": "public_mirror",
+          "official_byte_comparison_completed": false,
+          "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+          "prepared_at": "2026-10-21T18:03:58",
+          "sheets": [
+            {
+              "sheet": "Year 2009-2010",
+              "raw_rows": 525461,
+              "cross_sheet_copies_excluded": 0
+            },
+            {
+              "sheet": "Year 2010-2011",
+              "raw_rows": 541910,
+              "cross_sheet_copies_excluded": 22523
+            }
+          ],
+          "raw_rows": 1067371,
+          "cross_sheet_copies_excluded": 22523,
+          "retained_rows": 1044848,
+          "positive_sale_rows": 1022290,
+          "within_sheet_duplicate_candidates_retained": 11812,
+          "cancelled_rows": 19165,
+          "nonpositive_quantity_rows": 22557,
+          "invalid_dates": 0,
+          "quantity_invalid_rows": 0,
+          "sale_rows_without_valid_price": 5,
+          "zero_price_sale_rows": 2631,
+          "invoice_with_multiple_times": 83,
+          "date_min": "2009-12-01",
+          "date_max": "2011-12-09",
+          "elapsed_seconds": 41.73,
+          "rules": [
+            "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+            "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+            "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+            "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+            "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+          ],
+          "order_identity_conflicts": 0,
+          "order_key": "invoice"
+        }
+      },
+      "elapsed_seconds": 0.0
+    },
+    {
+      "step": "03 未登录访问业务接口被拒(401)",
+      "ok": true,
+      "detail": {
+        "error": "未登录或登录已失效",
+        "code": "unauthorized"
+      },
+      "elapsed_seconds": 0.0
+    },
+    {
+      "step": "04 错误密码登录被拒(401)",
+      "ok": true,
+      "detail": {
+        "error": "账号或密码错误",
+        "code": "unauthorized"
+      },
+      "elapsed_seconds": 0.141
+    },
+    {
+      "step": "05 管理员登录成功",
+      "ok": true,
+      "detail": {
+        "user": {
+          "id": 1,
+          "username": "admin",
+          "display_name": "系统管理员",
+          "role": "admin",
+          "active": true,
+          "must_change_password": true
+        }
+      },
+      "elapsed_seconds": 0.156
+    },
+    {
+      "step": "06 /api/auth/me 返回当前用户",
+      "ok": true,
+      "detail": {
+        "user": {
+          "id": 1,
+          "username": "admin",
+          "display_name": "系统管理员",
+          "role": "admin",
+          "active": true,
+          "must_change_password": true
+        }
+      },
+      "elapsed_seconds": 0.063
+    },
+    {
+      "step": "07 /api/options 返回批次/国家/商品/方法",
+      "ok": true,
+      "detail": {
+        "batch": "original",
+        "countries": 43,
+        "products": 500,
+        "methods": [
+          "blend_rule",
+          "lgbm",
+          "holt_winters",
+          "seasonal_week4",
+          "naive_week"
+        ]
+      },
+      "elapsed_seconds": 11.687
+    },
+    {
+      "step": "08 历史窗口看板与基线一致(851403/1694068.71/2913)",
+      "ok": true,
+      "detail": {
+        "quantity": 851403.0,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "lines": 86861,
+        "warnings": 0
+      },
+      "elapsed_seconds": 2.313
+    },
+    {
+      "step": "09 订单列表总数与看板订单数一致",
+      "ok": true,
+      "detail": {
+        "total": 2913,
+        "page_rows": 10
+      },
+      "elapsed_seconds": 1.609
+    },
+    {
+      "step": "10 订单明细相加等于订单头",
+      "ok": true,
+      "detail": {
+        "order_key": "581475",
+        "header_qty": 352.0,
+        "lines_qty": 352.0,
+        "header_revenue": 280.24,
+        "lines_revenue": 280.24,
+        "lines": 19
+      },
+      "elapsed_seconds": 0.0
+    },
+    {
+      "step": "11 /api/transactions 分页契约可用",
+      "ok": true,
+      "detail": {
+        "total": 25136,
+        "rows": 5
+      },
+      "elapsed_seconds": 0.203
+    },
+    {
+      "step": "12 趋势CSV导出可用",
+      "ok": true,
+      "detail": {
+        "lines": 31,
+        "content_type": "text/csv; charset=utf-8"
+      },
+      "elapsed_seconds": 2.359
+    },
+    {
+      "step": "13 导入接口提交返回任务标识(202)",
+      "ok": true,
+      "detail": {
+        "job_id": "05895b21c5334bdc970dedfdf9b6e538",
+        "status": "queued"
+      },
+      "elapsed_seconds": 0.11
+    },
+    {
+      "step": "14 导入任务成功并生成批次",
+      "ok": true,
+      "detail": {
+        "status": "succeeded",
+        "batch_id": "b20261029T08295420e5d6",
+        "report": {
+          "source_file": "lead_sample.csv",
+          "source_sha256": "ed9231f21e81bf2ca43f82c118605dcbae29f3897b518005aee19fdedd8a2aa3",
+          "source_kind": "upload",
+          "official_byte_comparison_completed": false,
+          "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+          "prepared_at": "2026-10-29T16:29:55",
+          "sheets": [
+            {
+              "sheet": "CSV",
+              "raw_rows": 8,
+              "cross_sheet_copies_excluded": 0
+            }
+          ],
+          "raw_rows": 8,
+          "cross_sheet_copies_excluded": 0,
+          "retained_rows": 8,
+          "positive_sale_rows": 8,
+          "within_sheet_duplicate_candidates_retained": 0,
+          "cancelled_rows": 0,
+          "nonpositive_quantity_rows": 0,
+          "invalid_dates": 0,
+          "quantity_invalid_rows": 0,
+          "sale_rows_without_valid_price": 0,
+          "zero_price_sale_rows": 0,
+          "invoice_with_multiple_times": 2,
+          "order_identity_conflicts": 0,
+          "order_key": "invoice",
+          "date_min": "2011-12-01",
+          "date_max": "2011-12-06",
+          "elapsed_seconds": 1.16,
+          "rules": [
+            "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+            "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+            "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+            "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+            "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+          ]
+        },
+        "issues": 0
+      },
+      "elapsed_seconds": 0.0
+    },
+    {
+      "step": "15 同一文件重复导入被判重(duplicate)",
+      "ok": true,
+      "detail": {
+        "status": "duplicate",
+        "batch_id": "b20261029T08295420e5d6"
+      },
+      "elapsed_seconds": 0.078
+    },
+    {
+      "step": "16 切换为上传批次成功",
+      "ok": true,
+      "detail": {
+        "batch": {
+          "id": "b20261029T08295420e5d6",
+          "label": "上传 lead_sample.csv",
+          "kind": "upload",
+          "status": "ready",
+          "is_active": true,
+          "source_file": "lead_sample.csv",
+          "source_sha256": "ed9231f21e81bf2ca43f82c118605dcbae29f3897b518005aee19fdedd8a2aa3",
+          "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+          "created_at": "2026-10-29T08:29:55+00:00",
+          "published_at": "2026-10-29T08:29:55+00:00",
+          "manifest": {
+            "source_file": "lead_sample.csv",
+            "source_sha256": "ed9231f21e81bf2ca43f82c118605dcbae29f3897b518005aee19fdedd8a2aa3",
+            "source_kind": "upload",
+            "official_byte_comparison_completed": false,
+            "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+            "prepared_at": "2026-10-29T16:29:55",
+            "sheets": [
+              {
+                "sheet": "CSV",
+                "raw_rows": 8,
+                "cross_sheet_copies_excluded": 0
+              }
+            ],
+            "raw_rows": 8,
+            "cross_sheet_copies_excluded": 0,
+            "retained_rows": 8,
+            "positive_sale_rows": 8,
+            "within_sheet_duplicate_candidates_retained": 0,
+            "cancelled_rows": 0,
+            "nonpositive_quantity_rows": 0,
+            "invalid_dates": 0,
+            "quantity_invalid_rows": 0,
+            "sale_rows_without_valid_price": 0,
+            "zero_price_sale_rows": 0,
+            "invoice_with_multiple_times": 2,
+            "order_identity_conflicts": 0,
+            "order_key": "invoice",
+            "date_min": "2011-12-01",
+            "date_max": "2011-12-06",
+            "elapsed_seconds": 1.16,
+            "rules": [
+              "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+              "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+              "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+              "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+              "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+            ]
+          }
+        },
+        "previous_batch_id": "original"
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "step": "17 看板切换到新批次后口径正确(46件/135.5英镑/6订单)",
+      "ok": true,
+      "detail": {
+        "quantity": 46.0,
+        "revenue": 135.5,
+        "orders": 6
+      },
+      "elapsed_seconds": 0.094
+    },
+    {
+      "step": "18 新批次外日期显示覆盖警告而非旧数据",
+      "ok": true,
+      "detail": {
+        "warnings": [
+          "上一等长区间超出数据覆盖范围，不计算增长率。",
+          "部分查询日期超出数据覆盖范围，缺失区间显示为空。"
+        ]
+      },
+      "elapsed_seconds": 0.109
+    },
+    {
+      "step": "19 切回原始批次成功",
+      "ok": true,
+      "detail": {
+        "batch": {
+          "id": "original",
+          "label": "原始数据 2009-12-01~2011-12-09",
+          "kind": "original",
+          "status": "ready",
+          "is_active": true,
+          "source_file": "online_retail_II.xlsx",
+          "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+          "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+          "created_at": "2026-10-21T18:03:58",
+          "published_at": "2026-10-21T18:03:58",
+          "manifest": {
+            "source_file": "online_retail_II.xlsx",
+            "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+            "source_kind": "public_mirror",
+            "official_byte_comparison_completed": false,
+            "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+            "prepared_at": "2026-10-21T18:03:58",
+            "sheets": [
+              {
+                "sheet": "Year 2009-2010",
+                "raw_rows": 525461,
+                "cross_sheet_copies_excluded": 0
+              },
+              {
+                "sheet": "Year 2010-2011",
+                "raw_rows": 541910,
+                "cross_sheet_copies_excluded": 22523
+              }
+            ],
+            "raw_rows": 1067371,
+            "cross_sheet_copies_excluded": 22523,
+            "retained_rows": 1044848,
+            "positive_sale_rows": 1022290,
+            "within_sheet_duplicate_candidates_retained": 11812,
+            "cancelled_rows": 19165,
+            "nonpositive_quantity_rows": 22557,
+            "invalid_dates": 0,
+            "quantity_invalid_rows": 0,
+            "sale_rows_without_valid_price": 5,
+            "zero_price_sale_rows": 2631,
+            "invoice_with_multiple_times": 83,
+            "date_min": "2009-12-01",
+            "date_max": "2011-12-09",
+            "elapsed_seconds": 41.73,
+            "rules": [
+              "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+              "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+              "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+              "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+              "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+            ],
+            "order_identity_conflicts": 0,
+            "order_key": "invoice"
+          }
+        },
+        "previous_batch_id": "b20261029T08295420e5d6"
+      },
+      "elapsed_seconds": 0.109
+    },
+    {
+      "step": "20 切回后历史窗口数字恢复一致",
+      "ok": true,
+      "detail": {
+        "lines": 86861,
+        "quantity": 851403.0,
+        "orders": 2913,
+        "products": 2882,
+        "amount_rows": 86861,
+        "revenue": 1694068.71,
+        "average_order_value": 581.5546549948507
+      },
+      "elapsed_seconds": 2.344
+    },
+    {
+      "step": "21 预测任务提交(202)",
+      "ok": true,
+      "detail": {
+        "job_id": "30350a7924384f0388c1c5bc420d2dff",
+        "status": "queued",
+        "batch_id": "original"
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "step": "22 未来7天预测返回7行且无未来实际值",
+      "ok": true,
+      "detail": {
+        "status": "succeeded",
+        "rows": 7,
+        "actual_method": "blend_rule",
+        "requested": "blend_rule",
+        "batch_id": "original",
+        "warnings": [
+          "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+          "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+        ],
+        "origin": "2011-12-09"
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "step": "23 预测结果CSV可导出",
+      "ok": true,
+      "detail": {
+        "lines": 8,
+        "header": "origin,date,h,prediction,baseline,actual,abs_error,model_version,data_policy_version,batch_id,actual_method"
+      },
+      "elapsed_seconds": 0.063
+    },
+    {
+      "step": "24 回测任务提交(202)",
+      "ok": true,
+      "detail": {
+        "job_id": "cae9558772cb4caa8b9048fce06d8ce0",
+        "status": "queued",
+        "batch_id": "original"
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "step": "25 回测任务成功且有可评分样本",
+      "ok": true,
+      "detail": {
+        "scored_count": 21,
+        "origins": 3,
+        "WAPE": 0.2377798095494847,
+        "complete_origins": 3
+      },
+      "elapsed_seconds": 0.125
+    },
+    {
+      "step": "26 新建模拟库存场景",
+      "ok": true,
+      "detail": {
+        "scenario": {
+          "id": "b35dbc0a567140fbb3ea9fee69ae1090",
+          "name": "Lead 验收场景",
+          "note": "原型验收",
+          "created_at": "2026-10-29T08:30:06+00:00",
+          "item_count": 0
+        },
+        "simulated": true
+      },
+      "elapsed_seconds": 0.094
+    },
+    {
+      "step": "27 设置商品初始库存(100/提前期8/安全库存30/日需求10)",
+      "ok": true,
+      "detail": {
+        "item": {
+          "stock_code": "C001",
+          "name": "Delta Box",
+          "initial_qty": 100.0,
+          "lead_time_days": 8,
+          "safety_stock": 30.0,
+          "daily_demand": 10.0,
+          "balance": 100.0,
+          "in_transit_effective": 0.0,
+          "in_transit_total": 0.0,
+          "replenishment_candidate": 10.0
+        },
+        "simulated": true
+      },
+      "elapsed_seconds": 0.062
+    },
+    {
+      "step": "28 入库20后余额120",
+      "ok": true,
+      "detail": {
+        "balance": 120.0
+      },
+      "elapsed_seconds": 0.079
+    },
+    {
+      "step": "29 出库30后余额90",
+      "ok": true,
+      "detail": {
+        "balance": 90.0
+      },
+      "elapsed_seconds": 0.062
+    },
+    {
+      "step": "30 同一出库幂等重复提交仍为90",
+      "ok": true,
+      "detail": {
+        "duplicate": true,
+        "balance": 90.0
+      },
+      "elapsed_seconds": 0.047
+    },
+    {
+      "step": "31 出库91被拒绝",
+      "ok": true,
+      "detail": {
+        "error": "出库数量超过当前余额：当前余额 90，请求出库 91",
+        "code": "bad_request"
+      },
+      "elapsed_seconds": 0.047
+    },
+    {
+      "step": "32 补货确认登记在途10",
+      "ok": true,
+      "detail": {
+        "in_transit": {
+          "id": "b2a4782f78514ef0bff3ac4929a6b08c",
+          "stock_code": "C001",
+          "qty": 10.0,
+          "expected_date": "2026-10-31",
+          "status": "in_transit",
+          "created_at": "2026-10-29T08:30:07+00:00"
+        },
+        "item": {
+          "stock_code": "C001",
+          "name": "Delta Box",
+          "initial_qty": 100.0,
+          "lead_time_days": 8,
+          "safety_stock": 30.0,
+          "daily_demand": 10.0,
+          "balance": 90.0,
+          "in_transit_effective": 10.0,
+          "in_transit_total": 10.0,
+          "replenishment_candidate": 10.0
+        },
+        "simulated": true
+      },
+      "elapsed_seconds": 0.078
+    },
+    {
+      "step": "33 补货候选=80+30-90-10=10",
+      "ok": true,
+      "detail": {
+        "candidate": 10.0,
+        "formula": "max(0, 提前期内场景需求 + 安全库存 - 当前库存 - 有效在途量)",
+        "item": {
+          "stock_code": "C001",
+          "name": "Delta Box",
+          "current_qty": 90.0,
+          "lead_time_demand": 80.0,
+          "effective_in_transit": 10.0,
+          "safety_stock": 30.0,
+          "candidate": 10.0
+        }
+      },
+      "elapsed_seconds": 0.047
+    },
+    {
+      "step": "34 AI状态明确未配置大模型",
+      "ok": true,
+      "detail": {
+        "llm_configured": false,
+        "provider": "local-rule-planner",
+        "model": "",
+        "key_present": false,
+        "timeout_seconds": 60.0,
+        "fallback": "local-rule-planner",
+        "tools_count": 7
+      },
+      "elapsed_seconds": 0.062
+    },
+    {
+      "step": "35 AI工具白名单可列出",
+      "ok": true,
+      "detail": {
+        "tools": [
+          "dashboard_summary",
+          "product_search",
+          "product_ranking",
+          "orders_query",
+          "forecast_7d",
+          "inventory_query",
+          "batch_info"
+        ]
+      },
+      "elapsed_seconds": 0.016
+    },
+    {
+      "step": "36 AI问答数字与看板一致且标注未调用大模型",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "provider": "local-rule-planner",
+        "llm_used": false,
+        "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-11-10~2011-12-09，全店）：成交量 851403.0 件，销售额 £1694068.71，订单 2913 笔，商品数 2882；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +29.8%，销售额环比 +37.8%，订单数环比 +27.9%（上一等长区间）。\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是",
+        "tool_calls": [
+          "dashboard_summary"
+        ]
+      },
+      "elapsed_seconds": 4.687
+    },
+    {
+      "step": "37 AI缺日期时追问而非编造",
+      "ok": true,
+      "detail": {
+        "status": "ok",
+        "clarification": null,
+        "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-11-10~2011-12-09，全店）：成交量 851403.0 件，销售额 £1694068.71，订单 2913 笔，商品数 2882；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +29.8%，销售额环比 +37.8%，订单数环比 +27.9%（上一等长区间）。\n范围：201"
+      },
+      "elapsed_seconds": 2.391
+    },
+    {
+      "step": "38 运营简报生成成功",
+      "ok": true,
+      "detail": {
+        "title": "运营简报 2011-11-10~2011-12-09",
+        "provider": "template",
+        "url": "/api/ai/briefs/5d679309e8f5416fac3fe3c5bd1ee4e9.md",
+        "markdown_len": 2597,
+        "has_simulated_label": true
+      },
+      "elapsed_seconds": 4.469
+    },
+    {
+      "step": "39 简报Markdown可下载",
+      "ok": true,
+      "detail": {
+        "status": 200,
+        "content_type": "text/markdown; charset=utf-8",
+        "bytes": 4645
+      },
+      "elapsed_seconds": 0.047
+    },
+    {
+      "step": "40 管理员创建运营账号",
+      "ok": true,
+      "detail": {
+        "user": {
+          "id": 3,
+          "username": "lead_op",
+          "display_name": "验收运营",
+          "role": "operator",
+          "active": true,
+          "must_change_password": false
+        }
+      },
+      "elapsed_seconds": 0.234
+    },
+    {
+      "step": "41 运营账号可登录",
+      "ok": true,
+      "detail": {
+        "user": {
+          "id": 3,
+          "username": "lead_op",
+          "display_name": "验收运营",
+          "role": "operator",
+          "active": true,
+          "must_change_password": false
+        }
+      },
+      "elapsed_seconds": 0.203
+    },
+    {
+      "step": "42 运营账号访问用户管理被拒(403)",
+      "ok": true,
+      "detail": {
+        "error": "该操作需要管理员权限",
+        "code": "forbidden"
+      },
+      "elapsed_seconds": 0.031
+    },
+    {
+      "step": "43 运营账号可正常查询看板",
+      "ok": true,
+      "detail": {},
+      "elapsed_seconds": 2.375
+    },
+    {
+      "step": "44 已登录未知接口返回404契约",
+      "ok": true,
+      "detail": {
+        "error": "路径不存在",
+        "code": "not_found"
+      },
+      "elapsed_seconds": 0.047
+    },
+    {
+      "step": "45 退出登录成功",
+      "ok": true,
+      "detail": {
+        "ok": true
+      },
+      "elapsed_seconds": 0.047
+    },
+    {
+      "step": "46 退出后访问被拒(401)",
+      "ok": true,
+      "detail": {
+        "error": "未登录或登录已失效",
+        "code": "unauthorized"
+      },
+      "elapsed_seconds": 0.0
+    },
+    {
+      "step": "47 未登录未知接口由会话中间件拒绝(401)",
+      "ok": true,
+      "detail": {
+        "error": "未登录或登录已失效",
+        "code": "unauthorized"
+      },
+      "elapsed_seconds": 0.0
+    },
+    {
+      "step": "48 OpenAPI 路径与实现一致",
+      "ok": true,
+      "detail": {
+        "missing": [],
+        "total_paths": 39
+      },
+      "elapsed_seconds": 0.031
+    }
+  ],
+  "environment": {
+    "python": "3.12.10",
+    "port": 8790,
+    "system_root": "C:\\Users\\Administrator\\11111\\数据\\学校项目\\电商运营系统"
+  }
+}

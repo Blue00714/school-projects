@@ -1,0 +1,121 @@
+==============================================================================
+MySQL 模式验收（真实 python run.py 子进程 + 真实 MySQL 8 实例）
+MySQL  127.0.0.1:3307  user=ece
+应用库 ece_app_test（隔离）；原始数据 ece_original（只读使用）
+命令   python.exe scripts\acceptance_mysql.py
+==============================================================================
+既有批次库 0 个（运行后新增的会删除）: 无
+已重建隔离应用库 ece_app_test
+服务已启动 http://127.0.0.1:60644（5.3s）
+
+[1] 健康检查与登录
+  PASS health.status: 200
+  PASS health.batch.id: 'original'
+  PASS login.status: 200
+  PASS login.user: 'admin'
+  PASS login.role: 'admin'
+  PASS auth.me.status: 200
+  MySQL 实际连接: database=ece_app_test user=ece@127.0.0.1
+
+[2] 看板 / 订单 / 商品（MySQL 查询）
+  PASS dashboard.status: 200
+  PASS dashboard.quantity: 851403
+  PASS dashboard.revenue: 1694068.71
+  PASS dashboard.orders: 2913
+  PASS dashboard.lines: 86861
+  PASS dashboard.batch.id: 'original'
+  PASS dashboard.weekdays rows: 6
+  PASS dashboard.weekdays ids: [0, 1, 2, 3, 4, 5]
+  覆盖范围 {'start': '2009-12-01', 'end': '2011-12-09'}，有记录日 26/30
+  PASS orders.status: 200
+  PASS orders.total: 2913
+  PASS orders.page rows: 5
+  PASS products.status: 200
+  PASS products rows>0: 50 rows
+  MySQL 原始库行数 transactions=1,067,371
+
+[3] 上传小样例 -> MySQL 批次库 -> duplicate -> 切换 -> 切回
+  PASS import.submit: 202
+  PASS import.job.status: 'succeeded'
+  PASS import.report.raw_rows: 4
+  PASS import.report.positive_sale_rows: 4
+  PASS import.report.date_min: '2011-02-01'
+  PASS import.report.date_max: '2011-02-05'
+  PASS import.batch.is_active: False
+  PASS batches.active_batch_id: 'original'
+  PASS batch registered
+  PASS batch db_path is mysql:<db>: mysql:ece_batch_b20261029T082025e6eba0
+  批次库 ece_batch_b20261029T082025e6eba0 transactions=4 sale=1 4
+  PASS duplicate.submit: 202
+  PASS duplicate.job.status: 'duplicate'
+  PASS duplicate.batch_id: 'b20261029T082025e6eba0'
+  PASS activate.status: 200
+  PASS switched.quantity: 14
+  PASS switched.revenue: 24.5
+  PASS switched.orders: 3
+  PASS switched.batch.id: 'b20261029T082025e6eba0'
+  PASS switched.orders.total: 3
+  PASS switch-back.status: 200
+  PASS switch-back.batch.id: 'original'
+  PASS switch-back.quantity: 851403
+  PASS switch-back.orders: 2913
+
+[4] 预测任务（MySQL）
+  PASS forecast.submit: 202
+  PASS forecast.job.status: 'succeeded'
+  PASS forecast.origin: '2011-12-09'
+  PASS forecast.horizon: 7
+  PASS forecast.rows: 7
+  PASS forecast.actual_days: 0
+  PASS forecast rows have numeric prediction
+  PASS forecast.export.status: 200
+  PASS forecast.export csv: text/csv; charset=utf-8
+  预测方法 blend_rule；CSV 1076 bytes
+
+[5] 模拟库存固定样例（100+20-30=90 / 幂等 / 91 拒绝 / 候选 10）
+  PASS inventory.scenario.create: 201
+  PASS inventory.scenario.id
+  PASS inventory.item.update: 200
+  PASS inventory.item.balance: 100.0
+  PASS inventory.item.candidate: 10.0
+  PASS inventory.in.status: 201
+  PASS inventory.in.balance: 120.0
+  PASS inventory.out.status: 201
+  PASS inventory.out.balance: 90.0
+  PASS inventory.idempotent.status: 200
+  PASS inventory.idempotent.flag: True
+  PASS inventory.idempotent.balance: 90.0
+  PASS inventory.91.status: 400
+  PASS inventory.final.balance: 90.0
+  PASS inventory.movements.rows: 2
+  PASS inventory.in_transit.confirm: 201
+  PASS inventory.in_transit.balance: 90.0
+  PASS inventory.in_transit.effective: 10.0
+  PASS inventory.replenishment.candidate: 10.0
+  PASS inventory.simulated flag: True
+
+[6] AI 助手（未配置真实大模型时的本地规则回退）
+  PASS ai.status.http: 200
+  PASS ai.llm_configured: False
+  PASS ai.fallback: 'local-rule-planner'
+  PASS ai.tools_count>=5: 7
+  PASS ai.ask.http: 200
+  PASS ai.ask.answer: 未调用大模型，数字来自服务端工具。
+· 历史实际（2011-11-10~2011-12-09，全店）：成交量 851403.0 件，销售额 £1694068.7
+  AI 状态: {"llm_configured": false, "fallback": "local-rule-planner", "tools_count": 7}
+
+[7] 应用状态确实写入 MySQL（ece_app_test）
+  users: 2 行
+  batches: 2 行
+  inventory_scenarios: 1 行
+  inventory_movements: 2 行
+  jobs: 1 行
+  ai_runs: 1 行
+  PASS users seeded
+  PASS original batch row: mysql:ece_original
+
+[cleanup] 已删除 ece_app_test 与本次新增的 1 个批次库
+
+==============================================================================
+结果: PASS（全部检查通过）耗时 145.9s
+==============================================================================

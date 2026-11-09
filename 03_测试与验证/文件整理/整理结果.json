@@ -1,0 +1,217 @@
+{
+  "date": "2026-10-22",
+  "project_root": "C:\\Users\\Administrator\\Desktop\\学校项目",
+  "moves": [
+    {
+      "from": "20261014_电商数据与页面选型/基于FastAPI的智能电商运营管理系统_前三章参考稿.docx",
+      "to": "01_交付内容/基于FastAPI的智能电商运营管理系统_前三章参考稿.docx",
+      "kind": "file"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/forecast_benchmark",
+      "to": "02_实验研究/forecast_benchmark",
+      "kind": "directory"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/word_qa",
+      "to": "03_测试与验证/word_qa",
+      "kind": "directory"
+    },
+    {
+      "from": "电商运营系统/tests",
+      "to": "03_测试与验证/系统测试/tests",
+      "kind": "directory"
+    },
+    {
+      "from": "电商运营系统/runtime/test_tmp",
+      "to": "03_测试与验证/系统测试/test_tmp",
+      "kind": "directory"
+    },
+    {
+      "from": "电商运营系统/runtime/screenshots",
+      "to": "03_测试与验证/系统测试/screenshots",
+      "kind": "directory"
+    },
+    {
+      "from": "电商运营系统/runtime/acceptance.json",
+      "to": "03_测试与验证/系统测试/acceptance.json",
+      "kind": "file"
+    },
+    {
+      "from": "电商运营系统/runtime/acceptance.log",
+      "to": "03_测试与验证/系统测试/acceptance.log",
+      "kind": "file"
+    },
+    {
+      "from": "电商运营系统/runtime/cache_migration.log",
+      "to": "03_测试与验证/系统测试/cache_migration.log",
+      "kind": "file"
+    },
+    {
+      "from": "电商运营系统/tests_result.log",
+      "to": "03_测试与验证/系统测试/tests_result.log",
+      "kind": "file"
+    },
+    {
+      "from": "电商运营系统/runtime_prepare.log",
+      "to": "03_测试与验证/系统测试/runtime_prepare.log",
+      "kind": "file"
+    },
+    {
+      "from": "电商运营系统/forecast_task.txt",
+      "to": "03_测试与验证/系统测试/forecast_task.txt",
+      "kind": "file"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/download_dataset.py",
+      "to": "03_测试与验证/数据获取核验/download_dataset.py",
+      "kind": "file"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/download_record.json",
+      "to": "03_测试与验证/数据获取核验/download_record.json",
+      "kind": "file"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/download_run.log",
+      "to": "03_测试与验证/数据获取核验/download_run.log",
+      "kind": "file"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/online_retail_ii.zip.part",
+      "to": "03_测试与验证/数据获取核验/online_retail_ii.zip.part",
+      "kind": "file"
+    }
+  ],
+  "original_file_count": 318,
+  "unchanged_original_files": 304,
+  "path_and_documentation_edits": [
+    {
+      "from": "先看这里.md",
+      "to": "先看这里.md",
+      "before": "0f0db6721f07a26afd10a008ba6913633e0eebdefb003c31bf2093a59ab821d6",
+      "after": "3c7b901cde0671ed9ec34519d1abbf580182c390f6394fecbc99fbcac25abc9d"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/download_dataset.py",
+      "to": "03_测试与验证/数据获取核验/download_dataset.py",
+      "before": "425489c12887fcca97bec4219df0f0974b5fdf8c6c020d01f67699f69a4eb620",
+      "after": "9c9f5d218d397eb720f7dfb94f0d24e457430023087ad4d8aec3640e3b3c2efa"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/先看这里.md",
+      "to": "20261014_电商数据与页面选型/先看这里.md",
+      "before": "7a21df83265dc033e4946f8fee6ce8df4693c03c80dca1aec96282b84f3fd3eb",
+      "after": "0ff772bb85babd1345fcf77cfa88a36be4da78b326ee707ba72145434cbc264a"
+    },
+    {
+      "from": "电商运营系统/README.md",
+      "to": "电商运营系统/README.md",
+      "before": "d0ec60f638ada7f49248613a094b63299d40480654fc2ee21b64df59b289b9c3",
+      "after": "fbc7cd7d86ddd9b9c39ec7b5598bb7a84df876335f6c28d032b7540981a86596"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/forecast_benchmark/run_benchmark.py",
+      "to": "02_实验研究/forecast_benchmark/run_benchmark.py",
+      "before": "fb1c99e163447b1ed27d16a8fe98a57dcba25b28230c954156ee15dddc6994e2",
+      "after": "73c019a7c413dcc2f82152a2b9499adf8bb6e35a48d4299fce30ea2d141d52da"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/forecast_benchmark/结果摘要.md",
+      "to": "02_实验研究/forecast_benchmark/结果摘要.md",
+      "before": "58f543ab1f6a7a895ff099cc59e61d88626f472961d8ed2fd26fa1294bf5b762",
+      "after": "06676793aa8aebee10ac844f142773656418008bd8cf536bb50b4866c9ea2bdf"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/word_qa/artifact.md",
+      "to": "03_测试与验证/word_qa/artifact.md",
+      "before": "ad6c793e9e8d2083648243c1449e30baf9a3f034c9ba72bde867d3822ca4b6a4",
+      "after": "cffc35c62012846366da3ade7fe970284061e1510a1f3991f56e7e9626564ba1"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/word_qa/build_manifest.json",
+      "to": "03_测试与验证/word_qa/build_manifest.json",
+      "before": "20bff89021ab1698f8906d49253bd62725c1b3c60b3ca5c926730f214c559b4e",
+      "after": "d37b1901e8d9eff6e5e409b6c88623d46d7ac0ceaaa61b5142e8454c53e15569"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/word_qa/build_report.py",
+      "to": "03_测试与验证/word_qa/build_report.py",
+      "before": "7e4909fa81324bcfe4df3e68b9230c2fcc82d68ee8c63cecae7faf98ee31fdbb",
+      "after": "b3d57bff42d69fc55f1cb62601b127d63502f2d87e26ea376afac94ccb3c343e"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/word_qa/finalize_revision.py",
+      "to": "03_测试与验证/word_qa/finalize_revision.py",
+      "before": "0a21d38cf29d70c5673d04b9044ec3f130c17a4ba302107817a659b525b975a7",
+      "after": "f1bc017646a98ee5c89523772be73063925f09cd4844250c2a866f0626b0ad03"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/word_qa/revise_render.ps1",
+      "to": "03_测试与验证/word_qa/revise_render.ps1",
+      "before": "2aee78809054474bb32bea0b24e34bdfdf205bb6b2f67cf46fd2928efa155df2",
+      "after": "fef1de6695dafcd5e03057ebea8ebdffb7e03bdf3ac6e67086ad6d43f35bfa14"
+    },
+    {
+      "from": "20261014_电商数据与页面选型/word_qa/revise_report.py",
+      "to": "03_测试与验证/word_qa/revise_report.py",
+      "before": "65b739f83d8f17ebbdff31654f88f2f4a5674ab58376eae3c233788357a68375",
+      "after": "6fcd82f3e04f1b8a88bfcb636f78394b376c1d87f54896ad8f9fe1ba20ecaed5"
+    },
+    {
+      "from": "电商运营系统/tests/test_services.py",
+      "to": "03_测试与验证/系统测试/tests/test_services.py",
+      "before": "b9425aa6c095743798f1d5a6a179f39b0d75d4d324e71df458f4be06bf52a508",
+      "after": "1ed7491b5a7a470860891f1e335585cbde28d97fba280c5888d8374c12d7e158"
+    },
+    {
+      "from": "电商运营系统/tests/verify_real.py",
+      "to": "03_测试与验证/系统测试/tests/verify_real.py",
+      "before": "dc31d382251a80637901ad3b746f71a77e1f1a85e687a1030d3b3d1f98e95944",
+      "after": "78c565b762f030dd42de9b161a2e1ba9c9eba3a7be7e62eeae13988563e86e64"
+    }
+  ],
+  "all_edited_or_created_files": [
+    "01_交付内容/README.md",
+    "02_实验研究/forecast_benchmark/README.md",
+    "02_实验研究/forecast_benchmark/run_benchmark.py",
+    "02_实验研究/forecast_benchmark/结果摘要.md",
+    "03_测试与验证/README.md",
+    "03_测试与验证/word_qa/README.md",
+    "03_测试与验证/word_qa/artifact.md",
+    "03_测试与验证/word_qa/build_manifest.json",
+    "03_测试与验证/word_qa/build_report.py",
+    "03_测试与验证/word_qa/finalize_revision.py",
+    "03_测试与验证/word_qa/revise_render.ps1",
+    "03_测试与验证/word_qa/revise_report.py",
+    "03_测试与验证/数据获取核验/README.md",
+    "03_测试与验证/数据获取核验/download_dataset.py",
+    "03_测试与验证/文件整理/README.md",
+    "03_测试与验证/系统测试/README.md",
+    "03_测试与验证/系统测试/tests/test_services.py",
+    "03_测试与验证/系统测试/tests/verify_real.py",
+    "20261014_电商数据与页面选型/先看这里.md",
+    "先看这里.md",
+    "电商运营系统/README.md"
+  ],
+  "checks": {
+    "delivery_word_unchanged": true,
+    "raw_workbook_unchanged": true,
+    "runtime_database_unchanged": true,
+    "all_original_files_retained": true,
+    "python_syntax_checked_without_execution": 8,
+    "experiment_input_exists": true,
+    "report_revision_inputs_exist": true,
+    "test_system_import_path_exists": true,
+    "report_manifest_matches_delivery_hash": true,
+    "new_entry_links_valid": true,
+    "resolved_paths_checked_in_seven_scripts": true,
+    "powershell_syntax_checked_without_execution": true,
+    "source_and_data_index_links_valid": true
+  },
+  "experiments_rerun": false,
+  "functional_tests_rerun": false,
+  "report_rebuilt": false,
+  "historical_evidence_preserved": true,
+  "implementation_tool": "Codex; no callable Claude Code tools in this session"
+}

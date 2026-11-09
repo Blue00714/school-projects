@@ -1,0 +1,84 @@
+==============================================================================
+FastAPI 原型 API 自动化测试运行记录
+运行时间: 2026-11-02T10:01:16+08:00
+命令: python.exe 03_测试与验证/系统测试/tests_api/run_api_tests.py --out test_api_desktop_migration_20261102.log
+工作目录: C:\Users\Administrator\Desktop\学校项目
+说明: （未填写）
+Python: 3.12.10 (Windows-10-10.0.19045-SP0)
+pandas: 3.0.5
+隔离方式: 每个测试类一个 python run.py 子进程 + 临时 ECE_RUNTIME_DIR + 复制的 retail.sqlite3 (ECE_ORIGINAL_DB)
+官方库运行前:
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+==============================================================================
+test_01_status_reports_unconfigured_and_no_secret (test_ai.AiAssistantTests.test_01_status_reports_unconfigured_and_no_secret) ... ok
+test_02_tools_are_declared_read_only (test_ai.AiAssistantTests.test_02_tools_are_declared_read_only) ... ok
+test_03_thirty_question_sample (test_ai.AiAssistantTests.test_03_thirty_question_sample) ... ok
+test_04_brief_generation_and_download (test_ai.AiAssistantTests.test_04_brief_generation_and_download) ... ok
+test_05_bad_question_is_400 (test_ai.AiAssistantTests.test_05_bad_question_is_400) ... ok
+test_key_is_present_but_never_exposed (test_ai.AiKeyLeakTests.test_key_is_present_but_never_exposed) ... ok
+test_01_health_is_public_and_describes_service (test_auth.AuthTests.test_01_health_is_public_and_describes_service) ... ok
+test_02_login_success_me_and_cookie_flags (test_auth.AuthTests.test_02_login_success_me_and_cookie_flags) ... ok
+test_03_login_failures_are_401_or_400 (test_auth.AuthTests.test_03_login_failures_are_401_or_400) ... ok
+test_04_unauthenticated_requests_are_401 (test_auth.AuthTests.test_04_unauthenticated_requests_are_401) ... ok
+test_05_operator_cannot_use_admin_endpoints (test_auth.AuthTests.test_05_operator_cannot_use_admin_endpoints) ... ok
+test_06_admin_user_management (test_auth.AuthTests.test_06_admin_user_management) ... ok
+test_07_password_change_revokes_other_sessions (test_auth.AuthTests.test_07_password_change_revokes_other_sessions) ... ok
+test_08_logout_invalidates_session (test_auth.AuthTests.test_08_logout_invalidates_session) ... ok
+test_01_openapi_matches_registered_routes (test_contract.ContractTests.test_01_openapi_matches_registered_routes) ... ok
+test_02_contract_endpoints_are_all_implemented (test_contract.ContractTests.test_02_contract_endpoints_are_all_implemented) ... ok
+test_03_openapi_metadata_and_docs (test_contract.ContractTests.test_03_openapi_metadata_and_docs) ... ok
+test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) ... ok
+test_05_http_status_codes_are_documented (test_contract.ContractTests.test_05_http_status_codes_are_documented) ... ok
+test_06_cross_origin_writes_are_403 (test_contract.ContractTests.test_06_cross_origin_writes_are_403) ... ok
+test_07_frontend_is_served_by_fastapi (test_contract.ContractTests.test_07_frontend_is_served_by_fastapi) ... ok
+test_01_original_window_totals_match_historical_baseline (test_dashboard.DashboardTests.test_01_original_window_totals_match_historical_baseline) ... ok
+test_02_trend_keeps_calendar_days_and_sums_to_totals (test_dashboard.DashboardTests.test_02_trend_keeps_calendar_days_and_sums_to_totals) ... ok
+test_03_previous_period_and_changes (test_dashboard.DashboardTests.test_03_previous_period_and_changes) ... ok
+test_04_ranking_countries_weekdays_quality (test_dashboard.DashboardTests.test_04_ranking_countries_weekdays_quality) ... ok
+test_05_default_range_is_last_30_days (test_dashboard.DashboardTests.test_05_default_range_is_last_30_days) ... ok
+test_06_trend_csv_export (test_dashboard.DashboardTests.test_06_trend_csv_export) ... ok
+test_07_orders_csv_export_matches_order_list (test_dashboard.DashboardTests.test_07_orders_csv_export_matches_order_list) ... ok
+test_08_transactions_csv_export (test_dashboard.DashboardTests.test_08_transactions_csv_export) ... ok
+test_09_invalid_filters_are_400 (test_dashboard.DashboardTests.test_09_invalid_filters_are_400) ... ok
+test_10_empty_range_is_empty_not_fabricated (test_dashboard.DashboardTests.test_10_empty_range_is_empty_not_fabricated) ... ok
+test_11_products_and_transactions_follow_the_batch (test_dashboard.DashboardTests.test_11_products_and_transactions_follow_the_batch) ... ok
+test_01_forecast_job_returns_seven_null_actual_rows (test_forecast.ForecastTests.test_01_forecast_job_returns_seven_null_actual_rows) ... ok
+test_02_forecast_csv_export (test_forecast.ForecastTests.test_02_forecast_csv_export) ... ok
+test_03_choose_model_and_reject_unknown (test_forecast.ForecastTests.test_03_choose_model_and_reject_unknown) ... ok
+test_04_backtest_small_window (test_forecast.ForecastTests.test_04_backtest_small_window) ... ok
+test_05_job_binding_survives_batch_switch (test_forecast.ForecastTests.test_05_job_binding_survives_batch_switch) ... ok
+test_06_bad_requests_and_missing_jobs (test_forecast.ForecastTests.test_06_bad_requests_and_missing_jobs) ... ok
+test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) ... ok
+test_01_rejects_wrong_file_type (test_import.ImportTests.test_01_rejects_wrong_file_type) ... ok
+test_02_missing_required_column_is_reported (test_import.ImportTests.test_02_missing_required_column_is_reported) ... ok
+test_03_upload_small_sample_succeeds_as_inactive_snapshot (test_import.ImportTests.test_03_upload_small_sample_succeeds_as_inactive_snapshot) ... ok
+test_04_duplicate_file_creates_no_new_batch (test_import.ImportTests.test_04_duplicate_file_creates_no_new_batch) ... ok
+test_05_activate_switches_dashboard_and_orders (test_import.ImportTests.test_05_activate_switches_dashboard_and_orders) ... ok
+test_06_exports_on_uploaded_batch_keep_text_and_neutralise_formulas (test_import.ImportTests.test_06_exports_on_uploaded_batch_keep_text_and_neutralise_formulas) ... ok
+test_07_switch_back_to_original_restores_baseline (test_import.ImportTests.test_07_switch_back_to_original_restores_baseline) ... ok
+test_upload_xlsx_small_sample (test_import.ImportXlsxTests.test_upload_xlsx_small_sample) ... ok
+test_01_scenario_create_and_list (test_inventory.InventoryTests.test_01_scenario_create_and_list) ... ok
+test_02_item_parameters_and_replenishment_formula (test_inventory.InventoryTests.test_02_item_parameters_and_replenishment_formula) ... ok
+test_03_movements_balance_and_idempotency (test_inventory.InventoryTests.test_03_movements_balance_and_idempotency) ... ok
+test_04_in_transit_confirmation_and_receiving (test_inventory.InventoryTests.test_04_in_transit_confirmation_and_receiving) ... ok
+test_05_validation_and_missing_resources (test_inventory.InventoryTests.test_05_validation_and_missing_resources) ... ok
+test_01_orders_total_matches_dashboard (test_orders.OrdersTests.test_01_orders_total_matches_dashboard) ... ok
+test_02_rows_sorted_and_long_order_keys_are_strings (test_orders.OrdersTests.test_02_rows_sorted_and_long_order_keys_are_strings) ... ok
+test_03_order_detail_lines_add_up_to_header (test_orders.OrdersTests.test_03_order_detail_lines_add_up_to_header) ... ok
+test_04_dashboard_and_orders_follow_the_same_filter (test_orders.OrdersTests.test_04_dashboard_and_orders_follow_the_same_filter) ... ok
+test_05_q_searches_order_keys (test_orders.OrdersTests.test_05_q_searches_order_keys) ... ok
+test_06_unknown_order_is_404 (test_orders.OrdersTests.test_06_unknown_order_is_404) ... ok
+
+----------------------------------------------------------------------
+Ran 58 tests in 107.844s
+
+OK
+==============================================================================
+耗时: 108.92s
+用例: 共 58，失败 0，错误 0，跳过 0
+官方库运行后:
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+官方库是否被修改: 否
+==============================================================================

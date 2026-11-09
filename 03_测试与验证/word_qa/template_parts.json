@@ -1,0 +1,122 @@
+[
+  {
+    "part": "[Content_Types].xml",
+    "bytes": 2327,
+    "sha256": "a956b06a7665ddb6f4a76fe470a1486be334eba630208edd2a5a80e0e3c1e6fe"
+  },
+  {
+    "part": "_rels/.rels",
+    "bytes": 590,
+    "sha256": "e19238d7a71fa7a2490776252686f70e2de6238c87cd509b5e3a3cc07c2ea4df"
+  },
+  {
+    "part": "word/document.xml",
+    "bytes": 536136,
+    "sha256": "b462b6c8b49749b4ab0400916480ee598407f73e58ee07c72633a58c60fcf46a"
+  },
+  {
+    "part": "word/_rels/document.xml.rels",
+    "bytes": 2277,
+    "sha256": "07b7885712c03539be04e50b269469c4fbf6f166261b6f99c093d9c533826366"
+  },
+  {
+    "part": "word/footnotes.xml",
+    "bytes": 3056,
+    "sha256": "ce5c6c26e0d7288494d1712b3bd8b3bd4d5b3630130764dc9b317f2494e4027d"
+  },
+  {
+    "part": "word/endnotes.xml",
+    "bytes": 3050,
+    "sha256": "e52487795ae2b324e79e4dfc89c19c0f5585bdbdb103dccdada7d2fd081f005b"
+  },
+  {
+    "part": "word/header1.xml",
+    "bytes": 2878,
+    "sha256": "fbd2f66db6151e4a49b654b0ea07bc63cfb4c6aad476049d896a274b1c40af2f"
+  },
+  {
+    "part": "word/footer1.xml",
+    "bytes": 3382,
+    "sha256": "11fa7aba0252a6fc4de6ae092b86f5451f92628da5b34efa2ee3560559f7d626"
+  },
+  {
+    "part": "word/footer2.xml",
+    "bytes": 3421,
+    "sha256": "45a6cbee8176a6991aa300cc4f0a2c74ccc46de021d6a5ba5c0d1fb71eca66a5"
+  },
+  {
+    "part": "word/media/image1.jpeg",
+    "bytes": 17596,
+    "sha256": "ba892c7f504f64f2ac7858dfcae19d05caad1fa39641d53959f15b337dbc611e"
+  },
+  {
+    "part": "word/media/image2.jpeg",
+    "bytes": 55232,
+    "sha256": "dc312d975956342381d5eeb9531470316632795cd62f2b6ce3ce2c198dbf6cc7"
+  },
+  {
+    "part": "word/media/image3.png",
+    "bytes": 19316,
+    "sha256": "7be43e18545c3a4c8bd457dfac3da33d723d899208dff660cb1499c2d03ffb8a"
+  },
+  {
+    "part": "word/media/image4.png",
+    "bytes": 32275,
+    "sha256": "9a2f20ebdca45a5b83a55124cfeb7c15e807a39a62a0b1e8b2bbcd294e3b1e87"
+  },
+  {
+    "part": "word/theme/theme1.xml",
+    "bytes": 6744,
+    "sha256": "c68a0a1bc0d57e0dc77f20127616d1b477fc87894bbbbb27483518ce4a86c30c"
+  },
+  {
+    "part": "word/settings.xml",
+    "bytes": 6864,
+    "sha256": "fc89421fd4b95fef3379560f3b4da8c3b3c5c36516682b38a56b7805edc3d518"
+  },
+  {
+    "part": "customXml/item1.xml",
+    "bytes": 306,
+    "sha256": "64a56efd64d49e759fe8705700562e79a4792fc7885a1351e30e5f3651f7247c"
+  },
+  {
+    "part": "customXml/itemProps1.xml",
+    "bytes": 341,
+    "sha256": "6aa1096fdb07ba7521cc152e91c31ec1435f65c44815ac247db28f907a934d5f"
+  },
+  {
+    "part": "word/numbering.xml",
+    "bytes": 31102,
+    "sha256": "edb853e19931c74d54dd31aaf0ea11f106cd953d70286897ddae80c78c0a6171"
+  },
+  {
+    "part": "word/styles.xml",
+    "bytes": 56426,
+    "sha256": "b7911b63b2f75edab6b5d33d0042fe18f37c6e02cc518eb97099ba95e31cdc6a"
+  },
+  {
+    "part": "word/webSettings.xml",
+    "bytes": 1069,
+    "sha256": "f2f6fe7679634963bf49bae65f941f41934de42ceeb3a806afac4bab92274853"
+  },
+  {
+    "part": "word/fontTable.xml",
+    "bytes": 3709,
+    "sha256": "ad923220d4183206fddbca9b081ad3bc55163e0143f570b40285457da2b032cc"
+  },
+  {
+    "part": "docProps/core.xml",
+    "bytes": 747,
+    "sha256": "693be1ba4d101b21b24598a18002b5acbcc65f8ab81713641fa8c8a7de4af2bd"
+  },
+  {
+    "part": "docProps/app.xml",
+    "bytes": 722,
+    "sha256": "4878d8ab71e0375ba5c105affb8a8d1670c4c4e51d959871e51326b750a7784a"
+  },
+  {
+    "part": "customXml/_rels/item1.xml.rels",
+    "bytes": 296,
+    "sha256": "80482f86e196171d66001e0e74d1900408a3aaf2463e54005d251b5f2db9a0b0"
+  }
+]

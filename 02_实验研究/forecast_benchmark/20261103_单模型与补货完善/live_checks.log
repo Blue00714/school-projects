@@ -1,0 +1,2 @@
+{"scenario": {"id": "demo-original", "name": "������Ӫ��ʾ �� ģ��", "note": "ģ����ʾ����Ʒ������������ original��������ο�2011-11-12��2011-12-09���վ���¼��������ʼ��桢����⼰�ɹ���;Ϊģ���趨��δ����ʷ�����Զ��ۼ����ظ����뱣����ǰ���������", "created_at": "2026-11-03T08:35:13+00:00", "item_count": 12}, "item_count": 12, "movement_count": 27, "transit_count": 9, "needs_replenishment": 6, "replenishment_quantity": 9038.0}
+Forecast/backtest saved, both recoverable through latest API. Demo repeated without duplicate movements.

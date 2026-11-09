@@ -1,0 +1,431 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex">
+<title>智能电商运营管理系统 · 课程原型</title>
+<link rel="stylesheet" href="/static/style.css">
+<script src="/static/app.js" defer></script>
+</head>
+<body>
+
+<!-- ============ 登录视图 ============ -->
+<div id="login-view" class="login-view">
+  <div class="login-backdrop" aria-hidden="true"></div>
+  <section class="login-card" aria-labelledby="login-title">
+    <div class="login-brand">
+      <span class="brand-mark">E</span>
+      <div>
+        <strong>智能电商运营管理系统</strong>
+        <span class="brand-sub">OPERATIONS WORKSPACE · FASTAPI</span>
+      </div>
+    </div>
+    <div class="proto-ribbon">课程原型 · 非生产环境</div>
+    <h1 id="login-title">登录工作台</h1>
+    <p class="login-hint">使用初始化凭据登录。首次登录凭据保存在隔离运行目录的 initial_admin.txt 中。</p>
+    <form id="login-form" class="login-form" novalidate>
+      <label class="field"><span>账号</span><input id="login-username" name="username" autocomplete="username" required placeholder="例如 admin"></label>
+      <label class="field"><span>密码</span><input id="login-password" name="password" type="password" autocomplete="current-password" required placeholder="登录密码"></label>
+      <div id="login-error" class="alert error hidden" role="alert"></div>
+      <button id="login-submit" class="button primary full" type="submit">登录</button>
+    </form>
+    <div class="login-meta">
+      <span id="login-health" class="muted small">正在检查服务状态…</span>
+    </div>
+    <ul class="login-notes">
+      <li>销售额为 GBP 交易金额，不等于利润；无记录日按 0 补。</li>
+      <li>库存为模拟数据，预测为固定模型实验，不代表真实经营收益。</li>
+    </ul>
+  </section>
+</div>
+
+<!-- ============ 主应用 ============ -->
+<div id="app-view" class="app hidden">
+  <aside class="sidebar">
+    <a class="brand" href="#dashboard" data-page="dashboard"><span class="brand-mark">E</span><span>电商运营<span class="brand-sub">OPERATIONS WORKSPACE</span></span></a>
+    <div class="nav-label">业务工作台</div>
+    <nav id="nav" aria-label="功能导航">
+      <button class="nav active" data-page="dashboard"><span class="nav-symbol">▥</span>看板</button>
+      <button class="nav" data-page="orders"><span class="nav-symbol">≡</span>商品与订单</button>
+      <button class="nav" data-page="imports"><span class="nav-symbol">⇪</span>数据导入</button>
+      <button class="nav" data-page="forecast"><span class="nav-symbol">↗</span>预测与回测</button>
+      <button class="nav" data-page="inventory"><span class="nav-symbol">▤</span>模拟库存</button>
+      <button class="nav" data-page="ai"><span class="nav-symbol">◇</span>AI 助手</button>
+      <button class="nav nav-admin hidden" data-page="admin"><span class="nav-symbol">⚙</span>系统管理</button>
+    </nav>
+    <div class="sidebar-bottom">
+      <div class="source-label"><i></i> 本地离线原型</div>
+      <strong>Online Retail II</strong>
+      <p>单店历史记录 · 销量/交易额<br>无真实库存与成本数据</p>
+      <span class="local-label">LOCAL · NO CDN</span>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div class="topbar-left">
+        <span class="proto-badge" title="课程原型，非生产系统">课程原型</span>
+        <span id="breadcrumb">看板</span>
+      </div>
+      <div class="topbar-right">
+        <div class="batch-chip" id="batch-chip" title="当前数据批次">
+          <span class="batch-dot"></span>
+          <span id="batch-label">数据批次加载中…</span>
+          <span class="batch-coverage" id="batch-coverage">—</span>
+        </div>
+        <div class="user-chip" id="user-chip">
+          <span id="user-name">—</span>
+          <span id="user-role" class="role-badge">—</span>
+        </div>
+        <button id="logout" class="button ghost" type="button">退出登录</button>
+      </div>
+    </header>
+    <div class="policy-strip" id="policy-strip">
+      <span><b>口径</b>：交易销售额为 GBP 交易额，<em>不等于利润</em>；无记录日按 0 补，不代表市场无需求。</span>
+      <span><b>范围</b>：<span id="policy-coverage">—</span></span>
+      <span><b>边界</b>：库存为<em>模拟</em>；预测为固定模型实验，不构成经营收益结论。</span>
+    </div>
+
+    <div class="workspace">
+      <div id="global-error" class="alert error hidden" role="alert"></div>
+      <div id="global-info" class="alert info hidden" role="status"></div>
+
+      <!-- ========== 看板 ========== -->
+      <section id="page-dashboard" class="page">
+        <div class="page-heading">
+          <div><div class="eyebrow">SALES OVERVIEW</div><h1>看板</h1><p>按当前数据批次汇总销量、交易额与商品贡献。</p></div>
+          <div class="heading-actions">
+            <button id="dashboard-export-trend" class="button ghost" type="button">↓ 导出日趋势 CSV</button>
+            <button id="dashboard-refresh" class="button secondary" type="button">刷新</button>
+          </div>
+        </div>
+        <form id="dashboard-filter" class="filter-bar">
+          <label class="field"><span>开始日期</span><input type="date" id="dash-start" required></label>
+          <span class="date-dash">—</span>
+          <label class="field"><span>结束日期</span><input type="date" id="dash-end" required></label>
+          <label class="field grow"><span>商品编码</span><input id="dash-product" list="product-options" placeholder="全部商品，可输入编码" autocomplete="off"><datalist id="product-options"></datalist></label>
+          <label class="field"><span>国家</span><select id="dash-country"><option value="">全部国家</option></select></label>
+          <button class="button primary" id="dash-apply" type="submit">应用筛选</button>
+          <button class="button plain" id="dash-reset" type="button">重置</button>
+        </form>
+        <div class="range-row"><span id="dash-range" class="muted">—</span>
+          <div class="quick-ranges"><button data-days="30" class="chip active" type="button">最近30天</button><button data-days="90" class="chip" type="button">最近90天</button><button data-days="365" class="chip" type="button">最近365天</button></div>
+        </div>
+        <div id="dashboard-warnings" class="warnings"></div>
+        <div id="dashboard-kpis" class="kpi-grid"><div class="kpi skeleton">正在读取统计结果…</div></div>
+        <div class="dashboard-charts">
+          <article class="panel">
+            <div class="panel-head"><div><h2>销售趋势</h2><p>按日汇总 · 无记录日显示为 0（obs=0）</p></div>
+              <div class="segmented" id="metric-tabs"><button data-metric="quantity" class="active" type="button">销量</button><button data-metric="revenue" type="button">销售额</button><button data-metric="orders" type="button">订单数</button></div>
+            </div>
+            <div id="sales-chart" class="chart-area" aria-label="每日销售趋势折线图"></div>
+            <div class="chart-legend"><span><i class="dot teal"></i>当前筛选范围</span><span class="muted" id="trend-note"></span></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><h2>国家汇总</h2><p>按记录销量排序 · 前 10</p></div><span class="tiny-pill">QTY</span></div>
+            <div id="country-bars" class="country-bars"></div>
+          </article>
+        </div>
+        <article class="panel">
+          <div class="panel-head"><div><h2>商品排名</h2><p>按记录销量排序，点击商品可查看其交易明细。</p></div><span class="tiny-pill" id="ranking-count">TOP 20</span></div>
+          <div class="table-scroll"><table><thead><tr><th>排名</th><th>商品编码 / 名称</th><th class="num">销量 / 件</th><th class="num">交易额 / £</th><th class="num">订单数</th></tr></thead><tbody id="ranking-body"></tbody></table></div>
+        </article>
+        <div class="panel-grid">
+          <article class="panel"><div class="panel-head"><h2>质量提示</h2></div><dl id="quality-list" class="def-list"></dl></article>
+          <article class="panel"><div class="panel-head"><h2>口径与批次</h2></div><div id="dashboard-policy" class="prose small"></div></article>
+        </div>
+        <div class="footnote" id="dashboard-footnote">—</div>
+      </section>
+
+      <!-- ========== 商品与订单 ========== -->
+      <section id="page-orders" class="page hidden">
+        <div class="page-heading">
+          <div><div class="eyebrow">PRODUCTS &amp; ORDERS</div><h1>商品与订单</h1><p>商品搜索、订单列表与明细、交易流水，支持 CSV 导出。</p></div>
+          <div class="heading-actions">
+            <button id="export-orders" class="button ghost" type="button">↓ 订单 CSV</button>
+            <button id="export-transactions" class="button ghost" type="button">↓ 交易明细 CSV</button>
+            <button id="export-trend-2" class="button ghost" type="button">↓ 趋势 CSV</button>
+          </div>
+        </div>
+        <form id="orders-filter" class="filter-bar">
+          <label class="field"><span>开始日期</span><input type="date" id="ord-start"></label>
+          <span class="date-dash">—</span>
+          <label class="field"><span>结束日期</span><input type="date" id="ord-end"></label>
+          <label class="field"><span>商品编码</span><input id="ord-product" list="product-options" placeholder="全部商品" autocomplete="off"></label>
+          <label class="field"><span>国家</span><select id="ord-country"><option value="">全部国家</option></select></label>
+          <label class="field grow"><span>订单号 / 关键词</span><input id="ord-q" placeholder="订单号前缀或商品描述" autocomplete="off"></label>
+          <button class="button primary" id="ord-apply" type="submit">查询</button>
+          <button class="button plain" id="ord-reset" type="button">重置</button>
+        </form>
+        <div id="orders-error" class="alert error hidden" role="alert"></div>
+        <article class="panel">
+          <div class="panel-head"><div><h2>商品搜索</h2><p>按编码或名称模糊查询，点击“用作筛选”把商品带入订单/明细查询。</p></div><span class="tiny-pill">≤50</span></div>
+          <form id="product-search-form" class="inline-form">
+            <input id="product-search-q" placeholder="输入商品编码或名称，如 85123 / CHRISTMAS" autocomplete="off">
+            <button class="button secondary" type="submit">搜索商品</button>
+          </form>
+          <div class="table-scroll short"><table><thead><tr><th>商品编码</th><th>名称</th><th class="num">销量 / 件</th><th class="num">操作</th></tr></thead><tbody id="product-search-body"><tr><td colspan="4" class="empty-cell">输入关键词后搜索</td></tr></tbody></table></div>
+        </article>
+
+        <div class="subtabs" id="order-subtabs">
+          <button class="subtab active" data-sub="orders" type="button">订单列表</button>
+          <button class="subtab" data-sub="lines" type="button">交易明细</button>
+        </div>
+
+        <div id="sub-orders">
+          <article class="panel">
+            <div class="panel-head"><div><h2>订单列表</h2><p id="orders-scope">按日倒序 · 订单数按 invoice 去重</p></div><span class="tiny-pill" id="orders-total">—</span></div>
+            <div class="table-scroll"><table><thead><tr><th>订单号</th><th>日期</th><th>首次 / 末次时间</th><th>客户</th><th>国家</th><th class="num">行数</th><th class="num">销量</th><th class="num">交易额 / £</th><th>商品编码</th></tr></thead><tbody id="orders-body"><tr><td colspan="9" class="empty-cell">加载中…</td></tr></tbody></table></div>
+            <div class="pagination"><span id="orders-page-label">—</span><div><button id="orders-prev" class="button secondary" type="button">上一页</button><button id="orders-next" class="button secondary" type="button">下一页</button></div></div>
+          </article>
+          <article id="order-detail-panel" class="panel hidden">
+            <div class="panel-head"><div><h2 id="order-detail-title">订单明细</h2><p id="order-detail-subtitle"></p></div><button id="order-detail-close" class="button ghost" type="button">关闭</button></div>
+            <div class="table-scroll"><table><thead><tr><th>商品编码</th><th>描述</th><th class="num">数量</th><th class="num">单价 / £</th><th class="num">金额 / £</th><th>开单时间</th><th>来源表 / 行</th></tr></thead><tbody id="order-detail-body"></tbody></table></div>
+          </article>
+        </div>
+
+        <div id="sub-lines" class="hidden">
+          <article class="panel">
+            <div class="panel-head"><div><h2>交易明细</h2><p>正向交易行 · 分页 25 行</p></div><span class="tiny-pill" id="lines-total">—</span></div>
+            <div class="table-scroll"><table><thead><tr><th>开单时间 / 订单号</th><th>商品</th><th class="num">数量</th><th class="num">单价 / £</th><th class="num">金额 / £</th><th>国家</th><th>来源表 / 行</th></tr></thead><tbody id="lines-body"><tr><td colspan="7" class="empty-cell">加载中…</td></tr></tbody></table></div>
+            <div class="pagination"><span id="lines-page-label">—</span><div><button id="lines-prev" class="button secondary" type="button">上一页</button><button id="lines-next" class="button secondary" type="button">下一页</button></div></div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ========== 数据导入 ========== -->
+      <section id="page-imports" class="page hidden">
+        <div class="page-heading">
+          <div><div class="eyebrow">DATA IMPORTS</div><h1>数据导入</h1><p>上传 xlsx / xls / csv，后台导入并生成独立批次；成功后需手动切换为当前批次。</p></div>
+          <a class="button ghost" href="/api/imports/template.csv">↓ 下载示例模板</a>
+        </div>
+        <div class="alert info">导入不会覆盖当前批次，也不自动切换；同一文件（SHA-256 相同）重复导入会直接返回 duplicate。上传上限 20MB。</div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h2>上传文件</h2></div>
+            <form id="import-form" class="stack-form">
+              <label class="field"><span>数据文件（.xlsx / .xls / .csv）</span><input type="file" id="import-file" accept=".xlsx,.xls,.csv" required></label>
+              <label class="field"><span>批次标签（可选）</span><input id="import-label" placeholder="例如 2026-11 上传样例"></label>
+              <button class="button primary" id="import-submit" type="submit">开始导入</button>
+            </form>
+            <div id="import-progress" class="task-state hidden" role="status"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>最近导入任务</h2><p>状态：queued / running / succeeded / failed / duplicate</p></div>
+            <div id="import-job-detail" class="stack"><div class="empty-cell">尚未提交导入任务</div></div>
+          </article>
+        </div>
+        <article class="panel">
+          <div class="panel-head"><div><h2>批次列表</h2><p>仅一个批次为“当前批次”，切换后看板/订单/预测按新批次刷新。</p></div><button id="batches-refresh" class="button secondary" type="button">刷新批次</button></div>
+          <div class="table-scroll"><table><thead><tr><th>批次 ID</th><th>标签</th><th>类型</th><th>覆盖范围</th><th>状态</th><th>当前</th><th>操作</th></tr></thead><tbody id="batches-body"><tr><td colspan="7" class="empty-cell">加载中…</td></tr></tbody></table></div>
+        </article>
+      </section>
+
+      <!-- ========== 预测与回测 ========== -->
+      <section id="page-forecast" class="page hidden">
+        <div class="page-heading">
+          <div><div class="eyebrow">FORECAST &amp; BACKTEST</div><h1>预测与回测</h1><p>全店日记录销量、未来 7 天固定模型；回测在历史起点上滚动评估误差。</p></div>
+          <span class="scope-badge">范围：全店 · horizon 7</span>
+        </div>
+        <div class="alert info">预测基于历史记录与固定参数模型实验，<b>不是经营收益预测</b>；无记录日按 0 构造连续序列。WAPE/MAE 只说明历史拟合误差，不能解释为提升收益。</div>
+        <div class="forecast-layout">
+          <aside class="panel forecast-controls">
+            <div class="panel-head"><h2>预测设置</h2></div>
+            <label class="field"><span>模型</span><select id="forecast-model"></select></label>
+            <div id="model-description" class="model-description small muted">—</div>
+            <label class="field"><span>预测起点</span><input type="date" id="forecast-origin"></label>
+            <p class="tiny muted">起点必须在数据覆盖范围内，且之前至少有 28 天历史。</p>
+            <button id="run-forecast" class="button primary full" type="button">生成未来 7 天预测</button>
+            <div id="forecast-task" class="task-state" role="status">尚未提交预测任务</div>
+            <div class="divider"></div>
+            <h3>滚动起点回测</h3>
+            <p class="tiny muted">1—56 个历史起点；重叠起点不是独立样本。</p>
+            <label class="field"><span>首个起点</span><input type="date" id="backtest-start"></label>
+            <label class="field"><span>最后起点</span><input type="date" id="backtest-end"></label>
+            <button id="run-backtest" class="button secondary full" type="button">运行历史回测</button>
+            <div id="backtest-task" class="task-state" role="status">尚未提交回测任务</div>
+          </aside>
+          <div class="forecast-results">
+            <div id="forecast-empty" class="panel empty-state">
+              <div class="empty-symbol">↗</div>
+              <h2>先选择预测起点</h2>
+              <p>生成逐日预测，或回到历史检验误差。<br>数据末端之后的日期没有实际值，不参与评分。</p>
+            </div>
+            <div id="forecast-content" class="hidden">
+              <div class="result-heading">
+                <div><h2 id="forecast-title">预测结果</h2><p id="forecast-subtitle"></p></div>
+                <button id="forecast-export" class="button secondary" type="button">↓ 导出结果 CSV</button>
+              </div>
+              <div id="forecast-warnings" class="warnings"></div>
+              <div id="forecast-kpis" class="kpi-grid small"></div>
+              <article class="panel">
+                <div class="panel-head"><h2 id="forecast-chart-title">预测 / 基准 / 实际</h2><span id="forecast-chart-badge" class="tiny-pill">7 DAYS</span></div>
+                <div id="forecast-chart" class="chart-area"></div>
+                <div class="chart-legend"><span><i class="dot teal"></i>预测</span><span><i class="dot gold"></i>4周均值基准</span><span><i class="dot dark"></i>实际（若有）</span></div>
+              </article>
+              <article class="panel">
+                <div class="panel-head"><h2 id="forecast-table-title">逐日结果</h2></div>
+                <div class="table-scroll"><table><thead id="forecast-table-head"></thead><tbody id="forecast-table-body"></tbody></table></div>
+              </article>
+              <div id="forecast-lineage" class="footnote">—</div>
+            </div>
+            <div id="backtest-content" class="hidden">
+              <div class="result-heading">
+                <div><h2>回测结果摘要</h2><p id="backtest-subtitle"></p></div>
+                <button id="backtest-export" class="button secondary" type="button">↓ 导出回测 CSV</button>
+              </div>
+              <div id="backtest-warnings" class="warnings"></div>
+              <div id="backtest-kpis" class="kpi-grid small"></div>
+              <article class="panel">
+                <div class="panel-head"><h2>分步长误差（WAPE）</h2><p>h=1..7，按目标日相对起点计</p></div>
+                <div id="horizon-grid" class="horizon-grid"></div>
+              </article>
+              <article class="panel">
+                <div class="panel-head"><div><h2>高误差案例</h2><p>每个目标日保留绝对误差最大的一条，前 5 条</p></div></div>
+                <div class="table-scroll"><table><thead><tr><th>目标日</th><th>起点</th><th>h</th><th class="num">实际</th><th class="num">预测</th><th class="num">绝对误差</th></tr></thead><tbody id="backtest-worst"></tbody></table></div>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========== 模拟库存 ========== -->
+      <section id="page-inventory" class="page hidden">
+        <div class="page-heading">
+          <div><div class="eyebrow">SIMULATED INVENTORY</div><h1>模拟库存</h1><p>场景化人工输入库存参数，演练补货建议与到货入库。</p></div>
+          <span class="badge simulated">模拟数据 · 不代表真实库存</span>
+        </div>
+        <div class="alert warn"><b>模拟声明</b>：本页所有数量与建议均为人工模拟，<em>不是真实库存、采购或财务数据</em>；补货建议只按公式计算，不含成本与供应商约束。</div>
+        <div class="split-grid wide-left">
+          <article class="panel">
+            <div class="panel-head"><div><h2>场景</h2><p>选择或新建场景</p></div><button id="inventory-refresh" class="button secondary" type="button">刷新</button></div>
+            <div class="inline-form">
+              <select id="scenario-select"></select>
+              <button id="scenario-load" class="button secondary" type="button">载入</button>
+            </div>
+            <form id="scenario-form" class="stack-form compact">
+              <label class="field"><span>新建场景名称</span><input id="scenario-name" placeholder="例如 双十一补货演练" required></label>
+              <label class="field"><span>备注</span><input id="scenario-note" placeholder="可选"></label>
+              <label class="field"><span>从当前批次建立商品清单（前 N 个热销商品，0=空场景）</span><input id="scenario-topn" type="number" min="0" max="50" value="5"></label>
+              <button class="button primary" type="submit">新建场景</button>
+            </form>
+            <div id="scenario-summary" class="stack small muted"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><h2>入库 / 出库</h2><p>出库余额不足会被拒绝；重复幂等键不重复记账。</p></div></div>
+            <form id="movement-form" class="stack-form compact">
+              <label class="field"><span>商品</span><select id="movement-sku"></select></label>
+              <div class="field-row">
+                <label class="field"><span>类型</span><select id="movement-kind"><option value="in">入库</option><option value="out">出库</option></select></label>
+                <label class="field"><span>数量</span><input id="movement-qty" type="number" min="1" step="1" value="10" required></label>
+              </div>
+              <label class="field"><span>幂等键</span><div class="inline-form tight"><input id="movement-idem" placeholder="自动生成"><button id="movement-idem-new" class="button ghost" type="button">生成</button></div></label>
+              <label class="field"><span>备注</span><input id="movement-note" placeholder="可选"></label>
+              <button class="button primary" type="submit">提交流水</button>
+            </form>
+            <div id="movement-result" class="task-state hidden"></div>
+          </article>
+        </div>
+
+        <article class="panel">
+          <div class="panel-head"><div><h2>商品参数</h2><p>初始库存 / 提前期 / 安全库存 / 日需求，可直接编辑并保存。</p></div><span id="items-count" class="tiny-pill">—</span></div>
+          <div class="table-scroll"><table class="items-table"><thead><tr><th>商品编码</th><th>名称</th><th class="num">初始库存</th><th class="num">提前期 / 天</th><th class="num">安全库存</th><th class="num">日需求</th><th class="num">当前余额</th><th class="num">有效在途</th><th class="num">建议补货</th><th>操作</th></tr></thead><tbody id="items-body"><tr><td colspan="10" class="empty-cell">先选择一个场景</td></tr></tbody></table></div>
+        </article>
+
+        <article class="panel">
+          <div class="panel-head"><div><h2>补货建议</h2><p id="replenish-formula">公式加载中…</p></div><button id="replenish-refresh" class="button secondary" type="button">刷新建议</button></div>
+          <div class="table-scroll"><table><thead><tr><th>商品编码</th><th>名称</th><th class="num">当前库存</th><th class="num">提前期内需求</th><th class="num">有效在途</th><th class="num">安全库存</th><th class="num">建议补货量</th><th>确认补货</th></tr></thead><tbody id="replenish-body"><tr><td colspan="8" class="empty-cell">先选择一个场景</td></tr></tbody></table></div>
+        </article>
+
+        <div class="panel-grid">
+          <article class="panel">
+            <div class="panel-head"><div><h2>在途列表</h2><p>确认补货只登记在途，到货后点“到货入库”。</p></div><button id="in-transit-refresh" class="button secondary" type="button">刷新</button></div>
+            <div class="table-scroll short"><table><thead><tr><th>商品</th><th class="num">数量</th><th>预计到货</th><th>状态</th><th>操作</th></tr></thead><tbody id="in-transit-body"><tr><td colspan="5" class="empty-cell">先选择一个场景</td></tr></tbody></table></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><div><h2>库存流水</h2><p>按时间倒序 · 最多 200 条</p></div><button id="movements-refresh" class="button secondary" type="button">刷新</button></div>
+            <div class="table-scroll short"><table><thead><tr><th>时间</th><th>商品</th><th>类型</th><th class="num">数量</th><th class="num">余额</th><th>幂等键 / 备注</th></tr></thead><tbody id="movements-body"><tr><td colspan="6" class="empty-cell">先选择一个场景</td></tr></tbody></table></div>
+          </article>
+        </div>
+        <div class="footnote">计算定义：balance = 初始库存 + Σ入库 − Σ出库；lead_time_demand = 提前期 × 日需求；candidate = max(0, lead_time_demand + 安全库存 − balance − effective_in_transit)。</div>
+      </section>
+
+      <!-- ========== AI 助手 ========== -->
+      <section id="page-ai" class="page hidden">
+        <div class="page-heading">
+          <div><div class="eyebrow">AI ASSISTANT</div><h1>AI 助手</h1><p>对当前批次做只读问询；回答中的数字全部来自工具结果。</p></div>
+          <button id="ai-status-refresh" class="button secondary" type="button">刷新状态</button>
+        </div>
+        <div id="ai-banner" class="ai-banner">正在读取 AI 配置状态…</div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h2>提问</h2></div>
+            <form id="ai-form" class="stack-form">
+              <label class="field"><span>问题</span><textarea id="ai-question" rows="3" placeholder="例如：最近30天销量最高的商品是什么？" required></textarea></label>
+              <div class="field-row">
+                <label class="field"><span>范围开始（可选）</span><input type="date" id="ai-start"></label>
+                <label class="field"><span>范围结束（可选）</span><input type="date" id="ai-end"></label>
+              </div>
+              <div class="field-row">
+                <label class="field"><span>商品（可选）</span><input id="ai-product" placeholder="商品编码"></label>
+                <label class="field"><span>国家（可选）</span><select id="ai-country"><option value="">全部国家</option></select></label>
+              </div>
+              <button class="button primary" id="ai-submit" type="submit">提交问题</button>
+            </form>
+            <div class="divider"></div>
+            <div class="panel-head"><h2>可用工具（只读）</h2></div>
+            <ul id="ai-tools" class="tool-list small muted"><li>加载中…</li></ul>
+            <div class="divider"></div>
+            <button id="ai-brief" class="button secondary full" type="button">生成运营简报（Markdown）</button>
+            <div id="ai-brief-result" class="stack small"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>回答</h2><p>含范围、批次、工具调用轨迹与警告</p></div>
+            <div id="ai-answer" class="ai-answer"><div class="empty-cell">尚未提问</div></div>
+          </article>
+        </div>
+        <div class="footnote">AI 为只读问询：不执行库存写操作，不伪造未配置的大模型结果；库存变更必须在本页之外的“模拟库存”页人工确认。</div>
+      </section>
+
+      <!-- ========== 系统管理（admin） ========== -->
+      <section id="page-admin" class="page hidden">
+        <div class="page-heading">
+          <div><div class="eyebrow">ADMINISTRATION</div><h1>系统管理</h1><p>账号管理与非敏感配置只读展示（管理员可见）。</p></div>
+          <button id="users-refresh" class="button secondary" type="button">刷新账号</button>
+        </div>
+        <div class="alert info">本页仅管理员可见；后端仍会独立校验权限（不能只靠隐藏菜单）。AI 密钥不会出现在页面或接口中。</div>
+        <div class="split-grid">
+          <article class="panel">
+            <div class="panel-head"><h2>新建账号</h2><p>密码至少 8 位；用户名重复返回 409</p></div>
+            <form id="user-form" class="stack-form compact">
+              <label class="field"><span>用户名</span><input id="new-username" required autocomplete="off"></label>
+              <div class="field-row">
+                <label class="field"><span>显示名</span><input id="new-display" placeholder="可选"></label>
+                <label class="field"><span>角色</span><select id="new-role"><option value="operator">operator</option><option value="admin">admin</option></select></label>
+              </div>
+              <label class="field"><span>初始密码（≥8 位）</span><input id="new-password" type="password" minlength="8" required autocomplete="new-password"></label>
+              <button class="button primary" type="submit">创建账号</button>
+            </form>
+            <div id="user-form-result" class="task-state hidden"></div>
+          </article>
+          <article class="panel">
+            <div class="panel-head"><h2>系统设置（只读）</h2><p>不含 AI 密钥</p></div>
+            <dl id="settings-list" class="def-list"><dt>状态</dt><dd>加载中…</dd></dl>
+          </article>
+        </div>
+        <article class="panel">
+          <div class="panel-head"><div><h2>用户列表</h2><p>停用/启用、修改角色与重置密码</p></div><span id="users-count" class="tiny-pill">—</span></div>
+          <div class="table-scroll"><table><thead><tr><th>ID</th><th>用户名</th><th>显示名</th><th>角色</th><th>状态</th><th>操作</th></tr></thead><tbody id="users-body"><tr><td colspan="6" class="empty-cell">加载中…</td></tr></tbody></table></div>
+        </article>
+      </section>
+
+      <footer class="app-footer">本地课程原型 · FastAPI + 原生前端 · <span id="footer-version">—</span> · 无 CDN / 无构建步骤</footer>
+    </div>
+  </main>
+</div>
+
+<div id="toast" class="toast hidden" role="status"></div>
+<div id="tooltip" class="tooltip hidden" role="status"></div>
+</body>
+</html>

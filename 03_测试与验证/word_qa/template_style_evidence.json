@@ -1,0 +1,319 @@
+[
+  {
+    "index": 3,
+    "text": "专业项目设计报告",
+    "style": "Normal",
+    "alignment": "CENTER (1)",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 26.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 26.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 5,
+    "text": "题目                          ",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 22.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 22.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 7,
+    "text": "学    院     先进制造学院     ",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 8,
+    "text": "专    业     人工智能         ",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 9,
+    "text": "年级班别   2023级（ ）班     ",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 10,
+    "text": "学    号                      ",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 11,
+    "text": "学生姓名                      ",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 12,
+    "text": "指导教师    黄林青/李剑锋    ",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 14,
+    "text": "2026 年 10 月   ",
+    "style": "Normal",
+    "alignment": "CENTER (1)",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      },
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 34,
+    "text": "摘    要",
+    "style": "1号标题",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": null,
+        "bold": null
+      }
+    ]
+  },
+  {
+    "index": 35,
+    "text": "学生成绩管理系统是现代化教育发展的产物，信息技术的发展和普及预示着一个利用电子计算机来处理成绩档案信息的管理模式必将诞生。基于这一点，我们着",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": "宋体",
+        "size_pt": 12.0,
+        "bold": null
+      }
+    ]
+  },
+  {
+    "index": 36,
+    "text": "学生成绩管理系统选用SSM框架完成程序的主体架构设计从而实现前后台数据的传输与数据的更新保存。SSM框架封装了数据库主要函数，只需要传递结构",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": "宋体",
+        "size_pt": 12.0,
+        "bold": null
+      },
+      {
+        "font": null,
+        "size_pt": 12.0,
+        "bold": null
+      }
+    ]
+  },
+  {
+    "index": 37,
+    "text": "本系统以学生成绩信息相关的数据操作存储查询为研究目标，最终设计了管理员、教师、学生三类用户权限，管理员管理系别、专业等基础信息用于划分班级使",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": "宋体",
+        "size_pt": 12.0,
+        "bold": null
+      }
+    ]
+  },
+  {
+    "index": 38,
+    "text": "\t",
+    "style": "Normal",
+    "alignment": "LEFT (0)",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 16.0,
+        "bold": true
+      }
+    ]
+  },
+  {
+    "index": 39,
+    "text": "关键字：学生成绩，MYSQL数据库，SSM框架，JAVA语言",
+    "style": "Normal",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 14.0,
+        "bold": true
+      },
+      {
+        "font": "宋体",
+        "size_pt": 12.0,
+        "bold": null
+      }
+    ]
+  },
+  {
+    "index": 44,
+    "text": "项目概述",
+    "style": "1号标题",
+    "alignment": "CENTER (1)",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": null,
+        "bold": null
+      },
+      {
+        "font": null,
+        "size_pt": null,
+        "bold": null
+      }
+    ]
+  },
+  {
+    "index": 45,
+    "text": "1.1 背景",
+    "style": "List Paragraph",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": "黑体",
+        "size_pt": 12.0,
+        "bold": null
+      }
+    ]
+  },
+  {
+    "index": 46,
+    "text": "进入21世纪以来，网络信息技术有了突飞猛进的发展，人们在信息交流方面不再拘泥于单一、简单的交流而是在信息交流的深度和广度上有了更高的要求，传",
+    "style": "List Paragraph",
+    "alignment": "None",
+    "line_spacing": "1.5",
+    "runs": [
+      {
+        "font": null,
+        "size_pt": 12.0,
+        "bold": null
+      },
+      {
+        "font": null,
+        "size_pt": 12.0,
+        "bold": null
+      }
+    ]
+  }
+]

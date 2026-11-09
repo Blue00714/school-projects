@@ -1,0 +1,204 @@
+{
+  "large_expected": {
+    "raw_rows": 120002,
+    "quantity": 240003,
+    "revenue": 827995.7,
+    "orders": 40002
+  },
+  "large_upload": {
+    "http": 202,
+    "body": {
+      "job_id": "4e1098a3054043e7b1f9ddb1dab76ca0",
+      "status": "queued"
+    }
+  },
+  "large_import": {
+    "status": "succeeded",
+    "waited_s": 7.69,
+    "status_sequence": [
+      "queued",
+      "running",
+      "running",
+      "running",
+      "running",
+      "succeeded"
+    ],
+    "report": {
+      "raw_rows": 120002,
+      "retained_rows": 120002,
+      "positive_sale_rows": 120002,
+      "date_min": "2011-05-01",
+      "date_max": "2011-05-27",
+      "elapsed_seconds": 7.58
+    },
+    "issues_count": 0,
+    "dashboard_during_import": [
+      {
+        "job_status": "queued",
+        "elapsed_s": 2.797,
+        "batch": "original",
+        "quantity": 851403,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "elapsed_s": 0.516,
+        "batch": "original",
+        "quantity": 851403,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "elapsed_s": 0.985,
+        "batch": "original",
+        "quantity": 851403,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "elapsed_s": 0.484,
+        "batch": "original",
+        "quantity": 851403,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "elapsed_s": 0.469,
+        "batch": "original",
+        "quantity": 851403,
+        "revenue": 1694068.71,
+        "orders": 2913,
+        "unchanged": true
+      }
+    ],
+    "orders_during_import": [
+      {
+        "job_status": "queued",
+        "http": 200,
+        "elapsed_s": 0.625,
+        "total": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "http": 200,
+        "elapsed_s": 0.171,
+        "total": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "http": 200,
+        "elapsed_s": 0.203,
+        "total": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "http": 200,
+        "elapsed_s": 0.172,
+        "total": 2913,
+        "unchanged": true
+      },
+      {
+        "job_status": "running",
+        "http": 200,
+        "elapsed_s": 0.172,
+        "total": 2913,
+        "unchanged": true
+      }
+    ]
+  },
+  "large_batch_db": {
+    "tables": [
+      "transactions",
+      "metadata",
+      "forecast_runs"
+    ],
+    "has_order_index": true,
+    "counts": {
+      "total": 120002,
+      "sale": 120002,
+      "cross_dup": 0
+    },
+    "manifest_date_range": [
+      "2011-05-01",
+      "2011-05-27"
+    ],
+    "manifest_equals_side_file": true,
+    "manifest_equals_job_report": true,
+    "size_bytes": 25780224
+  },
+  "large_batch_dashboard": {
+    "batch": {
+      "id": "b20261029T07074307e322",
+      "label": "M2 大数据导入",
+      "kind": "upload"
+    },
+    "filters": {
+      "start": "2011-05-01",
+      "end": "2011-05-27",
+      "product": "",
+      "country": ""
+    },
+    "totals": {
+      "quantity": 240003,
+      "revenue": 827995.7,
+      "orders": 40002,
+      "lines": 120002
+    },
+    "matches_expected": true
+  },
+  "large_batch_exports": {
+    "orders_status": 200,
+    "orders_lines": 40003,
+    "orders_rows_equal_orders": true,
+    "transactions_status": 200,
+    "transactions_lines": 120003,
+    "transactions_rows_equal_positive_rows": true,
+    "bom": true,
+    "long_invoice_kept_as_text": true,
+    "formula_neutralized": true,
+    "negative_invoice_preserved": true
+  },
+  "switch_back": {
+    "previous_batch_id": "b20261029T07074307e322",
+    "batch": "original",
+    "totals": {
+      "quantity": 851403,
+      "revenue": 1694068.71,
+      "orders": 2913,
+      "lines": 86861
+    },
+    "baseline_restored": true
+  },
+  "read_only": {
+    "retail_sha256": "033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf",
+    "retail_sha256_expected": "033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf",
+    "retail_mtime": 1792579488.1599727,
+    "retail_size": 284557312,
+    "excel_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+    "excel_sha256_expected": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+    "excel_mtime": 1791950765.0307884,
+    "retail_unchanged": true,
+    "excel_unchanged": true
+  },
+  "stored_path": {
+    "isolated_runtime_dir": "C:\\Users\\Administrator\\11111\\数据\\学校项目\\电商运营系统\\runtime",
+    "isolated_batch_db_path_stored_by_register": "C:/Users/Administrator/11111/数据/学校项目/.tmp/rt_data/batches/b20261029T07074307e322/data.sqlite3",
+    "production_relative_example": "runtime/batches/demo/data.sqlite3"
+  },
+  "write_scope": {
+    "isolated_imports_dirs": 4,
+    "isolated_batches": 3,
+    "project_runtime_batches_entries": []
+  }
+}

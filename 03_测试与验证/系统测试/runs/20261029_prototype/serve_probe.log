@@ -1,0 +1,12 @@
+﻿M0 serve probe
+time: 2026-10-29 14:47:36 +08:00
+server_pid: 29116  base_url: http://127.0.0.1:8899
+GET /api/health -> HTTP 200 {"ok": true, "data_ready": true}  (0.011s)
+GET /api/options -> HTTP 200 bytes=42752 countries=43 products=500 methods=blend_rule,lgbm,holt_winters,seasonal_week4,naive_week coverage=2009-12-01..2011-12-09 policy=cross-sheet-multiset-v1-sales-v2-invoice-order  (1.145s)
+GET /api/dashboard?start=2011-11-10&end=2011-12-09 -> HTTP 200 bytes=7763  (0.418s)
+  totals={"lines":86861,"quantity":851403,"orders":2913,"products":2930,"amount_rows":86861,"revenue":1694068.71,"average_order_value":581.5546549948507}
+  previous.totals={"lines":62594,"quantity":655756,"orders":2278,"products":2889,"amount_rows":62594,"revenue":1229356.5,"average_order_value":539.6648375768218}
+  changes={"quantity":0.29835335094150883,"revenue":0.3780125699908854,"orders":0.27875329236172086} previous.complete=True
+  trend_days=30 ranking=20 countries=10 warnings=
+  filters={"start":"2011-11-10","end":"2011-12-09","product":"","country":""} policy=cross-sheet-multiset-v1-sales-v2-invoice-order
+expected: quantity=851403 revenue=1694068.71 orders=2913 lines=86861

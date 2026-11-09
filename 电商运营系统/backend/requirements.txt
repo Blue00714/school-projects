@@ -1,0 +1,19 @@
+# Web 服务（本次新增，FastAPI 为正式目标框架）
+fastapi>=0.115,<1.0
+uvicorn>=0.30,<1.0
+python-multipart>=0.0.9,<1.0
+
+# 数据库驱动：MySQL 8（演示/交付）与 SQLite（默认测试/回退）
+pymysql>=1.1,<2.0
+
+# 数据处理与预测（沿用既有实现；本机实测 Python 3.12.10）
+# 原声明 pandas>=2.2,<3.0 已过期：本机 pandas 3.0.5 下既有 16 项测试全部通过，
+# 故移除上限并在 01_交付内容 环境说明中记录实测版本。
+pandas>=2.2
+numpy>=1.26,<3.0
+openpyxl>=3.1,<4.0
+lightgbm>=4.0,<5.0
+scikit-learn>=1.4,<2.0
+
+# 前端（Vue 3 + Element Plus）依赖不在本文件：见 frontend/package.json，
+# 需要 Node.js 20+（本机 Node 24.19）执行 npm install 与 npm run build。

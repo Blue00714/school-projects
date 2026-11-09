@@ -1,0 +1,7 @@
+﻿Invoice,StockCode,Description,Quantity,InvoiceDate,Price,Customer ID,Country
+300001,G-7001,Csv Item A,2,2011-02-01 10:00:00,4.5,20001,Italy
+300001,G-7002,Csv Item B,3,2011-02-01 10:10:00,2.0,20001,Italy
+300002,G-7003,Csv Item C,1,2011-02-02 11:00:00,15.75,20002,France
+300003,G-7004,Csv Item D,4,2011-02-03 12:00:00,1.25,20003,Spain
+C300004,G-7005,Csv Cancelled,-3,2011-02-04 13:00:00,9.0,20004,Germany
+300006,G-7006,Csv Bad Date,2,2020-13-45,6.0,20005,France

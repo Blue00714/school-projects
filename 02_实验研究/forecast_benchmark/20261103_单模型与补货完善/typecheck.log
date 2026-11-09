@@ -1,0 +1,4 @@
+
+> mall-admin-web@3.0.0 type-check
+> vue-tsc --build
+

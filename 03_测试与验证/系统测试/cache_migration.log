@@ -1,0 +1,44 @@
+{
+  "source_file": "online_retail_II.xlsx",
+  "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "source_kind": "public_mirror",
+  "official_byte_comparison_completed": false,
+  "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+  "prepared_at": "2026-10-21T18:03:58",
+  "sheets": [
+    {
+      "sheet": "Year 2009-2010",
+      "raw_rows": 525461,
+      "cross_sheet_copies_excluded": 0
+    },
+    {
+      "sheet": "Year 2010-2011",
+      "raw_rows": 541910,
+      "cross_sheet_copies_excluded": 22523
+    }
+  ],
+  "raw_rows": 1067371,
+  "cross_sheet_copies_excluded": 22523,
+  "retained_rows": 1044848,
+  "positive_sale_rows": 1022290,
+  "within_sheet_duplicate_candidates_retained": 11812,
+  "cancelled_rows": 19165,
+  "nonpositive_quantity_rows": 22557,
+  "invalid_dates": 0,
+  "quantity_invalid_rows": 0,
+  "sale_rows_without_valid_price": 5,
+  "zero_price_sale_rows": 2631,
+  "invoice_with_multiple_times": 83,
+  "date_min": "2009-12-01",
+  "date_max": "2011-12-09",
+  "elapsed_seconds": 41.73,
+  "rules": [
+    "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+    "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+    "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+    "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+    "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+  ],
+  "order_identity_conflicts": 0,
+  "order_key": "invoice"
+}

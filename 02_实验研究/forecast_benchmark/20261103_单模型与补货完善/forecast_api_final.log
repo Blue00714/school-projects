@@ -1,0 +1,12 @@
+test_01_forecast_job_returns_seven_null_actual_rows (test_forecast.ForecastTests.test_01_forecast_job_returns_seven_null_actual_rows) ... ok
+test_02_forecast_csv_export (test_forecast.ForecastTests.test_02_forecast_csv_export) ... ok
+test_03_single_model_contract (test_forecast.ForecastTests.test_03_single_model_contract) ... ok
+test_04_backtest_small_window (test_forecast.ForecastTests.test_04_backtest_small_window) ... ok
+test_05_job_binding_survives_batch_switch (test_forecast.ForecastTests.test_05_job_binding_survives_batch_switch) ... ok
+test_06_bad_requests_and_missing_jobs (test_forecast.ForecastTests.test_06_bad_requests_and_missing_jobs) ... ok
+test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 13.314s
+
+OK

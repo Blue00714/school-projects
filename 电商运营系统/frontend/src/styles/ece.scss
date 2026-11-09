@@ -1,0 +1,270 @@
+/* 智能电商运营管理系统 · 课程原型页面公共样式（Vue 3 + Element Plus） */
+
+html,
+body,
+#app {
+  height: 100%;
+}
+
+.ece-page {
+  padding: 18px 22px 32px;
+  max-width: 1560px;
+}
+
+.ece-page-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
+}
+
+.ece-eyebrow {
+  font-size: 10px;
+  letter-spacing: 2.2px;
+  color: #94a49b;
+  margin-bottom: 6px;
+}
+
+.ece-page-head h1 {
+  margin: 0;
+  font-size: 26px;
+  line-height: 1.2;
+  color: #172c32;
+}
+
+.ece-page-head p {
+  margin: 6px 0 0;
+  color: #758487;
+  font-size: 13px;
+}
+
+.ece-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.ece-panel {
+  background: #fff;
+  border: 1px solid #e5e9e5;
+  border-radius: 10px;
+  padding: 16px 18px;
+  box-shadow: 0 1px 2px rgba(23, 44, 50, 0.04), 0 8px 24px rgba(23, 44, 50, 0.04);
+  margin-bottom: 16px;
+}
+
+.ece-panel-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.ece-panel-head h2 {
+  margin: 0;
+  font-size: 16px;
+  color: #172c32;
+}
+
+.ece-panel-head p {
+  margin: 4px 0 0;
+  font-size: 11px;
+  color: #758487;
+}
+
+.ece-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
+.ece-kpi {
+  background: #fff;
+  border: 1px solid #e5e9e5;
+  border-radius: 10px;
+  padding: 14px 16px;
+  min-height: 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 1px 2px rgba(23, 44, 50, 0.04);
+}
+
+.ece-kpi__label {
+  font-size: 11px;
+  color: #758487;
+}
+
+.ece-kpi__value {
+  font-size: clamp(20px, 1.9vw, 28px);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+  color: #172c32;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin: 6px 0 2px;
+  font-variant-numeric: tabular-nums;
+}
+
+.ece-kpi__foot {
+  font-size: 11px;
+  color: #758487;
+  line-height: 1.6;
+}
+
+.ece-chart {
+  width: 100%;
+  height: 280px;
+}
+
+.ece-muted {
+  color: #758487;
+}
+
+.ece-small {
+  font-size: 12px;
+}
+
+.ece-mono {
+  font-family: 'Cascadia Mono', Consolas, monospace;
+  font-size: 12px;
+}
+
+.ece-warnings {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 14px;
+}
+
+.ece-inline-form {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.ece-inline-form .el-form-item {
+  margin-bottom: 0;
+}
+
+.ece-filter {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: flex-end;
+}
+
+.ece-filter .el-form-item {
+  margin-bottom: 0;
+}
+
+.ece-toolbar {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.ece-table-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.ece-cards-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ece-cards-3 {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.ece-simulated {
+  color: #7a5a20;
+  font-size: 11px;
+}
+
+.ece-answer {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: #f7faf5;
+  border: 1px solid #e5e9e5;
+  border-radius: 8px;
+  padding: 12px 14px;
+  font-size: 12.5px;
+  line-height: 1.9;
+  color: #33474c;
+  margin: 0;
+}
+
+.ece-tool-call {
+  border: 1px solid #e5e9e5;
+  border-radius: 8px;
+  padding: 9px 11px;
+  background: #fbfcfa;
+  margin-bottom: 8px;
+}
+
+.ece-tool-call .params {
+  font-size: 10.5px;
+  color: #6b7f76;
+  word-break: break-all;
+  margin-top: 6px;
+  font-family: 'Cascadia Mono', Consolas, monospace;
+}
+
+.ece-tool-call .summary {
+  margin-top: 6px;
+  font-size: 11.5px;
+  line-height: 1.8;
+  color: #4a5f58;
+}
+
+.ece-empty {
+  padding: 26px 10px;
+  text-align: center;
+  color: #9aa79f;
+  font-size: 12px;
+}
+
+@media (max-width: 1200px) {
+  .ece-kpi-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .ece-cards-2,
+  .ece-cards-3 {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 850px) {
+  .ece-page {
+    padding: 14px 12px 24px;
+  }
+  .ece-page-head h1 {
+    font-size: 22px;
+  }
+}
+
+/* 页面切换过渡（模板 transition.scss 的 fade） */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.16s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

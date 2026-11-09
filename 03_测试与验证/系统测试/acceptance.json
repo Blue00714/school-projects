@@ -1,0 +1,215 @@
+{
+  "data_manifest": {
+    "source_file": "online_retail_II.xlsx",
+    "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+    "source_kind": "public_mirror",
+    "official_byte_comparison_completed": false,
+    "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+    "prepared_at": "2026-10-21T18:03:58",
+    "sheets": [
+      {
+        "sheet": "Year 2009-2010",
+        "raw_rows": 525461,
+        "cross_sheet_copies_excluded": 0
+      },
+      {
+        "sheet": "Year 2010-2011",
+        "raw_rows": 541910,
+        "cross_sheet_copies_excluded": 22523
+      }
+    ],
+    "raw_rows": 1067371,
+    "cross_sheet_copies_excluded": 22523,
+    "retained_rows": 1044848,
+    "positive_sale_rows": 1022290,
+    "within_sheet_duplicate_candidates_retained": 11812,
+    "cancelled_rows": 19165,
+    "nonpositive_quantity_rows": 22557,
+    "invalid_dates": 0,
+    "quantity_invalid_rows": 0,
+    "sale_rows_without_valid_price": 5,
+    "zero_price_sale_rows": 2631,
+    "invoice_with_multiple_times": 83,
+    "date_min": "2009-12-01",
+    "date_max": "2011-12-09",
+    "elapsed_seconds": 41.73,
+    "rules": [
+      "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+      "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+      "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+      "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+      "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+    ],
+    "order_identity_conflicts": 0,
+    "order_key": "invoice"
+  },
+  "verified_window": {
+    "start": "2011-11-10",
+    "end": "2011-12-09",
+    "product": "",
+    "country": ""
+  },
+  "independent_line_totals": {
+    "quantity": 851403.0,
+    "revenue": 1694068.71,
+    "orders": 2913,
+    "lines": 86861
+  },
+  "dashboard_seconds": [
+    0.26600000000325963,
+    0.25,
+    0.25,
+    0.26600000000325963,
+    0.26500000001396984
+  ],
+  "five_concurrent_requests_seconds": [
+    0.485,
+    0.485,
+    0.485,
+    0.485,
+    0.485
+  ],
+  "invoice_time_conflict_examples": [
+    {
+      "invoice": "578548",
+      "times": 2,
+      "first": "2011-11-24 15:02:00",
+      "last": "2011-11-24 15:03:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "576057",
+      "times": 2,
+      "first": "2011-11-13 15:05:00",
+      "last": "2011-11-13 15:06:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "574076",
+      "times": 2,
+      "first": "2011-11-02 15:37:00",
+      "last": "2011-11-02 15:38:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "571735",
+      "times": 2,
+      "first": "2011-10-19 10:03:00",
+      "last": "2011-10-19 10:04:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "567183",
+      "times": 2,
+      "first": "2011-09-18 15:32:00",
+      "last": "2011-09-18 15:33:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "563245",
+      "times": 2,
+      "first": "2011-08-15 10:53:00",
+      "last": "2011-08-15 10:54:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "562128",
+      "times": 2,
+      "first": "2011-08-03 09:06:00",
+      "last": "2011-08-03 09:07:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "561369",
+      "times": 2,
+      "first": "2011-07-26 16:21:00",
+      "last": "2011-07-26 16:22:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "558086",
+      "times": 2,
+      "first": "2011-06-26 11:58:00",
+      "last": "2011-06-26 11:59:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "554116",
+      "times": 2,
+      "first": "2011-05-22 15:11:00",
+      "last": "2011-05-22 15:12:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "553556",
+      "times": 2,
+      "first": "2011-05-17 16:48:00",
+      "last": "2011-05-17 16:49:00",
+      "customers": 1,
+      "countries": 1
+    },
+    {
+      "invoice": "553375",
+      "times": 2,
+      "first": "2011-05-16 14:52:00",
+      "last": "2011-05-16 14:53:00",
+      "customers": 1,
+      "countries": 1
+    }
+  ],
+  "future_task_id": "ddd8969dcacb459da4dfd3ee6eb845cd",
+  "historical_task_id": "794778c843da4265b5fc1b231697b653",
+  "backtest_task_id": "8f1522a5b48d4056816f1ab51bc41d3d",
+  "backtest": {
+    "origins_attempted": 56,
+    "origins_with_actual": 55,
+    "complete_origins": 49,
+    "forecast_count": 392,
+    "scored_count": 364,
+    "metrics": {
+      "n": 364,
+      "MAE": 6074.172265543508,
+      "RMSE": 11190.174266718815,
+      "WAPE": 0.23344995680569708,
+      "BIAS": -2489.4007781241544,
+      "BIAS_PCT": -0.09567567048135933
+    },
+    "baseline_metrics": {
+      "n": 364,
+      "MAE": 6383.863324175824,
+      "RMSE": 11378.57088594265,
+      "WAPE": 0.24535237924289738,
+      "BIAS": -2992.805631868132,
+      "BIAS_PCT": -0.115023136477501
+    },
+    "complete_window_metrics": {
+      "n": 343,
+      "MAE": 4964.608245802409,
+      "RMSE": 7494.803436849355,
+      "WAPE": 0.20350480304790133,
+      "BIAS": -1199.8608348644175,
+      "BIAS_PCT": -0.04918362754814068
+    },
+    "complete_window_baseline_metrics": {
+      "n": 343,
+      "MAE": 5392.772594752187,
+      "RMSE": 7789.722935426797,
+      "WAPE": 0.22105573500287057,
+      "BIAS": -1841.776967930029,
+      "BIAS_PCT": -0.07549648241302116
+    },
+    "model_version": "daily-v1-hw-fixed-lgbm400",
+    "data_policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order"
+  },
+  "all_assertions_passed": true
+}

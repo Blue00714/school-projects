@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1750" viewBox="0 0 1900 1750">
+<rect width="100%" height="100%" fill="white"/>
+<rect x="650" y="50" width="600" height="140" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="950.0" y="135.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">导入历史交易数据</text>
+<rect x="40" y="310" width="520" height="160" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="300.0" y="377.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">反馈问题清单</text>
+<text x="300.0" y="433.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">修正或确认处理</text>
+<rect x="650" y="610" width="600" height="140" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="950.0" y="695.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">确认处理与保存批次</text>
+<rect x="650" y="850" width="600" height="140" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="950.0" y="935.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">商品订单查询与看板</text>
+<rect x="50" y="1140" width="600" height="140" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="350.0" y="1197.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">全店销量预测</text>
+<text x="350.0" y="1253.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">与历史回测</text>
+<rect x="700" y="1140" width="600" height="140" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1000.0" y="1197.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">用户设定商品场景需求</text>
+<text x="1000.0" y="1253.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">与模拟库存参数</text>
+<rect x="1400" y="1140" width="450" height="140" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1625.0" y="1197.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">AI调用受控工具</text>
+<text x="1625.0" y="1253.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">查询统计与预测</text>
+<rect x="700" y="1350" width="600" height="120" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1000.0" y="1425.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">模拟库存与补货提示</text>
+<rect x="700" y="1560" width="600" height="140" fill="#F3F4F5" stroke="#222" stroke-width="3"/>
+<text x="1000.0" y="1645.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">核对并导出运营简报</text>
+<polygon points="950,260 1200,390 950,520 700,390" fill="white" stroke="#222" stroke-width="3"/>
+<text x="950" y="377.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">数据检查</text>
+<text x="950" y="433.68" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="40" text-anchor="middle" fill="#111111">是否可入库</text>
+<polyline points="950,190 950,260" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="950,260 942.6603118449277,243.56439907437846 957.3396881550723,243.56439907437846" fill="#222"/>
+<polyline points="700,390 560,390" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="560,390 576.4356009256215,382.6603118449277 576.4356009256215,397.3396881550723" fill="#222"/>
+<rect x="602.0" y="314.8" width="56" height="60.4" fill="white"/>
+<text x="630" y="359.0" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">否</text>
+<polyline points="300,310 300,120 650,120" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="650,120 633.5643990743785,127.33968815507227 633.5643990743785,112.66031184492773" fill="#222"/>
+<polyline points="950,520 950,610" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="950,610 942.6603118449277,593.5643990743785 957.3396881550723,593.5643990743785" fill="#222"/>
+<rect x="982.0" y="534.8" width="56" height="60.4" fill="white"/>
+<text x="1010" y="579.0" font-family="Microsoft YaHei,SimSun,sans-serif" font-size="36" text-anchor="middle" fill="#111111">是</text>
+<polyline points="950,750 950,850" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="950,850 942.6603118449277,833.5643990743785 957.3396881550723,833.5643990743785" fill="#222"/>
+<polyline points="950,990 950,1060 350,1060 350,1140" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="350,1140 342.6603118449277,1123.5643990743783 357.3396881550723,1123.5643990743783" fill="#222"/>
+<polyline points="950,1060 1000,1060 1000,1140" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="1000,1140 992.6603118449277,1123.5643990743783 1007.3396881550723,1123.5643990743783" fill="#222"/>
+<polyline points="1000,1060 1625,1060 1625,1140" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="1625,1140 1617.6603118449277,1123.5643990743783 1632.3396881550723,1123.5643990743783" fill="#222"/>
+<polyline points="1000,1280 1000,1350" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="1000,1350 992.6603118449277,1333.5643990743783 1007.3396881550723,1333.5643990743783" fill="#222"/>
+<polyline points="1000,1470 1000,1560" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="1000,1560 992.6603118449277,1543.5643990743783 1007.3396881550723,1543.5643990743783" fill="#222"/>
+<polyline points="350,1280 350,1630 700,1630" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="700,1630 683.5643990743785,1637.3396881550723 683.5643990743785,1622.6603118449277" fill="#222"/>
+<polyline points="1625,1280 1625,1630 1300,1630" fill="none" stroke="#222" stroke-width="3"/>
+<polygon points="1300,1630 1316.4356009256217,1622.6603118449277 1316.4356009256217,1637.3396881550723" fill="#222"/>
+</svg>

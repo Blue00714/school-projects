@@ -1,0 +1,56 @@
+{
+  "downloaded_at_utc": "2026-10-14T04:06:29.661636+00:00",
+  "source_url": "https://raw.githubusercontent.com/KristerMartinez/online_retail_ii/main/online_retail_II.xlsx",
+  "source_page": "https://archive.ics.uci.edu/dataset/502/online+retail+ii",
+  "source_kind": "public_mirror",
+  "mirror_source_page": "https://github.com/KristerMartinez/online_retail_ii/blob/main/online_retail_II.xlsx",
+  "official_byte_comparison_completed": false,
+  "zip_crc_check_passed": true,
+  "reader": "openpyxl 3.1.5",
+  "python_executable": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+  "archive_bytes": null,
+  "workbook_bytes": 45622278,
+  "workbook_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+  "local_workbook": "C:\\Users\\Administrator\\11111\\数据\\学校项目\\20261014_电商数据与页面选型\\online_retail_II.xlsx",
+  "sheets": [
+    {
+      "sheet": "Year 2009-2010",
+      "headers": [
+        "Invoice",
+        "StockCode",
+        "Description",
+        "Quantity",
+        "InvoiceDate",
+        "Price",
+        "Customer ID",
+        "Country"
+      ],
+      "reported_rows": 525462,
+      "actual_data_rows": 525461,
+      "reported_columns": 8,
+      "invoice_date_min": "2009-12-01T07:45:00",
+      "invoice_date_max": "2010-12-09T20:01:00",
+      "invoice_date_missing_or_invalid": 0
+    },
+    {
+      "sheet": "Year 2010-2011",
+      "headers": [
+        "Invoice",
+        "StockCode",
+        "Description",
+        "Quantity",
+        "InvoiceDate",
+        "Price",
+        "Customer ID",
+        "Country"
+      ],
+      "reported_rows": 541911,
+      "actual_data_rows": 541910,
+      "reported_columns": 8,
+      "invoice_date_min": "2010-12-01T08:26:00",
+      "invoice_date_max": "2011-12-09T12:50:00",
+      "invoice_date_missing_or_invalid": 0
+    }
+  ],
+  "scope": "Unchanged workbook delivery, ZIP CRC, actual row counts, headers and date bounds only; no cleaning, duplicate audit or model training"
+}

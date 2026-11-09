@@ -1,0 +1,2310 @@
+{
+  "phase1": {
+    "checks": [
+      {
+        "name": "GET /api/ai/status（未配置）",
+        "http": 200,
+        "body": {
+          "llm_configured": false,
+          "provider": "local-rule-planner",
+          "model": "",
+          "key_present": false,
+          "timeout_seconds": 60.0,
+          "fallback": "local-rule-planner",
+          "tools_count": 7
+        },
+        "pass": true,
+        "note": "契约5.7：未配置时 fallback=local-rule-planner，不含密钥"
+      },
+      {
+        "name": "GET /api/ai/tools（7个只读工具）",
+        "http": 200,
+        "body": {
+          "names": [
+            "dashboard_summary",
+            "product_search",
+            "product_ranking",
+            "orders_query",
+            "forecast_7d",
+            "inventory_query",
+            "batch_info"
+          ],
+          "policy": "仅只读；库存写操作必须走页面确认"
+        },
+        "pass": true,
+        "note": "工具白名单与参数 schema"
+      },
+      {
+        "name": "未登录访问 /api/ai/status",
+        "http": 401,
+        "pass": true,
+        "note": "认证中间件生效",
+        "body": {
+          "error": "未登录或登录已失效",
+          "code": "unauthorized"
+        }
+      },
+      {
+        "name": "operator 账号可读 AI 状态与问答",
+        "http": 200,
+        "body": {
+          "status": null,
+          "ask": "ok"
+        },
+        "pass": true,
+        "note": "普通登录用户均可读（契约5.7）"
+      },
+      {
+        "name": "空问题 400",
+        "http": 400,
+        "body": {
+          "error": "question 不能为空",
+          "code": "bad_request"
+        },
+        "pass": true,
+        "note": "参数校验错误必须是 400 且带 error/code"
+      },
+      {
+        "name": "scope 日期格式非法 400",
+        "http": 400,
+        "body": {
+          "error": "scope.start 不是有效日期",
+          "code": "bad_request"
+        },
+        "pass": true,
+        "note": "参数校验错误必须是 400 且带 error/code"
+      },
+      {
+        "name": "scope start>end 400",
+        "http": 400,
+        "body": {
+          "error": "开始日期不能晚于结束日期",
+          "code": "bad_request"
+        },
+        "pass": true,
+        "note": "参数校验错误必须是 400 且带 error/code"
+      },
+      {
+        "name": "scope 超过4年 400",
+        "http": 400,
+        "body": {
+          "error": "单次查询最多覆盖4年",
+          "code": "bad_request"
+        },
+        "pass": true,
+        "note": "参数校验错误必须是 400 且带 error/code"
+      },
+      {
+        "name": "scope 起始日超出覆盖 400",
+        "http": 400,
+        "body": {
+          "error": "开始日期晚于数据覆盖末日 2011-12-09，请调整 scope.start",
+          "code": "bad_request"
+        },
+        "pass": true,
+        "note": "参数校验错误必须是 400 且带 error/code"
+      },
+      {
+        "name": "scope 未知国家 400",
+        "http": 400,
+        "body": {
+          "error": "国家 Narnia 不在当前批次的国家列表中",
+          "code": "bad_request"
+        },
+        "pass": true,
+        "note": "参数校验错误必须是 400 且带 error/code"
+      },
+      {
+        "name": "未知字段 400",
+        "http": 400,
+        "body": {
+          "error": "请求含未知字段：bad",
+          "code": "bad_request"
+        },
+        "pass": true,
+        "note": "参数校验错误必须是 400 且带 error/code"
+      },
+      {
+        "name": "无模拟库存场景时的库存降级",
+        "http": 200,
+        "body": {
+          "status": "ok",
+          "error": null,
+          "warnings": [],
+          "tools": [
+            [
+              "product_search",
+              true
+            ],
+            [
+              "inventory_query",
+              false
+            ]
+          ]
+        },
+        "pass": true,
+        "note": "库存模块未就绪/无场景时不 500，如实说明"
+      },
+      {
+        "name": "准备模拟库存固定样例（HTTP）",
+        "http": 201,
+        "body": {
+          "scenario_id": "fbbf9ed469fa45699501c513e2f73aab"
+        },
+        "pass": true,
+        "note": "通过 /api/inventory 接口写入，非直接改库"
+      },
+      {
+        "name": "库存接口固定样例核对",
+        "http": 200,
+        "body": {
+          "stock_code": "85123A",
+          "name": "WHITE HANGING HEART T-LIGHT HOLDER",
+          "initial_qty": 100.0,
+          "lead_time_days": 8,
+          "safety_stock": 30.0,
+          "daily_demand": 10.0,
+          "balance": 90.0,
+          "in_transit_effective": 10.0,
+          "in_transit_total": 10.0,
+          "replenishment_candidate": 10.0
+        },
+        "pass": true,
+        "note": "余额90、候选10（契约5.6固定样例）"
+      },
+      {
+        "name": "POST /api/ai/ask 与 GET /api/dashboard 数字一致",
+        "http": 200,
+        "body": {
+          "lines": 86861,
+          "quantity": 851403,
+          "orders": 2913,
+          "products": 2930,
+          "amount_rows": 86861,
+          "revenue": 1694068.71,
+          "average_order_value": 581.5546549948507
+        },
+        "pass": true,
+        "note": "851403 / 1694068.71 / 2913"
+      },
+      {
+        "name": "POST /api/ai/brief（确定性模板）",
+        "http": 201,
+        "body": {
+          "brief": {
+            "id": "7975642ccd3d40ddb35abf1fff666221",
+            "title": "运营简报 2011-11-10~2011-12-09",
+            "created_at": "2026-10-29T07:17:20+00:00",
+            "url": "/api/ai/briefs/7975642ccd3d40ddb35abf1fff666221.md"
+          },
+          "provider": "template",
+          "markdown_chars": 2641,
+          "missing": []
+        },
+        "pass": true,
+        "note": "含历史实际/预测/模拟标识、批次与口径、核心数字"
+      },
+      {
+        "name": "GET 简报下载（Markdown 附件）",
+        "http": 200,
+        "body": {
+          "content_type": "text/markdown; charset=utf-8",
+          "disposition": "attachment; filename=\"brief-7975642ccd3d40ddb35abf1fff666221.md\"",
+          "chars": 2641
+        },
+        "pass": true,
+        "note": "url 可直接下载且内容与响应 markdown 一致"
+      },
+      {
+        "name": "不存在的简报 404",
+        "http": 404,
+        "pass": true,
+        "note": "错误契约",
+        "body": {
+          "error": "简报不存在",
+          "code": "not_found"
+        }
+      }
+    ],
+    "note": "isolated runtime rt_ai_accept, port 8784"
+  },
+  "phase2": {
+    "checks": [
+      {
+        "name": "配置密钥后 /api/ai/status",
+        "http": 200,
+        "body": {
+          "llm_configured": true,
+          "provider": "openai-compatible",
+          "model": "fake-model",
+          "key_present": true,
+          "timeout_seconds": 60.0,
+          "fallback": null,
+          "tools_count": 7
+        },
+        "pass": true,
+        "note": "密钥只来自环境变量；响应不回显"
+      },
+      {
+        "name": "settings.ai 覆盖 base_url/model/timeout",
+        "http": 200,
+        "body": {
+          "put": {
+            "ai": {
+              "configured": true,
+              "provider": "openai-compatible",
+              "base_url": "http://127.0.0.1:9/v2",
+              "model": "settings-model",
+              "timeout_seconds": 5.0,
+              "key_present": true
+            },
+            "session_ttl_hours": 12.0,
+            "batch": {
+              "id": "original",
+              "label": "原始数据 2009-12-01~2011-12-09",
+              "kind": "original",
+              "status": "ready",
+              "is_active": true,
+              "source_file": "online_retail_II.xlsx",
+              "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+              "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+              "created_at": "2026-10-21T18:03:58",
+              "published_at": "2026-10-21T18:03:58",
+              "manifest": {
+                "source_file": "online_retail_II.xlsx",
+                "source_sha256": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+                "source_kind": "public_mirror",
+                "official_byte_comparison_completed": false,
+                "policy_version": "cross-sheet-multiset-v1-sales-v2-invoice-order",
+                "prepared_at": "2026-10-21T18:03:58",
+                "sheets": [
+                  {
+                    "sheet": "Year 2009-2010",
+                    "raw_rows": 525461,
+                    "cross_sheet_copies_excluded": 0
+                  },
+                  {
+                    "sheet": "Year 2010-2011",
+                    "raw_rows": 541910,
+                    "cross_sheet_copies_excluded": 22523
+                  }
+                ],
+                "raw_rows": 1067371,
+                "cross_sheet_copies_excluded": 22523,
+                "retained_rows": 1044848,
+                "positive_sale_rows": 1022290,
+                "within_sheet_duplicate_candidates_retained": 11812,
+                "cancelled_rows": 19165,
+                "nonpositive_quantity_rows": 22557,
+                "invalid_dates": 0,
+                "quantity_invalid_rows": 0,
+                "sale_rows_without_valid_price": 5,
+                "zero_price_sale_rows": 2631,
+                "invoice_with_multiple_times": 83,
+                "date_min": "2009-12-01",
+                "date_max": "2011-12-09",
+                "elapsed_seconds": 41.73,
+                "rules": [
+                  "仅排除跨表完全相同记录的重复副本，按出现次数匹配；同表重复候选保留。",
+                  "正向销量：日期/编号有效、数量大于0、非取消、非跨表副本。",
+                  "交易销售额：正向交易中单价有效且非负的行，数量×英镑单价；零单价保留。",
+                  "订单数：按订单号去重。正向订单号已核查无跨日期、客户、国家冲突；同单分钟级时间差不拆单。",
+                  "无记录日补0仅是构造连续记录销量，不代表已确认营业或市场需求为0。"
+                ],
+                "order_identity_conflicts": 0,
+                "order_key": "invoice"
+              }
+            }
+          },
+          "status": {
+            "llm_configured": true,
+            "provider": "openai-compatible",
+            "model": "settings-model",
+            "key_present": true,
+            "timeout_seconds": 5.0,
+            "fallback": null,
+            "tools_count": 7
+          }
+        },
+        "pass": true,
+        "note": "PUT /api/settings 后生效；密钥仍只读环境变量"
+      },
+      {
+        "name": "大模型不可达 → failed 保留工具结果",
+        "http": 200,
+        "body": {
+          "status": "failed",
+          "provider": "openai-compatible",
+          "llm_used": false,
+          "error": "大模型调用失败：URLError: <urlopen error [WinError 10061] 由于目标计算机积极拒绝，无法连接。>",
+          "tools": [
+            [
+              "dashboard_summary",
+              true
+            ]
+          ],
+          "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-11-10~2011-12-09，全店）：成交量 851403 件，销售额 £1694068.71，订单 2913 笔，商品数 2930；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +29.8%，销售额环比 +37.8%，订单数环比 +27.9%（上一等长区间）。\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实"
+        },
+        "pass": true,
+        "note": "不无限重试；工具数字保留；响应不含密钥"
+      }
+    ],
+    "note": "configured+failure, port 63238"
+  },
+  "phase3": {
+    "checks": [
+      {
+        "name": "库存模块导入失败 → 工具降级（不 500）",
+        "body": {
+          "ok": true,
+          "summary": "模拟库存（非真实库存）：场景 AI验收场景，商品 85123A WHITE HANGING HEART T-LIGHT HOLDER；余额 90，提前期需求 80，有效在途 10，安全库存 30，补货候选 10。",
+          "warnings": [
+            "模拟库存：结果来自模拟参数与流水，不是真实库存。",
+            "库存模块未就绪（ImportError: simulated missing inventory module），本工具按契约公式只读计算模拟指标。"
+          ],
+          "data": {
+            "simulated": true,
+            "scenario": {
+              "id": "fbbf9ed469fa45699501c513e2f73aab",
+              "name": "AI验收场景",
+              "note": "合同固定样例：100+20-30=90，候选10",
+              "item_count": 1
+            },
+            "item": {
+              "stock_code": "85123A",
+              "name": "WHITE HANGING HEART T-LIGHT HOLDER",
+              "initial_qty": 100.0,
+              "lead_time_days": 8,
+              "safety_stock": 30.0,
+              "daily_demand": 10.0,
+              "balance": 90.0,
+              "effective_in_transit": 10.0,
+              "lead_time_demand": 80.0,
+              "replenishment_candidate": 10.0,
+              "horizon_date": "2026-11-06"
+            },
+            "service_module_ready": false
+          }
+        },
+        "pass": true,
+        "note": "模拟 api.services.inventory 不可导入，回退只读表仍按契约公式给出90"
+      },
+      {
+        "name": "库存模块导入失败 → /ask 降级回答",
+        "body": {
+          "status": "ok",
+          "tools": [
+            [
+              "product_search",
+              true
+            ],
+            [
+              "inventory_query",
+              true
+            ]
+          ],
+          "warnings": [
+            "模拟库存：结果来自模拟参数与流水，不是真实库存。",
+            "库存模块未就绪（ImportError: simulated missing inventory module），本工具按契约公式只读计算模拟指标。"
+          ],
+          "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品检索「85123A」：匹配 2 个商品；85123A WHITE HANGING HEART T-LIGHT HOLDER（销量98328）、85123a WHITE HANGING HEART T-LIGHT HOLDER（销量516）\n· 模拟库存（非真实库存）：场景 AI验收场景，商品 85123A WHITE HANGING HEART T-LIGHT HOLDER；余额 90，提前期需求 80，有效在途 10，安全库存 30，补货候选 10。\n数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径"
+        },
+        "pass": true,
+        "note": "降级路径仍返回模拟库存与提示，不伪造真实库存"
+      }
+    ],
+    "note": "in-process import-failure simulation"
+  },
+  "questions": [
+    {
+      "id": 1,
+      "question": "2011-11-10到2011-12-09全店卖了多少",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "dashboard_summary"
+      ],
+      "expected_note": "与 /api/dashboard 同口径，数字必须完全一致",
+      "actual_status": "ok",
+      "actual_tools": [
+        "dashboard_summary"
+      ],
+      "actual_params": {
+        "dashboard_summary": {
+          "start": "2011-11-10",
+          "end": "2011-12-09"
+        }
+      },
+      "tool_ok": {
+        "dashboard_summary": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-11-10~2011-12-09，全店）：成交量 851403 件，销售额 £1694068.71，订单 2913 笔，商品数 2930；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +29.8%，销售额环比 +37.8%，订单数环比 +27.9%（上一等长区间）。\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.25,
+      "secret_hits": [],
+      "numeric_expected": [
+        "851403",
+        "1694068.71",
+        "2913"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 2,
+      "question": "2011年12月9日全店销售额是多少",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "dashboard_summary"
+      ],
+      "expected_note": "单日日期解析（年月日写法）",
+      "actual_status": "ok",
+      "actual_tools": [
+        "dashboard_summary"
+      ],
+      "actual_params": {
+        "dashboard_summary": {
+          "start": "2011-12-09",
+          "end": "2011-12-09"
+        }
+      },
+      "tool_ok": {
+        "dashboard_summary": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-12-09~2011-12-09，全店）：成交量 93980 件，销售额 £200938.60，订单 44 笔，商品数 1082；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +163.5%，销售额环比 +143.6%，订单数环比 -64.2%（上一等长区间）。\n范围：2011-12-09~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-12-09",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.016,
+      "secret_hits": [],
+      "numeric_expected": [
+        "93980",
+        "200938.60"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 3,
+      "question": "最近30天全店销量",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "dashboard_summary"
+      ],
+      "expected_note": "相对日期按数据覆盖末日回推，与看板默认一致",
+      "actual_status": "ok",
+      "actual_tools": [
+        "dashboard_summary"
+      ],
+      "actual_params": {
+        "dashboard_summary": {
+          "start": "2011-11-10",
+          "end": "2011-12-09"
+        }
+      },
+      "tool_ok": {
+        "dashboard_summary": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-11-10~2011-12-09，全店）：成交量 851403 件，销售额 £1694068.71，订单 2913 笔，商品数 2930；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +29.8%，销售额环比 +37.8%，订单数环比 +27.9%（上一等长区间）。\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.25,
+      "secret_hits": [],
+      "numeric_expected": [
+        "851403",
+        "1694068.71"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 4,
+      "question": "2011-01-01到2011-03-31英国卖了多少",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "dashboard_summary"
+      ],
+      "expected_note": "国家中文→英文映射（英国=United Kingdom）",
+      "actual_status": "ok",
+      "actual_tools": [
+        "dashboard_summary"
+      ],
+      "actual_params": {
+        "dashboard_summary": {
+          "start": "2011-01-01",
+          "end": "2011-03-31",
+          "country": "United Kingdom"
+        }
+      },
+      "tool_ok": {
+        "dashboard_summary": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2011-01-01~2011-03-31，国家 United Kingdom）：成交量 871473 件，销售额 £1577548.21，订单 3411 笔，商品数 2975；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 -40.2%，销售额环比 -47.3%，订单数环比 -45.6%（上一等长区间）。\n范围：2011-01-01~2011-03-31，国家 United Kingdom；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-01-01",
+        "end": "2011-03-31",
+        "product": "",
+        "country": "United Kingdom"
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.313,
+      "secret_hits": [],
+      "numeric_expected": [
+        "871473",
+        "1577548.21",
+        "3411"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 5,
+      "question": "2011-11-10到2011-12-09商品85123A卖了多少",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_search",
+        "dashboard_summary"
+      ],
+      "expected_note": "商品编号精确匹配 + 看板商品筛选",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_search",
+        "dashboard_summary"
+      ],
+      "actual_params": {
+        "product_search": {
+          "q": "85123A"
+        },
+        "dashboard_summary": {
+          "start": "2011-11-10",
+          "end": "2011-12-09",
+          "product": "85123A"
+        }
+      },
+      "tool_ok": {
+        "product_search": true,
+        "dashboard_summary": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品检索「85123A」：匹配 2 个商品；85123A WHITE HANGING HEART T-LIGHT HOLDER（销量98328）、85123a WHITE HANGING HEART T-LIGHT HOLDER（销量516）\n· 历史实际（2011-11-10~2011-12-09，商品 85123A）：成交量 3865 件，销售额 £10698.71，订单 250 笔，商品数 1；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +19.3%，销售额环比 +12.2%，订单数环比 +38.1%（上一等长区间）。\n范围：2011-11-10~2011-12-09，商品 85123A；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "85123A",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.437,
+      "secret_hits": [],
+      "numeric_expected": [
+        "3865",
+        "10698.71",
+        "250"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 6,
+      "question": "2020-01-01到2020-01-31全店销量",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "dashboard_summary"
+      ],
+      "expected_note": "空结果/超覆盖：返回0并给出按无记录显示的提示",
+      "actual_status": "ok",
+      "actual_tools": [
+        "dashboard_summary"
+      ],
+      "actual_params": {
+        "dashboard_summary": {
+          "start": "2020-01-01",
+          "end": "2020-01-31"
+        }
+      },
+      "tool_ok": {
+        "dashboard_summary": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际（2020-01-01~2020-01-31，全店）：成交量 0 件，销售额 £0.00，订单 0 笔，商品数 0；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 该范围没有符合口径的记录（空结果不等于需求为零）。\n范围：2020-01-01~2020-01-31；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n提示：查询区间超出数据覆盖范围的部分按无记录显示。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2020-01-01",
+        "end": "2020-01-31",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [
+        "所选范围没有符合口径的交易记录，不等于市场需求为零。",
+        "上一等长区间超出数据覆盖范围，不计算增长率。",
+        "部分查询日期超出数据覆盖范围，缺失区间显示为空。"
+      ],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.016,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 7,
+      "question": "最近哪些商品销量最高",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_ranking"
+      ],
+      "expected_note": "排名工具默认最近30天、前10",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_ranking"
+      ],
+      "actual_params": {
+        "product_ranking": {
+          "top_n": 10
+        }
+      },
+      "tool_ok": {
+        "product_ranking": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品销量排名（2011-11-10~2011-12-09）：第1名 23843 PAPER CRAFT , LITTLE BIRDIE：销量80995 件，销售额£168469.60；第2名 23084 RABBIT NIGHT LIGHT：销量15243 件，销售额£34330.51；第3名 22197 POPCORN HOLDER：销量14468 件，销售额£14092.93；第4名 84826 ASSTD DESIGN 3D PAPER STICKERS：销量12633 件，销售额£18.33；第5名 22086 PAPER CHAIN KIT 50'S CHRISTMAS：销量7401 件，销售额£26464.71…\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.25,
+      "secret_hits": [],
+      "numeric_expected": [
+        "23843",
+        "80995"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 8,
+      "question": "2011-12-09销量前5的商品",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_ranking"
+      ],
+      "expected_note": "“前5”解析为 top_n=5",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_ranking"
+      ],
+      "actual_params": {
+        "product_ranking": {
+          "start": "2011-12-09",
+          "end": "2011-12-09",
+          "top_n": 5
+        }
+      },
+      "tool_ok": {
+        "product_ranking": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品销量排名（2011-12-09~2011-12-09）：第1名 23843 PAPER CRAFT , LITTLE BIRDIE：销量80995 件，销售额£168469.60；第2名 16008 SMALL FOLDING SCISSOR(POINTED EDGE)：销量240 件，销售额£28.80；第3名 22197 POPCORN HOLDER：销量230 件，销售额£318.50；第4名 22693 GROW A FLYTRAP OR SUNFLOWER IN TIN：销量195 件，销售额£211.02；第5名 23167 SMALL CERAMIC TOP STORAGE JAR：销量192 件，销售额£132.48\n范围：2011-12-09~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-12-09",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.016,
+      "secret_hits": [],
+      "numeric_expected": [
+        "23843",
+        "80995"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 9,
+      "question": "2011-11-10到2011-12-09德国销量最高的商品",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_ranking"
+      ],
+      "expected_note": "国家过滤 + 排名；国家名不得被误当商品名",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_ranking"
+      ],
+      "actual_params": {
+        "product_ranking": {
+          "start": "2011-11-10",
+          "end": "2011-12-09",
+          "country": "Germany",
+          "top_n": 10
+        }
+      },
+      "tool_ok": {
+        "product_ranking": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品销量排名（2011-11-10~2011-12-09，国家 Germany）：第1名 22629 SPACEBOY LUNCH BOX：销量292 件，销售额£492.60；第2名 84598 BOYS ALPHABET IRON ON PATCHES：销量288 件，销售额£60.48；第3名 23084 RABBIT NIGHT LIGHT：销量258 件，销售额£474.00；第4名 23295 SET OF 12 MINI LOAF BAKING CASES：销量192 件，销售额£145.28；第5名 23212 HEART WREATH DECORATION WITH BELL：销量180 件，销售额£194.76…\n范围：2011-11-10~2011-12-09，国家 Germany；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": "Germany"
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.031,
+      "secret_hits": [],
+      "numeric_expected": [
+        "22629",
+        "292"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 10,
+      "question": "搜索 PAPER CRAFT",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_search"
+      ],
+      "expected_note": "商品检索",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_search"
+      ],
+      "actual_params": {
+        "product_search": {
+          "q": "PAPER CRAFT"
+        }
+      },
+      "tool_ok": {
+        "product_search": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品检索「PAPER CRAFT」：匹配 1 个商品；23843 PAPER CRAFT , LITTLE BIRDIE（销量80995）\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.218,
+      "secret_hits": [],
+      "numeric_expected": [
+        "23843"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 11,
+      "question": "JUMBO BAG 卖了多少",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [
+        "product_search"
+      ],
+      "expected_note": "商品重名歧义→追问",
+      "actual_status": "need_clarification",
+      "actual_tools": [
+        "product_search"
+      ],
+      "actual_params": {
+        "product_search": {
+          "q": "JUMBO BAG"
+        }
+      },
+      "tool_ok": {
+        "product_search": true
+      },
+      "answer": null,
+      "clarification": "「JUMBO BAG」匹配到多个商品，请指定商品编号：85099B（RED RETROSPOT JUMBO BAG，累计销量96,938）；22386（JUMBO BAG PINK WITH WHITE SPOTS，累计销量39,467）；85099F（JUMBO BAG STRAWBERRY，累计销量36,915）；21929（JUMBO BAG PINK VINTAGE PAISLEY，累计销量25,625）；21928（JUMBO BAG SCANDINAVIAN PAISLEY，累计销量24,305）…",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.438,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 12,
+      "question": "商品85123A的库存",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "expected_note": "固定样例 100+20−30=90，候选10",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "actual_params": {
+        "product_search": {
+          "q": "85123A"
+        },
+        "inventory_query": {
+          "stock_code": "85123A"
+        }
+      },
+      "tool_ok": {
+        "product_search": true,
+        "inventory_query": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品检索「85123A」：匹配 2 个商品；85123A WHITE HANGING HEART T-LIGHT HOLDER（销量98328）、85123a WHITE HANGING HEART T-LIGHT HOLDER（销量516）\n· 模拟库存（非真实库存）：场景 AI验收场景，商品 85123A WHITE HANGING HEART T-LIGHT HOLDER；余额 90，提前期需求 80，有效在途 10，安全库存 30，补货候选 10。\n数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": null,
+        "end": null,
+        "product": "85123A",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [
+        "模拟库存：结果来自模拟参数与流水，不是真实库存。"
+      ],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.359,
+      "secret_hits": [],
+      "numeric_expected": [
+        "90",
+        "80",
+        "30",
+        "10"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 13,
+      "question": "WHITE HANGING HEART T-LIGHT HOLDER 库存",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "expected_note": "名称精确匹配到 85123A（同名大小写取销量最高）",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "actual_params": {
+        "product_search": {
+          "q": "WHITE HANGING HEART T-LIGHT HOLDER"
+        },
+        "inventory_query": {
+          "stock_code": "85123A"
+        }
+      },
+      "tool_ok": {
+        "product_search": true,
+        "inventory_query": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品检索「WHITE HANGING HEART T-LIGHT HOLDER」：匹配 2 个商品；85123A WHITE HANGING HEART T-LIGHT HOLDER（销量94267）、85123a WHITE HANGING HEART T-LIGHT HOLDER（销量516）\n· 模拟库存（非真实库存）：场景 AI验收场景，商品 85123A WHITE HANGING HEART T-LIGHT HOLDER；余额 90，提前期需求 80，有效在途 10，安全库存 30，补货候选 10。\n数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": null,
+        "end": null,
+        "product": "85123A",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [
+        "模拟库存：结果来自模拟参数与流水，不是真实库存。"
+      ],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.437,
+      "secret_hits": [],
+      "numeric_expected": [
+        "85123A",
+        "90"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 14,
+      "question": "某商品库存",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "缺商品→追问",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "查询模拟库存需要商品编号，请说明要查哪个商品（例如“85123A 库存”）。模拟库存结论不代表真实库存。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 15,
+      "question": "商品洗衣机的库存",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [
+        "product_search"
+      ],
+      "expected_note": "商品不存在→追问（不伪造）",
+      "actual_status": "need_clarification",
+      "actual_tools": [
+        "product_search"
+      ],
+      "actual_params": {
+        "product_search": {
+          "q": "洗衣机"
+        }
+      },
+      "tool_ok": {
+        "product_search": true
+      },
+      "answer": null,
+      "clarification": "没有找到与「洗衣机」匹配的商品，请提供商品编号（如 85123A）或更完整的英文商品名称。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.437,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 16,
+      "question": "最近订单",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "orders_query"
+      ],
+      "expected_note": "订单数与看板订单数一致（按 invoice 去重）",
+      "actual_status": "ok",
+      "actual_tools": [
+        "orders_query"
+      ],
+      "actual_params": {
+        "orders_query": {
+          "page": 1,
+          "page_size": 10
+        }
+      },
+      "tool_ok": {
+        "orders_query": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际订单查询（2011-11-10~2011-12-09）：共 2913 笔订单，第 1 页 10 笔；581475（2011-12-09，352件，£280.24）；581476（2011-12-09，2215件，£2618.89）；581477（2011-12-09，144件，£291.78）；581478（2011-12-09，226件，£391.02）；581479（2011-12-09，10件，£29.50）…\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.078,
+      "secret_hits": [],
+      "numeric_expected": [
+        "2913"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 17,
+      "question": "订单536365 详情",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "orders_query"
+      ],
+      "expected_note": "订单号识别 + 单笔明细",
+      "actual_status": "ok",
+      "actual_tools": [
+        "orders_query"
+      ],
+      "actual_params": {
+        "orders_query": {
+          "page": 1,
+          "page_size": 10,
+          "order_key": "536365"
+        }
+      },
+      "tool_ok": {
+        "orders_query": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际订单 536365（2010-12-01）：7 行，成交量 40 件，销售额 £139.12，客户 17850，国家 United Kingdom。\n范围：2011-11-10~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.328,
+      "secret_hits": [],
+      "numeric_expected": [
+        "40",
+        "139.12"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 18,
+      "question": "2011-12-09 最近5笔交易",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "orders_query"
+      ],
+      "expected_note": "日期+条数解析",
+      "actual_status": "ok",
+      "actual_tools": [
+        "orders_query"
+      ],
+      "actual_params": {
+        "orders_query": {
+          "start": "2011-12-09",
+          "end": "2011-12-09",
+          "page": 1,
+          "page_size": 5
+        }
+      },
+      "tool_ok": {
+        "orders_query": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际订单查询（2011-12-09~2011-12-09）：共 44 笔订单，第 1 页 5 笔；581475（2011-12-09，352件，£280.24）；581476（2011-12-09，2215件，£2618.89）；581477（2011-12-09，144件，£291.78）；581478（2011-12-09，226件，£391.02）；581479（2011-12-09，10件，£29.50）\n范围：2011-12-09~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-12-09",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [
+        "44"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 19,
+      "question": "未来7天全店销量预测",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "forecast_7d"
+      ],
+      "expected_note": "预测合计与 services.forecasting 一致",
+      "actual_status": "ok",
+      "actual_tools": [
+        "forecast_7d"
+      ],
+      "actual_params": {
+        "forecast_7d": {}
+      },
+      "tool_ok": {
+        "forecast_7d": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 预测（非历史实际）：全店未来7天 2011-12-10~2011-12-16，模型 blend_rule（周季节与LightGBM组合＋零销量日规则）；7天预测合计 272727 件；起点 2011-12-09。预测存在误差，仅供备货参考。\n范围：2011-12-10~2011-12-16；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n提示：查询区间超出数据覆盖范围的部分按无记录显示。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-12-10",
+        "end": "2011-12-16",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [
+        "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+        "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+      ],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 1.891,
+      "secret_hits": [],
+      "numeric_expected": [
+        "272727"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 20,
+      "question": "以2011-11-30为起点预测未来7天",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "forecast_7d"
+      ],
+      "expected_note": "显式起点解析",
+      "actual_status": "ok",
+      "actual_tools": [
+        "forecast_7d"
+      ],
+      "actual_params": {
+        "forecast_7d": {
+          "origin": "2011-11-30"
+        }
+      },
+      "tool_ok": {
+        "forecast_7d": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 预测（非历史实际）：全店未来7天 2011-12-01~2011-12-07，模型 blend_rule（周季节与LightGBM组合＋零销量日规则）；7天预测合计 161283 件；起点 2011-11-30。预测存在误差，仅供备货参考。\n范围：2011-12-01~2011-12-07；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2011-12-01",
+        "end": "2011-12-07",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [
+        "无记录日按0构造连续记录销量，不能据此认定不营业或市场需求为0。",
+        "零销量星期规则由可见历史计算，是候选规则，未确认真实营业安排。"
+      ],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.703,
+      "secret_hits": [],
+      "numeric_expected": [
+        "161283"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 21,
+      "question": "未来7天某商品销量预测",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "商品级预测不支持→追问",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "现有预测模型只支持“全店未来7天”预测，不支持按商品预测；请提供具体全店预测需求，或改为查询某个商品的历史销量。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 22,
+      "question": "未来3天销量预测",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "非7天预测→追问",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "现有预测服务只支持未来7天的全店预测，不支持未来3天；请改为“未来7天全店预测”。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 23,
+      "question": "当前数据批次和数据范围",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "batch_info"
+      ],
+      "expected_note": "批次信息工具",
+      "actual_status": "ok",
+      "actual_tools": [
+        "batch_info"
+      ],
+      "actual_params": {
+        "batch_info": {}
+      },
+      "tool_ok": {
+        "batch_info": true
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 数据批次：当前批次 original（原始数据 2009-12-01~2011-12-09，original）；数据覆盖 2009-12-01~2011-12-09；来源文件 online_retail_II.xlsx；口径 cross-sheet-multiset-v1-sales-v2-invoice-order；已登记批次 1 个。\n范围：2009-12-01~2011-12-09；数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": "2009-12-01",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [
+        "2009-12-01",
+        "2011-12-09"
+      ],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 24,
+      "question": "商品23843的库存",
+      "http": 200,
+      "expected_status": "ok",
+      "expected_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "expected_note": "工具失败（场景无该商品）被如实说明，未 500",
+      "actual_status": "ok",
+      "actual_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "actual_params": {
+        "product_search": {
+          "q": "23843"
+        },
+        "inventory_query": {
+          "stock_code": "23843"
+        }
+      },
+      "tool_ok": {
+        "product_search": true,
+        "inventory_query": false
+      },
+      "answer": "未调用大模型，数字来自服务端工具。\n· 历史实际商品检索「23843」：匹配 1 个商品；23843 PAPER CRAFT , LITTLE BIRDIE（销量80995）\n· 工具 inventory_query 执行失败：工具执行失败：模拟库存场景 AI验收场景 中没有商品 23843 的模拟参数\n数据批次：original（原始数据 2009-12-01~2011-12-09）。\n口径提示：历史实际是数据中已发生的交易；预测为模型结果且有误差；模拟库存不是真实库存；数据没有成本字段，销售额不等于利润。",
+      "clarification": null,
+      "error": null,
+      "range": {
+        "start": null,
+        "end": null,
+        "product": "23843",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.75,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 25,
+      "question": "帮我写一首诗",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "非数据问题→追问",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "我只做本系统的只读数据问答：可按日期/商品/国家查询销量、销售额、订单数，商品检索，订单查询，全店未来7天预测，模拟库存查询和数据批次信息。请补充查询对象和日期范围（例如“2011-11-10到2011-12-09全店卖了多少”）。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 26,
+      "question": "利润是多少",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "缺成本列→追问，不编造利润",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "当前数据没有成本/采购价字段，无法计算利润或毛利；可以改为查询销售额、销量或订单数，不能用销售额代替利润。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.016,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 27,
+      "question": "帮我生成运营简报",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "简报走专门接口",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "运营简报请调用 POST /api/ai/brief 生成，并用 GET /api/ai/briefs/{id}.md 下载；简报由确定性模板生成（provider=template）。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 28,
+      "question": "2011-12-09到2011-11-10全店销量",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "倒序日期→追问",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "开始日期 2011-12-09 晚于结束日期 2011-11-10，请确认要查询的日期范围。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 29,
+      "question": "比上个月增长了多少",
+      "http": 200,
+      "expected_status": "need_clarification",
+      "expected_tools": [],
+      "expected_note": "缺基准区间→追问",
+      "actual_status": "need_clarification",
+      "actual_tools": [],
+      "actual_params": {},
+      "tool_ok": {},
+      "answer": null,
+      "clarification": "请说明要对比的两个时间段（例如“2011-11-01到2011-11-30 与 2011-10-01到2011-10-31 比较”）。",
+      "error": null,
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    },
+    {
+      "id": 30,
+      "question": "以2020-01-01为起点预测未来7天",
+      "http": 200,
+      "expected_status": "failed",
+      "expected_tools": [
+        "forecast_7d"
+      ],
+      "expected_note": "工具失败（起点超出覆盖）→failed，保留错误不重试",
+      "actual_status": "failed",
+      "actual_tools": [
+        "forecast_7d"
+      ],
+      "actual_params": {
+        "forecast_7d": {
+          "origin": "2020-01-01"
+        }
+      },
+      "tool_ok": {
+        "forecast_7d": false
+      },
+      "answer": "工具执行失败，未生成任何数字；失败原因见 error 与 tool_calls。未调用大模型。",
+      "clarification": null,
+      "error": "forecast_7d: 工具执行失败：预测起点必须在数据覆盖范围 2009-12-01~2011-12-09 内",
+      "range": {
+        "start": "2011-11-10",
+        "end": "2011-12-09",
+        "product": "",
+        "country": ""
+      },
+      "batch": {
+        "id": "original",
+        "label": "原始数据 2009-12-01~2011-12-09"
+      },
+      "warnings": [],
+      "provider": "local-rule-planner",
+      "llm_used": false,
+      "elapsed_seconds": 0.0,
+      "secret_hits": [],
+      "numeric_expected": [],
+      "numeric_ok": true,
+      "numeric_missing": [],
+      "param_failures": [],
+      "params_ok": true,
+      "tool_selection_ok": true,
+      "status_ok": true,
+      "pass": true,
+      "failures": []
+    }
+  ],
+  "extra_checks": [],
+  "question_items": [
+    {
+      "id": 1,
+      "question": "2011-11-10到2011-12-09全店卖了多少",
+      "expect_status": "ok",
+      "expect_tools": [
+        "dashboard_summary"
+      ],
+      "expect_params": {
+        "dashboard_summary": {
+          "start": "2011-11-10",
+          "end": "2011-12-09"
+        }
+      },
+      "note": "与 /api/dashboard 同口径，数字必须完全一致"
+    },
+    {
+      "id": 2,
+      "question": "2011年12月9日全店销售额是多少",
+      "expect_status": "ok",
+      "expect_tools": [
+        "dashboard_summary"
+      ],
+      "expect_params": {
+        "dashboard_summary": {
+          "start": "2011-12-09",
+          "end": "2011-12-09"
+        }
+      },
+      "note": "单日日期解析（年月日写法）"
+    },
+    {
+      "id": 3,
+      "question": "最近30天全店销量",
+      "expect_status": "ok",
+      "expect_tools": [
+        "dashboard_summary"
+      ],
+      "expect_params": {
+        "dashboard_summary": {
+          "start": "2011-11-10",
+          "end": "2011-12-09"
+        }
+      },
+      "note": "相对日期按数据覆盖末日回推，与看板默认一致"
+    },
+    {
+      "id": 4,
+      "question": "2011-01-01到2011-03-31英国卖了多少",
+      "expect_status": "ok",
+      "expect_tools": [
+        "dashboard_summary"
+      ],
+      "expect_params": {
+        "dashboard_summary": {
+          "start": "2011-01-01",
+          "end": "2011-03-31",
+          "country": "United Kingdom"
+        }
+      },
+      "note": "国家中文→英文映射（英国=United Kingdom）"
+    },
+    {
+      "id": 5,
+      "question": "2011-11-10到2011-12-09商品85123A卖了多少",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_search",
+        "dashboard_summary"
+      ],
+      "expect_params": {
+        "product_search": {
+          "q": "85123A"
+        },
+        "dashboard_summary": {
+          "product": "85123A",
+          "start": "2011-11-10",
+          "end": "2011-12-09"
+        }
+      },
+      "note": "商品编号精确匹配 + 看板商品筛选"
+    },
+    {
+      "id": 6,
+      "question": "2020-01-01到2020-01-31全店销量",
+      "expect_status": "ok",
+      "expect_tools": [
+        "dashboard_summary"
+      ],
+      "expect_params": {
+        "dashboard_summary": {
+          "start": "2020-01-01",
+          "end": "2020-01-31"
+        }
+      },
+      "note": "空结果/超覆盖：返回0并给出按无记录显示的提示"
+    },
+    {
+      "id": 7,
+      "question": "最近哪些商品销量最高",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_ranking"
+      ],
+      "expect_params": {},
+      "note": "排名工具默认最近30天、前10"
+    },
+    {
+      "id": 8,
+      "question": "2011-12-09销量前5的商品",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_ranking"
+      ],
+      "expect_params": {
+        "product_ranking": {
+          "start": "2011-12-09",
+          "end": "2011-12-09",
+          "top_n": 5
+        }
+      },
+      "note": "“前5”解析为 top_n=5"
+    },
+    {
+      "id": 9,
+      "question": "2011-11-10到2011-12-09德国销量最高的商品",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_ranking"
+      ],
+      "expect_params": {
+        "product_ranking": {
+          "country": "Germany",
+          "start": "2011-11-10",
+          "end": "2011-12-09"
+        }
+      },
+      "note": "国家过滤 + 排名；国家名不得被误当商品名"
+    },
+    {
+      "id": 10,
+      "question": "搜索 PAPER CRAFT",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_search"
+      ],
+      "expect_params": {
+        "product_search": {
+          "q": "PAPER CRAFT"
+        }
+      },
+      "note": "商品检索"
+    },
+    {
+      "id": 11,
+      "question": "JUMBO BAG 卖了多少",
+      "expect_status": "need_clarification",
+      "expect_tools": [
+        "product_search"
+      ],
+      "expect_params": {
+        "product_search": {
+          "q": "JUMBO BAG"
+        }
+      },
+      "note": "商品重名歧义→追问"
+    },
+    {
+      "id": 12,
+      "question": "商品85123A的库存",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "expect_params": {
+        "inventory_query": {
+          "stock_code": "85123A"
+        }
+      },
+      "note": "固定样例 100+20−30=90，候选10"
+    },
+    {
+      "id": 13,
+      "question": "WHITE HANGING HEART T-LIGHT HOLDER 库存",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "expect_params": {
+        "inventory_query": {
+          "stock_code": "85123A"
+        }
+      },
+      "note": "名称精确匹配到 85123A（同名大小写取销量最高）"
+    },
+    {
+      "id": 14,
+      "question": "某商品库存",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "缺商品→追问"
+    },
+    {
+      "id": 15,
+      "question": "商品洗衣机的库存",
+      "expect_status": "need_clarification",
+      "expect_tools": [
+        "product_search"
+      ],
+      "expect_params": {},
+      "note": "商品不存在→追问（不伪造）"
+    },
+    {
+      "id": 16,
+      "question": "最近订单",
+      "expect_status": "ok",
+      "expect_tools": [
+        "orders_query"
+      ],
+      "expect_params": {},
+      "note": "订单数与看板订单数一致（按 invoice 去重）"
+    },
+    {
+      "id": 17,
+      "question": "订单536365 详情",
+      "expect_status": "ok",
+      "expect_tools": [
+        "orders_query"
+      ],
+      "expect_params": {
+        "orders_query": {
+          "order_key": "536365"
+        }
+      },
+      "note": "订单号识别 + 单笔明细"
+    },
+    {
+      "id": 18,
+      "question": "2011-12-09 最近5笔交易",
+      "expect_status": "ok",
+      "expect_tools": [
+        "orders_query"
+      ],
+      "expect_params": {
+        "orders_query": {
+          "start": "2011-12-09",
+          "end": "2011-12-09",
+          "page_size": 5
+        }
+      },
+      "note": "日期+条数解析"
+    },
+    {
+      "id": 19,
+      "question": "未来7天全店销量预测",
+      "expect_status": "ok",
+      "expect_tools": [
+        "forecast_7d"
+      ],
+      "expect_params": {},
+      "note": "预测合计与 services.forecasting 一致"
+    },
+    {
+      "id": 20,
+      "question": "以2011-11-30为起点预测未来7天",
+      "expect_status": "ok",
+      "expect_tools": [
+        "forecast_7d"
+      ],
+      "expect_params": {
+        "forecast_7d": {
+          "origin": "2011-11-30"
+        }
+      },
+      "note": "显式起点解析"
+    },
+    {
+      "id": 21,
+      "question": "未来7天某商品销量预测",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "商品级预测不支持→追问"
+    },
+    {
+      "id": 22,
+      "question": "未来3天销量预测",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "非7天预测→追问"
+    },
+    {
+      "id": 23,
+      "question": "当前数据批次和数据范围",
+      "expect_status": "ok",
+      "expect_tools": [
+        "batch_info"
+      ],
+      "expect_params": {},
+      "note": "批次信息工具"
+    },
+    {
+      "id": 24,
+      "question": "商品23843的库存",
+      "expect_status": "ok",
+      "expect_tools": [
+        "product_search",
+        "inventory_query"
+      ],
+      "expect_params": {
+        "inventory_query": {
+          "stock_code": "23843"
+        }
+      },
+      "note": "工具失败（场景无该商品）被如实说明，未 500"
+    },
+    {
+      "id": 25,
+      "question": "帮我写一首诗",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "非数据问题→追问"
+    },
+    {
+      "id": 26,
+      "question": "利润是多少",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "缺成本列→追问，不编造利润"
+    },
+    {
+      "id": 27,
+      "question": "帮我生成运营简报",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "简报走专门接口"
+    },
+    {
+      "id": 28,
+      "question": "2011-12-09到2011-11-10全店销量",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "倒序日期→追问"
+    },
+    {
+      "id": 29,
+      "question": "比上个月增长了多少",
+      "expect_status": "need_clarification",
+      "expect_tools": [],
+      "expect_params": {},
+      "note": "缺基准区间→追问"
+    },
+    {
+      "id": 30,
+      "question": "以2020-01-01为起点预测未来7天",
+      "expect_status": "failed",
+      "expect_tools": [
+        "forecast_7d"
+      ],
+      "expect_params": {
+        "forecast_7d": {
+          "origin": "2020-01-01"
+        }
+      },
+      "note": "工具失败（起点超出覆盖）→failed，保留错误不重试"
+    }
+  ],
+  "summary": {
+    "questions_total": 30,
+    "questions_passed": 30,
+    "tool_selection_pass": 30,
+    "params_pass": 30,
+    "numeric_pass": 17,
+    "numeric_total": 17,
+    "clarification_count": 10,
+    "failed_status_count": 1,
+    "http_failures": 0,
+    "elapsed_seconds": 21.4,
+    "generated_at": "2026-10-29 15:17:26+0800",
+    "ai_runs_rows": 33,
+    "briefs_rows": 1,
+    "ai_runs_statuses": {
+      "failed": 1,
+      "need_clarification": 10,
+      "ok": 22
+    }
+  }
+}

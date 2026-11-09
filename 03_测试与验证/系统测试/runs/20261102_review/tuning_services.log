@@ -1,0 +1,27 @@
+test_cross_sheet_multiplicity_and_source_immutability (test_services.DataAndAnalyticsTests.test_cross_sheet_multiplicity_and_source_immutability) ... ok
+test_csv_formula_neutralized (test_services.DataAndAnalyticsTests.test_csv_formula_neutralized) ... ok
+test_filters_empty_missing_dates_and_page (test_services.DataAndAnalyticsTests.test_filters_empty_missing_dates_and_page) ... ok
+2026-11-02T15:11:13 "GET /api/dashboard?start=2011-01-01&end=2011-01-06 HTTP/1.1" 200 -
+2026-11-02T15:11:13 "GET /../services/data.py HTTP/1.1" 404 -
+2026-11-02T15:11:13 "GET /api/transactions?page=-1 HTTP/1.1" 400 -
+2026-11-02T15:11:13 "GET /api/jobs/not-a-job HTTP/1.1" 404 -
+2026-11-02T15:11:13 "POST /api/forecast HTTP/1.1" 403 -
+2026-11-02T15:11:13 "GET /api/export/trend?start=2011-01-01&end=2011-01-06 HTTP/1.1" 200 -
+test_http_queries_errors_and_static_scope (test_services.DataAndAnalyticsTests.test_http_queries_errors_and_static_scope) ... ok
+test_order_identity_conflict_requires_review (test_services.DataAndAnalyticsTests.test_order_identity_conflict_requires_review) ... ok
+test_same_invoice_time_variation_is_one_order (test_services.DataAndAnalyticsTests.test_same_invoice_time_variation_is_one_order) ... ok
+test_series_retains_calendar_and_sum (test_services.DataAndAnalyticsTests.test_series_retains_calendar_and_sum) ... ok
+test_totals_match_details_and_rankings (test_services.DataAndAnalyticsTests.test_totals_match_details_and_rankings) ... ok
+test_candidate_zero_weekday_and_features (test_services.ForecastTests.test_candidate_zero_weekday_and_features) ... ok
+test_fallback_is_named (test_services.ForecastTests.test_fallback_is_named) ... ok
+test_future_changes_never_change_prediction_or_rule (test_services.ForecastTests.test_future_changes_never_change_prediction_or_rule) ... ok
+test_invalid_history_and_dates (test_services.ForecastTests.test_invalid_history_and_dates) ... ok
+test_native_model_saved (test_services.ForecastTests.test_native_model_saved) ... ok
+test_overlap_accounting_and_full_windows (test_services.ForecastTests.test_overlap_accounting_and_full_windows) ... ok
+test_predict_beyond_data_always_seven_rows (test_services.ForecastTests.test_predict_beyond_data_always_seven_rows) ... ok
+test_scores_zero_empty_partial (test_services.ForecastTests.test_scores_zero_empty_partial) ... ok
+
+----------------------------------------------------------------------
+Ran 16 tests in 5.000s
+
+OK

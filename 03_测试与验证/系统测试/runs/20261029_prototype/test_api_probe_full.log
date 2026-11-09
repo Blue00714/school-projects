@@ -1,0 +1,279 @@
+==============================================================================
+FastAPI 原型 API 自动化测试运行记录
+运行时间: 2026-10-29T15:06:09+08:00
+命令: python.exe 03_测试与验证\系统测试\tests_api\run_api_tests.py --pattern test_*.py --out test_api_probe_full.log --label 阶段一试跑：全模块（实现进行中）
+工作目录: C:\Users\Administrator\11111\数据\学校项目
+说明: 阶段一试跑：全模块（实现进行中）
+Python: 3.12.10 (Windows-10-10.0.19045-SP0)
+pandas: 3.0.5
+隔离方式: 每个测试类一个 python run.py 子进程 + 临时 ECE_RUNTIME_DIR + 复制的 retail.sqlite3 (ECE_ORIGINAL_DB)
+官方库运行前:
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+==============================================================================
+test_01_status_reports_unconfigured_and_no_secret (test_ai.AiAssistantTests.test_01_status_reports_unconfigured_and_no_secret) ... FAIL
+test_02_tools_are_declared_read_only (test_ai.AiAssistantTests.test_02_tools_are_declared_read_only) ... ok
+test_03_thirty_question_sample (test_ai.AiAssistantTests.test_03_thirty_question_sample) ... FAIL
+test_04_brief_generation_and_download (test_ai.AiAssistantTests.test_04_brief_generation_and_download) ... ok
+test_05_bad_question_is_400 (test_ai.AiAssistantTests.test_05_bad_question_is_400) ... ok
+test_key_is_present_but_never_exposed (test_ai.AiKeyLeakTests.test_key_is_present_but_never_exposed) ... ok
+test_01_health_is_public_and_describes_service (test_auth.AuthTests.test_01_health_is_public_and_describes_service) ... ok
+test_02_login_success_me_and_cookie_flags (test_auth.AuthTests.test_02_login_success_me_and_cookie_flags) ... ok
+test_03_login_failures_are_401_or_400 (test_auth.AuthTests.test_03_login_failures_are_401_or_400) ... FAIL
+test_04_unauthenticated_requests_are_401 (test_auth.AuthTests.test_04_unauthenticated_requests_are_401) ... ok
+test_05_operator_cannot_use_admin_endpoints (test_auth.AuthTests.test_05_operator_cannot_use_admin_endpoints) ... ok
+test_06_admin_user_management (test_auth.AuthTests.test_06_admin_user_management) ... ok
+test_07_password_change_revokes_other_sessions (test_auth.AuthTests.test_07_password_change_revokes_other_sessions) ... ok
+test_08_logout_invalidates_session (test_auth.AuthTests.test_08_logout_invalidates_session) ... ok
+test_01_openapi_matches_registered_routes (test_contract.ContractTests.test_01_openapi_matches_registered_routes) ... ok
+test_02_contract_endpoints_are_all_implemented (test_contract.ContractTests.test_02_contract_endpoints_are_all_implemented) ... ok
+test_03_openapi_metadata_and_docs (test_contract.ContractTests.test_03_openapi_metadata_and_docs) ... ok
+test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) ... 
+  test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) (path='/api/dashboard', params={'start': '2008-01-01', 'end': '2011-12-09'}) ... FAIL
+  test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) (path='/api/auth/login') ... FAIL
+test_05_http_status_codes_are_documented (test_contract.ContractTests.test_05_http_status_codes_are_documented) ... FAIL
+test_06_cross_origin_writes_are_403 (test_contract.ContractTests.test_06_cross_origin_writes_are_403) ... ok
+test_07_frontend_is_served_by_fastapi (test_contract.ContractTests.test_07_frontend_is_served_by_fastapi) ... ok
+test_01_original_window_totals_match_historical_baseline (test_dashboard.DashboardTests.test_01_original_window_totals_match_historical_baseline) ... ok
+test_02_trend_keeps_calendar_days_and_sums_to_totals (test_dashboard.DashboardTests.test_02_trend_keeps_calendar_days_and_sums_to_totals) ... ok
+test_03_previous_period_and_changes (test_dashboard.DashboardTests.test_03_previous_period_and_changes) ... ok
+test_04_ranking_countries_weekdays_quality (test_dashboard.DashboardTests.test_04_ranking_countries_weekdays_quality) ... FAIL
+test_05_default_range_is_last_30_days (test_dashboard.DashboardTests.test_05_default_range_is_last_30_days) ... ok
+test_06_trend_csv_export (test_dashboard.DashboardTests.test_06_trend_csv_export) ... ok
+test_07_orders_csv_export_matches_order_list (test_dashboard.DashboardTests.test_07_orders_csv_export_matches_order_list) ... ok
+test_08_transactions_csv_export (test_dashboard.DashboardTests.test_08_transactions_csv_export) ... ok
+test_09_invalid_filters_are_400 (test_dashboard.DashboardTests.test_09_invalid_filters_are_400) ... FAIL
+test_10_empty_range_is_empty_not_fabricated (test_dashboard.DashboardTests.test_10_empty_range_is_empty_not_fabricated) ... FAIL
+test_11_products_and_transactions_follow_the_batch (test_dashboard.DashboardTests.test_11_products_and_transactions_follow_the_batch) ... FAIL
+test_01_forecast_job_returns_seven_null_actual_rows (test_forecast.ForecastTests.test_01_forecast_job_returns_seven_null_actual_rows) ... ERROR
+test_02_forecast_csv_export (test_forecast.ForecastTests.test_02_forecast_csv_export) ... FAIL
+test_03_choose_model_and_reject_unknown (test_forecast.ForecastTests.test_03_choose_model_and_reject_unknown) ... ok
+test_04_backtest_small_window (test_forecast.ForecastTests.test_04_backtest_small_window) ... ok
+test_05_job_binding_survives_batch_switch (test_forecast.ForecastTests.test_05_job_binding_survives_batch_switch) ... ok
+test_06_bad_requests_and_missing_jobs (test_forecast.ForecastTests.test_06_bad_requests_and_missing_jobs) ... ok
+test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) ... 
+  test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='blend_rule') ... FAIL
+  test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='lgbm') ... FAIL
+  test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='holt_winters') ... FAIL
+  test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='seasonal_week4') ... FAIL
+  test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='naive_week') ... FAIL
+test_01_rejects_wrong_file_type (test_import.ImportTests.test_01_rejects_wrong_file_type) ... ok
+test_02_missing_required_column_is_reported (test_import.ImportTests.test_02_missing_required_column_is_reported) ... ok
+test_03_upload_small_sample_succeeds_as_inactive_snapshot (test_import.ImportTests.test_03_upload_small_sample_succeeds_as_inactive_snapshot) ... ok
+test_04_duplicate_file_creates_no_new_batch (test_import.ImportTests.test_04_duplicate_file_creates_no_new_batch) ... ok
+test_05_activate_switches_dashboard_and_orders (test_import.ImportTests.test_05_activate_switches_dashboard_and_orders) ... ok
+test_06_exports_on_uploaded_batch_keep_text_and_neutralise_formulas (test_import.ImportTests.test_06_exports_on_uploaded_batch_keep_text_and_neutralise_formulas) ... ok
+test_07_switch_back_to_original_restores_baseline (test_import.ImportTests.test_07_switch_back_to_original_restores_baseline) ... ok
+test_upload_xlsx_small_sample (test_import.ImportXlsxTests.test_upload_xlsx_small_sample) ... ok
+test_01_scenario_create_and_list (test_inventory.InventoryTests.test_01_scenario_create_and_list) ... ok
+test_02_item_parameters_and_replenishment_formula (test_inventory.InventoryTests.test_02_item_parameters_and_replenishment_formula) ... FAIL
+test_03_movements_balance_and_idempotency (test_inventory.InventoryTests.test_03_movements_balance_and_idempotency) ... ok
+test_04_in_transit_confirmation_and_receiving (test_inventory.InventoryTests.test_04_in_transit_confirmation_and_receiving) ... ok
+test_05_validation_and_missing_resources (test_inventory.InventoryTests.test_05_validation_and_missing_resources) ... ok
+test_01_orders_total_matches_dashboard (test_orders.OrdersTests.test_01_orders_total_matches_dashboard) ... ok
+test_02_rows_sorted_and_long_order_keys_are_strings (test_orders.OrdersTests.test_02_rows_sorted_and_long_order_keys_are_strings) ... ok
+test_03_order_detail_lines_add_up_to_header (test_orders.OrdersTests.test_03_order_detail_lines_add_up_to_header) ... ok
+test_04_dashboard_and_orders_follow_the_same_filter (test_orders.OrdersTests.test_04_dashboard_and_orders_follow_the_same_filter) ... ok
+test_05_q_searches_order_keys (test_orders.OrdersTests.test_05_q_searches_order_keys) ... ok
+test_06_unknown_order_is_404 (test_orders.OrdersTests.test_06_unknown_order_is_404) ... ok
+
+======================================================================
+ERROR: test_01_forecast_job_returns_seven_null_actual_rows (test_forecast.ForecastTests.test_01_forecast_job_returns_seven_null_actual_rows)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_forecast.py", line 95, in test_01_forecast_job_returns_seven_null_actual_rows
+    origins = [row['origin'] for row in rows]
+               ~~~^^^^^^^^^^
+KeyError: 'origin'
+
+======================================================================
+FAIL: test_01_status_reports_unconfigured_and_no_secret (test_ai.AiAssistantTests.test_01_status_reports_unconfigured_and_no_secret)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_ai.py", line 79, in test_01_status_reports_unconfigured_and_no_secret
+    self.assertEqual(payload.get('fallback'), 'local-rule-planner')
+AssertionError: None != 'local-rule-planner'
+
+======================================================================
+FAIL: test_03_thirty_question_sample (test_ai.AiAssistantTests.test_03_thirty_question_sample)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_ai.py", line 198, in test_03_thirty_question_sample
+    self.assertFalse(failures, 'AI 回答出现工具结果之外的数字：\n' + '\n'.join(failures))
+AssertionError: ["#1 出现工具结果之外的数字 [2215.0, 2618.89, 581475.0, 581476.0, 581477.0, 581478.0, 581479.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际订单查询（2011-11-10~2011-12-09）：共 2,913 笔订单，第 1 页 10 笔；581475（2011-12-09，352件，£280.24）；581476（2011-12-09，2,215件，£2,618.89）；581477（2011-12-09，144件，£291.78）；581478（2011-12-09，226件，£3'", "#4 出现工具结果之外的数字 [579276.0, 579393.0, 579416.0, 579747.0, 579786.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际订单查询（2011-11-01~2011-11-30）：共 68 笔订单，第 1 页 10 笔；579747（2011-11-30，151件，£371.60）；579786（2011-11-30，110件，£307.80）；579276（2011-11-29，49件，£93.00）；579393（2011-11-29，309件，£566.98）；57'", "#7 出现工具结果之外的数字 [575178.0, 575179.0, 575180.0, 575181.0, 575182.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际订单查询（2011-10-11~2011-11-09）：共 2,278 笔订单，第 1 页 10 笔；575178（2011-11-09，110件，£345.80）；575179（2011-11-09，91件，£343.15）；575180（2011-11-09，24件，£306.00）；575181（2011-11-09，150件，£312.00）'", "#12 出现工具结果之外的数字 [1288.64, 579522.0, 579523.0, 579524.0, 579525.0, 579526.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际订单查询（2011-11-01~2011-11-30）：共 2,884 笔订单，第 1 页 10 笔；579522（2011-11-30，160件，£284.38）；579523（2011-11-30，204件，£729.60）；579524（2011-11-30，134件，£302.56）；579525（2011-11-30，950件，£1,288'", "#15 出现工具结果之外的数字 [22423.0, 26536.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际商品检索「22423」：匹配 1 个商品；22423 REGENCY CAKESTAND 3 TIER（销量26,536）\\n· 历史实际（2011-11-01~2011-11-30，商品 22423）：成交量 1,054 件，销售额 £13,799.58，订单 201 笔，商品数 1；与 /api/dashboard 同口径（sale=1，订单按 i'", "#20 出现工具结果之外的数字 [22086.0, 22197.0, 23084.0, 23843.0, 84826.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际商品销量排名（2011-11-10~2011-12-09）：第1名 23843 PAPER CRAFT , LITTLE BIRDIE：销量80,995 件，销售额£168,469.60；第2名 23084 RABBIT NIGHT LIGHT：销量15,243 件，销售额£34,330.51；第3名 22197 POPCORN HOLDER：销量1'", "#24 出现工具结果之外的数字 [2916.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际（2011-11-10~2011-12-09，国家 United Kingdom）：成交量 744,481 件，销售额 £1,501,355.49，订单 2,620 笔，商品数 2,916；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +36.8%，销售额环比 +46.5%，订单数环比 +27.'", "#25 出现工具结果之外的数字 [2215.0, 2618.89, 581475.0, 581476.0, 581477.0, 581478.0, 581479.0]: '未调用大模型，数字来自服务端工具。\\n· 历史实际订单查询（2011-12-09~2011-12-09）：共 44 笔订单，第 1 页 10 笔；581475（2011-12-09，352件，£280.24）；581476（2011-12-09，2,215件，£2,618.89）；581477（2011-12-09，144件，£291.78）；581478（2011-12-09，226件，£391.'"] is not false : AI 回答出现工具结果之外的数字：
+#1 出现工具结果之外的数字 [2215.0, 2618.89, 581475.0, 581476.0, 581477.0, 581478.0, 581479.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际订单查询（2011-11-10~2011-12-09）：共 2,913 笔订单，第 1 页 10 笔；581475（2011-12-09，352件，£280.24）；581476（2011-12-09，2,215件，£2,618.89）；581477（2011-12-09，144件，£291.78）；581478（2011-12-09，226件，£3'
+#4 出现工具结果之外的数字 [579276.0, 579393.0, 579416.0, 579747.0, 579786.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际订单查询（2011-11-01~2011-11-30）：共 68 笔订单，第 1 页 10 笔；579747（2011-11-30，151件，£371.60）；579786（2011-11-30，110件，£307.80）；579276（2011-11-29，49件，£93.00）；579393（2011-11-29，309件，£566.98）；57'
+#7 出现工具结果之外的数字 [575178.0, 575179.0, 575180.0, 575181.0, 575182.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际订单查询（2011-10-11~2011-11-09）：共 2,278 笔订单，第 1 页 10 笔；575178（2011-11-09，110件，£345.80）；575179（2011-11-09，91件，£343.15）；575180（2011-11-09，24件，£306.00）；575181（2011-11-09，150件，£312.00）'
+#12 出现工具结果之外的数字 [1288.64, 579522.0, 579523.0, 579524.0, 579525.0, 579526.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际订单查询（2011-11-01~2011-11-30）：共 2,884 笔订单，第 1 页 10 笔；579522（2011-11-30，160件，£284.38）；579523（2011-11-30，204件，£729.60）；579524（2011-11-30，134件，£302.56）；579525（2011-11-30，950件，£1,288'
+#15 出现工具结果之外的数字 [22423.0, 26536.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际商品检索「22423」：匹配 1 个商品；22423 REGENCY CAKESTAND 3 TIER（销量26,536）\n· 历史实际（2011-11-01~2011-11-30，商品 22423）：成交量 1,054 件，销售额 £13,799.58，订单 201 笔，商品数 1；与 /api/dashboard 同口径（sale=1，订单按 i'
+#20 出现工具结果之外的数字 [22086.0, 22197.0, 23084.0, 23843.0, 84826.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际商品销量排名（2011-11-10~2011-12-09）：第1名 23843 PAPER CRAFT , LITTLE BIRDIE：销量80,995 件，销售额£168,469.60；第2名 23084 RABBIT NIGHT LIGHT：销量15,243 件，销售额£34,330.51；第3名 22197 POPCORN HOLDER：销量1'
+#24 出现工具结果之外的数字 [2916.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际（2011-11-10~2011-12-09，国家 United Kingdom）：成交量 744,481 件，销售额 £1,501,355.49，订单 2,620 笔，商品数 2,916；与 /api/dashboard 同口径（sale=1，订单按 invoice 去重）。 成交量环比 +36.8%，销售额环比 +46.5%，订单数环比 +27.'
+#25 出现工具结果之外的数字 [2215.0, 2618.89, 581475.0, 581476.0, 581477.0, 581478.0, 581479.0]: '未调用大模型，数字来自服务端工具。\n· 历史实际订单查询（2011-12-09~2011-12-09）：共 44 笔订单，第 1 页 10 笔；581475（2011-12-09，352件，£280.24）；581476（2011-12-09，2,215件，£2,618.89）；581477（2011-12-09，144件，£291.78）；581478（2011-12-09，226件，£391.'
+
+======================================================================
+FAIL: test_03_login_failures_are_401_or_400 (test_auth.AuthTests.test_03_login_failures_are_401_or_400)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_auth.py", line 70, in test_03_login_failures_are_401_or_400
+    self.expect_error(missing, 400, 'bad_request')
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 389, in expect_error
+    payload = self.expect_json(response, status)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 383, in expect_json
+    self.assertEqual(
+AssertionError: 401 != 400 : http://127.0.0.1:59440/api/auth/login 期望 HTTP 400，实际 401：{"error":"账号或密码错误","code":"unauthorized"}
+
+======================================================================
+FAIL: test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) (path='/api/dashboard', params={'start': '2008-01-01', 'end': '2011-12-09'})
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_contract.py", line 156, in test_04_validation_errors_are_400_with_stable_code
+    self.assertIn(payload.get('code'),
+AssertionError: None not found in ('bad_request', 'not_found') : 错误码不在契约枚举内：{"filters": {"start": "2008-01-01", "end": "2011-12-09", "product": "", "country": ""}, "coverage": {"start": "2009-12-01", "end": "2011-12-09"}, "totals": {"lines": 1022290, "quantity": 11490121, "orders": 41943, "products": 4984, "amount_rows": 1022285, "revenue": 20533741.918, "average_order_value": 489.5630240564576}, "previous": {"filters": {"start": "2004-01-23", "end": "2007-12-31", "product": "", "country": ""}, "totals": {"lines": 0, "quantity": 0, "orders": 0, "products": 0, "amount_rows": 0, "revenue": 0.0, "average_order_value": null}, "complete": false}, "changes": {"quantity": null, "revenue": null, "orders": null}, "trend": [{"date": "2008-01-01", "quantity": null, "revenue": null, "orders": null, "lines": 0, "observed": false}, {"date": "2008-01-02", "quantity": null, "revenue": null, "orders": null, "lines": 0, "observed": false}, {"date": "2008-01-03", "quantity": null, "revenue": null, "orders": null, "lines": 0, "observed": false}, {"date": "2008-01-04", "quantity": null, "revenue": null, "orders": null, "lines": 0, "observed": false}, {"date": "2008-01-05", "quantity": null, "revenue": null, "orders": null, "lines": 0, "observed": false}, {"date": "2008-01-06",…
+
+======================================================================
+FAIL: test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) (path='/api/auth/login')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_contract.py", line 171, in test_04_validation_errors_are_400_with_stable_code
+    self.assertEqual(response.status, 400, f'{path} 应返回 400：{response.text()[:300]}')
+AssertionError: 401 != 400 : /api/auth/login 应返回 400：{"error":"账号或密码错误","code":"unauthorized"}
+
+======================================================================
+FAIL: test_05_http_status_codes_are_documented (test_contract.ContractTests.test_05_http_status_codes_are_documented)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_contract.py", line 181, in test_05_http_status_codes_are_documented
+    self.expect_error(anonymous.get('/api/definitely-not-a-route'), 404, 'not_found')
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 389, in expect_error
+    payload = self.expect_json(response, status)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 383, in expect_json
+    self.assertEqual(
+AssertionError: 401 != 404 : http://127.0.0.1:59554/api/definitely-not-a-route 期望 HTTP 404，实际 401：{"error":"未登录或登录已失效","code":"unauthorized"}
+
+======================================================================
+FAIL: test_04_ranking_countries_weekdays_quality (test_dashboard.DashboardTests.test_04_ranking_countries_weekdays_quality)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_dashboard.py", line 106, in test_04_ranking_countries_weekdays_quality
+    self.assertEqual(sum(row['quantity'] for row in ranking), totals['quantity'],
+AssertionError: 189053 != 851403 : 商品排名数量合计应等于看板数量
+
+======================================================================
+FAIL: test_09_invalid_filters_are_400 (test_dashboard.DashboardTests.test_09_invalid_filters_are_400)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_dashboard.py", line 196, in test_09_invalid_filters_are_400
+    self.expect_error(self.admin.get('/api/dashboard', {
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 389, in expect_error
+    payload = self.expect_json(response, status)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\apiharness.py", line 383, in expect_json
+    self.assertEqual(
+AssertionError: 200 != 400 : http://127.0.0.1:59604/api/dashboard?start=2008-01-01&end=2011-12-09 期望 HTTP 400，实际 200：{"filters":{"start":"2008-01-01","end":"2011-12-09","product":"","country":""},"coverage":{"start":"2009-12-01","end":"2011-12-09"},"totals":{"lines":1022290,"quantity":11490121,"orders":41943,"products":4984,"amount_rows":1022285,"revenue":20533741.918,"average_order_value":489.5630240564576},"previous":{"filters":{"start":"2004-01-23","end":"2007-12-31","product":"","country":""},"totals":{"lines":0,"quantity":0,"orders":0,"products":0,"amount_rows":0,"revenue":0.0,"average_order_value":null},
+
+======================================================================
+FAIL: test_10_empty_range_is_empty_not_fabricated (test_dashboard.DashboardTests.test_10_empty_range_is_empty_not_fabricated)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_dashboard.py", line 214, in test_10_empty_range_is_empty_not_fabricated
+    self.assertIsNone(row['quantity'], '覆盖外未知日期应显示为空而不是0')
+AssertionError: 0 is not None : 覆盖外未知日期应显示为空而不是0
+
+======================================================================
+FAIL: test_11_products_and_transactions_follow_the_batch (test_dashboard.DashboardTests.test_11_products_and_transactions_follow_the_batch)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_dashboard.py", line 238, in test_11_products_and_transactions_follow_the_batch
+    self.assertIn(field, row)
+AssertionError: 'customer_id' not found in {'invoice': '581587', 'stock_code': '22138', 'description': 'BAKING SET 9 PIECE RETROSPOT', 'quantity': 3, 'unit_price': 4.95, 'revenue': 14.85, 'invoice_time': '2011-12-09 12:50:00', 'country': 'France', 'sheet': 'Year 2010-2011', 'source_row': 541910, 'within_duplicate_candidate': 0}
+
+======================================================================
+FAIL: test_02_forecast_csv_export (test_forecast.ForecastTests.test_02_forecast_csv_export)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_forecast.py", line 131, in test_02_forecast_csv_export
+    self.assertAlmostEqual(float(row[3]), expected['prediction'], places=6)
+AssertionError: 29657.73692 != 29657.736921364693 within 6 places (1.3646931620314717e-06 difference)
+
+======================================================================
+FAIL: test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='blend_rule')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_forecast.py", line 273, in test_changing_the_future_does_not_change_predictions
+    self.assertTrue(all(row['actual'] is None for row in base['rows']),
+AssertionError: False is not true : 预测起点之后没有可用实际值，不得回填
+
+======================================================================
+FAIL: test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='lgbm')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_forecast.py", line 273, in test_changing_the_future_does_not_change_predictions
+    self.assertTrue(all(row['actual'] is None for row in base['rows']),
+AssertionError: False is not true : 预测起点之后没有可用实际值，不得回填
+
+======================================================================
+FAIL: test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='holt_winters')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_forecast.py", line 273, in test_changing_the_future_does_not_change_predictions
+    self.assertTrue(all(row['actual'] is None for row in base['rows']),
+AssertionError: False is not true : 预测起点之后没有可用实际值，不得回填
+
+======================================================================
+FAIL: test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='seasonal_week4')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_forecast.py", line 273, in test_changing_the_future_does_not_change_predictions
+    self.assertTrue(all(row['actual'] is None for row in base['rows']),
+AssertionError: False is not true : 预测起点之后没有可用实际值，不得回填
+
+======================================================================
+FAIL: test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='naive_week')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_forecast.py", line 273, in test_changing_the_future_does_not_change_predictions
+    self.assertTrue(all(row['actual'] is None for row in base['rows']),
+AssertionError: False is not true : 预测起点之后没有可用实际值，不得回填
+
+======================================================================
+FAIL: test_02_item_parameters_and_replenishment_formula (test_inventory.InventoryTests.test_02_item_parameters_and_replenishment_formula)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\Administrator\11111\数据\学校项目\03_测试与验证\系统测试\tests_api\test_inventory.py", line 101, in test_02_item_parameters_and_replenishment_formula
+    self.assertAlmostEqual(item.get('lead_time_demand') or 0, 80)
+AssertionError: 0 != 80 within 7 places (80 difference)
+
+----------------------------------------------------------------------
+Ran 58 tests in 93.129s
+
+FAILED (failures=17, errors=1)
+==============================================================================
+耗时: 93.19s
+用例: 共 58，失败 17，错误 1，跳过 0
+官方库运行后:
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\11111\数据\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+官方库是否被修改: 否
+失败用例:
+  - test_01_status_reports_unconfigured_and_no_secret (test_ai.AiAssistantTests.test_01_status_reports_unconfigured_and_no_secret)
+  - test_03_thirty_question_sample (test_ai.AiAssistantTests.test_03_thirty_question_sample)
+  - test_03_login_failures_are_401_or_400 (test_auth.AuthTests.test_03_login_failures_are_401_or_400)
+  - test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) (path='/api/dashboard', params={'start': '2008-01-01', 'end': '2011-12-09'})
+  - test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) (path='/api/auth/login')
+  - test_05_http_status_codes_are_documented (test_contract.ContractTests.test_05_http_status_codes_are_documented)
+  - test_04_ranking_countries_weekdays_quality (test_dashboard.DashboardTests.test_04_ranking_countries_weekdays_quality)
+  - test_09_invalid_filters_are_400 (test_dashboard.DashboardTests.test_09_invalid_filters_are_400)
+  - test_10_empty_range_is_empty_not_fabricated (test_dashboard.DashboardTests.test_10_empty_range_is_empty_not_fabricated)
+  - test_11_products_and_transactions_follow_the_batch (test_dashboard.DashboardTests.test_11_products_and_transactions_follow_the_batch)
+  - test_02_forecast_csv_export (test_forecast.ForecastTests.test_02_forecast_csv_export)
+  - test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='blend_rule')
+  - test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='lgbm')
+  - test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='holt_winters')
+  - test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='seasonal_week4')
+  - test_changing_the_future_does_not_change_predictions (test_forecast.FutureLeakTests.test_changing_the_future_does_not_change_predictions) (method='naive_week')
+  - test_02_item_parameters_and_replenishment_formula (test_inventory.InventoryTests.test_02_item_parameters_and_replenishment_formula)
+错误用例:
+  - test_01_forecast_job_returns_seven_null_actual_rows (test_forecast.ForecastTests.test_01_forecast_job_returns_seven_null_actual_rows)
+==============================================================================

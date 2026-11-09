@@ -1,0 +1,13 @@
+test_01_openapi_matches_registered_routes (test_contract.ContractTests.test_01_openapi_matches_registered_routes) ... ok
+test_02_contract_endpoints_are_all_implemented (test_contract.ContractTests.test_02_contract_endpoints_are_all_implemented) ... ok
+test_03_openapi_metadata_and_docs (test_contract.ContractTests.test_03_openapi_metadata_and_docs) ... ok
+test_04_validation_errors_are_400_with_stable_code (test_contract.ContractTests.test_04_validation_errors_are_400_with_stable_code) ... ok
+test_05_http_status_codes_are_documented (test_contract.ContractTests.test_05_http_status_codes_are_documented) ... ok
+test_06_cross_origin_writes_are_403 (test_contract.ContractTests.test_06_cross_origin_writes_are_403) ... ok
+test_07_frontend_is_served_by_fastapi (test_contract.ContractTests.test_07_frontend_is_served_by_fastapi) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 4.172s
+
+OK
+[contract] ��Լ֮�����ʵ�ֶ˵㣨��ص���Լȷ�ϣ���[('GET', '/api/settings'), ('PUT', '/api/settings')]

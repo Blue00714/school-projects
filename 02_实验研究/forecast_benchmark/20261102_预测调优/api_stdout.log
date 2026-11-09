@@ -1,0 +1,83 @@
+INFO:     127.0.0.1:56815 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58940 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58940 - "GET /assets/index-CE9BsOH1.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58940 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58942 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:58940 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58940 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58940 - "GET /assets/Forecast-BiOx5qeY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58970 - "GET /assets/table-column-CwPYV1nE.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58972 - "GET /assets/omit-CtrCvzVt.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58971 - "GET /assets/input-CXaVR7yY.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58973 - "GET /assets/divider-Be9Y4a6i.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58974 - "GET /assets/Forecast-Kz1YPpzJ.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58974 - "GET /assets/date-picker-panel-DQMfVaJr.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58940 - "GET /assets/select-DiSMwiBD.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:58973 - "GET /assets/alert-1LuLKYj7.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64174 - "POST /api/forecast HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64174 - "GET /api/jobs/1706e12f24894f5a9542f2645049bb3a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64174 - "GET /api/jobs/1706e12f24894f5a9542f2645049bb3a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64174 - "GET /api/jobs/1706e12f24894f5a9542f2645049bb3a HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64254 - "POST /api/forecast HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64254 - "GET /api/jobs/f66686cefcab49cbb10682dada355f38 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "POST /api/forecast HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64281 - "GET /api/jobs/848e1e3ae8034de4aab00c2fd3cbd928 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /api/jobs/848e1e3ae8034de4aab00c2fd3cbd928 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "POST /api/backtest HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64281 - "GET /api/jobs/f3fe46b12b264147b2cfaff9cad2f4bf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /api/jobs/f3fe46b12b264147b2cfaff9cad2f4bf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /api/jobs/f3fe46b12b264147b2cfaff9cad2f4bf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /api/jobs/f3fe46b12b264147b2cfaff9cad2f4bf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /api/jobs/f3fe46b12b264147b2cfaff9cad2f4bf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /api/jobs/f3fe46b12b264147b2cfaff9cad2f4bf HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /assets/index-CE9BsOH1.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64281 - "GET /api/auth/me HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64368 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:64281 - "GET /api/options HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /api/health HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64281 - "GET /assets/Forecast-BiOx5qeY.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64373 - "GET /assets/table-column-CwPYV1nE.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64374 - "GET /assets/input-CXaVR7yY.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64375 - "GET /assets/omit-CtrCvzVt.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64376 - "GET /assets/divider-Be9Y4a6i.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64377 - "GET /assets/date-picker-panel-DQMfVaJr.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64281 - "GET /assets/select-DiSMwiBD.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64373 - "GET /assets/Forecast-Kz1YPpzJ.css HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64374 - "GET /assets/alert-1LuLKYj7.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:64391 - "POST /api/forecast HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64391 - "GET /api/jobs/aca218fb19ea44699e54032a47afb2ca HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64416 - "POST /api/backtest HTTP/1.1" 202 Accepted
+INFO:     127.0.0.1:64416 - "GET /api/jobs/aedcc1a322dc4e788e0a0ef700461121 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64416 - "GET /api/jobs/aedcc1a322dc4e788e0a0ef700461121 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64416 - "GET /api/jobs/aedcc1a322dc4e788e0a0ef700461121 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64416 - "GET /api/jobs/aedcc1a322dc4e788e0a0ef700461121 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64416 - "GET /api/jobs/aedcc1a322dc4e788e0a0ef700461121 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:64416 - "GET /api/jobs/aedcc1a322dc4e788e0a0ef700461121 HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57058 - "GET / HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57058 - "GET /assets/index-CE9BsOH1.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57059 - "GET /assets/index-BuDBYUX3.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57059 - "GET /assets/dashboard-DeT4n18y.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57058 - "GET /assets/example-CD0E2g5T.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57075 - "GET /assets/product-D14f0Udh.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57076 - "GET /assets/table-BcCC8_DG.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /assets/order-CJ9H2j5_.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57077 - "GET /assets/total-week-DA3-T8vB.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57059 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57058 - "GET /assets/ums-admin-D6KUlihe.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57076 - "GET /assets/divider-DX5ccdpw.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57075 - "GET /assets/index-BIiWAZNU.js HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /assets/input-CXaVR7yY.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57077 - "GET /assets/divider-Be9Y4a6i.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57059 - "GET /assets/input-DbQ3yDQM.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57074 - "GET /assets/alert-DoDDMYK-.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57076 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:57058 - "GET /assets/alert-1LuLKYj7.js HTTP/1.1" 304 Not Modified
+INFO:     127.0.0.1:57077 - "GET /assets/index-CoKZ2IQ1.css HTTP/1.1" 200 OK
+INFO:     127.0.0.1:57058 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:57074 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:57077 - "GET /api/health HTTP/1.1" 500 Internal Server Error
+INFO:     127.0.0.1:57118 - "GET /api/auth/me HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:57120 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:57121 - "GET /favicon.ico HTTP/1.1" 204 No Content
+INFO:     127.0.0.1:57118 - "GET /api/health HTTP/1.1" 500 Internal Server Error

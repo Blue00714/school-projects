@@ -1,0 +1,185 @@
+{
+  "before_counts": {
+    "users": 2,
+    "batches": 1,
+    "jobs": 21,
+    "inventory_scenarios": 1,
+    "inventory_items": 12,
+    "inventory_movements": 28,
+    "inventory_in_transit": 10,
+    "demo_balance": 1540.0
+  },
+  "protected": {
+    "20261014_电商数据与页面选型\\online_retail_II.xlsx": "bcbe73b35f5b7babf197fb0cb983a11f5d9ff929078d4aa53d171b1f2df2e980",
+    "电商运营系统\\runtime\\retail.sqlite3": "033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf",
+    "电商运营系统\\runtime\\app.sqlite3": "b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d",
+    "电商运营系统\\runtime\\models\\4ac61f51f6d2bed861fa5bc598f19e2d684df21dbe66126a5edd99e802b7cc0f\\lightgbm.txt": "f8a04c18e6f7b871b12a4c275835e900a4b5133c6ca138445193ed4b4bb28235",
+    "电商运营系统\\runtime\\models\\4ac61f51f6d2bed861fa5bc598f19e2d684df21dbe66126a5edd99e802b7cc0f\\metadata.json": "c2f60a77380ecb16f2d0b56c3873a59c955cfbf8c403140cbd9a5b031273be3e",
+    "电商运营系统\\runtime\\models\\4e99a848c625529bda0f4f734d73a86aaae7fb4e0d47b2e9c59128b31c3ba99a\\lightgbm.txt": "3d9b55affd31384c927129189c6203317f011dc066b46424c91776d3d604efa8",
+    "电商运营系统\\runtime\\models\\4e99a848c625529bda0f4f734d73a86aaae7fb4e0d47b2e9c59128b31c3ba99a\\metadata.json": "054ad96bd3ae8c09b588659afc570fafff0e72d5e76ee6dbcf22f90f2eae1780",
+    "电商运营系统\\runtime\\models\\b33b982be9be11535774b9ee06fefc7fe8aad6f537369049950181ecd2b50b77\\lightgbm.txt": "f8a04c18e6f7b871b12a4c275835e900a4b5133c6ca138445193ed4b4bb28235",
+    "电商运营系统\\runtime\\models\\b33b982be9be11535774b9ee06fefc7fe8aad6f537369049950181ecd2b50b77\\metadata.json": "c2f60a77380ecb16f2d0b56c3873a59c955cfbf8c403140cbd9a5b031273be3e",
+    "电商运营系统\\runtime\\models\\f80480b0d7a56d545fe1bdb889f921a2930394f070956521b5a308e58ba7b8af\\lightgbm.txt": "3d9b55affd31384c927129189c6203317f011dc066b46424c91776d3d604efa8",
+    "电商运营系统\\runtime\\models\\f80480b0d7a56d545fe1bdb889f921a2930394f070956521b5a308e58ba7b8af\\metadata.json": "054ad96bd3ae8c09b588659afc570fafff0e72d5e76ee6dbcf22f90f2eae1780"
+  },
+  "moves": [
+    [
+      "电商运营系统\\api\\__init__.py",
+      "电商运营系统\\backend\\app\\__init__.py"
+    ],
+    [
+      "电商运营系统\\api\\main.py",
+      "电商运营系统\\backend\\app\\main.py"
+    ],
+    [
+      "电商运营系统\\api\\db.py",
+      "电商运营系统\\backend\\app\\db.py"
+    ],
+    [
+      "电商运营系统\\api\\config.py",
+      "电商运营系统\\backend\\app\\core\\config.py"
+    ],
+    [
+      "电商运营系统\\api\\security.py",
+      "电商运营系统\\backend\\app\\core\\security.py"
+    ],
+    [
+      "电商运营系统\\api\\errors.py",
+      "电商运营系统\\backend\\app\\core\\errors.py"
+    ],
+    [
+      "电商运营系统\\api\\deps.py",
+      "电商运营系统\\backend\\app\\api\\deps.py"
+    ],
+    [
+      "电商运营系统\\api\\routers",
+      "电商运营系统\\backend\\app\\api\\routers"
+    ],
+    [
+      "电商运营系统\\api\\services",
+      "电商运营系统\\backend\\app\\services"
+    ],
+    [
+      "电商运营系统\\run.py",
+      "电商运营系统\\backend\\run.py"
+    ],
+    [
+      "电商运营系统\\manage.py",
+      "电商运营系统\\backend\\cli.py"
+    ],
+    [
+      "电商运营系统\\requirements.txt",
+      "电商运营系统\\backend\\requirements.txt"
+    ],
+    [
+      "电商运营系统\\API契约.md",
+      "电商运营系统\\docs\\API契约.md"
+    ],
+    [
+      "电商运营系统\\登录配置.ini",
+      "电商运营系统\\config\\local\\登录配置.ini"
+    ],
+    [
+      "电商运营系统\\runtime\\mysql.env",
+      "电商运营系统\\config\\local\\mysql.env"
+    ],
+    [
+      "电商运营系统\\.mysql\\my.ini",
+      "电商运营系统\\config\\local\\mysql.ini"
+    ],
+    [
+      "电商运营系统\\.mysql",
+      "电商运营系统\\vendor\\mysql"
+    ],
+    [
+      "电商运营系统\\.pydeps",
+      "电商运营系统\\vendor\\python-packages"
+    ],
+    [
+      "电商运营系统\\启动系统.ps1",
+      "电商运营系统\\scripts\\启动系统.ps1"
+    ],
+    [
+      "电商运营系统\\scripts\\acceptance_mysql.py",
+      "电商运营系统\\backend\\tests\\integration\\acceptance_mysql.py"
+    ],
+    [
+      "电商运营系统\\services\\analytics.py",
+      "电商运营系统\\backend\\app\\services\\analytics.py"
+    ],
+    [
+      "电商运营系统\\services\\data.py",
+      "电商运营系统\\backend\\app\\services\\data.py"
+    ],
+    [
+      "电商运营系统\\services\\forecasting.py",
+      "电商运营系统\\backend\\app\\services\\forecasting.py"
+    ],
+    [
+      "电商运营系统\\server.py",
+      "03_测试与验证\\历史实现\\旧版看板\\server.py"
+    ],
+    [
+      "电商运营系统\\web",
+      "03_测试与验证\\历史实现\\旧版看板\\web"
+    ],
+    [
+      "电商运营系统\\启动看板.cmd",
+      "03_测试与验证\\历史实现\\旧版看板\\启动看板.cmd"
+    ],
+    [
+      "电商运营系统\\启动看板.ps1",
+      "03_测试与验证\\历史实现\\旧版看板\\启动看板.ps1"
+    ],
+    [
+      "03_测试与验证\\系统测试\\tests",
+      "电商运营系统\\backend\\tests\\services"
+    ],
+    [
+      "03_测试与验证\\系统测试\\tests_api",
+      "电商运营系统\\backend\\tests\\api"
+    ],
+    [
+      "电商运营系统\\runtime\\server_stdout.log",
+      "电商运营系统\\runtime\\logs\\server_stdout.log"
+    ],
+    [
+      "电商运营系统\\runtime\\server_stderr.log",
+      "电商运营系统\\runtime\\logs\\server_stderr.log"
+    ],
+    [
+      "电商运营系统\\runtime\\mysql-logs",
+      "电商运营系统\\runtime\\logs\\mysql"
+    ],
+    [
+      "电商运营系统\\runtime\\mysql-tmp",
+      "电商运营系统\\runtime\\tmp\\mysql"
+    ]
+  ],
+  "after_counts": {
+    "users": 2,
+    "batches": 1,
+    "jobs": 21,
+    "inventory_scenarios": 1,
+    "inventory_items": 12,
+    "inventory_movements": 28,
+    "inventory_in_transit": 10,
+    "demo_balance": 1540.0
+  },
+  "protected_bytes_unchanged": true,
+  "implementation": "Codex implementation and review; Claude Code MCP file tools for entry documents; prior CLI permission failure not retried.",
+  "root_files": [
+    ".gitignore",
+    "README.md",
+    "启动系统.cmd"
+  ],
+  "checks": {
+    "service_tests": 16,
+    "api_tests": 59,
+    "live_accounts": 2,
+    "canonical_dashboard": true,
+    "saved_curve_rendered": true,
+    "existing_inventory_visible": true,
+    "root_cmd_startup": true
+  }
+}
