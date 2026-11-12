@@ -260,6 +260,24 @@ class AiAssistantTests(ApiTestCase):
         self.expect_error(self.admin.post('/api/ai/ask', {'question': '   '}),
                           400, 'bad_request')
 
+    def test_06_stream_requires_session_and_returns_current_batch_result(self):
+        path = '/api/ai/ask/stream'
+        body = {'question': '最近30天销量最高的商品是什么？'}
+        self.expect_error(ApiClient(self.base).post(path, body), 401, 'unauthorized')
+        self.expect_error(self.admin.post(path, {'question': ' '}), 400, 'bad_request')
+        response = self.admin.post(path, body)
+        self.assertEqual(response.status, 200)
+        self.assertIn('application/x-ndjson', response.header('Content-Type'))
+        events = [json.loads(line) for line in response.text().splitlines()]
+        self.assertEqual(events[0], {'type': 'stage', 'stage': 'query'})
+        self.assertEqual(events[-1]['type'], 'done')
+        result = events[-1]['result']
+        self.assertEqual(result['status'], 'ok')
+        self.assertFalse(result['llm_used'])
+        self.assertEqual(result['batch']['id'], 'original')
+        self.assertEqual(result['range']['end'], '2011-12-09')
+        self.assertGreaterEqual(result['stage_timings']['query_seconds'], 0)
+
 
 class AiKeyLeakTests(ApiTestCase):
     """A configured-but-unusable key must never be echoed back to a client."""

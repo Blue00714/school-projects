@@ -71,13 +71,11 @@ function pollJob(kind: 'forecast' | 'backtest', jobId: string, onSuccess: (job: 
     try {
       const data = await ece.job(jobId)
       const job = data.job || data
-      updateTask(
-        `任务 ${jobId}：${job.status}${job.elapsed_seconds != null ? ` · ${fmt(job.elapsed_seconds, 1)}s` : ''}`,
-        'info',
-      )
       if (job.status === 'succeeded') {
         finish()
-        updateTask(`任务成功：${jobId}${job.elapsed_seconds != null ? ` · ${fmt(job.elapsed_seconds, 1)}s` : ''}`, 'success')
+        const label = kind === 'forecast' ? '预测已生成' : '回测已完成'
+        const duration = job.elapsed_seconds != null ? ` · ${fmt(job.elapsed_seconds, 2)} 秒` : ''
+        updateTask(label + duration, 'success')
         let result = job.result
         if (typeof result === 'string') {
           try {
@@ -95,6 +93,8 @@ function pollJob(kind: 'forecast' | 'backtest', jobId: string, onSuccess: (job: 
         finish()
         updateTask(`任务失败：${job.error || '未知错误'}`, 'error')
         ElMessage.error(`任务失败：${job.error || '未知错误'}`)
+      } else {
+        updateTask(job.status === 'queued' ? '任务已排队' : '正在计算…', 'info')
       }
     } catch (error: any) {
       finish()
@@ -115,7 +115,7 @@ async function runForecast() {
   try {
     const data = await ece.forecast({ origin: origin.value })
     forecastJobId.value = data.job_id
-    setForecastTask(`任务已排队：${data.job_id} · 批次 ${data.batch_id || '—'}`, 'info')
+    setForecastTask('预测任务已排队', 'info')
     pollJob(
       'forecast',
       data.job_id,
@@ -154,7 +154,7 @@ async function runBacktest() {
       end: backtestEnd.value,
     })
     backtestJobId.value = data.job_id
-    setBacktestTask(`任务已排队：${data.job_id} · 批次 ${data.batch_id || '—'}`, 'info')
+    setBacktestTask('回测任务已排队', 'info')
     pollJob(
       'backtest',
       data.job_id,
@@ -190,13 +190,13 @@ function drawForecastChart() {
   chart.setOption(
     {
       tooltip: { trigger: 'axis' },
-      legend: { top: 0, data: ['预测', '实际'] },
+      legend: { top: 0, data: ['模型预测', '近四周同星期均值', '实际销量'] },
       grid: { left: 56, right: 20, top: 34, bottom: 34 },
       xAxis: { type: 'category', data: rows.map((r: any) => r.date), axisLabel: { fontSize: 10 } },
       yAxis: { type: 'value', splitLine: { lineStyle: { color: '#edf1e8', type: 'dashed' } } },
       series: [
         {
-          name: '预测',
+          name: '模型预测',
           type: 'line',
           data: rows.map((r: any) => r.prediction),
           lineStyle: { color: '#167967', width: 2.4 },
@@ -204,7 +204,15 @@ function drawForecastChart() {
           showSymbol: true,
         },
         {
-          name: '实际',
+          name: '近四周同星期均值',
+          type: 'line',
+          data: rows.map((r: any) => r.baseline),
+          lineStyle: { color: '#ad7927', type: 'dashed' },
+          itemStyle: { color: '#ad7927' },
+          showSymbol: false,
+        },
+        {
+          name: '实际销量',
           type: 'line',
           data: rows.map((r: any) => (r.actual === null ? null : r.actual)),
           lineStyle: { color: '#4a6169', width: 2 },
@@ -235,6 +243,51 @@ const backtestBatchLabel = computed(
 const horizonEntries = computed(() => {
   const by = backtestResult.value?.by_horizon || {}
   return [1, 2, 3, 4, 5, 6, 7].map(h => ({ h, ...(by[String(h)] || {}) }))
+})
+const predictionSummary = computed(() => {
+  const rows = (forecastResult.value?.rows || []) as {
+    date: string; prediction: number; baseline: number; actual: number | null
+  }[]
+  const total = rows.reduce((sum, row) => sum + row.prediction, 0)
+  const baseline = rows.reduce((sum, row) => sum + row.baseline, 0)
+  const peak = rows.length ? rows.reduce((highest, row) => row.prediction > highest.prediction ? row : highest) : null
+  return { total, baseline, peak }
+})
+const metricDefinitions = [
+  { key: 'WAPE', label: '加权绝对误差率', description: '日绝对误差之和 ÷ 实际销量之和', rate: true },
+  { key: 'MAE', label: '平均绝对误差', description: '每条日预测平均相差多少件' },
+  { key: 'RMSE', label: '均方根误差', description: '对误差较大的日期更敏感，单位为件' },
+  { key: 'MEDIAN_AE', label: '绝对误差中位数', description: '一半预测的误差不超过这个件数' },
+  { key: 'P90_AE', label: '90 分位绝对误差', description: '约九成预测的误差不超过这个件数' },
+  { key: 'BIAS_PCT', label: '销量偏差率', description: '正值表示整体高估，负值表示整体低估', rate: true },
+] as const
+const comparisonRows = computed(() => {
+  const result = backtestResult.value
+  const complete = Boolean(result?.complete_origins)
+  const model = complete ? result?.complete_window_metrics : result?.metrics
+  const baseline = complete ? result?.complete_window_baseline_metrics : result?.baseline_metrics
+  return [
+    ...metricDefinitions.map(metric => {
+      const render = (value: unknown) => 'rate' in metric ? pct(value, 2) : fmt(value, 2)
+      return { ...metric, model: render(model?.[metric.key]), baseline: render(baseline?.[metric.key]) }
+    }),
+    {
+      key: 'WEEKLY_WAPE',
+      label: '7 天总量绝对误差率',
+      description: '先逐窗口合计 7 天销量，再计算 WAPE',
+      model: pct(result?.weekly_total_metrics?.WAPE, 2),
+      baseline: pct(result?.weekly_total_baseline_metrics?.WAPE, 2),
+    },
+  ]
+})
+const comparison = computed(() => {
+  const result = backtestResult.value
+  const model = result?.complete_origins ? result.complete_window_metrics : result?.metrics
+  const baseline = result?.complete_origins ? result.complete_window_baseline_metrics : result?.baseline_metrics
+  if (model?.WAPE == null || baseline?.WAPE == null) return ''
+  const gap = Math.round((model.WAPE - baseline.WAPE) * 10000) / 100
+  if (!gap) return '模型与基准的 WAPE 持平'
+  return `模型 WAPE 比基准${gap > 0 ? '高' : '低'} ${fmt(Math.abs(gap), 2)} 个百分点`
 })
 
 onMounted(async () => {
@@ -284,44 +337,23 @@ watch([chartEl, forecastResult], ([element, result]) => {
   <div class="ece-page">
     <div class="ece-page-head">
       <div>
-        <div class="ece-eyebrow">FORECAST &amp; BACKTEST</div>
         <h1>预测与回测</h1>
-        <p>系统统一生成全店未来7天销量预测，自动减弱偶发大单对常规趋势的放大。</p>
+        <p>查看全店未来 7 天销量，并用历史实际销量评估预测误差。</p>
       </div>
-      <el-tag effect="plain">范围：全店 · horizon 7</el-tag>
     </div>
 
-    <el-alert
-      type="info"
-      :closable="false"
-      show-icon
-      title="预测基于历史记录与固定参数模型实验，不是经营收益预测；无记录日按 0 构造连续序列。WAPE/MAE 是历史回测误差，不能解释为提升收益。"
-      class="mb12"
-    />
-
-    <el-alert
-      v-if="userStore.batch?.id === 'original'"
-      type="warning"
-      :closable="false"
-      show-icon
-      class="mb12"
-    >
-      <template #title>Online Retail II 历史基准实验已按时间顺序分为训练、验证和测试时期</template>
-      <div>
-        训练：2009-12-01 至 2011-08-15；验证：2011-08-16 至 2011-10-14，用于确定模型与稳健处理参数；
-        历史回溯：2011-10-15 至 2011-12-09。该段已经观察过，不能再称全新盲测。每个起点仅使用当时可见的数据。
-        下方自选起点回测是另一段动态评估；若据此反复选模型或改参数，该区间就不再是独立测试集。
-      </div>
-    </el-alert>
-
-    <el-alert
-      v-else
-      type="warning"
-      :closable="false"
-      show-icon
-      class="mb12"
-      title="当前导入批次没有单独登记的训练、验证和测试日期。下方为自选区间滚动回测，不会自动留出独立测试集；确定模型或调参数后，应另留未参与选择的最后一段日期作最终测试。"
-    />
+    <details class="training-context">
+      <summary>数据划分与回测口径</summary>
+      <p v-if="userStore.batch?.id === 'simulation_20111101'">
+        模拟日期为 2011-11-01，已知交易截至 2011-10-31。训练期为 2009-12-01 至 2011-08-15，
+        验证期为 2011-08-16 至 2011-10-14，已观察的测试期为 2011-10-15 至 2011-10-31。
+      </p>
+      <p v-else-if="userStore.batch?.id === 'original'">
+        完整原始批次包含 2011-11-01 之后的交易，树模型训练上限为 2011-08-15。
+      </p>
+      <p v-else>当前导入批次使用自选区间滚动回测，未登记单独的训练、验证和测试时段。</p>
+      <p>每个回测起点只使用当时可见的历史。无记录日按 0 构造连续销量，实际值缺失的未来日暂不评分。</p>
+    </details>
 
     <div class="forecast-layout">
       <div class="ece-panel forecast-controls">
@@ -375,55 +407,64 @@ watch([chartEl, forecastResult], ([element, result]) => {
               <div>
                 <h2>未来 7 天预测</h2>
                 <p>
-                  起点 {{ forecastResult.origin }} · 版本
-                  {{ forecastResult.model_version }} · 批次 {{ forecastBatchLabel }}
+                  {{ forecastResult.rows?.[0]?.date }} 至 {{ forecastResult.rows?.at(-1)?.date }} · 全店记录销量
                 </p>
               </div>
               <el-button @click="exportForecast">↓ 导出结果 CSV</el-button>
             </div>
-            <div class="ece-warnings">
-              <el-alert v-for="(w, i) in forecastWarnings" :key="i" :title="w" type="warning" :closable="false" show-icon />
-            </div>
             <div class="ece-kpi-grid">
               <div class="ece-kpi">
-                <div class="ece-kpi__label">WAPE</div>
-                <div class="ece-kpi__value">{{ pct(forecastResult.metrics?.WAPE) }}</div>
-                <div class="ece-kpi__foot">实际值齐备后评价</div>
+                <div class="ece-kpi__label">7 天预测合计 · 件</div>
+                <div class="ece-kpi__value">{{ fmt(predictionSummary.total, 2) }}</div>
+                <div class="ece-kpi__foot">近四周同星期均值合计 {{ fmt(predictionSummary.baseline, 2) }} 件</div>
               </div>
               <div class="ece-kpi">
-                <div class="ece-kpi__label">MAE</div>
-                <div class="ece-kpi__value">{{ fmt(forecastResult.metrics?.MAE, 2) }}</div>
-                <div class="ece-kpi__foot">平均每天绝对误差 · 件</div>
+                <div class="ece-kpi__label">日均预测 · 件</div>
+                <div class="ece-kpi__value">{{ fmt(predictionSummary.total / forecastResult.horizon, 2) }}</div>
               </div>
               <div class="ece-kpi">
-                <div class="ece-kpi__label">偏差 BIAS</div>
-                <div class="ece-kpi__value">{{ fmt(forecastResult.metrics?.BIAS, 2) }}</div>
-                <div class="ece-kpi__foot">偏差率：{{ pct(forecastResult.metrics?.BIAS_PCT) }}</div>
+                <div class="ece-kpi__label">预计销量最高日 · 件</div>
+                <div class="ece-kpi__value">{{ fmt(predictionSummary.peak?.prediction, 2) }}</div>
+                <div class="ece-kpi__foot">{{ predictionSummary.peak?.date }}</div>
               </div>
               <div class="ece-kpi">
                 <div class="ece-kpi__label">有实际值天数</div>
                 <div class="ece-kpi__value">{{ fmt(forecastResult.actual_days) }} / {{ fmt(forecastResult.horizon || 7) }}</div>
-                <div class="ece-kpi__foot">{{ forecastResult.complete_actual ? '7 天实际值完整' : '末端日期无实际值，不参与评分' }}</div>
+                <div class="ece-kpi__foot">
+                  {{ forecastResult.actual_days ? '误差仅按已有实际值计算' : '未来销量尚未发生，暂无法评分' }}
+                </div>
               </div>
             </div>
+            <p v-if="forecastResult.actual_days" class="foot-note">
+              已有实际值的目标日：WAPE {{ pct(forecastResult.metrics?.WAPE, 2) }} ·
+              平均绝对误差 {{ fmt(forecastResult.metrics?.MAE, 2) }} 件 ·
+              销量偏差率 {{ pct(forecastResult.metrics?.BIAS_PCT, 2) }}
+            </p>
             <div ref="chartEl" class="ece-chart" />
             <el-table :data="forecastResult.rows || []" size="small" style="margin-top: 12px">
               <el-table-column label="日期" prop="date" width="120" />
-              <el-table-column label="h" prop="h" width="60" align="center" />
-              <el-table-column label="预测" width="110" align="right">
-                <template #default="{ row }">{{ fmt(row.prediction, 1) }}</template>
+              <el-table-column label="预测（件）" min-width="110" align="right">
+                <template #default="{ row }">{{ fmt(row.prediction, 2) }}</template>
               </el-table-column>
-              <el-table-column label="实际" width="110" align="right">
-                <template #default="{ row }">{{ row.actual === null ? '—' : fmt(row.actual) }}</template>
+              <el-table-column label="近四周基准（件）" min-width="130" align="right">
+                <template #default="{ row }">{{ fmt(row.baseline, 2) }}</template>
               </el-table-column>
-              <el-table-column label="绝对误差" align="right">
-                <template #default="{ row }">{{ row.abs_error === null ? '—' : fmt(row.abs_error, 1) }}</template>
+              <el-table-column label="实际（件）" min-width="100" align="right">
+                <template #default="{ row }">{{ fmt(row.actual, 2) }}</template>
+              </el-table-column>
+              <el-table-column label="预测−实际（件）" min-width="130" align="right">
+                <template #default="{ row }">{{ row.actual == null ? '—' : fmt(row.prediction - row.actual, 2) }}</template>
               </el-table-column>
             </el-table>
-            <div class="foot-note">
-              历史：{{ forecastResult.history_start }} ~ {{ forecastResult.history_end }}（{{ fmt(forecastResult.history_days) }} 天）·
-              训练行数 {{ fmt(forecastResult.training_rows) }} · 批次 {{ forecastBatchLabel }} · 固定模型实验，不代表经营收益。
-            </div>
+            <details class="foot-note">
+              <summary>模型、批次与口径</summary>
+              <p>
+                {{ forecastResult.method_label }} · {{ forecastResult.model_version }} · {{ forecastBatchLabel }}。
+                历史 {{ forecastResult.history_start }} 至 {{ forecastResult.history_end }}，
+                树模型训练截至 {{ forecastResult.training_end || '—' }}（{{ fmt(forecastResult.training_rows) }} 条）。
+              </p>
+              <ul v-if="forecastWarnings.length"><li v-for="w in forecastWarnings" :key="w">{{ w }}</li></ul>
+            </details>
           </div>
         </template>
 
@@ -439,46 +480,37 @@ watch([chartEl, forecastResult], ([element, result]) => {
               </div>
               <el-button @click="exportBacktest">↓ 导出回测 CSV</el-button>
             </div>
-            <div class="ece-warnings">
-              <el-alert v-for="(w, i) in backtestWarnings" :key="i" :title="w" type="warning" :closable="false" show-icon />
-            </div>
-            <div class="ece-kpi-grid">
-              <div class="ece-kpi">
-                <div class="ece-kpi__label">完整7天窗口 WAPE</div>
-                <div class="ece-kpi__value">{{ pct(backtestResult.complete_window_metrics?.WAPE) }}</div>
-                <div class="ece-kpi__foot">{{ fmt(backtestResult.complete_window_metrics?.n) }} 条完整窗口评分</div>
-                <div class="ece-kpi__foot">全部可评分目标 WAPE：{{ pct(backtestResult.metrics?.WAPE) }}</div>
-              </div>
-              <div class="ece-kpi">
-                <div class="ece-kpi__label">MAE</div>
-                <div class="ece-kpi__value">{{ fmt(backtestResult.metrics?.MAE, 2) }}</div>
-                <div class="ece-kpi__foot">全部可评分目标 · 件</div>
-              </div>
-              <div class="ece-kpi">
-                <div class="ece-kpi__label">偏差率</div>
-                <div class="ece-kpi__value">{{ pct(backtestResult.metrics?.BIAS_PCT) }}</div>
-                <div class="ece-kpi__foot">平均 BIAS：{{ fmt(backtestResult.metrics?.BIAS, 2) }}</div>
-                <div class="ece-kpi__foot">预测−实际：正值为高估，负值为低估</div>
-              </div>
-              <div class="ece-kpi">
-                <div class="ece-kpi__label">评分目标数</div>
-                <div class="ece-kpi__value">{{ fmt(backtestResult.scored_count) }}</div>
-                <div class="ece-kpi__foot">
-                  起点 {{ fmt(backtestResult.origins_attempted) }} 个 · 完整窗口 {{ fmt(backtestResult.complete_origins) }}
-                </div>
-              </div>
-            </div>
+            <p v-if="comparison" class="comparison">{{ comparison }}</p>
+            <p class="foot-note">
+              {{ backtestResult.complete_origins ? '对照表使用有完整 7 天实际值的窗口' : '对照表使用全部有实际值的预测条目' }}。
+              完整窗口 {{ fmt(backtestResult.complete_origins) }} / {{ fmt(backtestResult.origins_attempted) }} 个，
+              全部可评分 {{ fmt(backtestResult.scored_count) }} 条<span v-if="backtestResult.scored_unique_days != null">，覆盖 {{ fmt(backtestResult.scored_unique_days) }} 个实际日期</span>。
+            </p>
+            <p v-if="!backtestResult.weekly_total_metrics" class="foot-note">重新运行回测可查看新增指标。</p>
+            <el-table :data="comparisonRows" size="small">
+              <el-table-column label="指标" min-width="235">
+                <template #default="{ row }">
+                  <strong>{{ row.label }}</strong><small class="metric-desc">{{ row.description }}</small>
+                </template>
+              </el-table-column>
+              <el-table-column label="模型" prop="model" min-width="100" align="right" />
+              <el-table-column label="近四周同星期基准" prop="baseline" min-width="150" align="right" />
+            </el-table>
+            <details v-if="backtestWarnings.length" class="foot-note">
+              <summary>回测口径与提示</summary>
+              <ul><li v-for="w in backtestWarnings" :key="w">{{ w }}</li></ul>
+            </details>
             <div class="ece-panel-head" style="margin-top: 8px">
               <div>
                 <h2>分步长误差（WAPE）</h2>
-                <p>h=1..7，按目标日相对起点计</p>
+                <p>全部有实际值的预测，按目标日离起点的天数分组</p>
               </div>
             </div>
             <div class="horizon-grid">
               <div v-for="e in horizonEntries" :key="e.h" class="horizon-item">
-                <span>h={{ e.h }}</span>
-                <strong>{{ pct(e.WAPE) }}</strong>
-                <small>MAE {{ fmt(e.MAE, 1) }} · n {{ fmt(e.n) }}</small>
+                <span>第 {{ e.h }} 天</span>
+                <strong>{{ pct(e.WAPE, 2) }}</strong>
+                <small>MAE {{ fmt(e.MAE, 2) }} 件 · {{ fmt(e.n) }} 条</small>
               </div>
             </div>
             <div class="ece-panel-head" style="margin-top: 14px">
@@ -490,15 +522,15 @@ watch([chartEl, forecastResult], ([element, result]) => {
             <el-table :data="backtestResult.worst_cases || []" size="small">
               <el-table-column label="目标日" prop="date" width="120" />
               <el-table-column label="起点" prop="origin" width="120" />
-              <el-table-column label="h" prop="h" width="60" align="center" />
-              <el-table-column label="实际" width="100" align="right">
-                <template #default="{ row }">{{ fmt(row.actual) }}</template>
+              <el-table-column label="第几天" prop="h" width="70" align="center" />
+              <el-table-column label="实际（件）" min-width="100" align="right">
+                <template #default="{ row }">{{ fmt(row.actual, 2) }}</template>
               </el-table-column>
-              <el-table-column label="预测" width="110" align="right">
-                <template #default="{ row }">{{ fmt(row.prediction, 1) }}</template>
+              <el-table-column label="预测（件）" min-width="110" align="right">
+                <template #default="{ row }">{{ fmt(row.prediction, 2) }}</template>
               </el-table-column>
-              <el-table-column label="绝对误差" align="right">
-                <template #default="{ row }">{{ fmt(row.abs_error, 1) }}</template>
+              <el-table-column label="绝对误差（件）" min-width="120" align="right">
+                <template #default="{ row }">{{ fmt(row.abs_error, 2) }}</template>
               </el-table-column>
             </el-table>
           </div>
@@ -509,7 +541,9 @@ watch([chartEl, forecastResult], ([element, result]) => {
 </template>
 
 <style scoped>
-.mb12 { margin-bottom: 12px; }
+.training-context { margin: 0 0 15px; padding: 8px 12px; color: #4c6057; background: #f2f6f1; border-radius: 8px; font-size: 12px; line-height: 1.7; }
+.training-context summary { width: fit-content; cursor: pointer; font-weight: 600; }
+.training-context p { margin: 6px 0 0; }
 .forecast-layout { display: grid; grid-template-columns: 290px minmax(0, 1fr); gap: 16px; align-items: start; }
 .forecast-controls { position: sticky; top: 118px; }
 .forecast-results { min-width: 0; }
@@ -520,6 +554,9 @@ watch([chartEl, forecastResult], ([element, result]) => {
 .horizon-item span, .horizon-item small { display: block; font-size: 9.5px; color: #758487; }
 .horizon-item strong { display: block; font-size: 14px; margin: 6px 0; color: #167967; }
 .foot-note { color: #8a9a92; font-size: 11px; line-height: 1.8; padding-top: 10px; }
+.foot-note summary { cursor: pointer; width: fit-content; }
+.comparison { color: #15594b; font-weight: 600; margin: 12px 0 0; }
+.metric-desc { display: block; color: #586a65; font-size: 11px; }
 @media (max-width: 1100px) {
   .forecast-layout { grid-template-columns: minmax(0, 1fr); }
   .forecast-controls { position: static; }

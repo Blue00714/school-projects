@@ -1,300 +1,396 @@
 <script lang="ts" setup>
-import { computed, onMounted, reactive, ref } from 'vue'
-import { ElMessage } from 'element-plus'
-import { download, ece } from '@/apis/ece'
+import { computed, nextTick, onBeforeUnmount, reactive, ref } from 'vue'
+import { ArrowUp, Document, Loading, Plus, Promotion } from '@element-plus/icons-vue'
+import { download, ece, streamAi, type AiAnswer, type AiEvent } from '@/apis/ece'
 import { useUserStore } from '@/stores/user'
-import { fmt, isoTime } from '@/utils/format'
+import { fmt } from '@/utils/format'
 
 defineOptions({ name: 'EceAi' })
 
-const userStore = useUserStore()
+type AnswerStage = Extract<AiEvent, { stage: 'answer' }>
+interface Turn {
+  id: number
+  question: string
+  stage: 'connect' | 'query' | 'answer' | 'writing' | 'legacy' | 'done'
+  text: string
+  source?: AnswerStage
+  result?: AiAnswer
+  error?: string
+}
 
-const status = ref<any>(null)
-const tools = ref<any[]>([])
-const toolsPolicy = ref('')
+const suggestions = [
+  '最近30天销量最高的商品是什么？',
+  '近期经营情况如何？',
+  '全店未来7天预计卖多少件？',
+]
+const toolNames: Record<string, string> = {
+  dashboard_summary: '经营看板',
+  product_search: '商品档案',
+  product_ranking: '商品销量排行',
+  orders_query: '交易订单',
+  forecast_summary: '全店预测',
+  inventory_lookup: '模拟库存',
+  batch_info: '数据批次',
+  saved_forecast: '已保存预测',
+  saved_backtest: '已保存回测',
+  simulated_inventory_overview: '模拟库存概况',
+}
+const stages = {
+  connect: '正在连接问答服务',
+  query: '正在查询当前批次',
+  answer: '数据已查到，正在组织回答',
+  writing: '正在生成回答',
+  legacy: '正在等待当前实例返回回答',
+}
+const userStore = useUserStore()
+const turns = ref<Turn[]>([])
+const question = ref('')
+const composer = ref<HTMLTextAreaElement>()
+const scrollArea = ref<HTMLDivElement>()
 const asking = ref(false)
-const question = ref('最近30天销量最高的商品是什么？')
-const scope = reactive({ start: '', end: '', product: '', country: '' })
-const answer = ref<any>(null)
+const briefOpen = ref(false)
 const briefLoading = ref(false)
 const brief = ref<any>(null)
+const briefError = ref('')
+const batchLabel = computed(() => userStore.batch?.label || '当前数据批次')
+let controller: AbortController | undefined
+let turnId = 0
 
-const llmConfigured = computed(() => Boolean(status.value?.llm_configured))
-const batchLabel = computed(() => answer.value?.batch?.label || userStore.batch?.label || '—')
-const rangeText = computed(() => {
-  const range = answer.value?.range || {}
-  const parts = [range.start, range.end].filter(Boolean)
-  return parts.length ? parts.join(' ~ ') : '未指定（按工具默认）'
-})
-
-async function loadStatus() {
-  try {
-    status.value = await ece.aiStatus()
-  } catch (error: any) {
-    if (error?.status !== 401) ElMessage.error(`AI 状态读取失败：${error.message}`)
-  }
+function followAnswer(force = false) {
+  const panel = scrollArea.value
+  if (!panel) return
+  const isNearBottom = panel.scrollHeight - panel.scrollTop - panel.clientHeight < 200
+  if (force || isNearBottom) void nextTick(() => panel.scrollTo({ top: panel.scrollHeight }))
 }
 
-async function loadTools() {
-  try {
-    const data = await ece.aiTools()
-    tools.value = data.tools || []
-    toolsPolicy.value = data.policy || ''
-  } catch (error: any) {
-    if (error?.status !== 401) ElMessage.error(`AI 工具清单读取失败：${error.message}`)
+function handleEvent(turn: Turn, event: AiEvent) {
+  if (event.type === 'stage') {
+    turn.stage = event.stage
+    if (event.stage === 'answer') turn.source = event
+  } else if (event.type === 'delta') {
+    turn.stage = 'writing'
+    turn.text += event.text
+  } else if (event.type === 'done') {
+    turn.result = event.result
+    turn.text = event.result.clarification || event.result.answer || ''
+    turn.stage = 'done'
   }
+  followAnswer()
 }
 
-async function ask() {
-  if (!question.value.trim()) {
-    ElMessage.warning('请输入问题')
-    return
-  }
+async function ask(text = question.value) {
+  const value = text.trim()
+  if (!value || asking.value) return
+  const turn = reactive<Turn>({ id: ++turnId, question: value, stage: 'connect', text: '' })
+  turns.value.push(turn)
+  question.value = ''
   asking.value = true
-  answer.value = null
+  const request = new AbortController()
+  controller = request
+  followAnswer(true)
   try {
-    const body: Record<string, unknown> = { question: question.value.trim() }
-    const scopePayload: Record<string, unknown> = {}
-    if (scope.start) scopePayload.start = scope.start
-    if (scope.end) scopePayload.end = scope.end
-    if (scope.product) scopePayload.product = scope.product.trim()
-    if (scope.country) scopePayload.country = scope.country
-    if (Object.keys(scopePayload).length) body.scope = scopePayload
-    answer.value = await ece.aiAsk(body)
-    // 提问可能改变范围，刷新一次当前批次信息（不强制）
-  } catch (error: any) {
-    if (error?.status !== 401) ElMessage.error(`AI 提问失败：${error.message}`)
+    await streamAi(value, event => handleEvent(turn, event), request.signal)
+  } catch (error) {
+    turn.error = request.signal.aborted ? '已停止接收回答' : error instanceof Error ? error.message : '问答请求失败'
+    turn.stage = 'done'
   } finally {
+    controller = undefined
     asking.value = false
+    followAnswer()
   }
+}
+
+function onKeydown(event: KeyboardEvent) {
+  if (event.key !== 'Enter' || event.shiftKey || event.isComposing) return
+  event.preventDefault()
+  void ask()
+}
+
+function clearChat() {
+  turns.value = []
+  question.value = ''
+  composer.value?.focus()
+}
+
+function rangeLabel(range: AiAnswer['range']) {
+  return [
+    range.start && (range.end && range.start !== range.end ? `${range.start} 至 ${range.end}` : range.start),
+    range.product,
+    range.country,
+  ].filter(Boolean).join(' · ')
+}
+
+function answerLines(value: string) {
+  return value.trim().split('\n').filter(line => line.trim()).map(line => {
+    const title = /^#{1,6}\s+/.test(line)
+    const text = line.replace(/^#{1,6}\s+/, '').replace(/^\s*[-*]\s+/, '• ')
+    return { title, parts: text.split(/\*\*([^*]+)\*\*/g) }
+  })
+}
+
+function preview(turn: Turn) {
+  const summary = turn.source?.tool_calls.find(call => call.ok)?.summary || ''
+  const first = summary.split('；')[0] || summary
+  return first.length > 175 ? `${first.slice(0, 175)}…` : first
 }
 
 async function generateBrief() {
+  briefOpen.value = true
+  if (briefLoading.value) return
   briefLoading.value = true
+  briefError.value = ''
   brief.value = null
   try {
-    const body: Record<string, unknown> = {}
-    if (scope.start || scope.end || scope.product || scope.country) {
-      body.scope = {
-        ...(scope.start ? { start: scope.start } : {}),
-        ...(scope.end ? { end: scope.end } : {}),
-        ...(scope.product ? { product: scope.product.trim() } : {}),
-        ...(scope.country ? { country: scope.country } : {}),
-      }
-    }
-    brief.value = await ece.aiBrief(body)
-    ElMessage.success('运营简报已生成')
-  } catch (error: any) {
-    if (error?.status !== 401) ElMessage.error(`生成简报失败：${error.message}`)
+    brief.value = await ece.aiBrief({})
+  } catch (error) {
+    briefError.value = error instanceof Error ? error.message : '简报生成失败'
   } finally {
     briefLoading.value = false
   }
 }
 
-async function downloadBrief() {
-  const data = brief.value
-  if (!data?.brief?.id) return
-  await download(data.brief.url || `/api/ai/briefs/${data.brief.id}.md`, `${data.brief.title || 'brief'}.md`)
+function downloadBrief() {
+  const saved = brief.value?.brief
+  if (saved) void download(saved.url, `${saved.title || '运营简报'}.md`)
 }
 
-const statusLabel = computed(
-  () =>
-    ({ ok: '正常回答', need_clarification: '需要澄清', failed: '调用失败', not_configured: '未配置' })[
-      answer.value?.status as string
-    ] || answer.value?.status || '',
-)
-const statusType = computed(() => {
-  const s = answer.value?.status
-  if (s === 'ok') return 'success'
-  if (s === 'failed') return 'danger'
-  return 'warning'
-})
-
-onMounted(async () => {
-  if (!userStore.options.countries?.length) await userStore.loadOptions()
-  await Promise.all([loadStatus(), loadTools()])
-})
+onBeforeUnmount(() => controller?.abort())
 </script>
 
 <template>
-  <div class="ece-page">
-    <div class="ece-page-head">
-      <div>
-        <div class="ece-eyebrow">AI ASSISTANT</div>
-        <h1>AI 助手</h1>
-        <p>对当前批次做只读问询；回答中的数字全部来自工具结果。</p>
+  <main class="ai-workspace">
+    <header class="ai-header">
+      <div class="ai-title"><h1>AI 助手</h1><span>{{ batchLabel }}</span></div>
+      <div class="ai-actions">
+        <button type="button" @click="generateBrief"><el-icon><Document /></el-icon><span>运营简报</span></button>
+        <button v-if="turns.length" type="button" :disabled="asking" @click="clearChat">
+          <el-icon><Plus /></el-icon><span>新对话</span>
+        </button>
       </div>
-      <el-button @click="loadStatus">刷新状态</el-button>
-    </div>
+    </header>
 
-    <el-alert
-      v-if="status && !llmConfigured"
-      type="warning"
-      :closable="false"
-      show-icon
-      class="mb12"
-    >
-      <template #title>
-        <b>未配置真实大模型</b>
-        <el-tag size="small" type="warning" style="margin-left: 8px">未调用大模型</el-tag>
-      </template>
-      <div class="banner-text">
-        当前回答由本地规则工具层（provider=<b>{{ status.provider || 'local-rule-planner' }}</b>
-        <span v-if="status.fallback">，fallback={{ status.fallback }}</span>）生成：仅把问题映射到声明的只读工具并引用工具数字，
-        不伪造自然语言智能结论。密钥状态：{{ status.key_present ? '已配置（但缺少完整配置）' : '未配置' }} ·
-        可用工具 {{ fmt(status.tools_count) }} 个。
-      </div>
-    </el-alert>
-    <el-alert v-else-if="status" type="success" :closable="false" show-icon class="mb12">
-      <template #title>
-        <b>已配置真实大模型</b>
-        <el-tag size="small" type="success" style="margin-left: 8px">provider={{ status.provider }}</el-tag>
-      </template>
-      <div class="banner-text">
-        模型 <b>{{ status.model }}</b> · 超时 {{ status.timeout_seconds }}s · 密钥{{ status.key_present ? '已配置（页面不回显）' : '未配置' }} ·
-        可用工具 {{ fmt(status.tools_count) }} 个。回答中的数字均来自只读工具结果。
-      </div>
-    </el-alert>
-    <el-alert v-else type="info" :closable="false" show-icon class="mb12" title="正在读取 AI 配置状态…" />
-
-    <div class="ece-cards-2">
-      <div class="ece-panel">
-        <div class="ece-panel-head">
-          <div>
-            <h2>提问</h2>
-            <p>范围与批次会随回答返回；工具仅只读</p>
-          </div>
-        </div>
-        <el-form label-position="top">
-          <el-form-item label="问题">
-            <el-input v-model="question" type="textarea" :rows="3" placeholder="例如：最近30天销量最高的商品是什么？" />
-          </el-form-item>
-          <div class="two-col">
-            <el-form-item label="范围开始（可选）">
-              <el-date-picker v-model="scope.start" type="date" value-format="YYYY-MM-DD" style="width: 100%" />
-            </el-form-item>
-            <el-form-item label="范围结束（可选）">
-              <el-date-picker v-model="scope.end" type="date" value-format="YYYY-MM-DD" style="width: 100%" />
-            </el-form-item>
-          </div>
-          <div class="two-col">
-            <el-form-item label="商品（可选）">
-              <el-input v-model="scope.product" placeholder="商品编码" />
-            </el-form-item>
-            <el-form-item label="国家（可选）">
-              <el-select v-model="scope.country" clearable placeholder="全部国家" style="width: 100%">
-                <el-option v-for="c in userStore.options.countries" :key="c" :label="c" :value="c" />
-              </el-select>
-            </el-form-item>
-          </div>
-          <el-button type="primary" :loading="asking" @click="ask">提交问题</el-button>
-        </el-form>
-
-        <el-divider />
-        <div class="ece-panel-head"><h2>可用工具（只读）</h2></div>
-        <ul class="tool-list">
-          <li v-for="tool in tools" :key="tool.name">
-            <b class="ece-mono">{{ tool.name }}</b> — {{ tool.description }}
-            <el-tag v-if="tool.read_only" size="small" type="success">只读</el-tag>
-          </li>
-          <li v-if="toolsPolicy" class="ece-muted">策略：{{ toolsPolicy }}</li>
-          <li v-if="!tools.length" class="ece-muted">工具清单加载中…</li>
-        </ul>
-
-        <el-divider />
-        <el-button :loading="briefLoading" @click="generateBrief">生成运营简报（Markdown）</el-button>
-        <div v-if="brief" class="brief-box">
-          <p>
-            <b>{{ brief.brief?.title }}</b> · {{ isoTime(brief.brief?.created_at) }} ·
-            provider={{ brief.provider || 'template' }}
-          </p>
-          <pre class="brief-preview">{{ (brief.markdown || '').slice(0, 2200) }}{{ (brief.markdown || '').length > 2200 ? '\n…（完整内容请下载）' : '' }}</pre>
-          <el-button size="small" @click="downloadBrief">↓ 下载 Markdown 简报</el-button>
+    <div ref="scrollArea" class="ai-scroll">
+      <div v-if="!turns.length" class="welcome">
+        <div class="welcome-icon"><el-icon><Promotion /></el-icon></div>
+        <h2>今天想查什么？</h2>
+        <p>直接问销量、订单、全店预测或模拟库存。日期、商品和国家可以写在问题里。</p>
+        <div class="suggestions">
+          <button v-for="item in suggestions" :key="item" type="button" @click="ask(item)">{{ item }}</button>
         </div>
       </div>
 
-      <div class="ece-panel">
-        <div class="ece-panel-head">
-          <div>
-            <h2>回答</h2>
-            <p>含范围、批次、工具调用轨迹与警告</p>
-          </div>
-        </div>
-        <div v-if="!answer" class="ece-empty">尚未提问</div>
-        <template v-else>
-          <div class="answer-meta">
-            <el-tag :type="statusType" size="small">{{ statusLabel }}</el-tag>
-            <span>provider：<b>{{ answer.provider || '—' }}</b></span>
-            <span>大模型调用：<b>{{ answer.llm_used ? '是' : '否（本地规则工具层）' }}</b></span>
-            <span>范围：{{ rangeText }}</span>
-            <span>批次：{{ batchLabel }}</span>
-            <span v-if="answer.elapsed_seconds != null">耗时：{{ fmt(answer.elapsed_seconds, 2) }}s</span>
-          </div>
-          <el-alert
-            v-if="answer.clarification"
-            type="info"
-            :closable="false"
-            show-icon
-            :title="`需要补充信息：${answer.clarification}`"
-            class="mt10"
-          />
-          <el-alert
-            v-if="answer.error"
-            type="error"
-            :closable="false"
-            show-icon
-            :title="`错误：${answer.error}`"
-            class="mt10"
-          />
-          <pre v-if="answer.answer" class="ece-answer mt10">{{ answer.answer }}</pre>
-          <div v-if="answer.tool_calls?.length" class="mt10">
-            <div class="ece-panel-head"><h2>工具调用轨迹（{{ answer.tool_calls.length }}）</h2></div>
-            <div v-for="(call, i) in answer.tool_calls" :key="i" class="ece-tool-call">
-              <div class="tool-head">
-                <b class="ece-mono">{{ call.name }}</b>
-                <el-tag :type="call.ok ? 'success' : 'danger'" size="small">{{ call.ok ? '成功' : '失败' }}</el-tag>
-              </div>
-              <div class="params">参数：{{ JSON.stringify(call.params || {}) }}</div>
-              <div class="summary">{{ call.summary || '—' }}</div>
+      <div v-else class="conversation">
+        <section v-for="turn in turns" :key="turn.id" class="turn">
+          <div class="user-message">{{ turn.question }}</div>
+          <div class="assistant-message">
+            <div class="assistant-heading"><span class="assistant-icon"><el-icon><Promotion /></el-icon></span>运营助手</div>
+            <p v-if="turn.stage !== 'done'" class="progress" role="status">
+              <el-icon class="is-loading"><Loading /></el-icon>{{ stages[turn.stage] }}<span v-if="turn.source">· 取数 {{ fmt(turn.source.query_seconds, 2) }} 秒</span>
+            </p>
+            <p v-if="turn.source && !turn.text" class="preview"><strong>已查到</strong> {{ preview(turn) }}</p>
+            <div v-if="turn.text" class="answer-text" :aria-busy="turn.stage !== 'done'">
+              <p v-for="(line, index) in answerLines(turn.text)" :key="index" :class="{ 'answer-title': line.title }">
+                <template v-for="(part, partIndex) in line.parts" :key="partIndex">
+                  <strong v-if="partIndex % 2">{{ part }}</strong><template v-else>{{ part }}</template>
+                </template>
+              </p>
             </div>
+            <p v-if="turn.error || turn.result?.error" class="message-error" role="alert">{{ turn.error || turn.result?.error }}</p>
+            <div v-if="turn.result" class="answer-footer">
+              <span v-if="turn.result.llm_used">模型根据查询结果生成</span>
+              <span v-else-if="turn.result.status === 'ok'">本地查询结果</span>
+              <span v-if="turn.result.stage_timings">取数 {{ fmt(turn.result.stage_timings.query_seconds, 2) }} 秒</span>
+              <span v-if="turn.result.stage_timings?.model_seconds != null">模型耗时 {{ fmt(turn.result.stage_timings.model_seconds, 2) }} 秒</span>
+              <span>总耗时 {{ fmt(turn.result.elapsed_seconds, 2) }} 秒</span>
+            </div>
+            <details v-if="turn.result || turn.source" class="sources">
+              <summary>数据来源与范围</summary>
+              <p>{{ (turn.result || turn.source)?.batch.label }}</p>
+              <p v-if="rangeLabel((turn.result || turn.source)!.range)">{{ rangeLabel((turn.result || turn.source)!.range) }}</p>
+              <p v-if="turn.result?.stage_timings?.first_text_seconds != null">模型首字 {{ fmt(turn.result.stage_timings.first_text_seconds, 2) }} 秒</p>
+              <ul v-if="(turn.result || turn.source)?.tool_calls.length">
+                <li v-for="(call, index) in (turn.result || turn.source)?.tool_calls" :key="index">
+                  <b>{{ toolNames[call.name] || call.name }}</b><span v-if="!call.ok"> · 未取得结果</span>
+                  <div>{{ call.summary }}</div>
+                </li>
+              </ul>
+              <p v-for="warning in turn.result?.warnings" :key="warning">{{ warning }}</p>
+            </details>
           </div>
-          <div v-if="answer.warnings?.length" class="mt10">
-            <el-alert
-              v-for="(w, i) in answer.warnings"
-              :key="i"
-              :title="w"
-              type="warning"
-              :closable="false"
-              show-icon
-              class="warn-item"
-            />
-          </div>
-          <div class="ece-small ece-muted mt10">问题：{{ question }}</div>
-        </template>
+        </section>
       </div>
     </div>
 
-    <div class="foot-note">
-      AI 为只读问询：不执行库存写操作，不伪造未配置的大模型结果；库存变更必须在“库存与补货”页人工确认。
+    <div class="composer-dock">
+      <form class="composer" @submit.prevent="ask()">
+        <textarea ref="composer" v-model="question" rows="1" maxlength="1000" aria-label="提问" placeholder="问问当前批次的经营数据" @keydown="onKeydown" />
+        <button v-if="asking" type="button" class="send" aria-label="停止接收回答" title="停止接收回答" @click="controller?.abort()"><span class="stop-icon" /></button>
+        <button v-else type="submit" class="send" :disabled="!question.trim()" aria-label="发送问题" title="发送问题"><el-icon><ArrowUp /></el-icon></button>
+      </form>
+      <p class="composer-note">Enter 发送 · Shift + Enter 换行 · “最近”以当前批次截止日计算</p>
     </div>
-  </div>
+
+    <el-dialog v-model="briefOpen" title="运营简报" width="min(680px, 92vw)">
+      <p v-if="briefLoading" role="status">正在生成当前批次的运营简报…</p>
+      <p v-else-if="briefError" class="message-error">{{ briefError }}</p>
+      <pre v-else-if="brief" class="brief-preview">{{ brief.markdown }}</pre>
+      <template #footer>
+        <el-button v-if="brief?.brief?.id" type="primary" @click="downloadBrief">下载 Markdown</el-button>
+        <el-button v-if="briefError" @click="generateBrief">重试</el-button>
+      </template>
+    </el-dialog>
+  </main>
 </template>
 
 <style scoped>
-.mb12 { margin-bottom: 12px; }
-.mt10 { margin-top: 12px; }
-.two-col { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
-.banner-text { font-size: 12px; line-height: 1.8; margin-top: 4px; }
-.tool-list { margin: 0; padding-left: 18px; display: grid; gap: 6px; font-size: 12px; line-height: 1.7; color: #4a5f58; }
-.answer-meta { display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; color: #758487; align-items: center; }
-.tool-head { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
-.warn-item { margin-bottom: 6px; }
-.brief-box { margin-top: 12px; }
-.brief-box p { margin: 0 0 8px; font-size: 12px; }
-.brief-preview {
-  background: #f7faf5; border: 1px solid #e5e9e5; border-radius: 8px; padding: 10px 12px;
-  max-height: 220px; overflow: auto; white-space: pre-wrap; font-size: 11.5px; line-height: 1.8;
-  color: #3d524b; margin: 0 0 8px;
+.ai-workspace {
+  --chat-ink: #182421;
+  --chat-muted: #566662;
+  --chat-border: #e2e8e4;
+  --chat-accent: #205e4e;
+  height: max(520px, calc(100dvh - 84px));
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr) auto;
+  background: #fff;
+  color: var(--chat-ink);
+  font-family: 'Inter', 'Microsoft YaHei UI', sans-serif;
 }
-.foot-note { color: #8a9a92; font-size: 11px; line-height: 1.8; padding-top: 4px; }
+.ai-header {
+  min-height: 57px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  padding: 10px 24px;
+}
+.ai-title, .ai-actions { display: flex; gap: 12px; align-items: center; }
+.ai-title h1 { margin: 0; font-size: 16px; font-weight: 650; white-space: nowrap; }
+.ai-title span { color: var(--chat-muted); font-size: 12px; }
+.ai-actions button {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  padding: 7px 9px;
+  color: var(--chat-muted);
+  background: transparent;
+  white-space: nowrap;
+  cursor: pointer;
+  font-size: 12px;
+}
+.ai-actions button:hover { background: #f3f6f4; color: var(--chat-ink); }
+.ai-actions button:disabled { opacity: .45; cursor: default; }
+.ai-scroll { overflow-y: auto; min-width: 0; }
+.welcome {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px 24px 38px;
+  text-align: center;
+}
+.welcome-icon, .assistant-icon {
+  display: inline-grid;
+  place-items: center;
+  color: var(--chat-accent);
+  background: #e9f3ee;
+}
+.welcome-icon { width: 54px; height: 54px; border-radius: 18px; font-size: 24px; }
+.welcome h2 { margin: 18px 0 10px; font-size: clamp(25px, 4vw, 36px); font-weight: 650; }
+.welcome p { margin: 0; max-width: 440px; color: var(--chat-muted); font-size: 14px; line-height: 1.7; }
+.suggestions { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin-top: 24px; }
+.suggestions button {
+  border: 1px solid var(--chat-border);
+  background: #fff;
+  border-radius: 14px;
+  padding: 9px 12px;
+  color: #344944;
+  font-size: 13px;
+  cursor: pointer;
+}
+.suggestions button:hover { border-color: #8cb3a1; background: #f3f8f5; }
+.conversation, .composer-dock { max-width: 804px; width: 100%; margin: 0 auto; padding-inline: 24px; }
+.conversation { display: grid; gap: 30px; padding-block: 18px 28px; }
+.turn { min-width: 0; }
+.user-message {
+  width: fit-content;
+  max-width: 88%;
+  margin-left: auto;
+  padding: 10px 16px;
+  border-radius: 18px 18px 5px 18px;
+  background: #edf2ef;
+  line-height: 1.65;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+.assistant-message { margin-top: 18px; min-width: 0; font-size: 14px; line-height: 1.75; overflow-wrap: anywhere; }
+.assistant-heading { display: flex; gap: 9px; align-items: center; font-weight: 650; }
+.assistant-icon { width: 30px; height: 30px; border-radius: 10px; }
+.progress { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; color: var(--chat-accent); font-size: 13px; margin: 10px 0; }
+.progress span { color: var(--chat-muted); }
+.preview { border-left: 2px solid #9abdac; padding-left: 12px; color: var(--chat-muted); }
+.preview strong { margin-right: 4px; color: var(--chat-ink); }
+.answer-text p { margin: 8px 0; white-space: pre-wrap; }
+.answer-text .answer-title { font-weight: 650; margin-top: 14px; }
+.message-error { color: #a3362d; font-size: 13px; }
+.answer-footer { margin-top: 13px; display: flex; flex-wrap: wrap; gap: 4px 13px; color: var(--chat-muted); font-size: 12px; }
+.sources { margin-top: 8px; color: var(--chat-muted); font-size: 12px; }
+.sources summary { width: fit-content; cursor: pointer; font-weight: 600; color: var(--chat-accent); }
+.sources p, .sources ul { margin: 6px 0; }
+.sources li + li { margin-top: 6px; }
+.composer-dock { padding-top: 8px; padding-bottom: 12px; }
+.composer {
+  display: flex;
+  align-items: flex-end;
+  gap: 12px;
+  border: 1px solid #ccd8d0;
+  border-radius: 23px;
+  padding: 10px 10px 10px 16px;
+  box-shadow: 0 4px 16px #162b2010;
+}
+.composer:focus-within { border-color: #679882; }
+.composer textarea {
+  flex: 1;
+  min-width: 0;
+  min-height: 35px;
+  max-height: 132px;
+  field-sizing: content;
+  border: 0;
+  outline: none;
+  resize: none;
+  background: transparent;
+  padding: 7px 0;
+  font: inherit;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.send {
+  flex: 0 0 36px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 50%;
+  background: var(--chat-accent);
+  color: #fff;
+  cursor: pointer;
+  font-size: 19px;
+}
+.send:disabled { background: #e9eeeb; color: #778782; cursor: default; }
+.stop-icon { width: 11px; height: 11px; border-radius: 2px; background: currentColor; }
+.composer-note { color: var(--chat-muted); margin: 8px 0 0; font-size: 11px; text-align: center; }
+.brief-preview { white-space: pre-wrap; overflow-wrap: anywhere; max-height: 52vh; overflow-y: auto; line-height: 1.65; }
+@media (max-width: 640px) {
+  .ai-workspace { height: max(450px, calc(100dvh - 130px)); }
+  .ai-header { padding-inline: 13px; gap: 6px; }
+  .ai-title { display: grid; gap: 3px; }
+  .ai-title span { font-size: 10px; }
+  .ai-actions { gap: 2px; }
+  .ai-actions button { padding: 6px; }
+  .conversation, .composer-dock { padding-inline: 13px; }
+  .welcome { padding-inline: 14px; }
+}
 </style>

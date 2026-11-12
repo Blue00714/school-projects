@@ -17,3 +17,6 @@ python backend/tests/api/run_api_tests.py --out test_api.log
 - [旧版看板](../历史实现/旧版看板/)
 
 常规测试使用隔离目录，正式数据库不作为测试写入对象。历史日志中的旧路径保留原始语境，当前代码位置以上述链接为准。
+
+- [2026-11-09 AI 问答与真实接口验证](runs/20261109_ai完善/README.md)
+- [2026-11-11 流式问答、预测结果与回测验收](runs/20261111_regression/README.md)

@@ -1,0 +1,32 @@
+==============================================================================
+FastAPI 原型 API 自动化测试运行记录
+运行时间: 2026-11-09T11:49:55+08:00
+命令: python.exe backend/tests/api/run_api_tests.py --pattern test_ai.py --out ai_asof_final.log --label 模拟日期AI隔离最终回归
+工作目录: C:\Users\Administrator\Desktop\学校项目\电商运营系统
+说明: 模拟日期AI隔离最终回归
+Python: 3.12.10 (Windows-10-10.0.19045-SP0)
+pandas: 3.0.5
+隔离方式: 每个测试类一个 python run.py 子进程 + 临时 ECE_RUNTIME_DIR + 复制的 retail.sqlite3 (ECE_ORIGINAL_DB)
+官方库运行前:
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+==============================================================================
+test_01_status_reports_unconfigured_and_no_secret (test_ai.AiAssistantTests.test_01_status_reports_unconfigured_and_no_secret) ... ok
+test_02_tools_are_declared_read_only (test_ai.AiAssistantTests.test_02_tools_are_declared_read_only) ... ok
+test_03_thirty_question_sample (test_ai.AiAssistantTests.test_03_thirty_question_sample) ... ok
+test_04_brief_generation_and_download (test_ai.AiAssistantTests.test_04_brief_generation_and_download) ... ok
+test_05_bad_question_is_400 (test_ai.AiAssistantTests.test_05_bad_question_is_400) ... ok
+test_key_is_present_but_never_exposed (test_ai.AiKeyLeakTests.test_key_is_present_but_never_exposed) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 22.691s
+
+OK
+==============================================================================
+耗时: 22.72s
+用例: 共 6，失败 0，错误 0，跳过 0
+官方库运行后:
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\retail.sqlite3: sha256=033f4aa2972771fddd95045f6f2de0a63af1d9c744090778a76c8fb803ef61bf size=284557312
+  C:\Users\Administrator\Desktop\学校项目\电商运营系统\runtime\app.sqlite3: sha256=b1cb1be6b5ca50a7f34fcaf583686b78a92e896807405cabda547ed34cb4ec6d size=139264
+官方库是否被修改: 否
+==============================================================================

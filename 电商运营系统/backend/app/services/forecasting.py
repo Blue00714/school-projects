@@ -10,7 +10,10 @@ import pandas as pd
 
 VERSION = 'daily-v1-hw-fixed-lgbm400'
 ACTIVE_MODEL = 'robust_blend'
-DEPLOYMENT_VERSION = 'daily-v3-robust-blend-mad3'
+DEPLOYMENT_VERSION = 'daily-v4-fixed-training-cutoff'
+REFERENCE_TRAIN_END = '2011-08-15'
+SIMULATION_BATCH_ID = 'simulation_20111101'
+SIMULATION_DATE = '2011-11-01'
 METHODS = {ACTIVE_MODEL:'销量预测模型', 'blend_rule':'周季节与LightGBM组合＋零销量日规则','lgbm_rule':'LightGBM＋零销量日规则（验证候选）','lgbm':'LightGBM直接7步','holt_winters':'固定参数周季节Holt-Winters','seasonal_week4':'同星期几近4周均值','naive_week':'上周同日'}
 LAGS, WINS = [1,2,3,7,14,21,28,56], [7,14,28,56]
 HOLIDAYS = pd.to_datetime(['2009-12-25','2009-12-28','2010-01-01','2010-04-02','2010-04-05','2010-05-03','2010-05-31','2010-08-30','2010-12-27','2010-12-28','2011-01-03','2011-04-22','2011-04-25','2011-05-02','2011-05-30','2011-08-29','2011-12-26','2011-12-27'])
@@ -25,9 +28,15 @@ def score(actual, predicted):
     valid = np.isfinite(a)
     a, p = a[valid], p[valid]
     if not len(a):
-        return dict(n=0, MAE=None, RMSE=None,WAPE=None,BIAS=None,BIAS_PCT=None)
+        return dict(n=0, MAE=None, RMSE=None, WAPE=None, BIAS=None, BIAS_PCT=None,
+                    MEDIAN_AE=None, P90_AE=None)
     err, denom = p-a, float(np.abs(a).sum())
-    return dict(n=len(a),MAE=float(np.abs(err).mean()),RMSE=float(np.sqrt((err**2).mean())),WAPE=float(np.abs(err).sum()/denom) if denom else None,BIAS=float(err.mean()),BIAS_PCT=float(err.sum()/denom) if denom else None)
+    absolute = np.abs(err)
+    median, p90 = np.quantile(absolute, [.5, .9])
+    return dict(n=len(a), MAE=float(absolute.mean()), RMSE=float(np.sqrt((err**2).mean())),
+                WAPE=float(absolute.sum()/denom) if denom else None, BIAS=float(err.mean()),
+                BIAS_PCT=float(err.sum()/denom) if denom else None,
+                MEDIAN_AE=float(median), P90_AE=float(p90))
 
 
 def normalize(series):
@@ -110,7 +119,8 @@ def robust_history(hist):
     return hist.clip(upper=upper), caps
 
 
-def forecast(series, origin=None, horizon=7, model=ACTIVE_MODEL, model_dir:Path|None=None):
+def forecast(series, origin=None, horizon=7, model=ACTIVE_MODEL, model_dir:Path|None=None,
+             train_end=None, *, _fixed_fit=None):
     if horizon != 7 or model not in METHODS:
         raise ValueError('只支持未来7天和已列出的方法')
     s = normalize(series)
@@ -123,6 +133,7 @@ def forecast(series, origin=None, horizon=7, model=ACTIVE_MODEL, model_dir:Path|
     if pd.isna(o) or o < s.index[0] or o > s.index[-1]:
         raise ValueError('预测起点必须在数据覆盖范围内')
     hist = s.loc[:o].copy()
+    fit_end = min(o, pd.Timestamp(train_end)) if train_end else o
     if len(hist)<28:
         raise ValueError('预测至少需要28天历史数据')
     base = seasonal(hist)
@@ -136,12 +147,18 @@ def forecast(series, origin=None, horizon=7, model=ACTIVE_MODEL, model_dir:Path|
             try:
                 from lightgbm import LGBMRegressor
                 d = design(hist)
-                tr = d[(d['target_date']<=o)&(d['target_date']>=pd.Timestamp('2010-03-01'))&d['y'].notna()]
                 x = d[d['origin']==o].sort_values('h')
-                train_rows = len(tr)
-                if len(tr)<200:
-                    raise ValueError('固定训练起始日期后的训练样本不足200行')
-                mdl = LGBMRegressor(**PARAMS).fit(tr[FEATURES],tr['y'])
+                can_share_fit = _fixed_fit is not None and fit_end == train_end
+                if can_share_fit and fit_end in _fixed_fit:
+                    mdl, train_rows = _fixed_fit[fit_end]
+                else:
+                    tr = d[(d['target_date']<=fit_end)&(d['target_date']>=pd.Timestamp('2010-03-01'))&d['y'].notna()]
+                    train_rows = len(tr)
+                    if train_rows < 200:
+                        raise ValueError('固定训练起始日期后的训练样本不足200行')
+                    mdl = LGBMRegressor(**PARAMS).fit(tr[FEATURES],tr['y'])
+                    if can_share_fit:
+                        _fixed_fit[fit_end] = (mdl, train_rows)
                 tree = np.clip(mdl.predict(x[FEATURES]),0,None)
                 if len(tree)!=7 or not np.isfinite(tree).all():
                     raise ValueError('模型未返回7条有效结果')
@@ -150,7 +167,7 @@ def forecast(series, origin=None, horizon=7, model=ACTIVE_MODEL, model_dir:Path|
                     folder.mkdir(parents=True,exist_ok=True)
                     # Python handles Unicode Windows paths; keep native text format.
                     (folder/'lightgbm.txt').write_text(mdl.booster_.model_to_string(),encoding='utf-8')
-                    (folder/'metadata.json').write_text(json.dumps({'version':version_for(model),'origin':o.date().isoformat(),'parameters':PARAMS,'features':FEATURES,'robust_rule':({'lookback_days':182,'mad_multiplier':3,'median_floor_multiplier':1.5} if model==ACTIVE_MODEL else None),'history_sha256':sha256(hist.to_csv().encode()).hexdigest()},ensure_ascii=False,indent=2),encoding='utf-8')
+                    (folder/'metadata.json').write_text(json.dumps({'version':version_for(model),'origin':o.date().isoformat(),'training_end':fit_end.date().isoformat(),'parameters':PARAMS,'features':FEATURES,'robust_rule':({'lookback_days':182,'mad_multiplier':3,'median_floor_multiplier':1.5} if model==ACTIVE_MODEL else None),'history_sha256':sha256(hist.to_csv().encode()).hexdigest()},ensure_ascii=False,indent=2),encoding='utf-8')
             except (ImportError, OSError, RuntimeError, ValueError) as exc:
                 method='seasonal_week4'
                 warnings.append(f'组合/树模型不可用，已回退4周均值：{type(exc).__name__}: {exc}')
@@ -184,10 +201,10 @@ def forecast(series, origin=None, horizon=7, model=ACTIVE_MODEL, model_dir:Path|
         warnings.append('当前日历假日表仅覆盖2009至2011年，后续年份的假日特征未验证。')
     acts=[r['actual'] for r in rows]
     n=sum(a is not None for a in acts)
-    return {'origin':o.date().isoformat(),'horizon':7,'requested_method':model,'actual_method':method,'method_label':METHODS[method],'model_version':version_for(model),'history_start':hist.index[0].date().isoformat(),'history_end':o.date().isoformat(),'history_days':len(hist),'training_rows':train_rows,'closed_weekdays':closed,'rows':rows,'metrics':score(acts,pred),'baseline_metrics':score(acts,base),'complete_actual':n==7,'actual_days':n,'warnings':warnings}
+    return {'origin':o.date().isoformat(),'horizon':7,'requested_method':model,'actual_method':method,'method_label':METHODS[method],'model_version':version_for(model),'history_start':hist.index[0].date().isoformat(),'history_end':o.date().isoformat(),'training_end':fit_end.date().isoformat(),'history_days':len(hist),'training_rows':train_rows,'closed_weekdays':closed,'rows':rows,'metrics':score(acts,pred),'baseline_metrics':score(acts,base),'complete_actual':n==7,'actual_days':n,'warnings':warnings}
 
 
-def backtest(series,start,end,model=ACTIVE_MODEL):
+def backtest(series,start,end,model=ACTIVE_MODEL,train_end=None):
     try:
         a,b=pd.Timestamp(start),pd.Timestamp(end)
         if a!=a.normalize() or b!=b.normalize() or a.tz is not None or b.tz is not None:
@@ -199,12 +216,21 @@ def backtest(series,start,end,model=ACTIVE_MODEL):
     s=normalize(series)
     if a<s.index[0]+pd.Timedelta(days=27) or b>s.index[-1]:
         raise ValueError('回测起点超出覆盖范围或历史不足28天')
-    results=[forecast(s,x.date().isoformat(),model=model) for x in pd.date_range(a,b)]
+    # Origins at or after the fixed cutoff have exactly the same training targets
+    # and features. Each origin still computes inputs from its own visible history.
+    cutoff = pd.Timestamp(train_end) if train_end else None
+    fixed_fit = {} if cutoff is not None else None
+    results = [forecast(s, x.date().isoformat(), model=model, train_end=cutoff, _fixed_fit=fixed_fit)
+               for x in pd.date_range(a, b)]
     rows=[dict(r,origin=result['origin']) for result in results for r in result['rows']]
     scored=[r for r in rows if r['actual'] is not None]
     def pair(items,key='prediction'):
         return score([r['actual'] for r in items],[r[key] for r in items])
-    complete=[r for result in results if result['complete_actual'] for r in result['rows']]
+    complete_origins = [result['rows'] for result in results if result['complete_actual']]
+    complete = [r for window in complete_origins for r in window]
+    def weekly_pair(key):
+        return score([sum(r['actual'] for r in window) for window in complete_origins],
+                     [sum(r[key] for r in window) for window in complete_origins])
     worst={}
     for row in scored:
         if row['date'] not in worst or row['abs_error']>worst[row['date']]['abs_error']:
@@ -213,4 +239,15 @@ def backtest(series,start,end,model=ACTIVE_MODEL):
     fallback=sum(x['actual_method']!=model for x in results)
     if fallback:
         warnings.append(f'{fallback}个起点使用了明确标记的备用方法，请查看分起点实际方法。')
-    return {'start':a.date().isoformat(),'end':b.date().isoformat(),'requested_method':model,'model_version':version_for(model),'origins_attempted':len(results),'origins_with_actual':sum(x['actual_days']>0 for x in results),'complete_origins':sum(x['complete_actual'] for x in results),'forecast_count':len(rows),'scored_count':len(scored),'metrics':pair(scored),'baseline_metrics':pair(scored,'baseline'),'complete_window_metrics':pair(complete),'complete_window_baseline_metrics':pair(complete,'baseline'),'by_horizon':{str(h):pair([r for r in scored if r['h']==h]) for h in range(1,8)},'worst_cases':sorted(worst.values(),key=lambda r:r['abs_error'],reverse=True)[:5],'origin_results':results,'warnings':warnings}
+    return {
+        'start': a.date().isoformat(), 'end': b.date().isoformat(),
+        'requested_method': model, 'model_version': version_for(model),
+        'origins_attempted': len(results), 'origins_with_actual': sum(x['actual_days'] > 0 for x in results),
+        'complete_origins': len(complete_origins), 'forecast_count': len(rows), 'scored_count': len(scored),
+        'scored_unique_days': len(worst), 'metrics': pair(scored), 'baseline_metrics': pair(scored, 'baseline'),
+        'complete_window_metrics': pair(complete), 'complete_window_baseline_metrics': pair(complete, 'baseline'),
+        'weekly_total_metrics': weekly_pair('prediction'), 'weekly_total_baseline_metrics': weekly_pair('baseline'),
+        'by_horizon': {str(h): pair([r for r in scored if r['h'] == h]) for h in range(1, 8)},
+        'worst_cases': sorted(worst.values(), key=lambda r: r['abs_error'], reverse=True)[:5],
+        'origin_results': results, 'warnings': warnings,
+    }

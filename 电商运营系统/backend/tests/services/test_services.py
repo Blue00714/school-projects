@@ -53,6 +53,18 @@ class ForecastTests(unittest.TestCase):
                 self.assertEqual(x['actual_method'],method)
                 self.assertEqual(x['history_days'],120)
 
+    def test_fixed_training_cutoff_does_not_expand_into_test_period(self):
+        idx = pd.date_range('2011-01-01', periods=300)
+        data = pd.Series([100 + i % 31 for i in range(300)], index=idx, dtype=float)
+        early = forecast(data, '2011-09-01', train_end='2011-05-15')
+        later = forecast(data, '2011-10-01', train_end='2011-05-15')
+        rolling = forecast(data, '2011-10-01')
+        self.assertEqual(early['training_end'], '2011-05-15')
+        self.assertEqual(later['training_end'], '2011-05-15')
+        self.assertEqual(early['training_rows'], later['training_rows'])
+        self.assertGreater(rolling['training_rows'], later['training_rows'])
+        self.assertEqual(later['actual_method'], 'robust_blend')
+
     def test_predict_beyond_data_always_seven_rows(self):
         result=forecast(series(),model='blend_rule')
         self.assertEqual(result['actual_method'],'blend_rule')
@@ -76,8 +88,21 @@ class ForecastTests(unittest.TestCase):
         m=score([0,0],[1,3]);self.assertIsNone(m['WAPE']);self.assertEqual(m['MAE'],2)
         self.assertEqual(score([None,None],[1,2])['n'],0)
         m=score([10,None,30],[11,100,27]);self.assertEqual(m['n'],2);self.assertAlmostEqual(m['WAPE'],.1)
+        self.assertEqual(m['MEDIAN_AE'], 2)
+        self.assertAlmostEqual(m['P90_AE'], 2.8)
         with self.assertRaises(ValueError):score([1],[2,3])
         with self.assertRaises(ValueError):score([1],[np.inf])
+
+    def test_backtest_reuses_fixed_fit_without_changing_predictions(self):
+        data = series(200)
+        cutoff = '2011-05-01'
+        start, end = '2011-06-10', '2011-06-12'
+        expected = [forecast(data, day.date().isoformat(), train_end=cutoff)['rows']
+                    for day in pd.date_range(start, end)]
+        result = backtest(data, start, end, train_end=cutoff)
+        self.assertEqual([origin['rows'] for origin in result['origin_results']], expected)
+        self.assertEqual(result['scored_unique_days'], 9)
+        self.assertEqual(result['weekly_total_metrics']['n'], 3)
 
     def test_invalid_history_and_dates(self):
         for s in [series(27),pd.Series([-1.],index=[pd.Timestamp('2011-01-01')]),pd.Series([1,2],index=[pd.Timestamp('2011-01-01')]*2)]:

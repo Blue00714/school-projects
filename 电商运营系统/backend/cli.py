@@ -25,12 +25,12 @@ def main():
         from run import main as run_server
         run_server(['--port', str(a.port)] + (['--open-browser'] if a.open_browser else []))
     else:
-        from app.services.forecasting import forecast, backtest
+        from app.services.forecasting import forecast, backtest, REFERENCE_TRAIN_END
         s=Store().series()
         if a.command=='forecast':
-            result=forecast(s,a.origin,model_dir=Path(__file__).parent/'runtime'/'cli_model')
+            result=forecast(s,a.origin,model_dir=Path(__file__).parent/'runtime'/'cli_model', train_end=REFERENCE_TRAIN_END)
         else:
-            result=backtest(s,a.start,a.end)
+            result=backtest(s,a.start,a.end,train_end=REFERENCE_TRAIN_END)
         print(json.dumps(result,ensure_ascii=False,indent=2,allow_nan=False))
 
 if __name__=='__main__':

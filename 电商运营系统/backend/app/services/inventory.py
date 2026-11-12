@@ -32,6 +32,7 @@ from app.services.data import DataError
 from app import db
 from app.core.errors import BadRequest, NotFound
 from app.services.batches import active_batch
+from app.services.forecasting import SIMULATION_BATCH_ID, SIMULATION_DATE
 
 SIMULATED = True
 FORMULA = 'max(0, 提前期内场景需求 + 安全库存 - 当前库存 - 有效在途量)'
@@ -40,6 +41,19 @@ DEFAULT_LIMIT = 200
 MAX_LIMIT = 500
 MAX_ITEMS_PER_SCENARIO = 500
 _DEMO_LOCK = Lock()
+_SIMULATION_NOTE = '[2011-11-01演示] '
+
+
+def _simulation_active():
+    return (active_batch() or {}).get('id') == SIMULATION_BATCH_ID
+
+
+def _business_today():
+    return date.fromisoformat(SIMULATION_DATE) if _simulation_active() else date.today()
+
+
+def _in_simulation(row):
+    return row['id'] == 'demo-' + SIMULATION_BATCH_ID or str(row['note'] or '').startswith(_SIMULATION_NOTE)
 
 
 # --------------------------------------------------------------------------------------
@@ -104,7 +118,7 @@ def _begin_immediate(cx) -> None:
 
 def _scenario_row(cx, scenario_id: str):
     row = cx.execute('select * from inventory_scenarios where id=?', (scenario_id,)).fetchone()
-    if not row:
+    if not row or (_simulation_active() and not _in_simulation(row)):
         raise NotFound('模拟库存场景不存在')
     return row
 
@@ -145,7 +159,7 @@ def _items_public(cx, scenario_id: str) -> list[dict]:
             "select stock_code,qty,expected_date from inventory_in_transit "
             "where scenario_id=? and status='in_transit'", (scenario_id,)):
         transit.setdefault(row['stock_code'], []).append((float(row['qty']), str(row['expected_date'])))
-    today = date.today()
+    today = _business_today()
     result = []
     for item in items:
         stock_code = item['stock_code']
@@ -238,12 +252,16 @@ def list_scenarios() -> list[dict]:
         rows = cx.execute(
             'select s.*, (select count(*) from inventory_items i where i.scenario_id=s.id) item_count '
             'from inventory_scenarios s order by s.created_at desc, s.id').fetchall()
+    if _simulation_active():
+        rows = [row for row in rows if _in_simulation(row)]
     return [_scenario_public(row, row['item_count']) for row in rows]
 
 
 def create_scenario(*, name, note=None, stock_codes=None, user=None) -> dict:
     name = _text(name, '场景名称', required=True, max_length=100)
-    note = _text(note, '备注', max_length=500) or ''
+    note = _text(note, '备注', max_length=480) or ''
+    if _simulation_active():
+        note = _SIMULATION_NOTE + note
     raw_codes = stock_codes or []
     if not isinstance(raw_codes, list):
         raise BadRequest('stock_codes 必须为数组')
@@ -303,7 +321,7 @@ def ensure_demo_scenario(*, user=None) -> dict:
         note = (f'模拟演示；商品名称来自批次 {batch["id"]}。日需求参考{start}至{end}的日均记录销量；'
                 '初始库存、出入库及采购在途为模拟设定，未由历史订单自动扣减。重复载入保留当前操作结果。')
         stamp = db.now_iso()
-        today = date.today()
+        today = _business_today()
         actor = (user or {}).get('id')
         with db.connect() as cx:
             _begin_immediate(cx)

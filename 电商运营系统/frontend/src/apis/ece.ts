@@ -88,6 +88,85 @@ const post = (url: string, body?: unknown) => http.post(url, body) as Promise<an
 const put = (url: string, body?: unknown) => http.put(url, body) as Promise<any>
 const patch = (url: string, body?: unknown) => http.patch(url, body) as Promise<any>
 
+export interface AiToolCall {
+  name: string
+  ok: boolean
+  summary: string
+  elapsed_seconds?: number
+}
+
+interface AiSource {
+  batch: { id: string; label: string }
+  range: { start?: string; end?: string; product?: string; country?: string }
+  tool_calls: AiToolCall[]
+}
+
+export interface AiAnswer extends AiSource {
+  status: 'ok' | 'need_clarification' | 'failed'
+  answer: string | null
+  clarification: string | null
+  error: string | null
+  warnings: string[]
+  llm_used: boolean
+  elapsed_seconds: number
+  stage_timings?: { query_seconds: number; first_text_seconds?: number; model_seconds?: number }
+}
+
+export type AiEvent =
+  | { type: 'stage'; stage: 'query' | 'legacy' }
+  | ({ type: 'stage'; stage: 'answer'; query_seconds: number } & AiSource)
+  | { type: 'delta'; text: string }
+  | { type: 'done'; result: AiAnswer }
+  | { type: 'error'; message: string }
+
+export async function streamAi(question: string, onEvent: (event: AiEvent) => void, signal: AbortSignal) {
+  const response = await fetch('/api/ai/ask/stream', {
+    method: 'POST',
+    credentials: 'same-origin',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ question }),
+    signal,
+  })
+  if (response.status === 401) {
+    await ece.me() // Reuse the normal session-expired handling.
+  }
+  if (response.status === 404 || response.status === 405) {
+    // An already-running backend can briefly lag behind a freshly built frontend.
+    onEvent({ type: 'stage', stage: 'legacy' })
+    const result = await http.post('/api/ai/ask', { question }, { signal }) as unknown as AiAnswer
+    onEvent({ type: 'done', result })
+    return
+  }
+  if (!response.ok) {
+    const data = await response.json()
+    throw new Error(data.error || `问答请求失败（HTTP ${response.status}）`)
+  }
+  if (!response.body) throw new Error('浏览器未收到问答响应流')
+
+  const reader = response.body.pipeThrough(new TextDecoderStream()).getReader()
+  let pending = ''
+  try {
+    while (true) {
+      const chunk = await reader.read()
+      if (chunk.done) break
+      pending += chunk.value
+      const lines = pending.split('\n')
+      pending = lines.pop() || ''
+      for (const line of lines) {
+        if (!line.trim()) continue
+        const event = JSON.parse(line) as AiEvent
+        if (event.type === 'error') throw new Error(event.message)
+        onEvent(event)
+        if (event.type === 'done') return
+      }
+    }
+    throw new Error('连接在回答完成前中断，请重试')
+  } finally {
+    await reader.cancel().catch(() => {})
+    reader.releaseLock()
+  }
+}
+
 /** 鉴权 / 基线信息 */
 export const ece = {
   health: () => get('/api/health'),

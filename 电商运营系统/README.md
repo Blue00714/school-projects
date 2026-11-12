@@ -28,7 +28,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/启动系统.ps1 -No
 | backend/cli.py | 数据准备、独立预测、历史回测及服务命令 |
 | frontend | Vue源码、构建配置与dist产物 |
 | config/local | 本机实际配置与登录信息 |
-| docs | [API契约](docs/API契约.md) |
+| docs | [API 契约](docs/API契约.md) |
 | scripts | 唯一启动脚本与MySQL工具 |
 | runtime | 运行数据、模型、批次、日志与临时文件 |
 | vendor | 便携MySQL及本机内置Python依赖 |
@@ -44,10 +44,17 @@ Python依赖：`pip install -r backend/requirements.txt`；本机可复用vendor
 从本系统根目录运行：
 
 ```powershell
-python -m unittest discover -s backend/tests/services -p test_services.py -v
+$env:PYTHONPATH='backend'
+python -m unittest discover -s backend/tests/services -v
 python backend/tests/api/run_api_tests.py --out test_api.log
 ```
 
 测试使用隔离运行目录；证据在上级03_测试与验证/系统测试/runs。数据库工具位于scripts/mysql；已有数据时不要使用强制初始化。
 
-业务只使用robust_blend（daily-v3-robust-blend-mad3），统计和预测口径沿用原实现。销售额单位GBP，不等于利润。商品需求参考历史销量，库存和采购流水为模拟，全店预测不自动分摊成商品补货量。
+业务只使用 robust_blend（daily-v4-fixed-training-cutoff）。原始数据批次的树模型训练最多截至 2011-08-15，验证和测试期间按各预测起点使用此前已知历史作为输入；其他导入批次未指定固定划分。当前演示批次模拟 2011-11-01 开始前，交易截至 2011-10-31；完整原始批次另行保留。模拟批次和完整原始批次的树模型均只用不晚于 2011-08-15 的数据拟合。销售额单位GBP，不等于利润。商品需求参考历史销量，库存和采购流水为模拟，全店预测不自动分摊成商品补货量。
+
+## AI 数据问答
+
+在 AI 助手输入问题即可。指定日期、商品或国家时，把条件写进问题，如“2011-10-01 到 2011-10-10 英国的销售额是多少”。输入“近期经营情况”会读取该范围看板、当前批次最近保存的全店预测和回测，以及模拟库存场景摘要。生成中的查询进度和来源可见，最终可展开查看数据范围与工具摘要。
+
+“最近”按当前数据批次覆盖末日计算。每条问题独立查询，发送给模型的是当次的问题、范围和工具结果。模型服务失败时，页面会标明错误并保留已成功的本地查询结果。

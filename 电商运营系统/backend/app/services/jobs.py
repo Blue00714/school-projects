@@ -30,7 +30,7 @@ from uuid import uuid4
 
 from app.services.analytics import iso_date
 from app.services.data import DataError
-from app.services.forecasting import ACTIVE_MODEL, DEPLOYMENT_VERSION
+from app.services.forecasting import ACTIVE_MODEL, DEPLOYMENT_VERSION, REFERENCE_TRAIN_END, SIMULATION_BATCH_ID
 from app.services.forecasting import backtest as run_backtest
 from app.services.forecasting import forecast as run_forecast
 
@@ -192,11 +192,12 @@ def _run_job(job_id: str) -> None:
         store = deps.store_for(batch)
         series = store.series()
         manifest = batch.get('manifest') or store.manifest()
+        train_end = REFERENCE_TRAIN_END if batch['id'] in ('original', SIMULATION_BATCH_ID) else None
         if row['kind'] == 'forecast':
-            result = run_forecast(series, params.get('origin'), model=params.get('model', DEFAULT_MODEL))
+            result = run_forecast(series, params.get('origin'), model=params.get('model', DEFAULT_MODEL), train_end=train_end)
         elif row['kind'] == 'backtest':
             result = run_backtest(series, params.get('start'), params.get('end'),
-                                  model=params.get('model', DEFAULT_MODEL))
+                                  model=params.get('model', DEFAULT_MODEL), train_end=train_end)
         else:
             raise ValueError('未知任务类型')
         result = _clean(result)

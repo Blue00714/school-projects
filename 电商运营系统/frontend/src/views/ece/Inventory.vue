@@ -245,7 +245,7 @@ async function receiveTransit(row: any) {
 
 function defaultExpectedDate(stockCode: string) {
   const lead = Number(itemsMap.value[stockCode]?.lead_time_days)
-  return addDays(todayISO(), Number.isFinite(lead) ? lead : 7)
+  return addDays(userStore.batch?.id === 'simulation_20111101' ? '2011-11-01' : todayISO(), Number.isFinite(lead) ? lead : 7)
 }
 
 function prepareReplenishRows() {

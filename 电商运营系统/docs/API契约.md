@@ -127,6 +127,8 @@ CSV 统一：UTF-8 BOM、`text/csv; charset=utf-8`、`Content-Disposition: attac
 
 任务排队/运行/成功/失败状态持久化到 `jobs` 表；同参数同批次重复提交可返回缓存任务（可选）；运行中断由启动逻辑标记 failed。
 
+评分字段含 `MAE`、`RMSE`、`WAPE`、`BIAS`、`BIAS_PCT`、`MEDIAN_AE` 和 `P90_AE`。回测的 `complete_window_metrics` 逐日评分，`weekly_total_metrics` 先对每个完整窗口合计七天再评分，各有对应的基准结果。缺少实际值的目标日不评分。历史存档可缺少新字段。
+
 ### 5.6 inventory（forecast-inventory）
 
 `simulated: true` 必须出现在所有库存响应中。
@@ -159,10 +161,13 @@ CSV 统一：UTF-8 BOM、`text/csv; charset=utf-8`、`Content-Disposition: attac
 | GET | `/api/ai/status` | `{llm_configured,provider,model,key_present,timeout_seconds,fallback:"local-rule-planner"|null,tools_count}` |
 | GET | `/api/ai/tools` | `{tools:[{name,description,params:{...},read_only:true}],policy:"仅只读；库存写操作必须走页面确认"}` |
 | POST | `/api/ai/ask` | body `{question,scope?:{start,end,product,country,scenario_id?}}`；200 见下 |
+| POST | `/api/ai/ask/stream` | 与 `/api/ai/ask` 使用相同的请求字段与会话认证。浏览器仅提交 `question`，返回 `application/x-ndjson` |
 | POST | `/api/ai/brief` | body `{scope?,scenario_id?}`；201 `{brief:{id,title,created_at,url},markdown,provider:"template"}` |
 | GET | `/api/ai/briefs/{id}.md` | `text/markdown; charset=utf-8`，`Content-Disposition: attachment`；不存在 404 |
 
-`/api/ai/ask` 响应：`{status:"ok|need_clarification|failed|not_configured", provider:"local-rule-planner|openai-compatible", llm_used:bool, answer:string|null, clarification?:string, tool_calls:[{name,params,ok,summary}], range:{...}, batch:{id,label}, warnings:[...], error?:string, elapsed_seconds}`。
+`/api/ai/ask` 响应包含 `status`、`provider`、`llm_used`、`answer`、`clarification`、`tool_calls`、`range`、`batch`、`warnings`、`error`、`elapsed_seconds` 和 `stage_timings`。阶段计时单位为秒，含 `query_seconds`，调用模型时含 `model_seconds`，流中收到正文时含 `first_text_seconds`。
+
+流接口每行一个 JSON 对象。按时间先收到 `{type:"stage",stage:"query"}`。有远程模型时，取数后发送 `stage:"answer"` 及批次、范围、工具摘要和取数耗时，再通过 `{type:"delta",text}` 发送已脱敏的正文。最终发送 `{type:"done",result}`，其中 `result` 沿用普通问答结果结构。流已开始后如遇服务错误，返回 `{type:"error",message}`。请求校验失败仍使用普通 JSON 错误。
 
 规则：
 - 未配置密钥：`llm_used=false, provider="local-rule-planner"`，用本地规则把问题映射到已声明工具，答案中的数字全部来自工具结果，并显式注明“未调用大模型”；**不得**伪造自然语言智能结论。

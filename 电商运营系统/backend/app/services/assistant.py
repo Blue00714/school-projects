@@ -29,12 +29,14 @@ import re
 import threading
 import time
 from datetime import date, timedelta
+from string import ascii_letters, digits
 from urllib import error as urlerror
 from urllib import request as urlrequest
+from urllib.parse import urlparse
 
 from app.services.analytics import Analytics, filters as analytics_filters, where as analytics_where
 from app.services.data import DataError
-from app.services.forecasting import ACTIVE_MODEL, forecast
+from app.services.forecasting import ACTIVE_MODEL, REFERENCE_TRAIN_END, SIMULATION_BATCH_ID, SIMULATION_DATE, forecast
 
 from app.core import config
 from app import db
@@ -374,7 +376,8 @@ def _forecast_cached(batch, params: dict) -> dict:
         return cached
     store = store_for(batch)
     series = store.series()
-    result = forecast(series, origin=params.get('origin'), model=ACTIVE_MODEL)
+    result = forecast(series, origin=params.get('origin'), model=ACTIVE_MODEL,
+                      train_end=REFERENCE_TRAIN_END if batch['id'] in ('original', SIMULATION_BATCH_ID) else None)
     with FORECAST_CACHE_LOCK:
         FORECAST_CACHE[key] = result
     return result
@@ -515,7 +518,8 @@ def _tool_dashboard(params, batch) -> dict:
         'warnings': warnings,
         'data': {'totals': totals, 'changes': changes, 'filters': filters,
                  'ranking': data.get('ranking') or [], 'countries': data.get('countries') or [],
-                 'coverage': data.get('coverage'), 'quality': data.get('quality'),
+                 'trend': data.get('trend') or [], 'weekdays': data.get('weekdays') or [],
+                 'previous': data.get('previous'), 'coverage': data.get('coverage'), 'quality': data.get('quality'),
                  'policy_version': data.get('policy_version')},
     }
 
@@ -632,7 +636,7 @@ def _tool_forecast(params, batch):
                  'requested_method': result.get('requested_method'),
                  'method_label': result['method_label'], 'model_version': result['model_version'],
                  'rows': result['rows'], 'history_start': result.get('history_start'),
-                 'history_end': result.get('history_end'),
+                 'history_end': result.get('history_end'), 'training_end': result.get('training_end'),
                  'warnings': result.get('warnings') or []},
     }
 
@@ -664,7 +668,7 @@ def _normalize_inventory_item(item: dict) -> dict:
         'effective_in_transit': float(effective), 'in_transit_total': float(item.get('in_transit_total') or 0),
         'lead_time_demand': lead * daily,
         'replenishment_candidate': float(item.get('replenishment_candidate') or 0),
-        'horizon_date': (date.today() + timedelta(days=lead)).isoformat(),
+        'horizon_date': ((date.fromisoformat(SIMULATION_DATE) if active_batch().get('id') == SIMULATION_BATCH_ID else date.today()) + timedelta(days=lead)).isoformat(),
     }
 
 
@@ -703,7 +707,7 @@ def _inventory_balance(cx, scenario_id: str, stock_code: str) -> dict | None:
         (scenario_id, item['stock_code'])).fetchone()[0]
     balance = float(item['initial_qty']) + float(moved or 0)
     lead = int(item['lead_time_days'])
-    horizon = (date.today() + timedelta(days=lead)).isoformat()
+    horizon = ((date.fromisoformat(SIMULATION_DATE) if active_batch().get('id') == SIMULATION_BATCH_ID else date.today()) + timedelta(days=lead)).isoformat()
     effective = cx.execute(
         "select coalesce(sum(qty),0) from inventory_in_transit "
         "where scenario_id=? and stock_code=? and status='in_transit' and expected_date<=?",
@@ -751,6 +755,11 @@ def _inventory_via_tables(params) -> tuple[dict, list[dict], dict]:
 
 def _tool_inventory(params, batch):
     module, reason = _inventory_service()
+    if batch['id'] == SIMULATION_BATCH_ID:
+        if module is None:
+            raise ValueError('模拟日期库存服务不可用，不能读取其他批次的场景')
+        if not params.get('scenario_id'):
+            params = dict(params, scenario_id='demo-' + SIMULATION_BATCH_ID)
     warnings = ['模拟库存：结果来自模拟参数与流水，不是真实库存。']
     scenario = item = None
     items: list[dict] = []
@@ -1033,6 +1042,8 @@ def plan_question(question: str, scope: dict, batch) -> dict:
         base['end'] = scope.get('end') or meta.get('date_max')
     if country:
         base['country'] = country
+    if scope.get('product'):
+        base['product'] = scope['product']
 
     def _scope_product():
         if scope.get('product'):
@@ -1052,6 +1063,12 @@ def plan_question(question: str, scope: dict, batch) -> dict:
         plan.update(intent='clarify-brief',
                     clarification=('运营简报请调用 POST /api/ai/brief 生成，并用 GET /api/ai/briefs/{id}.md 下载；'
                                    '简报由确定性模板生成（provider=template）。'))
+        return plan
+
+    # A broad system overview combines current-batch historical data with saved
+    # forecasts and the simulated inventory; narrow questions keep their own tools.
+    if any(phrase in q for phrase in ('综合分析', '综合情况', '经营情况', '运营情况', '整体情况', '近期数据', '最近数据')):
+        plan.update(intent='overview', tools=[{'name': 'dashboard_summary', 'params': dict(base)}])
         return plan
 
     # inventory ------------------------------------------------------------
@@ -1132,6 +1149,8 @@ def plan_question(question: str, scope: dict, batch) -> dict:
                 return plan
             params['product'] = resolved['stock_code']
         tools.append({'name': 'product_ranking', 'params': params})
+        if any(word in q for word in ('销售额', '营业额', '营收', '总销量', '成交量', '订单数')):
+            tools.append({'name': 'dashboard_summary', 'params': {k: v for k, v in params.items() if k != 'top_n'}})
         plan.update(intent='ranking', tools=tools)
         return plan
 
@@ -1153,6 +1172,9 @@ def plan_question(question: str, scope: dict, batch) -> dict:
                 return plan
             params['product'] = resolved['stock_code']
         tools.append({'name': 'orders_query', 'params': params})
+        if any(word in q for word in SALES_WORDS) and not order_match:
+            tools.append({'name': 'dashboard_summary', 'params': {k: v for k, v in params.items()
+                                                                  if k in ('start', 'end', 'product', 'country')}})
         plan.update(intent='orders', tools=tools)
         return plan
 
@@ -1212,34 +1234,81 @@ def _local_answer(plan: dict, results: list[dict], range_: dict, batch) -> str:
 
 
 def _llm_compact(results: list[dict]) -> str:
+    """Keep complete JSON and explicitly identify bounded lists sent to the model."""
+    def without_customer_ids(value):
+        if isinstance(value, dict):
+            return {k: without_customer_ids(v) for k, v in value.items() if k != 'customer_id'}
+        if isinstance(value, list):
+            return [without_customer_ids(v) for v in value]
+        return value
+
     payload = []
+    limits = {'rows': 50, 'lines': 50, 'trend': 62, 'ranking': 50,
+              'countries': 50, 'items': 50, 'candidates': 50}
     for result in results:
-        data = result.get('data') or {}
-        slim = {k: v for k, v in data.items() if k not in ('lines', 'rows')}
-        if data.get('rows'):
-            slim['rows_head'] = data['rows'][:10]
-            slim['rows_count'] = len(data['rows'])
-        if data.get('ranking'):
-            slim['ranking'] = data['ranking'][:10]
-        if data.get('countries'):
-            slim['countries'] = data['countries'][:10]
+        data = without_customer_ids(result.get('data') or {})
+        summary = result['summary']
+        if result['name'] == 'orders_query':
+            summary = re.sub(r'，客户 [^，。]+', '', summary)
+        omitted = {}
+        for key, limit in limits.items():
+            value = data.get(key)
+            if isinstance(value, list) and len(value) > limit:
+                data[key] = value[:limit]
+                omitted[key] = {'total': len(value), 'included': limit}
         payload.append({'name': result['name'], 'ok': result['ok'],
-                        'params': result['params'], 'summary': result['summary'],
-                        'data': slim})
-    text = json.dumps(payload, ensure_ascii=False, default=str)
-    return text[:8000]
+                        'kind': result.get('kind'), 'range': result.get('range'),
+                        'params': result['params'], 'summary': summary,
+                        'warnings': result.get('warnings') or [], 'data': data,
+                        'omitted': omitted})
+    return json.dumps(payload, ensure_ascii=False, default=str)
+
+
+def _overview_results(batch, scope):
+    """Read saved results only; neither run forecasts nor alter inventory."""
+    from app.services import jobs
+
+    saved = jobs.latest_jobs()['jobs']
+    results = []
+    for kind in ('forecast', 'backtest'):
+        job = saved.get(kind)
+        data = (job or {}).get('result') or {}
+        keys = ('origin', 'rows', 'model_version', 'warnings') if kind == 'forecast' else (
+            'start', 'end', 'model_version', 'complete_origins', 'scored_count',
+            'metrics', 'complete_window_metrics', 'by_horizon', 'warnings')
+        content = {key: data[key] for key in keys if key in data}
+        summary = (f"最近保存的全店{('预测' if kind == 'forecast' else '历史回测')}，"
+                   f"任务创建时间 {job['created_at']}，预测起点或回测范围见数据；可能早于当前数据末日。"
+                   if job else f"当前批次没有已保存的{('预测' if kind == 'forecast' else '回测')}结果。")
+        results.append({'name': 'saved_' + kind, 'params': {}, 'ok': bool(job),
+                        'kind': 'forecast' if kind == 'forecast' else 'backtest',
+                        'range': None, 'summary': summary, 'data': content})
+    scenario_id = scope.get('scenario_id')
+    if batch['id'] == SIMULATION_BATCH_ID and not scenario_id:
+        scenario_id = 'demo-' + SIMULATION_BATCH_ID
+    overview = inventory_overview(limit=50, scenario_id=scenario_id)
+    scenario = overview.get('scenario')
+    results.append({'name': 'simulated_inventory_overview', 'params': {},
+                    'ok': bool(scenario), 'kind': 'simulated', 'range': None,
+                    'summary': ('模拟库存场景概览，非真实库存。' if scenario else
+                                '没有可用的模拟库存场景。'),
+                    'data': {'simulated': True, 'scenario': scenario,
+                             'items': overview.get('items') or [],
+                             'candidates': overview.get('candidates') or [],
+                             'error': overview.get('error')}})
+    return results
 
 
 SYSTEM_PROMPT = (
     '你是电商运营数据分析助手。只能使用“工具结果”中的数字回答，禁止编造、禁止外推工具没有给出的数据；'
     '工具结果为空或失败时必须如实说明。库存是模拟库存，不是真实库存；预测是模型预测，不是已发生事实；'
-    '数据没有成本字段，销售额不是利润。回答用中文，先给结论再给数字，并写明日期范围与数据批次。'
+    '数据没有成本字段，销售额不是利润。最近是相对当前批次数据末日，不是现实中的今天；'
+    '已保存预测可能是历史起点，不得说成最新未来预测；预测和回测是全店口径，不能套用商品或国家筛选。'
+    '清楚说明资料缺失或列表截取，不把单次问答输入当作模型训练。回答用中文，先给结论再给数字，并写明日期范围与数据批次。'
 )
 
 
-def _call_llm(question: str, results: list[dict], range_: dict, batch) -> tuple[str | None, str | None]:
-    """One OpenAI-compatible /chat/completions call with a bounded timeout (no retries)."""
-    cfg = ai_config()
+def _llm_request(question, results, range_, batch, cfg, *, stream=False):
     base = cfg['base_url']
     if not base:
         return None, '未配置 ECE_AI_BASE_URL'
@@ -1255,14 +1324,34 @@ def _call_llm(question: str, results: list[dict], range_: dict, batch) -> tuple[
             'scope': range_,
             'batch': {'id': batch['id'], 'label': batch['label']},
             'tool_results': json.loads(_llm_compact(results)),
+            'instructions': ('请分别概述历史经营、已保存全店预测与回测、模拟库存；明确各自时间、适用范围和缺失项。'
+                             if any(r['name'] == 'saved_backtest' for r in results) else ''),
         }, ensure_ascii=False)},
     ]
-    body = json.dumps({'model': cfg['model'], 'messages': messages, 'temperature': 0},
-                      ensure_ascii=False).encode('utf-8')
+    params = {'model': cfg['model'], 'messages': messages, 'temperature': 0}
+    if stream:
+        params['stream'] = True
+        messages[0]['content'] += ('先直接回答用户的问题。简单查询用一小段，经营概览按主题各写一至两句。'
+                                   '日期与批次由页面同时显示，正文只在有助理解时重复。用短段落或列表。')
+        # SQL and forecast tools already compute the data. On the documented
+        # provider/model combination this call only needs to compose the answer.
+        if (urlparse(url).hostname in {'open.bigmodel.cn', 'api.z.ai'}
+                and cfg['model'].lower() == 'glm-4.6v'):
+            params['thinking'] = {'type': 'disabled'}
+    body = json.dumps(params, ensure_ascii=False).encode('utf-8')
     request = urlrequest.Request(url, data=body, method='POST', headers={
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {config.AI_API_KEY}',
     })
+    return request, None
+
+
+def _call_llm(question: str, results: list[dict], range_: dict, batch) -> tuple[str | None, str | None]:
+    """One OpenAI-compatible /chat/completions call with a bounded timeout."""
+    cfg = ai_config()
+    request, error = _llm_request(question, results, range_, batch, cfg)
+    if error:
+        return None, error
     try:
         with urlrequest.urlopen(request, timeout=cfg['timeout_seconds']) as response:
             raw = response.read().decode('utf-8', 'replace')
@@ -1280,6 +1369,72 @@ def _call_llm(question: str, results: list[dict], range_: dict, batch) -> tuple[
     return content.strip(), None
 
 
+def _stream_llm(question, results, range_, batch, cfg, timings):
+    request, error = _llm_request(question, results, range_, batch, cfg, stream=True)
+    if error:
+        return None, error
+    begun = time.monotonic()
+    pieces = []
+    pending = ''
+    key = config.AI_API_KEY
+    token_chars = set(ascii_letters + digits + '_-' + (key if len(key) >= 4 else ''))
+    finished = False
+    try:
+        with urlrequest.urlopen(request, timeout=cfg['timeout_seconds']) as response:
+            if response.headers.get_content_type() == 'application/json':
+                payload = json.load(response)
+                content = payload['choices'][0]['message']['content']
+                if isinstance(content, str) and content.strip():
+                    timings['first_text_seconds'] = round(time.monotonic() - begun, 3)
+                    yield {'type': 'delta', 'text': _redact(content)}
+                    return content.strip(), None
+                return None, '大模型返回空内容'
+
+            for line in response:
+                if time.monotonic() - begun > cfg['timeout_seconds']:
+                    raise TimeoutError('模型回答超过配置的等待时间')
+                if not line.startswith(b'data:'):
+                    continue
+                data = line[5:].strip()
+                if data == b'[DONE]':
+                    finished = True
+                    break
+                choices = json.loads(data).get('choices') or []
+                if not choices:
+                    continue
+                choice = choices[0]
+                content = (choice.get('delta') or {}).get('content')
+                if isinstance(content, str) and content:
+                    if content.strip() and 'first_text_seconds' not in timings:
+                        timings['first_text_seconds'] = round(time.monotonic() - begun, 3)
+                    pieces.append(content)
+                    pending += content
+                    # Neither a generic sk- token nor the configured key can
+                    # cross a character outside their alphabets.
+                    for index in range(len(pending) - 1, -1, -1):
+                        if pending[index] not in token_chars:
+                            visible, pending = pending[:index + 1], pending[index + 1:]
+                            yield {'type': 'delta', 'text': _redact(visible)}
+                            break
+                if choice.get('finish_reason') == 'stop':
+                    finished = True
+                    break
+        if not finished:
+            return None, '大模型回答在完成前中断'
+        if pending:
+            yield {'type': 'delta', 'text': _redact(pending)}
+        text = ''.join(pieces).strip()
+        return (text, None) if text else (None, '大模型返回空内容')
+    except urlerror.HTTPError as exc:
+        return None, f'大模型接口返回 HTTP {exc.code}（{cfg["model"]}）'
+    except (urlerror.URLError, TimeoutError, OSError) as exc:
+        return None, f'大模型调用失败：{type(exc).__name__}: {_redact(str(exc))[:300]}'
+    except (ValueError, KeyError, IndexError, TypeError, AttributeError):
+        return None, '大模型流式响应格式不符合 OpenAI 兼容约定'
+    finally:
+        timings['model_seconds'] = round(time.monotonic() - begun, 3)
+
+
 def _record_run(question: str, response: dict, user) -> None:
     try:
         with db.connect() as cx:
@@ -1290,15 +1445,14 @@ def _record_run(question: str, response: dict, user) -> None:
                  response['status'], response['provider'],
                  json.dumps({k: response.get(k) for k in ('answer', 'clarification', 'range', 'batch',
                                                           'warnings', 'error', 'llm_used',
-                                                          'elapsed_seconds')}, ensure_ascii=False, default=str),
+                                                          'elapsed_seconds', 'stage_timings')}, ensure_ascii=False, default=str),
                  json.dumps(response['tool_calls'], ensure_ascii=False, default=str),
                  (user or {}).get('id'), db.now_iso()))
     except Exception:  # telemetry must never break the request
         log.exception('failed to record ai_run')
 
 
-def answer_question(question, scope, user) -> dict:
-    started = time.monotonic()
+def validate_question(question, scope):
     if not isinstance(question, str):
         raise BadRequest('question 必须是字符串')
     question = question.strip()
@@ -1306,7 +1460,24 @@ def answer_question(question, scope, user) -> dict:
         raise BadRequest('question 不能为空')
     if len(question) > MAX_QUESTION_CHARS:
         raise BadRequest(f'question 过长（最多{MAX_QUESTION_CHARS}字符）')
-    scope_data = validate_scope(scope)
+    return question, validate_scope(scope)
+
+
+def answer_question(question, scope, user) -> dict:
+    question, scope = validate_question(question, scope)
+    return next(_answer_events(question, scope, user))['result']
+
+
+def stream_answer(question, scope, user):
+    question, scope = validate_question(question, scope)
+    return _answer_events(question, scope, user, stream=True)
+
+
+def _answer_events(question, scope_data, user, *, stream=False):
+    started = time.monotonic()
+    timings = {}
+    if stream:
+        yield {'type': 'stage', 'stage': 'query'}
     batch = active_batch()
     scope_data = scope_for_batch(scope_data, batch)
     batch_ref = {'id': batch['id'], 'label': batch['label']}
@@ -1319,10 +1490,17 @@ def answer_question(question, scope, user) -> dict:
         result = execute_tool(step['name'], step.get('params') or {}, batch)
         results.append(result)
         tool_calls.append({'name': result['name'], 'params': result['params'],
-                           'ok': result['ok'], 'summary': _redact(result['summary'])})
+                           'ok': result['ok'], 'summary': _redact(result['summary']),
+                           'elapsed_seconds': result.get('elapsed_seconds')})
         warnings.extend(_redact(w) for w in (result.get('warnings') or []))
         if result.get('ok') and result.get('range'):
             range_ = result['range']
+    if plan.get('intent') == 'overview':
+        extra = _overview_results(batch, scope_data)
+        results.extend(extra)
+        tool_calls.extend({'name': r['name'], 'params': r['params'], 'ok': r['ok'],
+                           'summary': _redact(r['summary'])} for r in extra)
+    timings['query_seconds'] = round(time.monotonic() - started, 3)
     cfg = ai_config()
     provider = 'openai-compatible' if cfg['configured'] else 'local-rule-planner'
     llm_used = False
@@ -1339,11 +1517,18 @@ def answer_question(question, scope, user) -> dict:
         clarification = None
         error = _redact('；'.join(f"{r['name']}: {r['summary']}" for r in results if not r.get('ok')))
     else:
-        answer = _local_answer(plan, results, range_, batch)
+        answer = _redact(_local_answer(plan, results, range_, batch))
         clarification = None
         status = 'ok'
         if cfg['configured']:
-            content, llm_error = _call_llm(question, results, range_, batch)
+            if stream:
+                yield {'type': 'stage', 'stage': 'answer', 'range': range_, 'batch': batch_ref,
+                       'tool_calls': tool_calls, 'query_seconds': timings['query_seconds']}
+                content, llm_error = yield from _stream_llm(question, results, range_, batch, cfg, timings)
+            else:
+                begun = time.monotonic()
+                content, llm_error = _call_llm(question, results, range_, batch)
+                timings['model_seconds'] = round(time.monotonic() - begun, 3)
             if llm_error:
                 status = 'failed'
                 error = _redact(llm_error)
@@ -1351,8 +1536,8 @@ def answer_question(question, scope, user) -> dict:
                           + str(error) + '）')
             else:
                 llm_used = True
-                answer = _redact(content + '\n\n— 以上文字由配置的大模型基于服务端工具结果组织；'
-                                           '数字以 tool_calls 中的工具结果为准。')
+                answer = _redact(content if stream else content + '\n\n— 以上文字由配置的大模型基于服务端工具结果组织；'
+                                                                  '模型可能出错，请结合页面和工具摘要核对数字。')
     response = {
         'status': status,
         'provider': provider,
@@ -1364,11 +1549,12 @@ def answer_question(question, scope, user) -> dict:
         'batch': batch_ref,
         'warnings': warnings,
         'error': error,
+        'stage_timings': timings,
         'elapsed_seconds': round(time.monotonic() - started, 3),
         'run_id': f"run-{int(time.time() * 1000)}-{abs(hash(question)) % 1000}",
     }
     _record_run(question, response, user)
-    return response
+    yield {'type': 'done', 'result': response}
 
 
 def status_payload() -> dict:
@@ -1413,6 +1599,10 @@ def inventory_overview(limit: int = 5, scenario_id: str | None = None) -> dict:
                     'scenario': scenario, 'items': items, 'candidates': candidates}
         except Exception:  # service bug/partial implementation: degrade to read-only tables
             log.exception('inventory overview via service failed; falling back to tables')
+    if active_batch().get('id') == SIMULATION_BATCH_ID:
+        return {'simulated': True, 'service_module_ready': False, 'scenarios': [],
+                'scenario': None, 'items': [], 'candidates': [],
+                'error': '模拟日期库存服务不可用，不能读取其他批次的场景'}
     with db.connect() as cx:
         scenarios = [dict(r) for r in cx.execute(
             'select id,name,note,created_at from inventory_scenarios order by created_at desc')]
